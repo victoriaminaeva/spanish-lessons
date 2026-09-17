@@ -1,0 +1,782 @@
+<!doctype html>
+<title>El Arte de Discrepar</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:opsz,wght@8..30,400;8..30,500;8..30,600;8..30,700&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ec;
+  --surface:#ffffff;
+  --surface-2:#e8efe7;
+  --ink:#1f2b26;
+  --muted:#6b7a70;
+  --accent:#2f6f62;
+  --accent-ink:#ffffff;
+  --human:#c1652f;
+  --good:#2f7d4f;
+  --good-bg:#e3f2e7;
+  --bad:#b23b3b;
+  --bad-bg:#fbeaea;
+  --border:#dcd6c4;
+  --mark:#d7e8cf;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141a17;
+    --surface:#1c2420;
+    --surface-2:#232d27;
+    --ink:#eaeee7;
+    --muted:#a3b0a7;
+    --accent:#6fc3ae;
+    --accent-ink:#0e1a16;
+    --human:#e2905c;
+    --good:#7cc99a;
+    --good-bg:#1e3327;
+    --bad:#e2837b;
+    --bad-bg:#3a2320;
+    --border:#33403a;
+    --mark:#2c3b30;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141a17;
+  --surface:#1c2420;
+  --surface-2:#232d27;
+  --ink:#eaeee7;
+  --muted:#a3b0a7;
+  --accent:#6fc3ae;
+  --accent-ink:#0e1a16;
+  --human:#e2905c;
+  --good:#7cc99a;
+  --good-bg:#1e3327;
+  --bad:#e2837b;
+  --bad-bg:#3a2320;
+  --border:#33403a;
+  --mark:#2c3b30;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Karla", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Spectral", Georgia, serif; text-wrap:balance;}
+a{color:var(--accent);}
+
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"JetBrains Mono", monospace; font-weight:600; font-size:13px;
+  color:var(--accent); display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--human);}
+.score-pill{
+  font-family:"JetBrains Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink);
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"JetBrains Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"JetBrains Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--human); margin:0 0 10px; font-weight:600;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink); font-weight:600;}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px; font-style:italic;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:0 8px 8px 0; padding:14px 16px; font-size:14.5px;
+}
+
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{font-family:"JetBrains Mono", monospace; font-size:13px; color:var(--human); font-weight:600;}
+h2{font-size:23px; margin:0; color:var(--ink); font-weight:600;}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 16px;}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Spectral", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"JetBrains Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--human); color:var(--human);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.q-card{border-left:3px solid var(--human); padding-left:14px; margin-bottom:20px;}
+.q-num{font-family:"JetBrains Mono", monospace; color:var(--human); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Spectral", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:12px;}
+.rule-box b{color:var(--accent);}
+
+.item-row{display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;}
+.item-idx{font-family:"JetBrains Mono", monospace; font-size:12px; color:var(--muted); min-width:18px; padding-top:6px;}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"JetBrains Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{font-family:"JetBrains Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px; display:inline-block; margin-left:10px;}
+.block-score b{color:var(--accent);}
+
+.wordbank{background:var(--surface-2); border:1px dashed var(--human); border-radius:8px; padding:8px 12px; font-size:13px; margin-bottom:10px;}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"JetBrains Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--human); color:var(--human); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;}
+
+footer{margin-top:60px; padding-top:20px; border-top:1px solid var(--border); font-size:12.5px; color:var(--muted); text-align:center;}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> El Arte de Discrepar · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Escuchar al que piensa distinto</h1>
+  <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> Vogue España, Mónica Heras — «Escuchar al que piensa distinto: una habilidad (a veces) incómoda que mejora las decisiones y el liderazgo» (2 de enero de 2026)</p>
+  <div class="summary">
+    <b>De qué trata:</b> el artículo explica por qué nos cuesta tanto escuchar opiniones contrarias a las nuestras (inflexibilidad cognitiva, «cámaras de eco») y qué pasa en el cerebro cuando alguien nos contradice, según la psicóloga Olga Albaladejo y el neurocientífico Francisco Manuel Ocaña Campos. También propone cómo entrenar esta habilidad, clave para el liderazgo y la toma de decisiones en equipo.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">04</span><h2>Test — Escuchar al que piensa distinto</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "artediscrepar_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){} }
+
+var blockScores = {};
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){ correct += blockScores[k].correct; total += blockScores[k].total; });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- VOCABULARIO ---------------- */
+var vocab = [
+  {term:"discernir", pos:"verbo transitivo (irregular)",
+   quote:"Tenemos menos capacidad de <mark>discernir</mark>, a las nuevas generaciones les cuesta crearse un pensamiento crítico...",
+   trans:"различать, разбираться, отличать одно от другого",
+   mean:"Способность отличить истинное от ложного, важное от неважного — ключевое понятие критического мышления. Не путать с «decidir» (принять решение).",
+   ex:"Es difícil discernir qué noticias son fiables y cuáles no. — Трудно отличить, какие новости надёжны, а какие нет."},
+  {term:"reacio/a a", pos:"construcción adjetival + infinitivo",
+   quote:"...somos <mark>reacios</mark> a escuchar cualquier postura que nos contradiga.",
+   trans:"несклонный / сопротивляющийся (делать что-то), неохотно идущий на что-то",
+   mean:"Описывает сопротивление или нежелание что-то делать; согласуется в роде и числе (reacio/reacia/reacios/reacias) с подлежащим.",
+   ex:"Mi abuelo es reacio a usar el móvil. — Мой дедушка неохотно пользуется мобильным телефоном."},
+  {term:"contradecir", pos:"verbo irregular (como decir)",
+   quote:"...cualquier postura que nos <mark>contradiga</mark>.",
+   trans:"противоречить, возражать",
+   mean:"Спрягается как «decir» (subjuntivo: contradiga, contradigas...). Означает высказывать противоположную точку зрения или не соответствовать чему-то.",
+   ex:"No me gusta que me contradigan delante de otras personas. — Мне не нравится, когда мне противоречат при других людях."},
+  {term:"rodearse de", pos:"verbo pronominal + preposición",
+   quote:"...si solo nos <mark>rodeamos</mark> de quienes piensan como nosotros...",
+   trans:"окружать себя (кем-то / чем-то)",
+   mean:"Возвратный глагол с обязательным предлогом «de» — указывает, кого или что человек выбирает в своё окружение.",
+   ex:"Es importante rodearse de personas que te apoyen. — Важно окружать себя людьми, которые тебя поддерживают."},
+  {term:"incapacitar", pos:"verbo transitivo",
+   quote:"...pero nos <mark>incapacita</mark> para funcionar fuera de él.",
+   trans:"лишать способности, делать неспособным",
+   mean:"Часто с предлогом «para» + infinitivo, указывающим, для чего именно человек становится неспособен.",
+   ex:"El miedo puede incapacitarnos para tomar decisiones. — Страх может лишить нас способности принимать решения."},
+  {term:"desafiar", pos:"verbo transitivo",
+   quote:"...una opinión que <mark>desafía</mark> nuestras creencias puede sentirse... como algo que duele...",
+   trans:"вызывать, бросать вызов, оспаривать",
+   mean:"Означает ставить что-то под сомнение или бросать вызов (идее, авторитету, сложности) — не только в буквальном смысле «вызвать на дуэль».",
+   ex:"Esta película desafía las expectativas del espectador. — Этот фильм бросает вызов ожиданиям зрителя."},
+  {term:"la amenaza", pos:"sustantivo, f.",
+   quote:"...como algo que duele o <mark>amenaza</mark> nuestra identidad... como una <mark>amenaza</mark> al sentido de pertenencia.",
+   trans:"угроза",
+   mean:"Существительное часто идёт с предлогом «a/para»: «una amenaza para/al...». Родственный глагол — «amenazar».",
+   ex:"El cambio climático es una amenaza para el planeta. — Изменение климата — угроза для планеты."},
+  {term:"subrayar", pos:"verbo transitivo",
+   quote:"...<mark>subraya</mark> Ocaña...",
+   trans:"подчёркивать, выделять (акцентировать внимание)",
+   mean:"Буквально «подчеркнуть линией», но в речи и текстах означает особо отметить важность чего-то — синоним «destacar»/«recalcar».",
+   ex:"El profesor subrayó la importancia de practicar todos los días. — Преподаватель подчеркнул важность ежедневной практики."},
+  {term:"el desacuerdo", pos:"sustantivo, m.",
+   quote:"...que el <mark>desacuerdo</mark> deje de ser vivido solo como amenaza...",
+   trans:"разногласие, несогласие",
+   mean:"Противоположность «acuerdo» (согласие). Частая конструкция: «estar en desacuerdo con alguien» — быть не согласным с кем-то.",
+   ex:"Tuvimos un pequeño desacuerdo sobre el precio. — У нас возникло небольшое разногласие по поводу цены."},
+  {term:"frenar", pos:"verbo transitivo/intransitivo",
+   quote:"...la creatividad se <mark>frena</mark>... frenar la tendencia automática a preparar la respuesta...",
+   trans:"тормозить, сдерживать, останавливать",
+   mean:"Буквально «тормозить» (машину), но широко используется фигурально — сдерживать процесс, эмоцию или тенденцию.",
+   ex:"Hay que frenar el gasto innecesario en la empresa. — Нужно сдержать ненужные расходы в компании."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+/* ---------------- DEBATE ---------------- */
+var debate = [
+  {q:"¿Te resulta fácil escuchar a alguien que piensa totalmente distinto a ti? ¿Por qué?", hint:"Útil: «Me resulta fácil/difícil porque...», «Normalmente...»"},
+  {q:"Cuenta una situación en la que alguien te contradijo y cómo reaccionaste.", hint:"Útil: «Recuerdo que...», «Al principio... pero luego...»"},
+  {q:"El artículo dice que las «cámaras de eco» en redes sociales refuerzan nuestras propias ideas. ¿Crees que esto pasa también en tu entorno (familia, trabajo, amigos)? Compara con lo que describe el texto.", hint:"Útil: «En mi caso...», «A diferencia del artículo,...»"},
+  {q:"¿Es siempre positivo tener un «abogado del diablo» en un equipo de trabajo, como se menciona en el artículo? Argumenta a favor y en contra.", hint:"Útil: «Por un lado...», «Sin embargo, también hay que tener en cuenta que...»"},
+  {q:"Si en tu próxima reunión de trabajo alguien contradijera abiertamente tu propuesta, ¿qué harías? ¿Aplicarías alguna de las recomendaciones del artículo (parafrasear, hacer preguntas genuinas)?", hint:"Útil: «Si eso pasara, yo...», «Intentaría...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){ var el = document.getElementById(id); if(el) el.value = store[id]; }
+});
+
+/* ---------------- GRAMÁTICA ---------------- */
+var gram = [
+  {id:"g1", title:"3.1 Futuro simple",
+   quote:"<mark>Pasaremos</mark> a la historia por ser testigos de un cambio de paradigma impulsado por la tecnología...",
+   rule:"Infinitivo completo + -é,-ás,-á,-emos,-éis,-án. Predicción/afirmación categórica sobre el futuro, con tono formal, periodístico. <b>Ошибка:</b> считать futuro simple и «ir a + infinitivo» полностью взаимозаменяемыми — futuro simple звучит более общим, безусловным утверждением.",
+   items:[
+     {stem:"En el futuro, la inteligencia artificial (cambiar) ______ aún más nuestra forma de comunicarnos.", answers:["cambiará"]},
+     {stem:"Los equipos que escuchen opiniones distintas (tomar) ______ mejores decisiones.", answers:["tomarán"]},
+     {stem:"¿Tú (aprender) ______ a escuchar mejor si lo practicas?", answers:["aprenderás"]},
+     {stem:"Nosotros (ver) ______ más conflictos si no mejoramos la comunicación.", answers:["veremos"]},
+     {stem:"La flexibilidad cognitiva (ser) ______ cada vez más valorada en las empresas.", answers:["será"]},
+     {stem:"¿Vosotros (cambiar) ______ de opinión si os dan buenos argumentos?", answers:["cambiaréis"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito perfecto compuesto",
+   quote:"...un cambio de paradigma impulsado por la tecnología, que <mark>ha transformado</mark> por completo la manera que tenemos de relacionarnos.",
+   rule:"haber (he, has, ha, hemos, habéis, han) + participio. Balance de un proceso que sigue siendo relevante hoy. <b>Ошибка:</b> путать с indefinido — если нужно указать конкретную завершённую дату, требуется indefinido, а не perfecto.",
+   items:[
+     {stem:"La tecnología ______ (cambiar) la forma en que discutimos.", answers:["ha cambiado"]},
+     {stem:"¿______ (escuchar, tú) alguna vez a alguien con quien no estás de acuerdo?", answers:["has escuchado"]},
+     {stem:"Los investigadores ______ (demostrar) que nos aislamos en redes polarizadas.", answers:["han demostrado"]},
+     {stem:"Yo todavía no ______ (aprender) a controlar mis reacciones defensivas.", answers:["he aprendido"]},
+     {stem:"Muchas empresas ______ (empezar) a valorar la diversidad de opiniones.", answers:["han empezado"]},
+     {stem:"¿Nosotros ______ (mejorar) nuestra forma de escuchar este año?", answers:["hemos mejorado"]}
+   ]},
+  {id:"g3", title:"3.3 Presente de subjuntivo (tras antecedente indefinido)",
+   quote:"...somos reacios a escuchar cualquier postura que nos <mark>contradiga</mark>.",
+   rule:"Subjuntivo tras «cualquier/cualquiera que», «nadie que», «alguien que» cuando el antecedente es indefinido o genérico, no una persona/cosa concreta. «Contradecir» es irregular como «decir»: contradiga, contradigas... <b>Ошибка:</b> использовать indicativo, когда речь о неопределённом/любом человеке или предмете — тогда обязателен subjuntivo.",
+   items:[
+     {stem:"No me gusta escuchar a nadie que me (contradecir) ______ en público.", answers:["contradiga"]},
+     {stem:"Aceptamos cualquier opinión que (aportar) ______ algo nuevo.", answers:["aporte"]},
+     {stem:"Busco a alguien que (saber) ______ escuchar sin juzgar.", answers:["sepa"]},
+     {stem:"Cualquier idea que (parecer) ______ extraña merece, al menos, una explicación.", answers:["parezca"]},
+     {stem:"No conozco a nadie que (ser) ______ completamente objetivo.", answers:["sea"]},
+     {stem:"Valoro a las personas que (tener) ______ el valor de decir lo que piensan.", answers:["tengan"]}
+   ]},
+  {id:"g4", title:"3.4 Condicional compuesto",
+   quote:"...habían identificado tres puntos ciegos críticos en su estrategia de expansión que, de no corregirse, <mark>habrían supuesto</mark> pérdidas millonarias.",
+   rule:"Condicional de «haber» (habría, habrías...) + participio. Выражает гипотетическое действие в прошлом, которое НЕ произошло — часто с «de + infinitivo» или «si + pluscuamperfecto». Конструкция более продвинутая, но полезно уметь её узнавать. <b>Ошибка:</b> путать с pretérito perfecto (то, что действительно случилось) — condicional compuesto говорит о том, что не случилось.",
+   items:[
+     {stem:"Si no hubiéramos escuchado esa crítica, (perder) ______ una oportunidad importante.", answers:["habríamos perdido"]},
+     {stem:"De no corregir el error, la empresa (tener) ______ graves problemas.", answers:["habría tenido"]},
+     {stem:"Sin la ayuda del equipo, yo nunca (poder) ______ terminar el proyecto.", answers:["habría podido"]},
+     {stem:"Si él no hubiera hablado, nadie (saber) ______ la verdad.", answers:["habría sabido"]},
+     {stem:"De haber sido más flexibles, (evitar, nosotros) ______ el conflicto.", answers:["habríamos evitado"]},
+     {stem:"Sin ese descubrimiento, los científicos no (llegar) ______ a esa conclusión.", answers:["habrían llegado"]}
+   ]},
+  {id:"g5", title:"3.5 Perífrasis «dejar de + infinitivo»",
+   quote:"<mark>Dejamos</mark> de incorporar información nueva.",
+   rule:"dejar (спрягается) + de + infinitivo — «перестать делать что-то», прекращение привычного действия. Не путать с «deber de + infinitivo» (предположение) или просто «dejar algo» (оставить что-то).",
+   items:[
+     {stem:"Cuando nos polarizamos, (dejar, nosotros) ______ de escuchar otras opiniones.", answers:["dejamos"]},
+     {stem:"¿Alguna vez (dejar, tú) ______ de hablar con un amigo por una discusión?", answers:["has dejado","dejaste"]},
+     {stem:"Las personas flexibles no (dejar) ______ de cuestionar sus propias ideas.", answers:["dejan"]},
+     {stem:"Espero que algún día el desacuerdo (dejar) ______ de vivirse como una amenaza.", answers:["deje"]},
+     {stem:"Los equipos rígidos (dejar) ______ de innovar con el tiempo.", answers:["dejan"]},
+     {stem:"Desde que leímos el artículo, nosotros nunca (dejar) ______ de cuestionar nuestras creencias.", answers:["hemos dejado"]}
+   ]}
+];
+
+function buildExerciseBlock(block){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button"; checkBtn.className = "check-btn"; checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b)); });
+
+/* ---------------- TEST ---------------- */
+var testList = document.getElementById("testList");
+
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"Según el artículo, ¿qué es la «inflexibilidad cognitiva masiva»?", opts:["La incapacidad de usar la tecnología","La dificultad para cambiar de opinión o contemplar matices","Un tipo de enfermedad neurológica","La falta de memoria"], answer:1},
+    {q:"¿Qué universidad investigó que las personas se aíslan en redes polarizadas?", opts:["Universidad de Sevilla","Universidad de Princeton","Universidad Complutense","Universidad de Harvard"], answer:1},
+    {q:"Según Olga Albaladejo, ¿cuáles son las tres capacidades que perdemos al polarizarnos?", opts:["Memoria, atención y lenguaje","Actualización de creencias, pensamiento complejo e innovación","Empatía, paciencia y humor","Velocidad, fuerza y coordinación"], answer:1},
+    {q:"¿Qué parte del cerebro detecta la discrepancia entre lo esperado y lo que ocurre, según Ocaña Campos?", opts:["La amígdala","La corteza cingulada anterior (ACC)","El cerebelo","La corteza visual"], answer:1},
+    {q:"En el ejemplo del «abogado del diablo», ¿qué consiguió el equipo directivo?", opts:["Aumentar las ventas inmediatamente","Identificar tres puntos ciegos críticos en su estrategia","Reducir el número de reuniones","Evitar cualquier tipo de conflicto"], answer:1},
+    {q:"¿Qué es BIMSTRESS, según el artículo?", opts:["Una técnica de meditación japonesa","Un proyecto de investigación de la Universidad de Sevilla con biofeedback y mindfulness","Una aplicación móvil de citas","Un tipo de terapia de pareja"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){ return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>'; }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button"); checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"discernir · reacios · contradiga · rodearse · desafía · subraya · desacuerdo · frenar",
+  items:[
+    {stem:"Tenemos menos capacidad de ______ entre información fiable y no fiable.", answers:["discernir"]},
+    {stem:"Muchas personas son ______ a escuchar opiniones distintas a las suyas.", answers:["reacios"]},
+    {stem:"A nadie le gusta que alguien le ______ en público.", answers:["contradiga"]},
+    {stem:"Es más cómodo ______ de personas que piensan como nosotros.", answers:["rodearse"]},
+    {stem:"Una opinión contraria ______ nuestras creencias más profundas.", answers:["desafía"]},
+    {stem:"Ocaña ______ que el desacuerdo puede vivirse como territorio de exploración.", answers:["subraya"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div><div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button"); checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su definición",
+  words:["amenaza","desacuerdo","frenar","incapacitar"],
+  defs:["reducir la velocidad o intensidad de algo","peligro o riesgo que algo representa para alguien","falta de acuerdo entre dos o más personas","hacer que alguien no pueda hacer algo"],
+  answers:["b","c","a","d"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Definición</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button"); checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena las ideas según aparecen en el artículo",
+  events:[
+    {text:"Se explica el mecanismo cerebral (ACC, amígdala, DLPFC) que reacciona ante una opinión contraria.", answer:2},
+    {text:"Se presentan las recomendaciones prácticas para escuchar mejor (parafrasear, preguntas genuinas).", answer:4},
+    {text:"Se describe la «inflexibilidad cognitiva masiva» y las tres capacidades que se pierden al polarizarnos.", answer:1},
+    {text:"Se menciona el ejemplo del «abogado del diablo» en un equipo directivo.", answer:3},
+    {text:"Se menciona el proyecto de investigación BIMSTRESS de la Universidad de Sevilla.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML = '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select><span class="stem">'+ev.text+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button"); checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Cambia a estilo indirecto: Ocaña dijo: «El cerebro es muy eficiente y tiende a ahorrar esfuerzo.»", model:"Ocaña dijo que el cerebro era muy eficiente y tendía a ahorrar esfuerzo."},
+    {stem:"Cambia de presente a futuro simple: «Pasamos a la historia por ser testigos de un cambio de paradigma.»", model:"Pasaremos a la historia por ser testigos de un cambio de paradigma."},
+    {stem:"Transforma en pregunta: «Los equipos diversos encuentran más soluciones innovadoras.»", model:"¿Encuentran los equipos diversos más soluciones innovadoras?"},
+    {stem:"Cambia a la voz pasiva: «La Universidad de Princeton demostró que las personas se aíslan en redes polarizadas.»", model:"Fue demostrado por la Universidad de Princeton que las personas se aíslan en redes polarizadas."},
+    {stem:"Sustituye «una opinión que desafía nuestras creencias» por una expresión sinónima, sin cambiar el sentido.", model:"Ejemplo: «una opinión que pone en duda nuestras creencias» / «una opinión que cuestiona nuestras creencias»."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «subrayar» en este contexto:", opts:["olvidar","destacar","borrar","dudar"], answer:1},
+    {q:"Antónimo de «reacio/a a»:", opts:["dispuesto/a","cansado/a","triste","rápido/a"], answer:0},
+    {q:"Marca la palabra intrusa:", opts:["amenaza","desacuerdo","conflicto","vacaciones"], answer:3},
+    {q:"Completa la colocación: «______ una amenaza»:", opts:["sentir","comer","vestir","dormir"], answer:0},
+    {q:"«Discernir» significa:", opts:["decidir rápido","diferenciar, distinguir","olvidar algo","repetir algo"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){ return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>'; }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button"); checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

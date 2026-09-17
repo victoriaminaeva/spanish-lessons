@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Talleres de Español</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Talleres interactivos de español (A2–B1) basados en artículos reales, con corrección automática.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f4;
+  --surface:#ffffff;
+  --surface-2:#eef2f0;
+  --ink:#201f1c;
+  --muted:#666057;
+  --accent:#2d5f5b;
+  --accent-ink:#ffffff;
+  --border:#e2ddd2;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#171512;
+    --surface:#201d19;
+    --surface-2:#262320;
+    --ink:#f1ede6;
+    --muted:#b3aca1;
+    --accent:#7fc9c1;
+    --accent-ink:#0f1f1d;
+    --border:#3a352d;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171512; --surface:#201d19; --surface-2:#262320; --ink:#f1ede6;
+  --muted:#b3aca1; --accent:#7fc9c1; --accent-ink:#0f1f1d; --border:#3a352d;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Work Sans", system-ui, sans-serif; line-height:1.6;
+  padding-inline:20px; padding-block:0 60px;
+}
+.wrap{max-width:760px; margin:0 auto;}
+h1,h2{font-family:"Fraunces", Georgia, serif; text-wrap:balance;}
+header{padding-block:48px 20px;}
+h1{font-size:clamp(28px,5vw,38px); margin:0 0 10px;}
+.lead{color:var(--muted); font-size:16px; max-width:56ch;}
+.grid{display:grid; gap:16px; margin-top:32px;}
+.card{
+  background:var(--surface); border:1px solid var(--border); border-radius:14px;
+  padding:20px 22px; display:block; text-decoration:none; color:inherit;
+  transition:border-color .15s ease;
+}
+.card:hover{border-color:var(--accent);}
+.card-top{display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+.card-title{font-family:"Fraunces", serif; font-weight:600; font-size:19px; color:var(--ink);}
+.level{
+  font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase;
+  background:var(--surface-2); color:var(--accent); border-radius:999px; padding:3px 10px;
+  white-space:nowrap;
+}
+.card-desc{color:var(--muted); font-size:14.5px; margin-top:8px;}
+.card-meta{font-size:12.5px; color:var(--muted); margin-top:10px; font-style:italic;}
+footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); font-size:13px; color:var(--muted); text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Talleres de Español</h1>
+  <p class="lead">Lecciones interactivas de nivel A2–B1 basadas en artículos reales de la prensa hispanohablante: vocabulario, preguntas de debate, gramática en contexto y un test con corrección automática al pulsar un botón.</p>
+</header>
+
+<div class="grid">
+
+  <a class="card" href="lessons/la-bola-negra.html">
+    <div class="card-top">
+      <span class="card-title">La Bola Negra</span>
+      <span class="level">A2–B1</span>
+    </div>
+    <p class="card-desc">La campaña de "La bola negra" en la carrera de los Oscar: cine, premios y la industria del entretenimiento español.</p>
+    <p class="card-meta">Fuente: El País</p>
+  </a>
+
+  <a class="card" href="lessons/el-sello-humano.html">
+    <div class="card-top">
+      <span class="card-title">El Sello Humano</span>
+      <span class="level">A2–B1</span>
+    </div>
+    <p class="card-desc">Inteligencia artificial, confianza y el valor del trato humano en la era digital.</p>
+    <p class="card-meta">Fuente: Vogue España</p>
+  </a>
+
+  <a class="card" href="lessons/el-arte-de-discrepar.html">
+    <div class="card-top">
+      <span class="card-title">El Arte de Discrepar</span>
+      <span class="level">A2–B1</span>
+    </div>
+    <p class="card-desc">Por qué nos cuesta escuchar opiniones contrarias y cómo entrenar la flexibilidad cognitiva.</p>
+    <p class="card-meta">Fuente: Vogue España</p>
+  </a>
+
+</div>
+
+<footer>Talleres de español · Nivel A2–B1</footer>
+
+</div>
+</body>
+</html>

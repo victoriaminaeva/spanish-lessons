@@ -1,0 +1,870 @@
+<!doctype html>
+<title>Taller La Bola Negra</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf6f1;
+  --surface:#ffffff;
+  --surface-2:#f4e9e2;
+  --ink:#241c1a;
+  --muted:#7c6f68;
+  --accent:#8a2148;
+  --accent-ink:#ffffff;
+  --gold:#a1741f;
+  --good:#2f7d4f;
+  --good-bg:#e6f3ea;
+  --bad:#b23b3b;
+  --bad-bg:#fbeaea;
+  --border:#e4d6cd;
+  --mark:#f6dfa0;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1a1412;
+    --surface:#231b18;
+    --surface-2:#2c2220;
+    --ink:#f1e8e1;
+    --muted:#b7a89d;
+    --accent:#e58fae;
+    --accent-ink:#241118;
+    --gold:#dcb15c;
+    --good:#7cc99a;
+    --good-bg:#1e3227;
+    --bad:#e28a8a;
+    --bad-bg:#3a2222;
+    --border:#3b2e29;
+    --mark:#5b4a26;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1a1412;
+  --surface:#231b18;
+  --surface-2:#2c2220;
+  --ink:#f1e8e1;
+  --muted:#b7a89d;
+  --accent:#e58fae;
+  --accent-ink:#241118;
+  --gold:#dcb15c;
+  --good:#7cc99a;
+  --good-bg:#1e3227;
+  --bad:#e28a8a;
+  --bad-bg:#3a2222;
+  --border:#3b2e29;
+  --mark:#5b4a26;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Source Sans 3", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"IBM Plex Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"IBM Plex Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"IBM Plex Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"IBM Plex Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+/* ---- vocab cards ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"IBM Plex Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+/* ---- discussion ---- */
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"IBM Plex Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"IBM Plex Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"IBM Plex Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"IBM Plex Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"IBM Plex Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> La Bola Negra · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>La bola negra: España en la carrera de los Oscar</h1>
+  <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> El País, Gregorio Belinchón — «'La bola negra' entra en la carrera de los Oscar con una expectación insólita y la campaña más grande de la historia del cine español»</p>
+  <div class="summary">
+    <b>De qué trata:</b> la Academia de Cine española eligió «La bola negra» (Javier Calvo y Javier Ambrossi) como representante de España en los Oscar a mejor película internacional. Variety y The Hollywood Reporter auguran entre 7 y 14 nominaciones, y Netflix invertirá unos 20 millones de euros en la campaña. En el reparto están Penélope Cruz y Glenn Close.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">04</span><h2>Test — La bola negra</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "labolanegra_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- VOCABULARIO ---------------- */
+var vocab = [
+  {term:"encarar", pos:"verbo transitivo",
+   quote:"Nunca una película española ha <mark>encarado</mark> la temporada de premios cinematográficos internacionales desde una posición tan privilegiada...",
+   trans:"сталкиваться (с чем-то), брать курс на трудную задачу",
+   mean:"Решительно взяться за сложную ситуацию или испытание. Отличается от простого «mirar» — акцент на готовности справляться с трудностью.",
+   ex:"El equipo tuvo que encarar una crisis económica muy grave. — Команде пришлось столкнуться с очень серьёзным экономическим кризисом."},
+  {term:"contar con", pos:"verbo + preposición",
+   quote:"...va a <mark>contar con</mark> el respaldo económico en su lanzamiento de la todopoderosa plataforma Netflix.",
+   trans:"располагать (чем-то), рассчитывать на, иметь поддержку",
+   mean:"«Contar con algo/alguien» — иметь что-то в своём распоряжении или рассчитывать на чью-то помощь. Не путать с «contar» = «считать»/«рассказывать».",
+   ex:"Para el proyecto, contamos con la ayuda de varios expertos. — В проекте мы рассчитываем на помощь нескольких экспертов."},
+  {term:"quedarse atrás", pos:"construcción verbal",
+   quote:"...los directores de La bola negra, no se van a <mark>quedar atrás</mark>.",
+   trans:"отставать, оставаться позади; (в отрицании) не уступать",
+   mean:"Часто в отрицательной форме «no quedarse atrás» — не хотеть уступать другим в усилиях или результатах.",
+   ex:"Mis compañeros estudiaron mucho, así que yo tampoco me quiero quedar atrás. — Мои товарищи усердно учились, поэтому я тоже не хочу отставать."},
+  {term:"sin embargo", pos:"conector discursivo",
+   quote:"...ya se han visto las películas de Cannes, Venecia y Telluride; <mark>sin embargo</mark>, faltan títulos muy potentes...",
+   trans:"однако, тем не менее",
+   mean:"Вводит противоречие с предыдущим утверждением; формальный аналог «pero», типичен для новостного стиля.",
+   ex:"La película tuvo buenas críticas; sin embargo, no ganó ningún premio. — У фильма были хорошие отзывы, однако он не выиграл ни одной премии."},
+  {term:"a pesar de (que)", pos:"construcción concesiva",
+   quote:"«<mark>A pesar de que</mark> habla del pasado», apostilló Calvo.",
+   trans:"несмотря на (то что)",
+   mean:"Вводит уступительное обстоятельство. После неё — существительное или «que + предложение».",
+   ex:"A pesar de la lluvia, decidimos ir al cine. — Несмотря на дождь, мы решили пойти в кино."},
+  {term:"irse a pique", pos:"expresión idiomática",
+   quote:"...toda la inversión realizada... pareció <mark>irse a pique</mark> tras estallar el escándalo...",
+   trans:"провалиться, пойти ко дну, рухнуть",
+   mean:"Идиома из морской лексики («пойти на дно»), фигурально о планах или проектах, терпящих крах.",
+   ex:"Sus planes de vacaciones se fueron a pique por el mal tiempo. — Их планы на отпуск провалились из-за плохой погоды."},
+  {term:"hay que + infinitivo", pos:"construcción impersonal",
+   quote:"Los Oscar <mark>hay que</mark> conocerlos muy bien desde dentro, porque son una maquinaria muy bien engrasada.",
+   trans:"нужно, необходимо (сделать что-то)",
+   mean:"Безличная конструкция долженствования — субъект не указан (в отличие от «tener que»).",
+   ex:"Para aprender un idioma, hay que practicar todos los días. — Чтобы выучить язык, нужно практиковаться каждый день."},
+  {term:"soler + infinitivo", pos:"perífrasis habitual",
+   quote:"...ahí los publicistas <mark>suelen</mark> lanzarse a por más adhesiones.",
+   trans:"обычно (делать что-то), иметь привычку",
+   mean:"Описывает привычные, регулярные действия (в imperfecto — «solía» для прошлых привычек).",
+   ex:"Los domingos solemos comer en casa de mis abuelos. — По воскресеньям мы обычно обедаем у дедушки и бабушки."},
+  {term:"el estreno", pos:"sustantivo, m.",
+   quote:"Después llegará la promoción y el <mark>estreno</mark> en España el 25 de septiembre.",
+   trans:"премьера, первый показ",
+   mean:"Первая публичная демонстрация фильма/спектакля. Родственно глаголу «estrenar».",
+   ex:"El estreno de la nueva película fue todo un éxito. — Премьера нового фильма прошла с большим успехом."},
+  {term:"aun así", pos:"conector discursivo",
+   quote:"<mark>Aun así</mark>, a la empresa de la N refulgente también le preocupaba esta etapa...",
+   trans:"и всё же, тем не менее",
+   mean:"Похоже на «sin embargo», но более разговорное. Не путать с «aún así» — здесь ударение на «aun» не ставится.",
+   ex:"Sabía que iba a llover; aun así, salió sin paraguas. — Он знал, что будет дождь, и всё же вышел без зонта."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+/* ---------------- DEBATE ---------------- */
+var debate = [
+  {q:"¿Has visto alguna película española? ¿Cuál te gustó más y por qué?", hint:"Útil: «Me gustó... porque...», «La trama trata de...»"},
+  {q:"¿Crees que plataformas como Netflix ayudan o perjudican al cine tradicional (las salas de cine)? ¿Por qué?", hint:"Útil: «Por un lado... por otro lado...», «En mi opinión...»"},
+  {q:"En tu país, ¿el cine nacional cuenta con el mismo respaldo económico que el cine internacional? Compara la situación con la de España.", hint:"Útil: «A diferencia de...», «Mientras que en España..., en mi país...»"},
+  {q:"¿Es justo que se inviertan unos 20 millones de euros en la promoción de una sola película para conseguir un premio? Argumenta tu respuesta.", hint:"Útil: «Por una parte...», «Sin embargo, hay que tener en cuenta que...»"},
+  {q:"Si tú fueras el director de una película nominada al Oscar, ¿qué harías para encarar la campaña? ¿Estarías dispuesto/a a viajar durante meses como hacen los Javis?", hint:"Útil: «Si yo fuera..., haría...», «Estaría dispuesto/a a...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+/* ---------------- GRAMÁTICA ---------------- */
+var gram = [
+  {id:"g1", title:"3.1 Pretérito perfecto compuesto",
+   quote:"Nunca una película española ha <mark>encarado</mark> la temporada de premios cinematográficos internacionales desde una posición tan privilegiada...",
+   rule:"Образуется: presente de <i>haber</i> (he, has, ha, hemos, habéis, han) + participio (-ado/-ido). Используется для действий, завершившихся в прошлом, но связанных с настоящим, часто с «nunca», «ya», «todavía no». <b>Ошибка:</b> путать с indefinido — perfecto без конкретной даты, indefinido — с явной прошедшей датой.",
+   items:[
+     {stem:"Los Javis nunca ______ (dirigir) una película tan ambiciosa como esta.", answers:["ha dirigido"]},
+     {stem:"¿______ (ver, tú) alguna película de los Javis?", answers:["has visto"]},
+     {stem:"Penélope Cruz ______ (trabajar) ya con muchos directores internacionales.", answers:["ha trabajado"]},
+     {stem:"Todavía no ______ (anunciar, ellos) las nominaciones definitivas.", answers:["han anunciado"]},
+     {stem:"Este año, Netflix ______ (invertir) mucho dinero en la campaña.", answers:["ha invertido"]},
+     {stem:"La crítica ______ (elogiar) mucho la película en los festivales.", answers:["ha elogiado"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito indefinido",
+   quote:"...la Academia de Cine <mark>anunció</mark> ayer, miércoles, que representará a España en los Oscar...",
+   rule:"Regular -ar: -é,-aste,-ó,-amos,-asteis,-aron; -er/-ir: -í,-iste,-ió,-imos,-isteis,-ieron. Se usa para acciones puntuales y completadas («ayer», «en 2019»). <b>Ошибка:</b> путать с imperfecto (описание фона/привычки).",
+   items:[
+     {stem:"La Academia (anunciar) ______ la elección el martes.", answers:["anunció"]},
+     {stem:"Los Javis (recibir) ______ la noticia hace dos semanas.", answers:["recibieron"]},
+     {stem:"Pezzi (abandonar) ______ Movistar para fichar en Suma Content.", answers:["abandonó"]},
+     {stem:"¿Cuándo (empezar) ______ el proyecto?", answers:["empezó"]},
+     {stem:"El año pasado, Sirât (lograr) ______ dos nominaciones.", answers:["logró"]},
+     {stem:"Nosotros (ver) ______ el tráiler ayer.", answers:["vimos"]}
+   ]},
+  {id:"g3", title:"3.3 Futuro simple",
+   quote:"...la temporada de premios, que se <mark>extenderá</mark> hasta que se entreguen los Oscar... Los Javis <mark>aterrizarán</mark> en San Sebastián...",
+   rule:"Infinitivo completo + -é,-ás,-á,-emos,-éis,-án (pocos irregulares en la raíz: tendrá, hará, podrá). Predicciones y planes con fecha; muy usado en el lenguaje periodístico.",
+   items:[
+     {stem:"La gala (celebrarse) ______ el 14 de marzo.", answers:["se celebrará","celebrará"]},
+     {stem:"Los Javis (aterrizar) ______ en San Sebastián el sábado.", answers:["aterrizarán"]},
+     {stem:"La película (estrenarse) ______ en España el 25 de septiembre.", answers:["se estrenará","estrenará"]},
+     {stem:"¿Tú crees que (haber) ______ sorpresas en la campaña?", answers:["habrá"]},
+     {stem:"Netflix (invertir) ______ mucho dinero en publicidad.", answers:["invertirá"]},
+     {stem:"Nosotros (saber) ______ las nominaciones en enero.", answers:["sabremos"]}
+   ]},
+  {id:"g4", title:"3.4 Condicional simple",
+   quote:"La bola negra <mark>podría alcanzar</mark> siete nominaciones a los Oscar... Netflix <mark>podría invertir</mark> unos 20 millones de euros...",
+   rule:"Infinitivo completo + -ía,-ías,-ía,-íamos,-íais,-ían (mismas raíces irregulares que el futuro). Hipótesis, especulaciones y consejos.",
+   items:[
+     {stem:"Según Variety, la película (obtener) ______ siete nominaciones.", answers:["podría obtener"]},
+     {stem:"Si yo fuera director, (invertir) ______ menos dinero en publicidad.", answers:["invertiría"]},
+     {stem:"The Hollywood Reporter dice que (poder) ______ llegar a 14 nominaciones.", answers:["podría"]},
+     {stem:"¿Qué (hacer) ______ tú en el lugar de los Javis?", answers:["harías"]},
+     {stem:"Nosotros (preferir) ______ ver la película antes de opinar.", answers:["preferiríamos"]},
+     {stem:"Ellos (necesitar) ______ más tiempo para la campaña.", answers:["necesitarían"]}
+   ]},
+  {id:"g5", title:"3.5 Presente de subjuntivo",
+   quote:"...la temporada de premios, que se extenderá hasta que se <mark>entreguen</mark> los Oscar, el domingo 14 de marzo de 2027.",
+   rule:"Raíz del presente en «yo» + vocal cambiada (-ar→e; -er/-ir→a). Tras conjunciones temporales de futuro no realizado («hasta que», «cuando», «en cuanto») y tras verbos de deseo/duda. <b>Ошибка:</b> indicativo после «hasta que» при действии в будущем — нужен subjuntivo.",
+   items:[
+     {stem:"La campaña continuará hasta que (entregarse) ______ los Oscar.", answers:["se entreguen","entreguen"]},
+     {stem:"Espero que la película (conseguir) ______ muchas nominaciones.", answers:["consiga"]},
+     {stem:"Cuando (llegar) ______ enero, sabremos las nominaciones oficiales.", answers:["llegue"]},
+     {stem:"Es posible que Netflix (invertir) ______ más de 20 millones.", answers:["invierta"]},
+     {stem:"No creo que Sirât (repetir) ______ el mismo éxito.", answers:["repita"]},
+     {stem:"En cuanto (saberse) ______ las shortlists, habrá más noticias.", answers:["se sepan","sepan"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+/* ---------------- TEST ---------------- */
+var testList = document.getElementById("testList");
+
+/* Bloque 1: comprensión (radio) */
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"¿Qué categoría de los Oscar representará España con «La bola negra»?", opts:["Mejor actriz","Mejor canción original","Mejor película internacional","Mejor guion original"], answer:2},
+    {q:"¿Quién dirige «La bola negra»?", opts:["Oliver Laxe","Javier Calvo y Javier Ambrossi","Juan Antonio Bayona","Pedro Almodóvar"], answer:1},
+    {q:"Según The Hollywood Reporter, ¿cuántas nominaciones podría alcanzar la película como máximo?", opts:["7","8","10","14"], answer:3},
+    {q:"¿Quién es Lisa Tabak?", opts:["La protagonista de la película","La directora de Netflix España","Vicepresidenta de Relaciones con el Talento y Premios en Netflix","La periodista autora del artículo"], answer:2},
+    {q:"¿Cuándo se estrena «La bola negra» en España?", opts:["El 16 de octubre","El 25 de septiembre","El 2 de diciembre","El 14 de marzo"], answer:1},
+    {q:"¿Qué papel interpreta Glenn Close en la película?", opts:["Una periodista","Una hispanista","Una productora","Una actriz de Hollywood"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 2: huecos */
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"encarar · contar con · sin embargo · a pesar · irse a pique · aun así · estreno · hay que",
+  items:[
+    {stem:"Nunca una película española ha tenido que ______ una temporada de premios tan importante como esta.", answers:["encarar"]},
+    {stem:"La película va a ______ el respaldo económico de Netflix en su lanzamiento.", answers:["contar con"]},
+    {stem:"Los medios auguran muchas nominaciones; ______, todavía faltan títulos muy potentes por ver.", answers:["sin embargo"]},
+    {stem:"______ de que la película habla del pasado, Netflix cree que representa el futuro.", answers:["a pesar"]},
+    {stem:"La campaña de Emilia Pérez pareció ______ tras el escándalo de la actriz.", answers:["irse a pique","se fue a pique"]},
+    {stem:"______, Netflix ya ha superado con éxito la etapa de la preselección.", answers:["aun así"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3a: relacionar (select) */
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su definición",
+  words:["respaldo","estreno","nominación","presupuesto"],
+  defs:["dinero disponible para hacer una película, antes de los gastos","apoyo, ayuda económica o moral","primera proyección pública de una película","propuesta oficial de un candidato para un premio"],
+  answers:["b","c","d","a"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Definición</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3b: orden (select) */
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena los hechos según aparecen en el artículo",
+  events:[
+    {text:"La Academia de Cine anuncia que «La bola negra» representará a España.", answer:3},
+    {text:"Los Javis reciben la noticia de la preselección en Los Ángeles.", answer:1},
+    {text:"Se anuncian las nominaciones oficiales a los Oscar (21 de enero).", answer:5},
+    {text:"La película se proyecta en los festivales de Telluride y Toronto.", answer:2},
+    {text:"La película se estrena en España.", answer:4}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 4: transformación (respuesta modelo, no autocorregible) */
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Convierte a estilo indirecto: Calvo dijo: «A pesar de que habla del pasado.»", model:"Calvo dijo que a pesar de que hablaba del pasado (la película representaba el futuro)."},
+    {stem:"Cambia del pretérito indefinido al pretérito perfecto: «La Academia anunció la elección.»", model:"La Academia ha anunciado la elección."},
+    {stem:"Transforma en pregunta: «Netflix podría invertir 20 millones de euros en la campaña.»", model:"¿Podría invertir Netflix 20 millones de euros en la campaña?"},
+    {stem:"Cambia a la voz pasiva: «Netflix invertirá mucho dinero en la promoción.»", model:"Mucho dinero será invertido por Netflix en la promoción."},
+    {stem:"Sustituye «no se van a quedar atrás» por una expresión sinónima, sin cambiar el sentido.", model:"Ejemplo: «Los Javis no se van a rendir» / «Los Javis van a estar a la altura»."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 5: léxico (radio) */
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «respaldo» en este contexto:", opts:["rechazo","apoyo","crítica","presupuesto"], answer:1},
+    {q:"Antónimo de «adorar» (como en «los medios... adoran este drama»):", opts:["odiar","admirar","elogiar","apoyar"], answer:0},
+    {q:"Marca la palabra intrusa:", opts:["nominación","candidatura","preselección","presupuesto"], answer:3},
+    {q:"Completa la colocación: «______ una nominación»:", opts:["hacer","lograr","tomar","poner"], answer:1},
+    {q:"«Estatuilla» significa:", opts:["el propio premio / trofeo","el guion","el presupuesto","la crítica"], answer:0}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

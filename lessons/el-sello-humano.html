@@ -1,0 +1,789 @@
+<!doctype html>
+<title>El Sello Humano</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f2f7;
+  --surface:#ffffff;
+  --surface-2:#ebe8f5;
+  --ink:#1b1a2b;
+  --muted:#6b6878;
+  --accent:#4b30d6;
+  --accent-ink:#ffffff;
+  --human:#c96a3e;
+  --good:#2f8f5b;
+  --good-bg:#e4f5ea;
+  --bad:#c1483f;
+  --bad-bg:#fbe9e7;
+  --border:#ddd9ea;
+  --mark:#dcd2fb;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#131120;
+    --surface:#1b1830;
+    --surface-2:#231f3c;
+    --ink:#ece9f7;
+    --muted:#a29dbd;
+    --accent:#9c86ff;
+    --accent-ink:#150f30;
+    --human:#f0a074;
+    --good:#6fcf97;
+    --good-bg:#1e3327;
+    --bad:#e2837b;
+    --bad-bg:#3a2320;
+    --border:#322c4a;
+    --mark:#352a5c;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131120;
+  --surface:#1b1830;
+  --surface-2:#231f3c;
+  --ink:#ece9f7;
+  --muted:#a29dbd;
+  --accent:#9c86ff;
+  --accent-ink:#150f30;
+  --human:#f0a074;
+  --good:#6fcf97;
+  --good-bg:#1e3327;
+  --bad:#e2837b;
+  --bad-bg:#3a2320;
+  --border:#322c4a;
+  --mark:#352a5c;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Work Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Newsreader", Georgia, serif; text-wrap:balance;}
+a{color:var(--accent);}
+
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Space Mono", monospace; font-weight:700; font-size:12.5px; letter-spacing:.04em;
+  color:var(--accent); text-transform:uppercase;
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .bar{width:14px;height:3px;background:var(--human);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:700;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:6px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:700;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:6px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+header.hero{padding-block:36px 8px; border-bottom:3px solid var(--ink); margin-bottom:8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--human); margin:0 0 10px; font-weight:700;
+}
+h1{font-size:clamp(28px,5vw,42px); margin:0 0 10px; color:var(--ink); font-weight:600;}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:18px; font-style:italic;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:0 8px 8px 0; padding:14px 16px; font-size:14.5px;
+}
+
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--human);
+  font-weight:700;
+}
+h2{font-size:23px; margin:0; color:var(--ink); font-weight:600;}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Newsreader", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:700;
+  background:none; border:1px dashed var(--human); color:var(--human);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.q-card{border-left:3px solid var(--human); padding-left:14px; margin-bottom:20px;}
+.q-num{font-family:"Space Mono", monospace; color:var(--human); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Newsreader", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:12px;}
+.rule-box b{color:var(--accent);}
+
+.item-row{display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;}
+.item-idx{font-family:"Space Mono", monospace; font-size:12px; color:var(--muted); min-width:18px; padding-top:6px;}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:700; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px; display:inline-block; margin-left:10px;}
+.block-score b{color:var(--accent);}
+
+.wordbank{background:var(--surface-2); border:1px dashed var(--human); border-radius:8px; padding:8px 12px; font-size:13px; margin-bottom:10px;}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:700;
+  background:none; border:1px dashed var(--human); color:var(--human); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;}
+
+footer{margin-top:60px; padding-top:20px; border-top:1px solid var(--border); font-size:12.5px; color:var(--muted); text-align:center;}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="bar"></span> El Sello Humano · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>¿La inteligencia artificial nos hará mejores humanos?</h1>
+  <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> Vogue España, Carmen Melgar — «¿La inteligencia artificial nos hará mejores humanos?» (28 de enero de 2026)</p>
+  <div class="summary">
+    <b>De qué trata:</b> el artículo analiza cómo el uso de la IA ha crecido muy rápido en España (+123,5% en un año), pero la confianza no crece al mismo ritmo: solo la mitad de quienes la usan confían en ella. Expertos de la UOC y de la consultora 21gramos explican que, ante el cansancio digital, las personas valoran cada vez más la autenticidad y el trato humano, aunque sea imperfecto, frente a la perfección de las máquinas.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">04</span><h2>Test — ¿La IA nos hará mejores humanos?</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "elsellohumano_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){} }
+
+var blockScores = {};
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){ correct += blockScores[k].correct; total += blockScores[k].total; });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- VOCABULARIO ---------------- */
+var vocab = [
+  {term:"constatar", pos:"verbo transitivo",
+   quote:"2025 ha sido el año en el que hemos <mark>constatado</mark> que, definitivamente, la inteligencia artificial forma parte de nuestra vida.",
+   trans:"убедиться, констатировать (как факт)",
+   mean:"Означает удостовериться в чём-то на основе фактов/наблюдений, официально это признать. Более «сухое» и объективное слово, чем «darse cuenta» (просто заметить).",
+   ex:"Los médicos constataron que el tratamiento funcionaba. — Врачи констатировали, что лечение работает."},
+  {term:"sin más", pos:"construcción adverbial",
+   quote:"Ahora, el reto no es <mark>sin más</mark> aprender a utilizarla, es no competir, adaptarla a nuestras capacidades y habilidades.",
+   trans:"просто так, без затей, без further ado",
+   mean:"Подчёркивает, что действие не сводится к чему-то простому/поверхностному — «не просто X, а нечто большее». Часто в конструкции «no es sin más + infinitivo».",
+   ex:"Aprender un idioma no es sin más memorizar palabras. — Изучение языка — это не просто зубрёжка слов."},
+  {term:"la brecha", pos:"sustantivo, f.",
+   quote:"...la cuestión radica en la <mark>brecha</mark> de seguridad y las vulnerabilidades a las que nos enfrentamos.",
+   trans:"разрыв, пропасть, брешь (в переносном смысле)",
+   mean:"Используется для обозначения разрыва между двумя группами/показателями: «brecha digital», «brecha de confianza», «brecha salarial». Не путать с buque «grieta» (трещина в материале).",
+   ex:"Existe una gran brecha salarial entre hombres y mujeres en algunos sectores. — В некоторых отраслях существует большой разрыв в зарплатах между мужчинами и женщинами."},
+  {term:"radicar en", pos:"verbo + preposición",
+   quote:"La pregunta va más allá de si estamos preparados para adaptarla masivamente, la cuestión <mark>radica en</mark> la brecha de seguridad...",
+   trans:"заключаться в, коренится в",
+   mean:"Формальный способ сказать, где именно находится суть проблемы/причины. Синоним «consistir en» / «estar en», но более книжный, частый в аналитических текстах.",
+   ex:"El problema no radica en la tecnología, sino en cómo la usamos. — Проблема не в технологии, а в том, как мы её используем."},
+  {term:"anteponer", pos:"verbo transitivo",
+   quote:"...8 de cada 10 españoles prefiera ser atendido por una persona imperfecta antes que por una inteligencia artificial; <mark>anteponemos</mark> el fallo humano a la perfección técnica.",
+   trans:"ставить на первое место, отдавать приоритет",
+   mean:"«Anteponer A a B» — ставить A выше/раньше B. Управление с предлогом «a» перед тем, что отодвигается на второй план.",
+   ex:"Muchas personas anteponen la familia al trabajo. — Многие люди ставят семью выше работы."},
+  {term:"la carencia", pos:"sustantivo, f.",
+   quote:"...la IA tiene «grandes ventajas, pero también <mark>carencias</mark>, como la falta de autenticidad, de responsabilidad firme, de compromiso ético...»",
+   trans:"нехватка, недостаток, отсутствие чего-либо необходимого",
+   mean:"Более формальное слово, чем «falta»; часто во множественном числе для перечисления слабых сторон системы, продукта, человека.",
+   ex:"El proyecto tiene varias carencias que hay que solucionar antes de lanzarlo. — В проекте есть несколько недостатков, которые нужно устранить перед запуском."},
+  {term:"incierto/a", pos:"adjetivo",
+   quote:"Porque aunque el aumento es notable, el uso todavía para muchos es <mark>incierto</mark>.",
+   trans:"неопределённый, неясный, ненадёжный",
+   mean:"Противоположность «seguro/claro»: используется, когда результат или ситуация вызывают сомнения или тревогу из-за непредсказуемости.",
+   ex:"El futuro de muchas profesiones es todavía incierto. — Будущее многих профессий пока неопределённо."},
+  {term:"rebasar", pos:"verbo transitivo",
+   quote:"...parece que estamos <mark>rebasando</mark> una barrera en la que el carácter y las habilidades meramente humanas serán la nueva alta costura del pensamiento.",
+   trans:"превышать, выходить за пределы, пересекать (границу/предел)",
+   mean:"Часто про пределы, лимиты, барьеры — фигурально или буквально (rebasar un límite de velocidad, rebasar una barrera social).",
+   ex:"La empresa ha rebasado todas las expectativas de ventas este año. — Компания превзошла все ожидания по продажам в этом году."},
+  {term:"no extraña que + subjuntivo", pos:"construcción impersonal",
+   quote:"...<mark>no extraña que</mark> el mismo informe revele que 8 de cada 10 españoles prefiera ser atendido por una persona imperfecta...",
+   trans:"неудивительно, что...",
+   mean:"Безличная конструкция оценки/реакции, требующая subjuntivo в придаточном (как «no sorprende que», «es normal que»). Выражает, что что-то логично, ожидаемо.",
+   ex:"No extraña que muchos jóvenes prefieran trabajar desde casa. — Неудивительно, что многие молодые люди предпочитают работать из дома."},
+  {term:"la palanca de cambio", pos:"colocación (sustantivo, f.)",
+   quote:"Ha dejado de ser una herramienta que acelera la productividad para convertirse en una <mark>palanca de cambio</mark> para empresas y particulares.",
+   trans:"рычаг перемен, катализатор изменений",
+   mean:"Метафора: то, что запускает или ускоряет крупные преобразования. Часто в бизнес- и аналитических текстах: «palanca de crecimiento», «palanca de transformación».",
+   ex:"La educación es una palanca de cambio fundamental para reducir la desigualdad. — Образование — фундаментальный рычаг перемен для снижения неравенства."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+/* ---------------- DEBATE ---------------- */
+var debate = [
+  {q:"¿Usas la inteligencia artificial en tu vida diaria? ¿Para qué la usas normalmente?", hint:"Útil: «La uso para...», «Normalmente...»"},
+  {q:"Cuando tienes un problema (por ejemplo, con un banco o una compañía), ¿prefieres que te atienda una persona o una IA? ¿Por qué?", hint:"Útil: «Prefiero... porque...», «Me gusta más...»"},
+  {q:"El artículo dice que el 66% de los españoles usa la IA habitualmente, pero menos de la mitad confía en ella. ¿Por qué crees que existe esta brecha entre uso y confianza?", hint:"Útil: «Creo que esto pasa porque...», «Por un lado..., por otro lado...»"},
+  {q:"Compara cómo se relaciona tu generación con la tecnología frente a la generación Z que describe el artículo (nostalgia por un internet más humano). ¿Hay diferencias en tu entorno?", hint:"Útil: «A diferencia de...», «Mientras que...,...»"},
+  {q:"Si una marca te ofreciera un producto con el sello «Human Authored» (hecho por una persona, no por IA) pero un poco más caro que el equivalente hecho con IA, ¿cuál elegirías? ¿Qué harías si fuera mucho más caro?", hint:"Útil: «Elegiría... porque...», «Si fuera mucho más caro,...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){ var el = document.getElementById(id); if(el) el.value = store[id]; }
+});
+
+/* ---------------- GRAMÁTICA ---------------- */
+var gram = [
+  {id:"g1", title:"3.1 Pretérito perfecto compuesto",
+   quote:"2025 <mark>ha sido</mark> el año en el que <mark>hemos constatado</mark> que, definitivamente, la inteligencia artificial forma parte de nuestra vida.",
+   rule:"Образуется: presente de <i>haber</i> (he, has, ha, hemos, habéis, han) + participio (-ado/-ido). Используется для итога периода, который всё ещё влияет на настоящее (здесь — итог года 2025). <b>Ошибка:</b> путать с indefinido, который использовался бы, если бы автор просто рассказывал историю года как закрытый факт прошлого, а не подводил актуальный итог.",
+   items:[
+     {stem:"La inteligencia artificial ______ (cambiar) mucho nuestra forma de trabajar en los últimos años.", answers:["ha cambiado"]},
+     {stem:"¿______ (usar, tú) alguna vez un chatbot de IA para resolver un problema?", answers:["has usado"]},
+     {stem:"Muchas empresas ______ (adoptar) esta tecnología en 2025.", answers:["han adoptado"]},
+     {stem:"Yo todavía no ______ (probar) todas las herramientas de IA que existen.", answers:["he probado"]},
+     {stem:"Los expertos ______ (advertir) sobre los riesgos de usarla sin formación.", answers:["han advertido"]},
+     {stem:"¿Vosotros ______ (notar) algún cambio en vuestro trabajo por la IA?", answers:["habéis notado"]}
+   ]},
+  {id:"g2", title:"3.2 Presente de indicativo",
+   quote:"Del 66% de usuarios que <mark>confiesan</mark> usarla habitualmente, menos de la mitad <mark>confían</mark> en ella.",
+   rule:"Verbos en presente para hechos, hábitos y datos/estadísticas. Los verbos en -iar como «confiar» son regulares, pero llevan tilde en las formas donde la «i» es tónica: confío, confías, confía, confían. <b>Ошибка:</b> забывать ударение над «í» в этих формах.",
+   items:[
+     {stem:"Muchos españoles (confiar) ______ poco en la inteligencia artificial.", answers:["confían"]},
+     {stem:"Yo (usar) ______ la IA para traducir textos.", answers:["uso"]},
+     {stem:"¿Tú (confesar) ______ que usas la IA todos los días?", answers:["confiesas"]},
+     {stem:"Nosotros (preferir) ______ hablar con una persona real.", answers:["preferimos"]},
+     {stem:"La tecnología (avanzar) ______ muy rápido.", answers:["avanza"]},
+     {stem:"¿Ustedes (depender) ______ mucho de estas herramientas?", answers:["dependen"]}
+   ]},
+  {id:"g3", title:"3.3 Futuro simple",
+   quote:"...parece que estamos rebasando una barrera en la que el carácter y las habilidades meramente humanas <mark>serán</mark> la nueva alta costura del pensamiento...",
+   rule:"Infinitivo completo + -é,-ás,-á,-emos,-éis,-án (el futuro de «ser» es regular: seré, serás, será...). Predicciones y afirmaciones categóricas sobre el futuro, con tono más rotundo que «ir a + infinitivo». <b>Ошибка:</b> считать futuro simple и «ir a + infinitivo» полностью взаимозаменяемыми — futuro simple звучит более общим/безусловным утверждением.",
+   items:[
+     {stem:"En el futuro, la creatividad humana (ser) ______ más valorada que nunca.", answers:["será"]},
+     {stem:"Muchas profesiones (cambiar) ______ por completo gracias a la IA.", answers:["cambiarán"]},
+     {stem:"¿Tú (poder) ______ trabajar sin usar ninguna herramienta de IA?", answers:["podrás"]},
+     {stem:"Los sellos como «Human Authored» (tener) ______ cada vez más importancia.", answers:["tendrán"]},
+     {stem:"Nosotros (tener) ______ que aprender a convivir con estas tecnologías.", answers:["tendremos"]},
+     {stem:"¿Quién (saber) ______ realmente qué es auténtico y qué no?", answers:["sabrá"]}
+   ]},
+  {id:"g4", title:"3.4 Perífrasis ir a + infinitivo",
+   quote:"En definitiva, es una tecnología que nos <mark>va a cambiar</mark> estratégicamente como humanos.",
+   rule:"ir (presente: voy, vas, va, vamos, vais, van) + a + infinitivo. Señala un cambio previsto, percibido como cercano o ya en marcha — más concreto e inminente que el futuro simple. <b>Ошибка:</b> забывать предлог «a» между «ir» и инфинитивом.",
+   items:[
+     {stem:"La IA (cambiar) ______ estratégicamente nuestra forma de vivir.", answers:["va a cambiar"]},
+     {stem:"Yo (aprender) ______ a usar mejor estas herramientas este año.", answers:["voy a aprender"]},
+     {stem:"¿Las empresas (invertir) ______ más dinero en seguridad digital?", answers:["van a invertir"]},
+     {stem:"Nosotros (tener) ______ que adaptarnos a estos cambios.", answers:["vamos a tener"]},
+     {stem:"¿Tú (confiar) ______ más en la IA en el futuro?", answers:["vas a confiar"]},
+     {stem:"Muchos trabajos (transformarse) ______ por completo.", answers:["van a transformarse"]}
+   ]},
+  {id:"g5", title:"3.5 Presente de subjuntivo",
+   quote:"...no extraña que el mismo informe <mark>revele</mark> que 8 de cada 10 españoles prefiera ser atendido por una persona imperfecta antes que por una inteligencia artificial.",
+   rule:"Raíz del presente en «yo» + vocal cambiada (-ar→e; -er/-ir→a). Se usa tras expresiones impersonales de reacción/valoración («no extraña que», «es normal que», «sorprende que»). <b>Ошибка:</b> использовать indicativo после подобных оценочных конструкций — по-русски естественно сказать факт напрямую, а в испанском после оценки обязателен subjuntivo.",
+   items:[
+     {stem:"No extraña que la gente (preferir) ______ hablar con personas reales.", answers:["prefiera"]},
+     {stem:"Es normal que muchos (desconfiar) ______ de la inteligencia artificial.", answers:["desconfíen"]},
+     {stem:"Sorprende que el uso (crecer) ______ tan rápido en España.", answers:["crezca"]},
+     {stem:"Es lógico que las empresas (necesitar) ______ más seguridad digital.", answers:["necesiten"]},
+     {stem:"No es extraño que los jóvenes (sentir) ______ nostalgia por un internet más humano.", answers:["sientan"]},
+     {stem:"Es importante que todos (entender) ______ los riesgos de esta tecnología.", answers:["entendamos"]}
+   ]}
+];
+
+function buildExerciseBlock(block){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button"; checkBtn.className = "check-btn"; checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b)); });
+
+/* ---------------- TEST ---------------- */
+var testList = document.getElementById("testList");
+
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"Según el artículo, ¿cuánto ha aumentado el uso de la IA en España en el último año?", opts:["66%","91%","123,5%","53%"], answer:2},
+    {q:"¿Qué proporción de españoles prefiere ser atendida por una persona imperfecta antes que por una IA?", opts:["5 de cada 10","6 de cada 10","8 de cada 10","10 de cada 10"], answer:2},
+    {q:"¿Quién es Marta González-Moro?", opts:["Profesora de la UOC","Autora del artículo","CEO y socia fundadora de 21gramos","Directora de Zscaler"], answer:2},
+    {q:"Según Ferrán Lalueza, ¿cuál NO es una carencia de la IA que menciona?", opts:["Falta de autenticidad","Falta de empatía real","Falta de velocidad de cálculo","Falta de compromiso ético"], answer:2},
+    {q:"Según el Pew Research Center, ¿qué porcentaje teme la pérdida de la capacidad de pensamiento creativo humano?", opts:["50%","53%","66%","91%"], answer:1},
+    {q:"¿Qué informe menciona el aumento del uso de la IA en España?", opts:["Sentido de Futuro de 21gramos","How Americans View AI de Pew Research","ThreatLabz 2026 AI Security de Zscaler","Estudio Marcas con Valores"], answer:2}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){ return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>'; }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button"); checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"constatar · brecha · anteponer · carencia · incierto · rebasar · palanca de cambio · sin más",
+  items:[
+    {stem:"En 2025 hemos podido ______ que la inteligencia artificial forma parte de nuestra vida.", answers:["constatar"]},
+    {stem:"Existe una ______ de confianza entre las personas que usan la IA y las que confían en ella.", answers:["brecha"]},
+    {stem:"Muchos españoles prefieren ______ el trato humano imperfecto a la perfección técnica.", answers:["anteponer"]},
+    {stem:"Ferrán Lalueza señala que la IA tiene una ______ importante: la falta de empatía real.", answers:["carencia"]},
+    {stem:"Para muchos usuarios, el uso de la IA todavía es ______.", answers:["incierto"]},
+    {stem:"Parece que estamos a punto de ______ una barrera en la relación entre humanos y tecnología.", answers:["rebasar"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div><div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button"); checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su definición",
+  words:["brecha","carencia","palanca de cambio","incierto"],
+  defs:["que no es seguro o claro, que genera dudas","diferencia o distancia entre dos situaciones o grupos","elemento o factor que impulsa una transformación importante","falta de algo necesario o esperado"],
+  answers:["b","d","c","a"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Definición</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button"); checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena las ideas según aparecen en el artículo",
+  events:[
+    {text:"Ferrán Lalueza señala las carencias de la IA (falta de autenticidad, empatía, etc.).", answer:3},
+    {text:"El informe de Zscaler revela que el uso de la IA en España ha aumentado un 123,5%.", answer:1},
+    {text:"El Pew Research Center indica que el 53% teme la pérdida del pensamiento creativo humano.", answer:4},
+    {text:"Marta González-Moro explica que las personas buscan experiencias más humanas, no más eficientes.", answer:2},
+    {text:"Se menciona el sello «made by a human» y iniciativas como Human Authored o AI Free.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML = '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select><span class="stem">'+ev.text+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button"); checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Cambia a estilo indirecto: Marta González-Moro dijo: «Las personas no buscan experiencias más eficientes, sino más humanas.»", model:"Marta González-Moro dijo que las personas no buscaban experiencias más eficientes, sino más humanas."},
+    {stem:"Cambia de presente a pretérito perfecto: «La inteligencia artificial forma parte de nuestra vida.»", model:"La inteligencia artificial ha formado parte de nuestra vida."},
+    {stem:"Transforma en pregunta: «El uso de la IA en España ha aumentado un 123,5%.»", model:"¿Ha aumentado el uso de la IA en España un 123,5%?"},
+    {stem:"Cambia a la voz pasiva: «Zscaler publicó el informe ThreatLabz 2026 AI Security.»", model:"El informe ThreatLabz 2026 AI Security fue publicado por Zscaler."},
+    {stem:"Sustituye «anteponemos el fallo humano a la perfección técnica» por una expresión sinónima, sin cambiar el sentido.", model:"Ejemplo: «Valoramos más el error humano que la perfección técnica» / «Preferimos lo humano, aunque sea imperfecto, a lo perfecto pero artificial»."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «carencia» en este contexto:", opts:["exceso","falta","ventaja","solución"], answer:1},
+    {q:"Antónimo de «confiar (en)»:", opts:["creer","desconfiar","depender","aceptar"], answer:1},
+    {q:"Marca la palabra intrusa:", opts:["brecha","carencia","palanca de cambio","ordenador"], answer:3},
+    {q:"Completa la colocación: «______ una barrera»:", opts:["rebasar","confiar","anteponer","constatar"], answer:0},
+    {q:"«Incierto» significa:", opts:["seguro y claro","que no es seguro o claro","rápido","antiguo"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){ return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>'; }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button"); checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
