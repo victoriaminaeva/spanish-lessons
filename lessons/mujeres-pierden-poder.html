@@ -1,0 +1,870 @@
+<!doctype html>
+<title>Mujeres y Poder</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+/* ---- vocab cards ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+/* ---- discussion ---- */
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Mujeres y Poder · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Las mujeres pierden poder en el mundo</h1>
+  <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> El País — «Las mujeres pierden poder en un mundo cada vez más hostil a la igualdad, según la ONU»</p>
+  <div class="summary">
+    <b>De qué trata:</b> el informe anual de ONU Mujeres alerta de un retroceso del liderazgo femenino en la política, la justicia y las empresas en muchos países. Al ritmo actual, la igualdad de género no se alcanzaría hasta el año 2197. El texto explica las causas de este retroceso (violencia política, crisis de financiación, auge de movimientos antifeministas) y propone soluciones, como reforzar las cuotas de género.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">04</span><h2>Test — Mujeres y poder</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "mujerespoder_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- VOCABULARIO ---------------- */
+var vocab = [
+  {term:"el retroceso", pos:"sustantivo, m.",
+   quote:"...los avances no solo se han estancado, sino que han retrocedido en muchos países... y de un <mark>retroceso</mark> democrático a nivel global.",
+   trans:"откат, регресс, отступление назад",
+   mean:"Утрата ранее достигнутого прогресса. Не путать с «fracaso» (провал с самого начала) — здесь речь о движении назад от уже достигнутого результата.",
+   ex:"Después de años de progreso, hubo un retroceso importante en los derechos laborales. — После нескольких лет прогресса произошёл серьёзный откат в трудовых правах."},
+  {term:"estancarse", pos:"verbo pronominal",
+   quote:"...los avances no solo se han <mark>estancado</mark>, sino que han retrocedido en muchos países...",
+   trans:"застаиваться, останавливаться в развитии",
+   mean:"Прекратить прогрессировать, оставаться на одном уровне без движения вперёд. Часто о процессах, переговорах, экономике.",
+   ex:"El proyecto se estancó por falta de financiación. — Проект застопорился из-за нехватки финансирования."},
+  {term:"debilitar(se)", pos:"verbo transitivo / pronominal",
+   quote:"...las mismas instituciones, la financiación y los movimientos... se están <mark>debilitando</mark> sistemáticamente.",
+   trans:"слабеть, ослабевать / ослаблять",
+   mean:"Терять силу или влияние; используется как переходный (debilitar algo) или возвратный (debilitarse) глагол.",
+   ex:"La confianza entre los socios se debilitó tras el escándalo. — Доверие между партнёрами ослабло после скандала."},
+  {term:"sufrir (algo)", pos:"verbo transitivo",
+   quote:"...ocho de cada diez mujeres candidatas al Parlamento... afirman haber <mark>sufrido</mark> violencia psicológica, sexual, económica o física.",
+   trans:"испытывать, переносить, страдать от (чего-то)",
+   mean:"Переживать что-то плохое или болезненное — насилие, боль, последствия. Часто сочетается с существительным: sufrir violencia, sufrir una enfermedad.",
+   ex:"Muchos empleados sufrieron las consecuencias de la crisis económica. — Многие сотрудники пострадали от последствий экономического кризиса."},
+  {term:"reducirse (un X%)", pos:"construcción verbal + porcentaje",
+   quote:"...el número de ministras se ha <mark>reducido un 20%</mark> a escala mundial.",
+   trans:"сократиться (на определённый процент)",
+   mean:"Уменьшаться в количестве; типичная конструкция для статистики в новостях: reducirse un/en + процент.",
+   ex:"Las ventas se redujeron un 15% el año pasado. — Продажи сократились на 15% в прошлом году."},
+  {term:"la brecha", pos:"sustantivo, f.",
+   quote:"La <mark>brecha</mark> más allá de los despachos... persistentes brechas de género.",
+   trans:"разрыв, пропасть (в статистике, возможностях)",
+   mean:"Значительное несоответствие между двумя группами, обычно в экономике или социологии: brecha salarial, brecha de género.",
+   ex:"La brecha salarial entre hombres y mujeres sigue siendo un problema. — Разрыв в зарплатах между мужчинами и женщинами остаётся проблемой."},
+  {term:"desincentivar (algo)", pos:"verbo transitivo",
+   quote:"...reformas que reduzcan los altos costes económicos y sociales que <mark>desincentivan</mark> una mayor presencia de mujeres en la política.",
+   trans:"препятствовать, отбивать желание (делать что-то)",
+   mean:"Уменьшать стимул или желание что-то делать, часто через экономические или социальные препятствия. Противоположность — «incentivar».",
+   ex:"Los altos impuestos pueden desincentivar la inversión extranjera. — Высокие налоги могут отбить желание иностранных инвестиций."},
+  {term:"el desmantelamiento", pos:"sustantivo, m.",
+   quote:"...debido en gran parte al <mark>desmantelamiento</mark> de USAID, la agencia de cooperación de Estados Unidos.",
+   trans:"демонтаж, ликвидация (организации, системы)",
+   mean:"Процесс разборки или ликвидации структуры, организации или системы — обычно намеренный и институциональный.",
+   ex:"El desmantelamiento de la fábrica dejó a cientos de personas sin trabajo. — Ликвидация завода оставила сотни людей без работы."},
+  {term:"respaldar (algo)", pos:"verbo transitivo",
+   quote:"Los datos <mark>respaldan</mark> su argumento: los países con sistemas de cuotas sólidos registran una presencia mucho mayor de mujeres.",
+   trans:"подтверждать, поддерживать (аргумент, позицию)",
+   mean:"Служить доказательством или опорой для утверждения; также «поддерживать» в более общем смысле (respaldar a alguien).",
+   ex:"Las estadísticas respaldan la teoría de los investigadores. — Статистика подтверждает теорию исследователей."},
+  {term:"endurecer (algo)", pos:"verbo transitivo",
+   quote:"El informe también reclama... <mark>endurecer</mark> la legislación contra la misoginia y la violencia política hacia las mujeres.",
+   trans:"ужесточать (законы, меры, позицию)",
+   mean:"Делать что-то более строгим — обычно о законах, правилах, наказаниях. Образовано от «duro» (твёрдый, жёсткий).",
+   ex:"El gobierno decidió endurecer las penas para ese tipo de delitos. — Правительство решило ужесточить наказания за такие преступления."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+/* ---------------- DEBATE ---------------- */
+var debate = [
+  {q:"¿Qué opinas de las cuotas de género en la política? ¿Crees que son una buena solución?", hint:"Útil: «Creo que...», «Por un lado... pero por otro...»"},
+  {q:"En tu país, ¿hay muchas mujeres en puestos de liderazgo (política, empresas, justicia)? Da ejemplos.", hint:"Útil: «En mi país...», «Por ejemplo...»"},
+  {q:"El informe dice que el 90% de las ministras ocupan carteras relacionadas con los cuidados, y muy pocas están en Defensa o Interior. ¿Por qué crees que pasa esto? ¿Es igual en tu país?", hint:"Útil: «Creo que esto pasa porque...», «A diferencia de..., en mi país...»"},
+  {q:"¿Estás de acuerdo con que la falta de financiación (como el desmantelamiento de USAID) es una de las causas principales del retroceso en la igualdad de género? Argumenta tu respuesta.", hint:"Útil: «Estoy de acuerdo/en desacuerdo porque...», «Sin embargo, hay que tener en cuenta que...»"},
+  {q:"Si tú fueras la directora de ONU Mujeres, ¿qué medida propondrías primero para frenar este retroceso?", hint:"Útil: «Si yo fuera..., propondría...», «Lo primero que haría sería...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+/* ---------------- GRAMÁTICA ---------------- */
+var gram = [
+  {id:"g1", title:"3.1 Presente de indicativo",
+   quote:"Las mujeres <mark>pierden</mark> poder en un mundo cada vez más hostil a la igualdad, según la ONU.",
+   rule:"Verbos en -e/-es/-e... con irregularidades vocálicas (perder → pierdo, pierdes, pierde: e→ie). Se usa para hechos actuales, titulares de noticias y verdades generales.",
+   items:[
+     {stem:"Las mujeres ______ (perder) poder en muchos países, según la ONU.", answers:["pierden"]},
+     {stem:"El informe ______ (advertir) de un retroceso global.", answers:["advierte"]},
+     {stem:"Las candidatas ______ (sufrir) violencia política en muchos países.", answers:["sufren"]},
+     {stem:"Solo el 63,9% de las mujeres de 25 a 54 años ______ (estar) empleada.", answers:["está"]},
+     {stem:"Los datos ______ (respaldar) el argumento de Hendriks.", answers:["respaldan"]},
+     {stem:"Hendriks ______ (defender) reforzar las cuotas de género.", answers:["defiende"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito perfecto compuesto",
+   quote:"...los avances no solo se <mark>han estancado</mark>, sino que <mark>han retrocedido</mark> en muchos países...",
+   rule:"Presente de <i>haber</i> (he, has, ha, hemos, habéis, han) + participio (-ado/-ido). Hecho pasado con relevancia en el presente, sin fecha puntual — muy frecuente en informes y noticias para resumir tendencias recientes.",
+   items:[
+     {stem:"El poder de muchas líderes se ______ (erosionar) en los últimos dos años.", answers:["ha erosionado"]},
+     {stem:"El número de ministras se ______ (reducir) un 20% a escala mundial.", answers:["ha reducido"]},
+     {stem:"36 países ______ (retroceder) en representación femenina desde 2015.", answers:["han retrocedido"]},
+     {stem:"Las organizaciones de mujeres ______ (afrontar) una grave crisis de financiación.", answers:["han afrontado"]},
+     {stem:"¿Alguna vez ______ (pensar, tú) en por qué hay tan pocas mujeres en Defensa?", answers:["has pensado"]},
+     {stem:"Los fondos para estas organizaciones se ______ (reducir) un 28% entre 2023 y 2024.", answers:["han reducido"]}
+   ]},
+  {id:"g3", title:"3.3 Pretérito indefinido",
+   quote:"...entre 2020 y enero de 2026 el número de mujeres jefas de Estado o de Gobierno <mark>aumentó</mark> de 20 a 28...",
+   rule:"Regular -ar: -é,-aste,-ó,-amos,-asteis,-aron; -er/-ir: -í,-iste,-ió,-imos,-isteis,-ieron. Acción puntual y completada, con fecha o periodo cerrado.",
+   items:[
+     {stem:"Entre 2020 y 2026, el número de mujeres jefas de Estado ______ (aumentar) de 20 a 28.", answers:["aumentó"]},
+     {stem:"En 2025, 316 millones de mujeres ______ (sufrir) violencia física o sexual.", answers:["sufrieron"]},
+     {stem:"Los fondos para las organizaciones de mujeres ______ (reducirse) un 28% entre 2023 y 2024.", answers:["se redujeron"]},
+     {stem:"ONU Mujeres ______ (publicar) su informe anual este jueves.", answers:["publicó"]},
+     {stem:"Sarah Hendriks ______ (lamentar) la reducción de la ayuda internacional en una videollamada.", answers:["lamentó"]},
+     {stem:"El número de mujeres parlamentarias ______ (caer) en 54 países en los últimos cinco años.", answers:["cayó"]}
+   ]},
+  {id:"g4", title:"3.4 Futuro simple",
+   quote:"...la igualdad de género no se <mark>alcanzará</mark> hasta 2197 al ritmo actual.",
+   rule:"Infinitivo completo + -é,-ás,-á,-emos,-éis,-án. Predicciones y proyecciones basadas en datos actuales — muy típico en informes y estadísticas.",
+   items:[
+     {stem:"Si nada cambia, la igualdad de género no se ______ (alcanzar) hasta 2197.", answers:["alcanzará"]},
+     {stem:"La caída en la financiación previsiblemente ______ (continuar) en los próximos años.", answers:["continuará"]},
+     {stem:"¿Qué ______ (pasar) si los países no refuerzan las cuotas de género?", answers:["pasará"]},
+     {stem:"Sin más financiación, las organizaciones de mujeres ______ (tener) más dificultades.", answers:["tendrán"]},
+     {stem:"Yo creo que este problema no ______ (resolverse) fácilmente.", answers:["se resolverá"]},
+     {stem:"Nosotros ______ (necesitar) más datos para medir el progreso real.", answers:["necesitaremos"]}
+   ]},
+  {id:"g5", title:"3.5 Presente de subjuntivo (antecedente indefinido)",
+   quote:"El informe también reclama... reformas que <mark>reduzcan</mark> los altos costes económicos y sociales...",
+   rule:"Raíz de la 1ª persona del presente + vocal cambiada (-ar→e; -er/-ir→a). Se usa en oraciones de relativo cuando el antecedente es indefinido o todavía no existe («reformas que reduzcan» = unas reformas que aún no existen, no unas concretas). <b>Ошибка:</b> русскоговорящие часто используют indicativo, потому что в русском это различие не так явно грамматикализовано.",
+   items:[
+     {stem:"El informe reclama reformas que ______ (reducir) los altos costes de la participación política.", answers:["reduzcan"]},
+     {stem:"Necesitamos líderes que ______ (defender) la igualdad de género de verdad.", answers:["defiendan"]},
+     {stem:"Buscan políticas que ______ (proteger) a las candidatas de la violencia política.", answers:["protejan"]},
+     {stem:"Hendriks quiere una legislación que ______ (endurecer) las penas contra la misoginia.", answers:["endurezca"]},
+     {stem:"Hacen falta organismos que ______ (combatir) la desigualdad con recursos suficientes.", answers:["combatan"]},
+     {stem:"Se necesita una financiación que ______ (permitir) el trabajo de estas organizaciones.", answers:["permita"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+/* ---------------- TEST ---------------- */
+var testList = document.getElementById("testList");
+
+/* Bloque 1: comprensión (radio) */
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"Según el informe de ONU Mujeres, ¿en qué año se alcanzaría la igualdad de género al ritmo actual?", opts:["2030","2100","2197","2050"], answer:2},
+    {q:"¿Cuántas mujeres eran jefas de Estado o de Gobierno en enero de 2026, según el informe?", opts:["20","28","36","54"], answer:1},
+    {q:"¿Qué porcentaje de ministras en el mundo ocupa carteras relacionadas con los cuidados, la familia o la igualdad?", opts:["11%","20%","51%","90%"], answer:3},
+    {q:"¿A qué se debe en gran parte la crisis de financiación de las organizaciones de mujeres, según el artículo?", opts:["al aumento de la violencia política","al desmantelamiento de USAID","a la falta de juezas","al auge de las redes sociales"], answer:1},
+    {q:"Según el informe, ¿qué porcentaje de mujeres de 25 a 54 años estaba empleado en 2026?", opts:["92%","63,9%","39,5%","20%"], answer:1},
+    {q:"¿Qué defiende Sarah Hendriks como herramienta eficaz para aumentar la representación femenina?", opts:["la manosfera","el desmantelamiento de organismos","las cuotas de género","la reducción de la ayuda internacional"], answer:2}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 2: huecos */
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"retroceso · estancarse · debilitar · brecha · desincentivar · desmantelamiento · respaldar · endurecer",
+  items:[
+    {stem:"El informe de la ONU advierte de un ______ importante en el liderazgo femenino.", answers:["retroceso"]},
+    {stem:"La ______ salarial entre hombres y mujeres directivas sigue siendo muy amplia.", answers:["brecha"]},
+    {stem:"Las instituciones que promueven la igualdad se están ______ sistemáticamente.", answers:["debilitando"]},
+    {stem:"Los datos ______ el argumento de que las cuotas de género funcionan.", answers:["respaldan"]},
+    {stem:"El informe pide ______ la legislación contra la violencia política hacia las mujeres.", answers:["endurecer"]},
+    {stem:"Los altos costes económicos ______ una mayor presencia de las mujeres en la política.", answers:["desincentivan"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3a: relacionar (select) */
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su definición",
+  words:["la brecha","desmantelar","respaldar","desincentivar"],
+  defs:["apoyar o confirmar algo con pruebas o datos","reducir el deseo o el estímulo de hacer algo","diferencia significativa entre dos grupos o situaciones","desarmar o eliminar por completo una organización o sistema"],
+  answers:["c","d","a","b"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Definición</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3b: orden (select) */
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena las ideas según aparecen en el artículo",
+  events:[
+    {text:"Se presenta la cifra de 2197 como el año en que se alcanzaría la igualdad al ritmo actual.", answer:1},
+    {text:"Se explica el retroceso de las mujeres en la política y los parlamentos.", answer:2},
+    {text:"Se señala que las mujeres siguen siendo minoría en la justicia y en las empresas, aunque hay más juezas que jueces.", answer:3},
+    {text:"Se describe la brecha en el mercado laboral y la violencia contra mujeres y niñas.", answer:4},
+    {text:"Se proponen soluciones: reforzar las cuotas de género y aumentar la financiación.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 4: transformación (respuesta modelo, no autocorregible) */
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Convierte a estilo indirecto: Hendriks dijo: «Las mismas instituciones se están debilitando sistemáticamente.»", model:"Hendriks dijo que las mismas instituciones se estaban debilitando sistemáticamente."},
+    {stem:"Cambia del pretérito indefinido al pretérito perfecto compuesto: «El número de mujeres jefas de Estado aumentó de 20 a 28.»", model:"El número de mujeres jefas de Estado ha aumentado de 20 a 28."},
+    {stem:"Transforma en pregunta: «La igualdad de género no se alcanzará hasta 2197.»", model:"¿Cuándo se alcanzará la igualdad de género?"},
+    {stem:"Cambia a la voz pasiva: «ONU Mujeres publicó el informe este jueves.»", model:"El informe fue publicado por ONU Mujeres este jueves."},
+    {stem:"Sustituye «reforzar las cuotas de género» por una expresión sinónima, sin cambiar el sentido.", model:"Ejemplo: «fortalecer las cuotas de género» / «ampliar el sistema de cuotas de género»."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 5: léxico (radio) */
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «retroceso»:", opts:["avance","regresión","estancamiento total","victoria"], answer:1},
+    {q:"Antónimo de «debilitar»:", opts:["fortalecer","reducir","eliminar","ignorar"], answer:0},
+    {q:"Marca la palabra intrusa:", opts:["brecha","diferencia","desigualdad","igualdad"], answer:3},
+    {q:"Completa la colocación: «______ una ley»:", opts:["endurecer","vestir","cocinar","plantar"], answer:0},
+    {q:"«Respaldar» en este contexto es sinónimo de:", opts:["contradecir","apoyar","ignorar","inventar"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
