@@ -1,0 +1,854 @@
+<!doctype html>
+<title>Tecnocapitalismo</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(27px,5vw,38px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:22px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:6px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:25px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Tecnocapitalismo · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Tecnocapitalismo y las nuevas estructuras de poder</h1>
+  <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> The Conversation — Víctor Climent Sanjuán, Universitat de Barcelona — «Tecnocapitalismo: así está cambiando la tecnología las estructuras de poder en el mundo»</p>
+  <div class="summary">
+    <b>De qué trata:</b> la Cuarta Revolución Industrial (IA, algoritmos, plataformas) está dando lugar al "tecnocapitalismo", un modelo en el que grandes magnates tecnológicos sustituyen a las viejas élites y acumulan poder sobre la gobernanza, la seguridad y hasta las guerras. El artículo analiza el "tecnoautoritarismo" y sus riesgos para las democracias.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">04</span><h2>Test — Tecnocapitalismo</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "tecnocapitalismo_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {};
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+var vocab = [
+  {term:"la irrupción", pos:"sustantivo, f.",
+   quote:"La <mark>irrupción</mark> de la Cuarta Revolución Industrial está suponiendo una profunda transformación tecnológica de las sociedades desarrolladas.",
+   trans:"вторжение, внезапное появление",
+   mean:"Aparición súbita y con fuerza de algo nuevo que cambia una situación; muy usado en textos periodísticos y académicos.",
+   ex:"La irrupción de la inteligencia artificial cambió el mercado laboral. — Внезапное появление искусственного интеллекта изменило рынок труда."},
+  {term:"suponer (algo)", pos:"verbo transitivo",
+   quote:"...está <mark>suponiendo</mark> una profunda transformación tecnológica de las sociedades desarrolladas.",
+   trans:"означать, представлять собой, предполагать",
+   mean:"Implicar o conllevar una consecuencia; no confundir con «imaginar» (also «suponer» pero en otro sentido).",
+   ex:"Este cambio supone un gran riesgo para la democracia. — Это изменение представляет большой риск для демократии."},
+  {term:"paulatinamente", pos:"adverbio",
+   quote:"...la irrupción de nuevos actores... que <mark>paulatinamente</mark> están sustituyendo a la antigua clase dominante.",
+   trans:"постепенно, поэтапно",
+   mean:"De forma lenta y progresiva; sinónimo de «gradualmente», «poco a poco».",
+   ex:"El sistema fue cambiando paulatinamente durante décadas. — Система постепенно менялась на протяжении десятилетий."},
+  {term:"sustituir (a alguien/algo)", pos:"verbo transitivo",
+   quote:"...nuevos actores... que paulatinamente están <mark>sustituyendo</mark> a la antigua clase dominante de la Globalización.",
+   trans:"замещать, заменять",
+   mean:"Ocupar el lugar de alguien o algo; sinónimo de «reemplazar».",
+   ex:"La robótica sustituyó a muchos trabajadores en las fábricas. — Робототехника заменила многих рабочих на заводах."},
+  {term:"infiltrarse (en algo)", pos:"verbo pronominal",
+   quote:"Estas plataformas tecnológicas, a través de sus sistemas operativos, se <mark>infiltran</mark> en las grandes estructuras de los Estados.",
+   trans:"проникать, внедряться (незаметно)",
+   mean:"Entrar en un sistema o grupo de forma progresiva y a menudo poco visible.",
+   ex:"El virus se infiltró en la red sin que nadie lo notara. — Вирус проник в сеть, и никто этого не заметил."},
+  {term:"ceder (algo)", pos:"verbo transitivo",
+   quote:"...el ejército «cede» una parte de su capacidad de decisión... a un algoritmo que está controlado por una empresa privada.",
+   trans:"уступать, передавать (право, власть)",
+   mean:"Renunciar voluntaria o forzosamente a un derecho, poder o posesión en favor de otro.",
+   ex:"El gobierno cedió parte de su autoridad a organismos internacionales. — Правительство передало часть своей власти международным организациям."},
+  {term:"la desregulación", pos:"sustantivo, f.",
+   quote:"...pretenden la total <mark>desregulación</mark> del espacio económico y político del Estado.",
+   trans:"дерегуляция, снятие ограничений",
+   mean:"Eliminación o reducción de las normas y controles estatales sobre un sector.",
+   ex:"La desregulación del sector financiero provocó varias crisis. — Дерегуляция финансового сектора вызвала несколько кризисов."},
+  {term:"las cortapisas", pos:"sustantivo, f. pl.",
+   quote:"...donde las nuevas estructuras de poder pueden desarrollar su verdadero potencial..., sin las <mark>cortapisas</mark> regulatorias de los viejos sistemas democráticos.",
+   trans:"ограничения, препоны, помехи",
+   mean:"Restricciones o trabas que impiden actuar libremente; se usa casi siempre en plural.",
+   ex:"El nuevo reglamento pone cortapisas a la libertad de las empresas. — Новый регламент вводит ограничения для свободы компаний."},
+  {term:"redundar en (algo)", pos:"verbo intransitivo",
+   quote:"...un nuevo contrato social que permita que las nuevas tecnologías <mark>redunden en</mark> beneficio de la humanidad.",
+   trans:"приводить к (какому-то результату), идти на пользу",
+   mean:"Tener como consecuencia final algo, generalmente positivo; «redundar en beneficio de» = ir en beneficio de.",
+   ex:"Esta inversión redundará en beneficio de toda la comunidad. — Эта инвестиция принесёт пользу всему сообществу."},
+  {term:"el trasvase", pos:"sustantivo, m.",
+   quote:"Se produce un <mark>trasvase</mark> de soberanía y de gobernanza crítica, propia del Estado, a un consejo de administración privado.",
+   trans:"перекачка, переток, передача (ресурсов, власти)",
+   mean:"Transferencia de algo (agua, poder, recursos) de un lugar o entidad a otra; en sentido figurado, muy usado en política y economía.",
+   ex:"Hubo un trasvase de talento del sector público al privado. — Произошёл переток талантов из государственного сектора в частный."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var debate = [
+  {q:"¿Conocías el término «tecnocapitalismo» antes de leer este artículo? ¿Qué te parece la idea?", hint:"Útil: «Nunca había oído...», «Me parece que...»"},
+  {q:"¿Crees que las grandes empresas tecnológicas tienen demasiado poder en el mundo actual? Da ejemplos.", hint:"Útil: «Creo que sí/no porque...», «Por ejemplo...»"},
+  {q:"El artículo dice que algunas decisiones militares ya son administradas por empresas privadas de software e IA. ¿Qué riesgos ves en esto? Compara con cómo funcionaba antes.", hint:"Útil: «El principal riesgo es...», «Antes, en cambio,...»"},
+  {q:"¿Estás de acuerdo con que la desregulación beneficia más a las grandes tecnológicas que a la sociedad en general? Argumenta tu opinión.", hint:"Útil: «Estoy de acuerdo/en desacuerdo porque...», «Por un lado..., por otro lado...»"},
+  {q:"Si tuvieras el poder de crear una ley internacional sobre el control de la inteligencia artificial y las grandes tecnológicas, ¿qué establecerías en primer lugar?", hint:"Útil: «Lo primero que establecería sería...», «Prohibiría que...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+var gram = [
+  {id:"g1", title:"3.1 Presente continuo (estar + gerundio)",
+   quote:"La irrupción de la Cuarta Revolución Industrial <mark>está suponiendo</mark> una profunda transformación tecnológica de las sociedades desarrolladas.",
+   rule:"<i>Estar</i> (presente) + gerundio (-ando/-iendo). Describe una acción en desarrollo justo en el momento presente, con foco en su continuidad.",
+   items:[
+     {stem:"La tecnología ______ (cambiar) las estructuras de poder en el mundo.", answers:["está cambiando"]},
+     {stem:"Los nuevos actores ______ (sustituir) a la antigua clase dominante.", answers:["están sustituyendo"]},
+     {stem:"Este proceso ______ (afectar) a todas las democracias occidentales.", answers:["está afectando"]},
+     {stem:"Las plataformas ______ (infiltrarse) en las estructuras del Estado.", answers:["están infiltrándose","se están infiltrando"]},
+     {stem:"Nosotros ______ (perder) capacidad de control sobre los algoritmos.", answers:["estamos perdiendo"]},
+     {stem:"¿Qué ______ (ocurrir) con la gobernanza crítica en este momento?", answers:["está ocurriendo"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito perfecto compuesto",
+   quote:"Esta nueva realidad <mark>ha implicado</mark> el desarrollo de un nuevo modelo económico y social denominado tecnocapitalismo.",
+   rule:"Presente de <i>haber</i> + participio (-ado/-ido). Acción pasada con relevancia en el presente, sin fecha concreta.",
+   items:[
+     {stem:"La Cuarta Revolución Industrial ______ (implicar) un nuevo modelo económico.", answers:["ha implicado"]},
+     {stem:"Los magnates tecnológicos ______ (acumular) un poder inmenso.", answers:["han acumulado"]},
+     {stem:"¿Alguna vez ______ (pensar, tú) en el poder real de estas empresas?", answers:["has pensado"]},
+     {stem:"Nosotros ______ (ver) cómo el algoritmo gana terreno frente al Estado.", answers:["hemos visto"]},
+     {stem:"Estos cambios ______ (afectar) también a las guerras y la defensa.", answers:["han afectado"]},
+     {stem:"El poder del Estado ______ (debilitarse) en algunos ámbitos críticos.", answers:["se ha debilitado"]}
+   ]},
+  {id:"g3", title:"3.3 Presente de subjuntivo",
+   quote:"...un nuevo contrato social que permita que las nuevas tecnologías <mark>redunden</mark> en beneficio de la humanidad.",
+   rule:"Raíz de la 1ª persona del presente + vocal cambiada. Tras verbos de deseo/finalidad («permita que», «es necesario que») se usa subjuntivo.",
+   items:[
+     {stem:"Necesitamos un contrato social que ______ (permitir) controlar la tecnología.", answers:["permita"]},
+     {stem:"Es necesario que la regulación ______ (proteger) a las democracias.", answers:["proteja"]},
+     {stem:"Piden que los algoritmos ______ (ser) más transparentes.", answers:["sean"]},
+     {stem:"Es fundamental que el Estado no ______ (perder) su capacidad de decisión.", answers:["pierda"]},
+     {stem:"Quieren que las empresas tecnológicas ______ (rendir) cuentas a la sociedad.", answers:["rindan"]},
+     {stem:"Ojalá que la humanidad ______ (beneficiarse) de estos avances.", answers:["se beneficie"]}
+   ]},
+  {id:"g4", title:"3.4 Futuro simple",
+   quote:"El desarrollo de esta nueva revolución industrial <mark>será</mark> más positivo o más negativo para la humanidad en función de la capacidad adaptativa de las viejas democracias.",
+   rule:"Infinitivo completo + -é,-ás,-á,-emos,-éis,-án. Predicciones sobre el futuro basadas en tendencias actuales.",
+   items:[
+     {stem:"El desarrollo de esta revolución ______ (ser) positivo o negativo según cómo reaccionemos.", answers:["será"]},
+     {stem:"Solo la regulación ______ (permitir) un contrato social justo.", answers:["permitirá"]},
+     {stem:"¿Qué ______ (pasar) si las democracias no se adaptan a tiempo?", answers:["pasará"]},
+     {stem:"Las guerras del futuro ______ (depender) cada vez más de algoritmos.", answers:["dependerán"]},
+     {stem:"Yo ______ (seguir) esta discusión con mucho interés.", answers:["seguiré"]},
+     {stem:"Los ciudadanos ______ (tener) que exigir más transparencia.", answers:["tendrán"]}
+   ]},
+  {id:"g5", title:"3.5 Perífrasis «ir a + infinitivo»",
+   quote:"...las empresas privadas <mark>van</mark> a <mark>ir sustituyendo</mark> determinadas capacidades decisorias propias de los gobernantes.",
+   rule:"<i>Ir</i> conjugado + a + infinitivo. Expresa un plan, intención o predicción cercana en el tiempo.",
+   items:[
+     {stem:"Las empresas privadas ______ (ir) a sustituir funciones antes propias del Estado.", answers:["van"]},
+     {stem:"Nosotros ______ (ir) a necesitar nuevas leyes internacionales.", answers:["vamos"]},
+     {stem:"Los gobiernos ______ (ir) a perder parte de su soberanía si no actúan.", answers:["van"]},
+     {stem:"¿Tú ______ (ir) a informarte más sobre este tema?", answers:["vas"]},
+     {stem:"El poder algorítmico ______ (ir) a crecer en los próximos años.", answers:["va"]},
+     {stem:"Yo ______ (ir) a seguir de cerca las decisiones de estas empresas.", answers:["voy"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+var testList = document.getElementById("testList");
+
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"¿Qué es el «tecnocapitalismo» según el artículo?", opts:["una nueva red social","un modelo económico donde los datos y algoritmos son la principal fuente de poder","una ley europea sobre IA","un partido político"], answer:1},
+    {q:"¿Qué empresas dirige Elon Musk según el artículo?", opts:["Amazon y Google","X, Tesla y SpaceX","Meta y Microsoft","Palantir y Anduril"], answer:1},
+    {q:"¿Quién fundó Palantir, según el texto?", opts:["Elon Musk","Alex Karp","Peter Thiel","Mark Zuckerberg"], answer:2},
+    {q:"Según el artículo, ¿quién administra ahora algunas decisiones de objetivos militares?", opts:["solo los gobiernos","organismos internacionales como la ONU","determinadas empresas de software e IA","los ciudadanos mediante referéndum"], answer:2},
+    {q:"¿Qué instituciones internacionales se mencionan como espacios de poder de la «burguesía» tecnocapitalista?", opts:["la Cruz Roja y UNESCO","el FMI, el Banco Mundial, el BCE, la UE y el G7","la OMS y la FAO","el Tribunal de La Haya"], answer:1},
+    {q:"Según el autor, ¿qué es necesario para que las nuevas tecnologías beneficien a la humanidad?", opts:["más desregulación","la regulación y el control público de la gobernanza algorítmica","la privatización total del Estado","ignorar el problema"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"irrupción · paulatinamente · sustituyendo · infiltran · ceder · desregulación · cortapisas · redundar",
+  items:[
+    {stem:"La ______ de la IA está transformando la economía y la sociedad.", answers:["irrupción"]},
+    {stem:"Los nuevos actores están ______ a la antigua clase dominante de la globalización.", answers:["sustituyendo"]},
+    {stem:"Las plataformas tecnológicas se ______ en las estructuras de los Estados.", answers:["infiltran"]},
+    {stem:"El ejército puede ______ parte de su capacidad de decisión a un algoritmo privado.", answers:["ceder"]},
+    {stem:"Los partidos de extrema derecha buscan la total ______ del espacio económico.", answers:["desregulación"]},
+    {stem:"Sin las ______ regulatorias, estas empresas pueden crecer sin límites.", answers:["cortapisas"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su definición",
+  words:["el trasvase","suponer (algo)","redundar en (algo)","las cortapisas"],
+  defs:["restricciones que impiden actuar con total libertad","implicar o tener como consecuencia","transferencia de poder o recursos de una entidad a otra","tener como resultado final algo, generalmente positivo"],
+  answers:["c","b","d","a"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Definición</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena las ideas según aparecen en el artículo",
+  events:[
+    {text:"Se presenta el tecnocapitalismo como el nuevo modelo económico y social de la Cuarta Revolución Industrial.", answer:1},
+    {text:"Se explica que nuevos magnates tecnológicos sustituyen a la antigua clase dominante.", answer:2},
+    {text:"Se describe cómo empresas privadas empiezan a administrar decisiones militares críticas.", answer:3},
+    {text:"Se relaciona este proceso con la llegada al poder de partidos de extrema derecha.", answer:4},
+    {text:"Se concluye que solo la regulación pública puede orientar la tecnología en beneficio de la humanidad.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Convierte a estilo indirecto: El autor escribió: «La regulación es necesaria para proteger a las democracias.»", model:"El autor escribió que la regulación era necesaria para proteger a las democracias."},
+    {stem:"Cambia del presente al pretérito perfecto compuesto: «Los magnates acumulan un poder inmenso.»", model:"Los magnates han acumulado un poder inmenso."},
+    {stem:"Transforma en pregunta: «Las empresas privadas van a sustituir funciones del Estado.»", model:"¿Van a sustituir las empresas privadas funciones del Estado?"},
+    {stem:"Cambia a la voz pasiva: «Las plataformas tecnológicas privatizan los megadatos.»", model:"Los megadatos son privatizados por las plataformas tecnológicas."},
+    {stem:"Sustituye «ejercer poder» por una expresión sinónima, sin cambiar el sentido.", model:"Ejemplo: «tener influencia» / «ostentar el poder»."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «sustituir»:", opts:["reemplazar","apoyar","crear","destruir"], answer:0},
+    {q:"Antónimo de «desregulación»:", opts:["liberalización","privatización","regulación","expansión"], answer:2},
+    {q:"Marca la palabra intrusa:", opts:["irrupción","aparición","surgimiento","desaparición"], answer:3},
+    {q:"Completa la colocación: «______ un contrato social»:", opts:["establecer","cocinar","vestir","plantar"], answer:0},
+    {q:"«Paulatinamente» en este contexto es sinónimo de:", opts:["rápidamente","gradualmente","violentamente","secretamente"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

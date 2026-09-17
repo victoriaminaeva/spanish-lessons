@@ -1,0 +1,854 @@
+<!doctype html>
+<title>Amistad Digital</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance;}
+a{color:var(--accent);}
+
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(27px,5vw,38px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:22px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:14px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:25px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Amistad Digital · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Como pez en el agua: la amistad digital</h1>
+  <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> The Conversation — Johanna Pérez Daza, Universidad Católica Andrés Bello — «Como pez en el agua: la amistad en el hábitat digital» (publicado originalmente en la revista Telos, Fundación Telefónica)</p>
+  <div class="summary">
+    <b>De qué trata:</b> para los adolescentes de hoy, la tecnología no es solo un medio, sino el propio "hábitat" donde nacen y crecen las amistades: emojis, videollamadas, retos virales o las "rachas" de TikTok. El artículo explora cómo se construyen estos vínculos digitales, sus riesgos (ciberacoso) y la idea de la "sociedad líquida" de Zygmunt Bauman.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">04</span><h2>Test — Amistad digital</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "amistaddigital_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {};
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+var vocab = [
+  {term:"amerita (algo)", pos:"verbo transitivo",
+   quote:"Pensar las emociones en este contexto <mark>amerita</mark> despojarnos de prejuicios y anclajes al pasado...",
+   trans:"заслуживать, требовать (внимания)",
+   mean:"Requerir cierta consideración o esfuerzo; se usa mucho en Latinoamérica como sinónimo de «merecer» o «requerir».",
+   ex:"Esta decisión amerita pensarlo con calma. — Это решение заслуживает того, чтобы его обдумать спокойно."},
+  {term:"despojarse de (algo)", pos:"verbo pronominal",
+   quote:"...amerita <mark>despojarnos de</mark> prejuicios y anclajes al pasado...",
+   trans:"избавляться от (чего-то), сбрасывать с себя",
+   mean:"Deshacerse voluntariamente de algo que se posee, a menudo en sentido figurado (prejuicios, miedos).",
+   ex:"Tuvo que despojarse de sus miedos para empezar de nuevo. — Ему пришлось избавиться от своих страхов, чтобы начать заново."},
+  {term:"pasar desapercibido/a", pos:"construcción verbal",
+   quote:"...la utilización de la tecnología es parte fundamental de su día a día, tan es así que <mark>pasa desapercibida</mark> pues su existencia se da por obvia.",
+   trans:"оставаться незамеченным",
+   mean:"No ser notado por su normalidad o familiaridad; algo tan cotidiano que deja de percibirse.",
+   ex:"Su esfuerzo pasó desapercibido para el resto del equipo. — Его усилия остались незамеченными для остальной команды."},
+  {term:"la racha", pos:"sustantivo, f.",
+   quote:"En TikTok, una <mark>racha</mark> es una secuencia de días consecutivos en la que dos amigos se envían mensajes directos.",
+   trans:"полоса, серия (успехов/действий подряд)",
+   mean:"Serie de eventos consecutivos, generalmente positivos o continuos; también «racha de mala suerte» en sentido negativo.",
+   ex:"Lleva una racha de diez victorias seguidas. — У него серия из десяти побед подряд."},
+  {term:"reactivarse", pos:"verbo pronominal",
+   quote:"La racha se rompe si pasan más de 24 horas... pero puede recuperarse si se <mark>reactiva</mark> el intercambio en un plazo de 48 horas.",
+   trans:"возобновляться, снова активизироваться",
+   mean:"Volver a estar activo algo que se había detenido o pausado.",
+   ex:"El proyecto se reactivó después de meses parado. — Проект возобновился после нескольких месяцев остановки."},
+  {term:"acotado/a (a algo)", pos:"participio / adjetivo",
+   quote:"...permite relaciones más estrechas entre grupos más pequeños, o incluso <mark>acotadas</mark> a dos personas.",
+   trans:"ограниченный (определёнными рамками)",
+   mean:"Limitado a un espacio, número o condición concreta; de «acotar» = limitar, delimitar.",
+   ex:"El estudio está acotado a jóvenes de entre 12 y 18 años. — Исследование ограничено молодыми людьми от 12 до 18 лет."},
+  {term:"revestido/a de (algo)", pos:"participio",
+   quote:"...encontramos prácticas antiamistad, basadas en el acoso, la discriminación, el bullying y otros males <mark>revestidos</mark> de las tecnologías del momento.",
+   trans:"облечённый, покрытый, замаскированный (чем-то)",
+   mean:"Cubierto o disfrazado con una apariencia particular; de «revestir» = cubrir, dar una apariencia.",
+   ex:"Su crítica venía revestida de humor, pero era muy directa. — Его критика была облечена в юмор, но была очень прямой."},
+  {term:"extrapolarse (a algo)", pos:"verbo pronominal",
+   quote:"Aunque el concepto se centra en las relaciones de pareja..., sus principios pueden <mark>extrapolarse</mark> a otro tipo de relaciones interpersonales.",
+   trans:"переноситься, экстраполироваться (на что-то другое)",
+   mean:"Aplicar una conclusión o principio válido en un contexto a otro contexto diferente.",
+   ex:"Los resultados de este estudio no pueden extrapolarse a toda la población. — Результаты этого исследования не могут быть перенесены на всё население."},
+  {term:"consustancial (a algo)", pos:"adjetivo",
+   quote:"...para quienes la viven como parte <mark>consustancial</mark> de sus relaciones.",
+   trans:"неотъемлемый, сущностно связанный (с чем-то)",
+   mean:"Que forma parte esencial e inseparable de algo; muy formal, típico de textos académicos.",
+   ex:"La curiosidad es consustancial a la infancia. — Любопытство неотъемлемо присуще детству."},
+  {term:"tácitamente", pos:"adverbio",
+   quote:"...la tecnología no sería un recurso adicional, sino un elemento central que existe <mark>tácitamente</mark> y no requiere mayor enunciación.",
+   trans:"молчаливо, неявно, без слов",
+   mean:"De forma implícita, sin necesidad de expresarlo explícitamente; de «tácito» = невысказанный.",
+   ex:"Todos aceptaron tácitamente la nueva norma sin discutirla. — Все молчаливо приняли новое правило, не обсуждая его."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var debate = [
+  {q:"¿Cuánto tiempo pasas comunicándote con tus amigos a través de aplicaciones (mensajes, videollamadas, redes)? ¿Prefieres eso o quedar en persona?", hint:"Útil: «Suelo hablar con mis amigos por...», «Prefiero... porque...»"},
+  {q:"¿Has tenido alguna vez una «racha» en TikTok, Snapchat o alguna otra red? ¿Qué opinas de este tipo de dinámicas?", hint:"Útil: «Sí/No, nunca he tenido...», «Me parece que estas dinámicas...»"},
+  {q:"El artículo cita a McLuhan: no somos conscientes de los efectos de la tecnología, «como un pez que no es consciente del agua donde nada». ¿Estás de acuerdo con esta idea aplicada a tu generación?", hint:"Útil: «Creo que tiene razón/no tiene razón porque...», «En mi caso...»"},
+  {q:"Zygmunt Bauman habla de relaciones «líquidas»: superficiales, frágiles y de poco compromiso. ¿Crees que las amistades digitales son necesariamente más líquidas que las presenciales? Argumenta tu opinión.", hint:"Útil: «Por un lado..., por otro lado...», «No necesariamente, porque...»"},
+  {q:"Si tuvieras que explicarle a alguien de otra generación por qué la tecnología es «el hábitat» y no solo una herramienta para hacer amigos, ¿qué ejemplos usarías?", hint:"Útil: «Le diría que...», «Un ejemplo sería...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+var gram = [
+  {id:"g1", title:"3.1 Presente de indicativo",
+   quote:"En TikTok, una racha <mark>es</mark> una secuencia de días consecutivos en la que dos amigos se <mark>envían</mark> mensajes directos.",
+   rule:"Verbos regulares en -ar/-er/-ir. Se usa para definiciones y explicaciones de cómo funciona algo — muy típico en textos explicativos.",
+   items:[
+     {stem:"Una racha ______ (ser) una secuencia de días consecutivos.", answers:["es"]},
+     {stem:"Los adolescentes ______ (comunicarse) constantemente a través del móvil.", answers:["se comunican"]},
+     {stem:"Este tipo de vínculo ______ (requerir) atención y lealtad mutua.", answers:["requiere"]},
+     {stem:"La tecnología ______ (influir) en cómo nos relacionamos con los demás.", answers:["influye"]},
+     {stem:"Yo ______ (compartir) memes con mis amigos todos los días.", answers:["comparto"]},
+     {stem:"Nosotros ______ (crear) comunidades en línea sin darnos cuenta.", answers:["creamos"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito perfecto compuesto",
+   quote:"...también <mark>posibilitan</mark> otros modos de expresar afecto... [contexto ampliado] las tecnologías digitales <mark>han acortado</mark> distancias geográficas y temporales.",
+   rule:"Presente de <i>haber</i> + participio (-ado/-ido). Acción pasada con relevancia en el presente, sin fecha concreta.",
+   items:[
+     {stem:"Las tecnologías digitales ______ (acortar) distancias geográficas y temporales.", answers:["han acortado"]},
+     {stem:"El concepto de amistad ______ (cambiar) mucho con las redes sociales.", answers:["ha cambiado"]},
+     {stem:"¿Alguna vez ______ (perder, tú) una racha con un amigo?", answers:["has perdido"]},
+     {stem:"Nosotros ______ (descubrir) nuevas formas de socializar en línea.", answers:["hemos descubierto"]},
+     {stem:"El bullying ______ (encontrar) nuevas formas gracias a la tecnología.", answers:["ha encontrado"]},
+     {stem:"Muchos jóvenes ______ (crear) vínculos fuertes a través de videojuegos.", answers:["han creado"]}
+   ]},
+  {id:"g3", title:"3.3 Pretérito imperfecto",
+   quote:"...un síndrome según el cual, el hombre no <mark>era</mark> consciente de los efectos... como un pez que no <mark>era</mark> consciente del agua donde nadaba.",
+   rule:"Raíz + -aba/-ía... Describe estados o circunstancias sin foco en cuándo terminaron; ideal para citar teorías o describir contextos pasados.",
+   items:[
+     {stem:"Según McLuhan, el hombre no ______ (ser) consciente de los efectos de su tecnología.", answers:["era"]},
+     {stem:"Antes, las amistades ______ (depender) mucho más del contacto físico.", answers:["dependían"]},
+     {stem:"De adolescente, yo siempre ______ (estar) conectado con mis amigos por chat.", answers:["estaba"]},
+     {stem:"Bauman ______ (creer) que los vínculos modernos eran cada vez más frágiles.", answers:["creía"]},
+     {stem:"Nosotros no ______ (saber) que existían tantas formas de expresar afecto en línea.", answers:["sabíamos"]},
+     {stem:"El pez no ______ (darse) cuenta del agua en la que nadaba.", answers:["se daba"]}
+   ]},
+  {id:"g4", title:"3.4 Perífrasis «poder + infinitivo»",
+   quote:"...sus principios <mark>pueden extrapolarse</mark> a otro tipo de relaciones interpersonales.",
+   rule:"<i>Poder</i> conjugado + infinitivo. Expresa posibilidad o capacidad. Muy frecuente en textos académicos para matizar afirmaciones.",
+   items:[
+     {stem:"Estos principios ______ (poder) extrapolarse a otras relaciones.", answers:["pueden"]},
+     {stem:"La racha ______ (poder) recuperarse en 48 horas.", answers:["puede"]},
+     {stem:"Tú ______ (poder) mantener amistades fuertes solo por internet.", answers:["puedes"]},
+     {stem:"Nosotros ______ (poder) malinterpretar los efectos de la tecnología.", answers:["podemos"]},
+     {stem:"Este tipo de vínculo ______ (poder) romperse fácilmente si se descuida.", answers:["puede"]},
+     {stem:"Los jóvenes ______ (poder) sentirse excluidos si no usan estas apps.", answers:["pueden"]}
+   ]},
+  {id:"g5", title:"3.5 Presente de subjuntivo",
+   quote:"...para que <mark>ser</mark>... [referencia ampliada] son prácticamente un requisito indispensable para que los jóvenes <mark>sean</mark> miembros funcionales y competentes de los grupos.",
+   rule:"Raíz de la 1ª persona presente + vocal cambiada. Tras «para que» (finalidad) siempre se usa subjuntivo, nunca indicativo.",
+   items:[
+     {stem:"Usan estas apps para que sus amigos ______ (sentirse) cerca.", answers:["se sientan"]},
+     {stem:"Mantienen la racha para que la amistad no ______ (romperse).", answers:["se rompa"]},
+     {stem:"Comparten memes para que todos ______ (reírse) juntos.", answers:["se rían"]},
+     {stem:"Es necesario que los adultos ______ (entender) este nuevo hábitat digital.", answers:["entiendan"]},
+     {stem:"Piden ayuda para que el ciberacoso ______ (detenerse) a tiempo.", answers:["se detenga"]},
+     {stem:"Usan la tecnología para que la distancia no ______ (ser) un problema.", answers:["sea"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+var testList = document.getElementById("testList");
+
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"¿Qué es una «racha» en TikTok, según el artículo?", opts:["un tipo de baile viral","una secuencia de días en la que dos amigos se envían mensajes","un número de seguidores","un filtro de la cámara"], answer:1},
+    {q:"¿Cuántos días seguidos hay que intercambiar mensajes para activar una racha?", opts:["uno","dos","tres","siete"], answer:2},
+    {q:"¿En cuánto tiempo se puede recuperar una racha después de romperse?", opts:["12 horas","24 horas","48 horas","una semana"], answer:2},
+    {q:"¿Qué autor introdujo el concepto de «narcosis Narciso» sobre no ser consciente de los efectos de la tecnología?", opts:["Zygmunt Bauman","Viktor Frankl","McLuhan","Javier Mercadé de Luna"], answer:2},
+    {q:"¿En qué obra desarrolla Zygmunt Bauman la idea de los vínculos afectivos frágiles?", opts:["La sociedad del riesgo","Amor líquido","El fin de la historia","La era del vacío"], answer:1},
+    {q:"¿Dónde se publicó originalmente este artículo?", opts:["El País","la revista Telos, de la Fundación Telefónica","National Geographic","BBC Mundo"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"amerita · despojarnos · desapercibida · racha · reactiva · acotadas · extrapolarse · consustancial",
+  items:[
+    {stem:"Pensar las emociones en este contexto ______ dejar atrás los prejuicios del pasado.", answers:["amerita"]},
+    {stem:"Para los adolescentes, la tecnología pasa ______ porque su existencia se da por obvia.", answers:["desapercibida"]},
+    {stem:"Muchas amistades digitales están ______ a un grupo muy pequeño de personas.", answers:["acotadas"]},
+    {stem:"Los principios del «amor líquido» pueden ______ a otro tipo de relaciones.", answers:["extrapolarse"]},
+    {stem:"Para algunos jóvenes, la tecnología es parte ______ de sus relaciones, no un simple medio.", answers:["consustancial"]},
+    {stem:"La racha se rompe, pero puede recuperarse si se ______ el intercambio a tiempo.", answers:["reactiva"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su definición",
+  words:["revestido/a de","despojarse de","tácitamente","amerita"],
+  defs:["de forma implícita, sin decirlo abiertamente","cubierto o disfrazado con una apariencia","requiere o merece cierta atención","deshacerse de algo, generalmente en sentido figurado"],
+  answers:["b","d","a","c"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Definición</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena las ideas según aparecen en el artículo",
+  events:[
+    {text:"Se presenta la idea de que la tecnología es el «hábitat digital» de los adolescentes.", answer:1},
+    {text:"Se cita a McLuhan y su concepto de «narcosis Narciso».", answer:2},
+    {text:"Se explica el funcionamiento de las «rachas» de TikTok.", answer:3},
+    {text:"Se mencionan las prácticas antiamistad, como el ciberacoso.", answer:4},
+    {text:"Se relaciona el tema con la «sociedad líquida» de Zygmunt Bauman.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Convierte a estilo indirecto: McLuhan escribió: «El hombre no es consciente de los efectos de su nueva tecnología.»", model:"McLuhan escribió que el hombre no era consciente de los efectos de su nueva tecnología."},
+    {stem:"Cambia del presente al pretérito perfecto compuesto: «La tecnología acorta distancias geográficas.»", model:"La tecnología ha acortado distancias geográficas."},
+    {stem:"Transforma en pregunta: «Las rachas requieren atención y lealtad mutua.»", model:"¿Requieren las rachas atención y lealtad mutua?"},
+    {stem:"Cambia a la voz pasiva: «Los adolescentes usan emojis para expresar afecto.»", model:"Los emojis son usados por los adolescentes para expresar afecto."},
+    {stem:"Sustituye «pasar desapercibido» por una expresión sinónima, sin cambiar el sentido.", model:"Ejemplo: «no llamar la atención» / «no notarse»."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «amerita»:", opts:["requiere","evita","destruye","olvida"], answer:0},
+    {q:"Antónimo de «reactivarse»:", opts:["renovarse","detenerse","continuar","crecer"], answer:1},
+    {q:"Marca la palabra intrusa:", opts:["racha","secuencia","serie","pausa"], answer:3},
+    {q:"Completa la colocación: «______ prejuicios»:", opts:["despojarse de","cocinar","vestir","plantar"], answer:0},
+    {q:"«Tácitamente» en este contexto es sinónimo de:", opts:["explícitamente","implícitamente","ruidosamente","lentamente"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

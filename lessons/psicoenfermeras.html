@@ -1,0 +1,854 @@
+<!doctype html>
+<title>Las Psicoenfermeras</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Las Psicoenfermeras · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Cuidar lo invisible: las psicoenfermeras</h1>
+  <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> The Conversation — Carlos Aguilera-Serrano, Universidad de Málaga — «Cuidar lo invisible y lo cotidiano: ¿cuál es el papel de las psicoenfermeras?»</p>
+  <div class="summary">
+    <b>De qué trata:</b> el artículo presenta a las "psicoenfermeras", especialistas en salud mental que van más allá de tratar síntomas: acompañan procesos, hacen psicoterapia enfermera y defienden los derechos de sus pacientes. En España son entre 6&nbsp;500 y 9&nbsp;000, pero la profesión sigue infrautilizada y afronta el estigma, la falta de recursos y el reconocimiento insuficiente.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">04</span><h2>Test — Las psicoenfermeras</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "psicoenfermeras_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {};
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+var vocab = [
+  {term:"abordar (algo)", pos:"verbo transitivo",
+   quote:"...su desempeño ha evolucionado hacia un modelo más integrador que <mark>aborda</mark> también el descanso, la alimentación, las relaciones personales...",
+   trans:"затрагивать, браться за (тему, проблему)",
+   mean:"Заняться темой или проблемой систематически. Отличается от «tocar» — «abordar» подразумевает более серьёзную, структурированную работу с вопросом.",
+   ex:"El taller aborda temas como la ansiedad y el estrés laboral. — Тренинг затрагивает такие темы, как тревожность и стресс на работе."},
+  {term:"el desempeño", pos:"sustantivo, m.",
+   quote:"...su <mark>desempeño</mark> ha evolucionado hacia un modelo más integrador...",
+   trans:"выполнение обязанностей, профессиональная деятельность",
+   mean:"Способ, каким кто-то выполняет свою работу или роль; часто в контексте оценки качества работы.",
+   ex:"El desempeño del nuevo equipo ha sido excelente este trimestre. — Работа новой команды в этом квартале была отличной."},
+  {term:"vulnerado/a (verse vulnerado/a)", pos:"participio / construcción con «verse»",
+   quote:"...defender los derechos de las personas y las familias en contextos donde a menudo se ven <mark>vulnerados</mark>.",
+   trans:"нарушенный (о правах)",
+   mean:"Verse vulnerado/a — оказаться в ситуации, когда твои права нарушены. Часто используется о правах человека.",
+   ex:"Sus derechos laborales se vieron vulnerados durante años. — Его трудовые права нарушались годами."},
+  {term:"el malestar", pos:"sustantivo, m.",
+   quote:"...la psicoenfermera le ayudará a identificar qué situaciones aumentan su <mark>malestar</mark>...",
+   trans:"недомогание, дискомфорт, беспокойство",
+   mean:"Общее чувство физического или эмоционального дискомфорта; противоположность «bienestar».",
+   ex:"Sentía un malestar constante que no sabía explicar. — Он постоянно чувствовал недомогание, которое не мог объяснить."},
+  {term:"aislarse", pos:"verbo pronominal",
+   quote:"...una persona mayor que vive sola, tiene pocos apoyos y comienza a <mark>aislarse</mark> tras la pérdida de un ser querido.",
+   trans:"изолироваться, замыкаться в себе",
+   mean:"Постепенно прекращать общение с другими людьми, часто из-за грусти или страха.",
+   ex:"Después del divorcio, empezó a aislarse de sus amigos. — После развода он начал изолироваться от друзей."},
+  {term:"la infrautilización", pos:"sustantivo, f.",
+   quote:"...lo que apunta a una <mark>infrautilización</mark> de las competencias especializadas.",
+   trans:"недостаточное использование (ресурса, специалиста)",
+   mean:"Использование чего-то/кого-то ниже его реального потенциала. Часто о человеческих ресурсах или инфраструктуре.",
+   ex:"La infrautilización de las energías renovables preocupa a los expertos. — Недостаточное использование возобновляемой энергии беспокоит экспертов."},
+  {term:"el estigma", pos:"sustantivo, m.",
+   quote:"...falta de recursos, fragmentación del sistema, reconocimiento insuficiente de sus capacidades o la persistencia del <mark>estigma</mark>...",
+   trans:"стигма, клеймо",
+   mean:"Негативное социальное отношение к какой-то группе или состоянию, которое мешает людям открыто говорить об этом или искать помощь.",
+   ex:"El estigma hacia las enfermedades mentales sigue siendo un gran obstáculo. — Стигма в отношении психических заболеваний остаётся серьёзным препятствием."},
+  {term:"afrontar (algo)", pos:"verbo transitivo",
+   quote:"Hoy, la enfermería especializada en salud mental sigue <mark>afrontando</mark> desafíos importantes...",
+   trans:"противостоять, сталкиваться лицом к лицу (с трудностью)",
+   mean:"Активно принимать вызов или трудность, не убегая от неё. Синоним «enfrentar».",
+   ex:"La empresa tuvo que afrontar una crisis financiera muy grave. — Компании пришлось противостоять очень серьёзному финансовому кризису."},
+  {term:"la plaza", pos:"sustantivo, f.",
+   quote:"...muchas no ocupan <mark>plazas</mark> específicas de la especialidad...",
+   trans:"должность, штатная единица",
+   mean:"Официальная рабочая позиция в организации, особенно в госсекторе. No confundir con «plaza» = площадь города.",
+   ex:"Consiguió una plaza fija en el hospital público. — Она получила постоянную должность в государственной больнице."},
+  {term:"el ámbito", pos:"sustantivo, m.",
+   quote:"...sigue siendo una de las áreas menos conocidas de la profesión fuera del <mark>ámbito</mark> sociosanitario.",
+   trans:"сфера, область (деятельности)",
+   mean:"Область или сфера, в которой происходит какая-то деятельность; синоним «campo», «área».",
+   ex:"Trabaja en el ámbito de la educación infantil. — Она работает в сфере детского образования."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var debate = [
+  {q:"¿Alguna vez has hablado con un profesional de la salud mental (psicólogo, psicoenfermera, terapeuta)? ¿Cómo fue la experiencia?", hint:"Útil: «Fue la primera vez que...», «Me ayudó a...»"},
+  {q:"En tu opinión, ¿por qué crees que la salud mental sigue rodeada de estigma en muchas sociedades?", hint:"Útil: «Creo que se debe a...», «Todavía existe la idea de que...»"},
+  {q:"El artículo dice que en España hay entre 6.500 y 9.000 psicoenfermeras, pero muchas no ocupan plazas específicas de su especialidad. ¿Por qué crees que pasa esto? Compara con la situación en tu país.", hint:"Útil: «Puede que se deba a...», «En mi país, la situación es...»"},
+  {q:"¿Estás de acuerdo con que un enfoque integral (que incluya el sueño, la alimentación y las relaciones sociales) es mejor que uno centrado solo en los síntomas? Argumenta tu opinión.", hint:"Útil: «Estoy de acuerdo/en desacuerdo porque...», «Por un lado..., por otro lado...»"},
+  {q:"Si tuvieras que diseñar un sistema de salud mental desde cero, ¿qué cambiarías primero para reducir el estigma y mejorar el acceso a la atención?", hint:"Útil: «Si yo diseñara el sistema, ...», «Lo primero que haría sería...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+var gram = [
+  {id:"g1", title:"3.1 Pretérito perfecto compuesto",
+   quote:"Su <mark>desempeño</mark> ha <mark>evolucionado</mark> hacia un modelo más integrador que aborda también el descanso, la alimentación, las relaciones personales...",
+   rule:"Presente de <i>haber</i> + participio (-ado/-ido). Acción pasada relacionada con el presente, sin fecha concreta — muy usado para describir tendencias y cambios recientes.",
+   items:[
+     {stem:"La profesión ______ (evolucionar) mucho en los últimos años.", answers:["ha evolucionado"]},
+     {stem:"Las psicoenfermeras ______ (desarrollar) programas educativos y comunitarios.", answers:["han desarrollado"]},
+     {stem:"¿Alguna vez ______ (pensar, tú) en trabajar en salud mental?", answers:["has pensado"]},
+     {stem:"El sistema todavía no ______ (resolver) el problema de la infrautilización.", answers:["ha resuelto"]},
+     {stem:"La evidencia ______ (mostrar) que esta profesión es muy adaptable.", answers:["ha mostrado"]},
+     {stem:"Nosotros ______ (aprender) mucho sobre la psicoterapia enfermera.", answers:["hemos aprendido"]}
+   ]},
+  {id:"g2", title:"3.2 Presente de indicativo",
+   quote:"Su trabajo <mark>incluye</mark> valorar de forma integral, educar en salud, coordinar y liderar equipos y acompañar a lo largo del tiempo...",
+   rule:"Verbos regulares en -ar/-er/-ir con terminaciones propias de cada persona. Describe hechos habituales, definiciones y descripciones de funciones profesionales.",
+   items:[
+     {stem:"Su trabajo ______ (incluir) valorar, educar y acompañar.", answers:["incluye"]},
+     {stem:"Las psicoenfermeras ______ (defender) los derechos de sus pacientes.", answers:["defienden"]},
+     {stem:"Este enfoque ______ (tener) en cuenta la salud física y la medicación.", answers:["tiene"]},
+     {stem:"La continuidad ______ (favorecer) la confianza entre paciente y profesional.", answers:["favorece"]},
+     {stem:"Yo ______ (creer) que esta especialidad necesita más reconocimiento.", answers:["creo"]},
+     {stem:"Ellos ______ (compartir) herramientas con otras formas de psicoterapia.", answers:["comparten"]}
+   ]},
+  {id:"g3", title:"3.3 Imperativo (nosotros/as)",
+   quote:"<mark>Pensemos</mark> en una persona que vive con ansiedad tras una enfermedad grave.",
+   rule:"Imperativo de <i>nosotros/as</i> = presente de subjuntivo en esa persona (pens-emos, habl-emos, viv-amos). Se usa para proponer una acción conjunta, muy común en explicaciones y ejemplos.",
+   items:[
+     {stem:"______ (pensar) en un ejemplo real de esta situación.", answers:["pensemos"]},
+     {stem:"______ (imaginar) a una persona mayor que vive sola.", answers:["imaginemos"]},
+     {stem:"______ (analizar) juntos los datos del Ministerio de Sanidad.", answers:["analicemos"]},
+     {stem:"______ (recordar) que el estigma sigue siendo un problema.", answers:["recordemos"]},
+     {stem:"______ (comparar) la situación de España con la de Reino Unido.", answers:["comparemos"]},
+     {stem:"______ (buscar) soluciones para la infrautilización de esta especialidad.", answers:["busquemos"]}
+   ]},
+  {id:"g4", title:"3.4 Pretérito indefinido",
+   quote:"...la especialidad <mark>fue regulada</mark> oficialmente en 1998 y su programa formativo actual <mark>se aprobó</mark> en 2011...",
+   rule:"Regular -ar: -é,-aste,-ó...; -er/-ir: -í,-iste,-ió... Acción puntual y completada en el pasado, con fecha concreta.",
+   items:[
+     {stem:"La especialidad ______ (regularse) oficialmente en 1998.", answers:["se reguló"]},
+     {stem:"El programa formativo actual ______ (aprobarse) en 2011.", answers:["se aprobó"]},
+     {stem:"El Ministerio de Sanidad ______ (publicar) los datos del registro.", answers:["publicó"]},
+     {stem:"Reino Unido ______ (ampliar) las funciones de estas enfermeras hace años.", answers:["amplió"]},
+     {stem:"El autor ______ (escribir) este artículo para The Conversation.", answers:["escribió"]},
+     {stem:"Nosotros ______ (leer) el artículo sobre las psicoenfermeras ayer.", answers:["leímos"]}
+   ]},
+  {id:"g5", title:"3.5 Presente de subjuntivo",
+   quote:"El objetivo es que <mark>recupere</mark> bienestar y autonomía en su vida diaria.",
+   rule:"Raíz de la 1ª persona del presente + vocal cambiada (-ar→e; -er/-ir→a). Tras expresiones de finalidad o deseo («el objetivo es que», «espero que»). <b>Ошибка:</b> использовать indicativo вместо subjuntivo после таких выражений.",
+   items:[
+     {stem:"El objetivo es que el paciente ______ (recuperar) su autonomía.", answers:["recupere"]},
+     {stem:"Es importante que la psicoenfermera ______ (conocer) el entorno familiar del paciente.", answers:["conozca"]},
+     {stem:"Esperamos que el sistema ______ (mejorar) el reconocimiento de esta profesión.", answers:["mejore"]},
+     {stem:"Ojalá que más personas ______ (buscar) ayuda sin miedo al estigma.", answers:["busquen"]},
+     {stem:"Es necesario que haya más plazas para que las especialistas ______ (trabajar) en su campo.", answers:["trabajen"]},
+     {stem:"Quieren que la formación ______ (durar) al menos dos años.", answers:["dure"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+var testList = document.getElementById("testList");
+
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"¿Cuándo se reguló oficialmente la especialidad de enfermería en salud mental en España?", opts:["1988","1998","2005","2011"], answer:1},
+    {q:"¿Cuántos años dura la formación de posgrado para ser psicoenfermera en España?", opts:["1","2","3","4"], answer:1},
+    {q:"Según el Registro Estatal de Profesionales Sanitarios, ¿cuántas enfermeras especialistas en salud mental hay inscritas oficialmente?", opts:["2.063","6.500","9.000","15.000"], answer:0},
+    {q:"¿Qué país se menciona como ejemplo de mayor reconocimiento de las enfermeras de salud mental?", opts:["Francia","Reino Unido","Alemania","Portugal"], answer:1},
+    {q:"¿Cuál de estos NO es uno de los desafíos mencionados en el artículo?", opts:["falta de recursos","fragmentación del sistema","exceso de financiación","persistencia del estigma"], answer:2},
+    {q:"¿Qué nombre le da la AEESME a las enfermeras especialistas en salud mental?", opts:["terapeutas","psicoenfermeras","sanadoras","consejeras"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"estigma · infrautilización · aislarse · malestar · afrontar · abordar · desempeño · plaza",
+  items:[
+    {stem:"El artículo señala la persistencia del ______ como una barrera para buscar ayuda.", answers:["estigma"]},
+    {stem:"Muchas psicoenfermeras no ocupan plazas específicas, lo que apunta a una ______ de sus competencias.", answers:["infrautilización"]},
+    {stem:"Una persona mayor puede empezar a ______ tras la pérdida de un ser querido.", answers:["aislarse"]},
+    {stem:"La psicoenfermera ayuda a identificar qué situaciones aumentan el ______ del paciente.", answers:["malestar"]},
+    {stem:"La enfermería de salud mental sigue ______ desafíos importantes, como la falta de recursos.", answers:["afrontando"]},
+    {stem:"El nuevo modelo integrador ______ también el descanso y la alimentación, no solo los síntomas.", answers:["aborda"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su definición",
+  words:["el ámbito","la plaza","el desempeño","vulnerado/a"],
+  defs:["puesto de trabajo específico dentro de una profesión","campo o área de actividad profesional","manera de ejercer o desarrollar un trabajo","que ha sufrido una violación (de un derecho)"],
+  answers:["b","a","c","d"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Definición</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena las ideas según aparecen en el artículo",
+  events:[
+    {text:"Se explica que la atención en salud mental tradicionalmente se centraba solo en los síntomas.", answer:1},
+    {text:"Se presenta a las «psicoenfermeras» y su papel como profesionales puente.", answer:2},
+    {text:"Se explica en qué consiste la psicoterapia enfermera y su enfoque integral.", answer:3},
+    {text:"Se señala que el número real de psicoenfermeras podría ser mucho mayor que el registrado oficialmente.", answer:4},
+    {text:"Se mencionan los retos (falta de recursos, estigma) y el potencial de la profesión.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Convierte a estilo indirecto: La psicoenfermera dijo: «Pensemos en una persona que vive con ansiedad.»", model:"La psicoenfermera dijo que pensáramos en una persona que vivía con ansiedad."},
+    {stem:"Cambia del pretérito indefinido al pretérito perfecto compuesto: «La especialidad fue regulada oficialmente.»", model:"La especialidad ha sido regulada oficialmente."},
+    {stem:"Transforma en pregunta: «Las psicoenfermeras suelen acompañar a las personas durante largos periodos.»", model:"¿Suelen las psicoenfermeras acompañar a las personas durante largos periodos?"},
+    {stem:"Cambia a la voz pasiva: «El Ministerio de Sanidad registra a las profesionales.»", model:"Las profesionales son registradas por el Ministerio de Sanidad."},
+    {stem:"Sustituye «afrontar desafíos importantes» por una expresión sinónima, sin cambiar el sentido.", model:"Ejemplo: «enfrentar retos importantes» / «hacer frente a problemas importantes»."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «malestar»:", opts:["bienestar","incomodidad","alegría","descanso"], answer:1},
+    {q:"Antónimo de «afrontar» (en el sentido de enfrentar un problema):", opts:["evitar","resolver","atacar","superar"], answer:0},
+    {q:"Marca la palabra intrusa:", opts:["estigma","prejuicio","discriminación","reconocimiento"], answer:3},
+    {q:"Completa la colocación: «______ un desafío»:", opts:["afrontar","cocinar","vestir","plantar"], answer:0},
+    {q:"«Ámbito» en este contexto es sinónimo de:", opts:["campo","error","premio","horario"], answer:0}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

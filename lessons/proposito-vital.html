@@ -1,0 +1,854 @@
+<!doctype html>
+<title>Propósito y Cerebro</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:16px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,42px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:24px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:18px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:17.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:27px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Propósito y Cerebro · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Un propósito en la vida protege el cerebro</h1>
+  <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> The Conversation — Lucrecia Moreno Royo, Universidad CEU Cardenal Herrera — «Tener un propósito en la vida también ayuda a mantener la salud cerebral»</p>
+  <div class="summary">
+    <b>De qué trata:</b> además de la dieta sana o el ejercicio mental, tener un propósito en la vida (sentir que la propia existencia tiene sentido y dirección) parece proteger el cerebro y reducir el riesgo de deterioro cognitivo. El concepto se acerca al <i>ikigai</i> japonés y puede medirse con cuestionarios validados. La buena noticia: puede cultivarse a cualquier edad, incluso después de la jubilación.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">04</span><h2>Test — Propósito y cerebro</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "propositovital_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {};
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+var vocab = [
+  {term:"el deterioro (cognitivo)", pos:"sustantivo, m.",
+   quote:"Cuando buscamos cómo prevenir el <mark>deterioro</mark> cognitivo solemos pensar en leer, jugar al ajedrez o hacer sudokus.",
+   trans:"ухудшение, снижение (когнитивных функций)",
+   mean:"Постепенное ослабление какой-либо способности или функции, часто связанное со старением или болезнью.",
+   ex:"El deterioro de la memoria puede empezar mucho antes de lo que pensamos. — Ухудшение памяти может начаться намного раньше, чем мы думаем."},
+  {term:"respaldado/a (por algo)", pos:"participio / adjetivo",
+   quote:"Todos estos factores son conocidos protectores de demencia y <mark>respaldados</mark> por la evidencia científica.",
+   trans:"подтверждённый, поддержанный (доказательствами)",
+   mean:"Быть подкреплённым авторитетным источником или данными; ser respaldado por algo/alguien.",
+   ex:"Su teoría está respaldada por décadas de investigación. — Его теория подтверждена десятилетиями исследований."},
+  {term:"dotar de (algo)", pos:"verbo transitivo",
+   quote:"El significado se define como la capacidad de <mark>dotar de</mark> contenido a la propia vida.",
+   trans:"наделять, снабжать (чем-то)",
+   mean:"Предоставить или придать кому-то/чему-то определённое качество или ресурс.",
+   ex:"La ciudad fue dotada de nuevos parques y bibliotecas. — Город был наделён новыми парками и библиотеками."},
+  {term:"abarcar", pos:"verbo transitivo",
+   quote:"Este concepto ha evolucionado desde su primera propuesta y <mark>abarca</mark> tres dimensiones diferentes.",
+   trans:"охватывать, включать в себя",
+   mean:"Содержать в себе несколько элементов или аспектов; синоним «incluir», «comprender».",
+   ex:"El curso abarca desde la gramática básica hasta la conversación avanzada. — Курс охватывает от базовой грамматики до продвинутого разговора."},
+  {term:"cuantificar", pos:"verbo transitivo",
+   quote:"Se trata de una prueba que permite <mark>cuantificar</mark> hasta qué punto una persona percibe que su vida tiene sentido.",
+   trans:"измерять количественно, выражать в цифрах",
+   mean:"Определить величину или количество чего-то абстрактного с помощью чисел или шкал.",
+   ex:"Es difícil cuantificar el impacto emocional de una pérdida. — Трудно измерить в цифрах эмоциональное воздействие потери."},
+  {term:"fortalecerse", pos:"verbo pronominal",
+   quote:"El propósito vital no es una característica fija, sino que puede <mark>fortalecerse</mark> a cualquier edad.",
+   trans:"укрепляться, становиться сильнее",
+   mean:"Ganar fuerza o resistencia con el tiempo o con la práctica; puede ser físico o psicológico.",
+   ex:"Su confianza se fortaleció después de superar el reto. — Его уверенность в себе укрепилась после того, как он справился с испытанием."},
+  {term:"la jubilación", pos:"sustantivo, f.",
+   quote:"...la <mark>jubilación</mark> no debería entenderse como el final de una etapa activa, sino como una oportunidad para iniciar nuevos proyectos.",
+   trans:"выход на пенсию, пенсия",
+   mean:"Момент, когда человек официально перестаёт работать по возрасту; también la propia pensión económica.",
+   ex:"Tras la jubilación, decidió aprender a tocar el piano. — После выхода на пенсию он решил научиться играть на пианино."},
+  {term:"sobresalir", pos:"verbo intransitivo",
+   quote:"Según nuestros resultados, el propósito en la vida <mark>sobresale</mark> por encima del resto.",
+   trans:"выделяться, превосходить (по значимости)",
+   mean:"Destacar claramente por encima de otros elementos, en importancia o en calidad.",
+   ex:"Entre todos los factores, el ejercicio sobresale por su efecto inmediato. — Среди всех факторов физическая нагрузка выделяется своим немедленным эффектом."},
+  {term:"el envejecimiento", pos:"sustantivo, m.",
+   quote:"Por estos motivos, debería considerarse como uno de los pilares del <mark>envejecimiento</mark> saludable.",
+   trans:"старение",
+   mean:"Процесс становления старше; часто в сочетании «envejecimiento saludable/activo» — здоровое/активное старение.",
+   ex:"El envejecimiento activo mejora la calidad de vida de las personas mayores. — Активное старение улучшает качество жизни пожилых людей."},
+  {term:"el entramado", pos:"sustantivo, m.",
+   quote:"...los factores psicológicos y los estilos de vida forman parte de un mismo <mark>entramado</mark> que influye en la salud cerebral.",
+   trans:"сеть, взаимосвязанная структура",
+   mean:"Совокупность взаимосвязанных элементов, образующих сложную структуру; часто в переносном смысле (социальную, психологическую).",
+   ex:"La corrupción forma parte de un entramado difícil de desmontar. — Коррупция является частью структуры, которую трудно разрушить."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var debate = [
+  {q:"¿Qué actividades te hacen sentir que tu vida tiene sentido o dirección?", hint:"Útil: «Me siento así cuando...», «Para mí, tiene sentido...»"},
+  {q:"¿Conoces el concepto japonés de «ikigai»? ¿Qué opinas de la idea de encontrar un propósito para vivir cada día con ilusión?", hint:"Útil: «Nunca había oído hablar de...», «Me parece una idea...»"},
+  {q:"El artículo dice que la jubilación no debería ser «el final de una etapa activa», sino una oportunidad para nuevos proyectos. ¿Cómo se vive la jubilación en tu cultura?", hint:"Útil: «En mi país, la jubilación se vive como...», «Muchas personas mayores...»"},
+  {q:"¿Estás de acuerdo con que factores psicológicos como el propósito vital pueden ser tan importantes como la dieta o el ejercicio para la salud cerebral? Argumenta tu opinión.", hint:"Útil: «Estoy de acuerdo/en desacuerdo porque...», «Por un lado..., por otro lado...»"},
+  {q:"Si notaras que un familiar mayor ha perdido el sentido de propósito en su vida, ¿qué le propondrías para ayudarlo a recuperarlo?", hint:"Útil: «Le propondría que...», «Lo primero que haría sería...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+var gram = [
+  {id:"g1", title:"3.1 Perífrasis «soler + infinitivo»",
+   quote:"Cuando buscamos cómo prevenir el deterioro cognitivo <mark>solemos pensar</mark> en leer, jugar al ajedrez o hacer sudokus.",
+   rule:"Presente de <i>soler</i> (suelo, sueles, suele, solemos, soléis, suelen) + infinitivo — expresa una acción habitual. En imperfecto («solía») describe hábitos del pasado.",
+   items:[
+     {stem:"Los expertos ______ (recomendar) mantener la mente activa.", answers:["suelen recomendar"]},
+     {stem:"Yo ______ (hacer) sudokus por la mañana.", answers:["suelo hacer"]},
+     {stem:"¿Tú ______ (leer) todos los días?", answers:["sueles leer"]},
+     {stem:"Las personas mayores ______ (necesitar) proyectos que les den sentido.", answers:["suelen necesitar"]},
+     {stem:"Nosotros ______ (subestimar) el poder de los factores psicológicos.", answers:["solemos subestimar"]},
+     {stem:"Ella ______ (participar) en actividades de voluntariado.", answers:["suele participar"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito perfecto compuesto",
+   quote:"Este concepto <mark>ha evolucionado</mark> desde su primera propuesta y abarca tres dimensiones diferentes.",
+   rule:"Presente de <i>haber</i> + participio (-ado/-ido). Acción pasada relacionada con el presente, sin fecha concreta.",
+   items:[
+     {stem:"La investigación sobre el propósito vital ______ (evolucionar) mucho en los últimos años.", answers:["ha evolucionado"]},
+     {stem:"Los científicos ______ (proponer) varias hipótesis sobre los mecanismos implicados.", answers:["han propuesto"]},
+     {stem:"¿Alguna vez ______ (sentir, tú) que tu vida tenía un propósito claro?", answers:["has sentido"]},
+     {stem:"Nosotros ______ (publicar) un trabajo sobre esto en 2022.", answers:["hemos publicado"]},
+     {stem:"La evidencia ______ (empezar) a señalar nuevos factores protectores.", answers:["ha empezado"]},
+     {stem:"Todavía no ______ (descubrirse) todos los mecanismos implicados.", answers:["se ha descubierto"]}
+   ]},
+  {id:"g3", title:"3.3 Pretérito imperfecto",
+   quote:"Estudiamos a personas que <mark>empezaban</mark> a notar fallos de memoria... quienes presentaban un mayor propósito vital <mark>obtenían</mark> mejores resultados cognitivos.",
+   rule:"Raíz + -aba/-ía... Describe estados, procesos en curso y circunstancias pasadas, sin foco en cuándo terminaron.",
+   items:[
+     {stem:"Las personas del estudio ______ (empezar) a notar pequeños fallos de memoria.", answers:["empezaban"]},
+     {stem:"Quienes tenían más propósito vital ______ (obtener) mejores resultados cognitivos.", answers:["obtenían"]},
+     {stem:"Antes, los científicos no ______ (saber) tanto sobre este factor protector.", answers:["sabían"]},
+     {stem:"De joven, mi abuelo siempre ______ (tener) proyectos nuevos.", answers:["tenía"]},
+     {stem:"Nosotros no ______ (conocer) el concepto de ikigai hasta hace poco.", answers:["conocíamos"]},
+     {stem:"Ella ______ (sentirse) útil cuidando de su comunidad.", answers:["se sentía"]}
+   ]},
+  {id:"g4", title:"3.4 Condicional simple",
+   quote:"La jubilación no <mark>debería</mark> entenderse como el final de una etapa activa. Un mayor propósito <mark>podría</mark> reducir el estrés crónico.",
+   rule:"Infinitivo completo + -ía,-ías,-ía,-íamos,-íais,-ían. Se usa para consejos, hipótesis suaves y especulaciones (deber, poder en condicional).",
+   items:[
+     {stem:"Según los expertos, la jubilación no ______ (deber) ser el final de la vida activa.", answers:["debería"]},
+     {stem:"Un mayor propósito vital ______ (poder) reducir el estrés crónico.", answers:["podría"]},
+     {stem:"Yo ______ (empezar) un nuevo proyecto si me jubilara pronto.", answers:["empezaría"]},
+     {stem:"¿Qué ______ (hacer) tú para mantener un propósito en la vida?", answers:["harías"]},
+     {stem:"Los mayores ______ (necesitar) más apoyo para encontrar nuevas actividades.", answers:["necesitarían"]},
+     {stem:"Nosotros ______ (recomendar) cultivar relaciones sociales a cualquier edad.", answers:["recomendaríamos"]}
+   ]},
+  {id:"g5", title:"3.5 Presente de subjuntivo",
+   quote:"Quizá cuidar el cerebro no <mark>consista</mark> únicamente en añadir años a la vida, sino también en seguir encontrando motivos para vivirlos con ilusión.",
+   rule:"Raíz de la 1ª persona del presente + vocal cambiada. Tras «quizá» / «tal vez» (duda o posibilidad) se usa subjuntivo. <b>Ошибка:</b> использовать indicativo после «quizá», когда речь идёт о неуверенности.",
+   items:[
+     {stem:"Quizá el secreto no ______ (estar) solo en la dieta, sino también en el propósito vital.", answers:["esté"]},
+     {stem:"Tal vez la clave ______ (ser) mantenerse activo física y mentalmente.", answers:["sea"]},
+     {stem:"Quizá muchas personas no ______ (saber) que el propósito protege el cerebro.", answers:["sepan"]},
+     {stem:"Tal vez la jubilación no ______ (representar) el final de nada.", answers:["represente"]},
+     {stem:"Quizá el voluntariado ______ (ayudar) más de lo que pensamos.", answers:["ayude"]},
+     {stem:"Tal vez nosotros ______ (necesitar) redefinir qué es el envejecimiento saludable.", answers:["necesitemos"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+var testList = document.getElementById("testList");
+
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"Según el artículo, ¿qué es el «PIL»?", opts:["una dieta saludable","un cuestionario de colesterol","el concepto de \"propósito en la vida\"","un tipo de demencia"], answer:2},
+    {q:"¿A partir de qué corriente se desarrolló el «test de propósito en la vida»?", opts:["el psicoanálisis","la logoterapia de Viktor Frankl","la neurología clásica","la terapia cognitivo-conductual"], answer:1},
+    {q:"¿Cuáles son las tres dimensiones del significado según el artículo?", opts:["física, social y económica","cognitiva, motivacional y afectiva","genética, ambiental y cultural","pasada, presente y futura"], answer:1},
+    {q:"¿Qué concepto japonés se menciona como similar al «propósito en la vida»?", opts:["kaizen","ikigai","wabi-sabi","omotenashi"], answer:1},
+    {q:"Según el estudio de 2022 de la Cátedra DeCo, ¿qué observaron en personas con mayor propósito vital?", opts:["mejores resultados cognitivos","menos actividad física","más aislamiento social","mayor riesgo de demencia"], answer:0},
+    {q:"¿Qué relación se menciona entre la actividad física y el propósito vital?", opts:["no tienen relación","las personas más activas muestran menos propósito","las personas más activas muestran mayor sentido de propósito","el propósito reduce las ganas de moverse"], answer:2}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"deterioro · respaldado/a · dotar · abarcar · cuantificar · fortalecerse · jubilación · sobresalir",
+  items:[
+    {stem:"Todos estos factores son conocidos protectores de demencia y ______ por la evidencia científica.", answers:["respaldados"]},
+    {stem:"El concepto de significado ______ tres dimensiones: cognitiva, motivacional y afectiva.", answers:["abarca"]},
+    {stem:"El test de propósito en la vida permite ______ hasta qué punto alguien percibe que su vida tiene sentido.", answers:["cuantificar"]},
+    {stem:"El propósito vital no es fijo: puede ______ a cualquier edad.", answers:["fortalecerse"]},
+    {stem:"La ______ no debería entenderse como el final de una etapa activa.", answers:["jubilación"]},
+    {stem:"Según los resultados, el propósito en la vida ______ por encima de otros factores psicológicos.", answers:["sobresale"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su definición",
+  words:["el deterioro","dotar de (algo)","el entramado","el envejecimiento"],
+  defs:["proceso de hacerse mayor","empeoramiento progresivo (de una capacidad o función)","conjunto de elementos interrelacionados que forman una estructura","proporcionar o llenar de algo (sentido, contenido)"],
+  answers:["b","d","c","a"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Definición</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena las ideas según aparecen en el artículo",
+  events:[
+    {text:"Se presentan los factores ya conocidos que protegen contra la demencia (dieta, ejercicio mental).", answer:1},
+    {text:"Se define qué es el «propósito en la vida» y se compara con el concepto de ikigai.", answer:2},
+    {text:"Se explica cómo se mide científicamente el propósito vital mediante cuestionarios.", answer:3},
+    {text:"Se describen los resultados de un estudio de 2022 sobre personas con fallos de memoria.", answer:4},
+    {text:"Se explica que el propósito puede cultivarse a cualquier edad, incluso tras la jubilación.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Convierte a estilo indirecto: El estudio concluyó: «El propósito en la vida sobresale por encima del resto.»", model:"El estudio concluyó que el propósito en la vida sobresalía por encima del resto."},
+    {stem:"Cambia del presente al pretérito perfecto compuesto: «Este concepto evoluciona constantemente.»", model:"Este concepto ha evolucionado constantemente."},
+    {stem:"Transforma en pregunta: «La jubilación debería ser una oportunidad para nuevos proyectos.»", model:"¿Debería ser la jubilación una oportunidad para nuevos proyectos?"},
+    {stem:"Cambia a la voz pasiva: «Los investigadores utilizan cuestionarios validados.»", model:"Los cuestionarios validados son utilizados por los investigadores."},
+    {stem:"Sustituye «mantener la mente activa» por una expresión sinónima, sin cambiar el sentido.", model:"Ejemplo: «ejercitar la mente» / «estimular el cerebro»."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «sobresalir»:", opts:["destacar","esconderse","desaparecer","empeorar"], answer:0},
+    {q:"Antónimo de «fortalecerse»:", opts:["reforzarse","debilitarse","crecer","mejorar"], answer:1},
+    {q:"Marca la palabra intrusa:", opts:["deterioro","declive","empeoramiento","fortalecimiento"], answer:3},
+    {q:"Completa la colocación: «______ un cuestionario»:", opts:["rellenar","cocinar","vestir","plantar"], answer:0},
+    {q:"«Abarcar» en este contexto es sinónimo de:", opts:["incluir","evitar","reducir","ignorar"], answer:0}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
