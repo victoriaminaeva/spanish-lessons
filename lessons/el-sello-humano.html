@@ -4,59 +4,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f3f2f7;
+  --bg:#fff8ca;
   --surface:#ffffff;
-  --surface-2:#ebe8f5;
-  --ink:#1b1a2b;
-  --muted:#6b6878;
-  --accent:#4b30d6;
-  --accent-ink:#ffffff;
-  --human:#c96a3e;
-  --good:#2f8f5b;
-  --good-bg:#e4f5ea;
-  --bad:#c1483f;
-  --bad-bg:#fbe9e7;
-  --border:#ddd9ea;
-  --mark:#dcd2fb;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --human:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#131120;
-    --surface:#1b1830;
-    --surface-2:#231f3c;
-    --ink:#ece9f7;
-    --muted:#a29dbd;
-    --accent:#9c86ff;
-    --accent-ink:#150f30;
-    --human:#f0a074;
-    --good:#6fcf97;
-    --good-bg:#1e3327;
-    --bad:#e2837b;
-    --bad-bg:#3a2320;
-    --border:#322c4a;
-    --mark:#352a5c;
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --human:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#35494c;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#131120;
-  --surface:#1b1830;
-  --surface-2:#231f3c;
-  --ink:#ece9f7;
-  --muted:#a29dbd;
-  --accent:#9c86ff;
-  --accent-ink:#150f30;
-  --human:#f0a074;
-  --good:#6fcf97;
-  --good-bg:#1e3327;
-  --bad:#e2837b;
-  --bad-bg:#3a2320;
-  --border:#322c4a;
-  --mark:#352a5c;
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --human:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#35494c;
 }
 *{box-sizing:border-box;}
 img{max-width:100%;}
@@ -65,14 +65,14 @@ html,body{margin:0;}
 body{
   background:var(--bg);
   color:var(--ink);
-  font-family:"Work Sans", system-ui, -apple-system, sans-serif;
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
   font-size:16px;
   line-height:1.6;
   padding-inline:20px;
   padding-block:0 48px;
 }
 .wrap{max-width:720px;margin:0 auto;}
-h1,h2,h3{font-family:"Newsreader", Georgia, serif; text-wrap:balance;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance;}
 a{color:var(--accent);}
 
 .topbar{
@@ -131,7 +131,7 @@ h2{font-size:23px; margin:0; color:var(--ink); font-weight:600;}
   padding:14px 16px; page-break-inside:avoid;
 }
 .vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
-.vocab-term{font-family:"Newsreader", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
 .vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
 .vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
 .vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
@@ -161,7 +161,7 @@ h2{font-size:23px; margin:0; color:var(--ink); font-weight:600;}
   padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
 }
 .ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
-.ex-title{font-family:"Newsreader", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
 .ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
 .ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
 .rule-box{background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:12px;}

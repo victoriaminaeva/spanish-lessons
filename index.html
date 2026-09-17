@@ -7,38 +7,40 @@
 <meta name="description" content="Talleres interactivos de español (A2–B1) basados en artículos reales, con corrección automática.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#faf8f4;
+  --bg:#fff8ca;
   --surface:#ffffff;
-  --surface-2:#eef2f0;
-  --ink:#201f1c;
-  --muted:#666057;
-  --accent:#2d5f5b;
-  --accent-ink:#ffffff;
-  --border:#e2ddd2;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --pop:#d9761f;
+  --border:#ecd98a;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#171512;
-    --surface:#201d19;
-    --surface-2:#262320;
-    --ink:#f1ede6;
-    --muted:#b3aca1;
-    --accent:#7fc9c1;
-    --accent-ink:#0f1f1d;
-    --border:#3a352d;
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --pop:#f2a544;
+    --border:#4a2a1e;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#171512; --surface:#201d19; --surface-2:#262320; --ink:#f1ede6;
-  --muted:#b3aca1; --accent:#7fc9c1; --accent-ink:#0f1f1d; --border:#3a352d;
+  --bg:#2d120d; --surface:#3a1a14; --surface-2:#452019; --ink:#fff8ca;
+  --muted:#d9c58f; --accent:#ef6b52; --accent-ink:#2d120d; --pop:#f2a544; --border:#4a2a1e;
 }
 *{box-sizing:border-box;}
 body{
   margin:0; background:var(--bg); color:var(--ink);
-  font-family:"Work Sans", system-ui, sans-serif; line-height:1.6;
+  font-family:"Public Sans", system-ui, sans-serif; line-height:1.6;
   padding-inline:20px; padding-block:0 60px;
 }
 .wrap{max-width:760px; margin:0 auto;}
@@ -56,8 +58,9 @@ h1{font-size:clamp(28px,5vw,38px); margin:0 0 10px;}
 .card-top{display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap;}
 .card-title{font-family:"Fraunces", serif; font-weight:600; font-size:19px; color:var(--ink);}
 .level{
-  font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase;
-  background:var(--surface-2); color:var(--accent); border-radius:999px; padding:3px 10px;
+  font-family:"Space Mono", monospace;
+  font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  background:var(--surface-2); color:var(--pop); border-radius:999px; padding:3px 10px;
   white-space:nowrap;
 }
 .card-desc{color:var(--muted); font-size:14.5px; margin-top:8px;}
