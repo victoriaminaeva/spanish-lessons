@@ -114,6 +114,18 @@ h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
   background:var(--surface-2); border-left:3px solid var(--accent);
   border-radius:8px; padding:14px 16px; font-size:14.5px;
 }
+details.source-more{
+  margin:10px 0 16px; background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:10px 14px;
+}
+details.source-more summary{
+  cursor:pointer; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  color:var(--gold); letter-spacing:.03em;
+}
+details.source-more[open] summary{ margin-bottom:8px; }
+.source-more-body{ font-size:14px; }
+.source-more-cite{ font-size:12px; color:var(--muted); margin-top:8px; }
+.source-more-cite a{ color:var(--accent); }
 
 section{margin-top:52px;}
 .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
@@ -256,6 +268,13 @@ footer{
   <h1>La Fórmula 1 vuelve a Madrid después de 45 años</h1>
   <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
   <p class="meta"><b>Fuente:</b> Infobae — «(Previa) Madrid vuelve a vibrar con la Fórmula 1 después de casi medio siglo», 13/09/2026</p>
+  <details class="source-more">
+    <summary>Leer más sobre la fuente</summary>
+    <div class="source-more-body">
+      <p>El artículo cuenta que la Fórmula 1 vuelve a Madrid después de 45 años: la última carrera en la capital fue en 1981, en el circuito del Jarama, y la ganó Gilles Villeneuve. Ahora, el nuevo circuito urbano Madring será sede del decimocuarto Gran Premio de la temporada 2026, con capacidad para 350.000 espectadores a lo largo del fin de semana. En el Mundial, el piloto Kimi Antonelli (Mercedes) llega como líder con 267 puntos, tras una gran remontada de 18 posiciones en Monza; su compañero George Russell le sigue con 201. Como Madring es un trazado completamente nuevo para casi todos los equipos —solo Ferrari pudo hacer un test privado antes—, hay mucha incertidumbre sobre qué estrategias y neumáticos funcionarán mejor. El texto también se fija en los pilotos españoles: Carlos Sainz (Williams) y Fernando Alonso (Aston Martin) disputan su segundo Gran Premio "de casa" de la temporada, aunque las expectativas de puntuar son bajas, pese a que Alonso ve alguna oportunidad. Por último, repasa la forma reciente de los equipos: Mercedes parece tener el motor más fuerte, McLaren tuvo un rendimiento flojo en Italia, y Ferrari podría beneficiarse de haber probado antes el nuevo circuito madrileño.</p>
+      <p class="source-more-cite">Resumen elaborado a partir del artículo original (no se reproduce su texto) — <a href="https://www.infobae.com/america/agencias/2026/09/10/previa-madrid-vuelve-a-vibrar-con-la-formula-1-despues-de-casi-medio-siglo/" target="_blank" rel="noopener">leer el artículo completo en Infobae</a>.</p>
+    </div>
+  </details>
   <div class="summary">
     <b>De qué trata:</b> la Fórmula 1 regresa a Madrid 45 años después de la última carrera en el Circuito del Jarama (1981), esta vez en el nuevo circuito urbano de Madring. El líder del Mundial, Kimi Antonelli, llega como favorito tras ganar en Monza, mientras los pilotos españoles Fernando Alonso y Carlos Sainz afrontan su segundo Gran Premio de casa de la temporada.
   </div>

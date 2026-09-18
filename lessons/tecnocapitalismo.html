@@ -114,6 +114,18 @@ h1{font-size:clamp(27px,5vw,38px); margin:0 0 8px; color:var(--ink);}
   background:var(--surface-2); border-left:3px solid var(--accent);
   border-radius:8px; padding:14px 16px; font-size:14.5px;
 }
+details.source-more{
+  margin:10px 0 16px; background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:10px 14px;
+}
+details.source-more summary{
+  cursor:pointer; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  color:var(--gold); letter-spacing:.03em;
+}
+details.source-more[open] summary{ margin-bottom:8px; }
+.source-more-body{ font-size:14px; }
+.source-more-cite{ font-size:12px; color:var(--muted); margin-top:8px; }
+.source-more-cite a{ color:var(--accent); }
 
 section{margin-top:52px;}
 .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
@@ -256,6 +268,13 @@ footer{
   <h1>Tecnocapitalismo y las nuevas estructuras de poder</h1>
   <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
   <p class="meta"><b>Fuente:</b> The Conversation — Víctor Climent Sanjuán, Universitat de Barcelona — «Tecnocapitalismo: así está cambiando la tecnología las estructuras de poder en el mundo»</p>
+  <details class="source-more">
+    <summary>Leer más sobre la fuente</summary>
+    <div class="source-more-body">
+      <p>El autor sostiene que la Cuarta Revolución Industrial —inteligencia artificial, robótica y digitalización— ha creado un nuevo sistema al que llama "tecnocapitalismo", donde el poder y la riqueza dependen cada vez menos del dinero o las fábricas, y cada vez más de los datos, los algoritmos y las plataformas de IA. Según el artículo, esto está sustituyendo a la antigua clase dominante de la globalización financiera por nuevos magnates tecnológicos, dueños de grandes empresas de software e IA, que acumulan poder sin necesidad de ser propietarios mayoritarios en el sentido tradicional. El autor señala que muchos de estos líderes tecnológicos en Estados Unidos están vinculados políticamente al trumpismo y a la extrema derecha, y promueven ideas poco democráticas sobre cómo debería organizarse la sociedad. Otro punto central: empresas privadas de tecnología empiezan a gestionar funciones que antes eran del Estado, como inteligencia o defensa, trasladando parte de la soberanía pública a consejos de administración privados. El artículo describe también cómo estas plataformas moldean la opinión pública mediante redes y algoritmos, sobre todo entre los más jóvenes. Su conclusión: solo con una regulación pública fuerte de estos algoritmos será posible que la tecnología beneficie a toda la sociedad, y no solo a unos pocos.</p>
+      <p class="source-more-cite">Resumen elaborado a partir del artículo original (no se reproduce su texto) — <a href="https://theconversation.com/tecnocapitalismo-asi-esta-cambiando-la-tecnologia-las-estructuras-de-poder-en-el-mundo-288028" target="_blank" rel="noopener">leer el artículo completo en The Conversation</a>.</p>
+    </div>
+  </details>
   <div class="summary">
     <b>De qué trata:</b> la Cuarta Revolución Industrial (IA, algoritmos, plataformas) está dando lugar al "tecnocapitalismo", un modelo en el que grandes magnates tecnológicos sustituyen a las viejas élites y acumulan poder sobre la gobernanza, la seguridad y hasta las guerras. El artículo analiza el "tecnoautoritarismo" y sus riesgos para las democracias.
   </div>

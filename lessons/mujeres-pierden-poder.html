@@ -116,6 +116,18 @@ h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
   background:var(--surface-2); border-left:3px solid var(--accent);
   border-radius:8px; padding:14px 16px; font-size:14.5px;
 }
+details.source-more{
+  margin:10px 0 16px; background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:10px 14px;
+}
+details.source-more summary{
+  cursor:pointer; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  color:var(--gold); letter-spacing:.03em;
+}
+details.source-more[open] summary{ margin-bottom:8px; }
+.source-more-body{ font-size:14px; }
+.source-more-cite{ font-size:12px; color:var(--muted); margin-top:8px; }
+.source-more-cite a{ color:var(--accent); }
 
 /* ---- section shell ---- */
 section{margin-top:52px;}
@@ -262,6 +274,13 @@ footer{
   <h1>Las mujeres pierden poder en el mundo</h1>
   <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
   <p class="meta"><b>Fuente:</b> El País — «Las mujeres pierden poder en un mundo cada vez más hostil a la igualdad, según la ONU»</p>
+  <details class="source-more">
+    <summary>Leer más sobre la fuente</summary>
+    <div class="source-more-body">
+      <p>Según el informe de ONU Mujeres en el que se basa esta noticia, una de cada tres instituciones públicas dedicadas a defender los derechos de las mujeres ha sufrido debilitamiento o recortes de presupuesto desde 2024. La ayuda internacional para programas de igualdad de género bajó un 13% entre 2023 y 2024, y la financiación específica para organizaciones de derechos de las mujeres cayó un 28%. A nivel mundial, seis de cada siete países están dirigidos por hombres, y las mujeres ocupan solo el 22% de los ministerios, un porcentaje que además ha bajado en los últimos años. El informe insiste en que dar a las mujeres un puesto no significa automáticamente que tengan poder real para decidir sobre economía o seguridad. En América Latina, las mujeres son el 32,6% de los cargos en órganos locales, pero solo ocupan el 16,6% de las alcaldías, y ocho de cada diez candidatas a un parlamento sufren algún tipo de violencia durante la campaña. Un millón de mujeres y niñas perdieron acceso a servicios básicos por los recortes de ayuda internacional. Al ritmo actual, la ONU calcula que harían falta 171 años para lograr la igualdad de género en el mundo, aunque destaca que las cuotas electorales bien diseñadas sí funcionan.</p>
+      <p class="source-more-cite">Resumen elaborado a partir del informe de ONU Mujeres (no se reproduce el texto de El País ni la nota exacta consultada por no haber podido verificar su URL) — <a href="https://news.un.org/es/story/2026/09/1541920" target="_blank" rel="noopener">leer la cobertura de Noticias ONU sobre el informe</a>.</p>
+    </div>
+  </details>
   <div class="summary">
     <b>De qué trata:</b> el informe anual de ONU Mujeres alerta de un retroceso del liderazgo femenino en la política, la justicia y las empresas en muchos países. Al ritmo actual, la igualdad de género no se alcanzaría hasta el año 2197. El texto explica las causas de este retroceso (violencia política, crisis de financiación, auge de movimientos antifeministas) y propone soluciones, como reforzar las cuotas de género.
   </div>

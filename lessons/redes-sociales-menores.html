@@ -114,6 +114,18 @@ h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
   background:var(--surface-2); border-left:3px solid var(--accent);
   border-radius:8px; padding:14px 16px; font-size:14.5px;
 }
+details.source-more{
+  margin:10px 0 16px; background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:10px 14px;
+}
+details.source-more summary{
+  cursor:pointer; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  color:var(--gold); letter-spacing:.03em;
+}
+details.source-more[open] summary{ margin-bottom:8px; }
+.source-more-body{ font-size:14px; }
+.source-more-cite{ font-size:12px; color:var(--muted); margin-top:8px; }
+.source-more-cite a{ color:var(--accent); }
 
 section{margin-top:52px;}
 .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
@@ -256,6 +268,13 @@ footer{
   <h1>La UE quiere prohibir las redes sociales a menores de 13 años</h1>
   <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
   <p class="meta"><b>Fuente:</b> Catalunya Press — «Así es el plan de la UE para restringir las redes sociales a menores de 15 años», 16/09/2026</p>
+  <details class="source-more">
+    <summary>Leer más sobre la fuente</summary>
+    <div class="source-more-body">
+      <p>La presidenta de la Comisión Europea, Ursula von der Leyen, presentó una propuesta legislativa conocida como "Ley del Niño" europea (EU Kids Act), pensada para toda la Unión Europea. La ley plantea un modelo progresivo según la edad: los menores de 13 años no podrán acceder de ninguna forma a las redes sociales; entre los 13 y los 15 años podrán tener "minicuentas" con supervisión y configuración de los padres; y a partir de los 15, el acceso será libre, aunque las plataformas deberán ofrecer un diseño con seguridad reforzada hasta que el usuario cumpla 18 años. Von der Leyen justificó la medida por "la necesidad de frenar los riesgos por la falta de control de las plataformas digitales", y explicó que responde también a peticiones de países como Francia y España. El artículo señala que España tramita en paralelo una ley nacional todavía más estricta, que subiría la edad mínima hasta los 16 años para plataformas con contenidos potencialmente dañinos, y obligaría a las tecnológicas a certificar ante la CNMC que no usan algoritmos diseñados para crear adicción. La Comisión Europea prepara además otra normativa complementaria, la Ley de Equidad Digital, centrada en combatir esos mecanismos adictivos para toda la población, no solo para menores.</p>
+      <p class="source-more-cite">Resumen elaborado a partir del artículo original (no se reproduce su texto) — <a href="https://www.catalunyapress.es/articulo/sociedad/2026-09-16/6016910-union-europea-restringira-acceso-redes-sociales-menores-13-anos-exigira-control-parental-hasta-15" target="_blank" rel="noopener">leer el artículo completo en Catalunya Press</a>.</p>
+    </div>
+  </details>
   <div class="summary">
     <b>De qué trata:</b> Ursula von der Leyen presentó la futura "Ley del Niño" europea (EU Kids Act): veto total de redes sociales antes de los 13 años, minicuentas supervisadas por los padres entre los 13 y los 15, y diseño con seguridad reforzada hasta los 18. España tramita en paralelo una ley aún más restrictiva, que eleva la edad mínima hasta los 16 años.
   </div>

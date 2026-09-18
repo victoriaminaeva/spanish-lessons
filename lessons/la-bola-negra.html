@@ -116,6 +116,18 @@ h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
   background:var(--surface-2); border-left:3px solid var(--accent);
   border-radius:8px; padding:14px 16px; font-size:14.5px;
 }
+details.source-more{
+  margin:10px 0 16px; background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:10px 14px;
+}
+details.source-more summary{
+  cursor:pointer; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  color:var(--gold); letter-spacing:.03em;
+}
+details.source-more[open] summary{ margin-bottom:8px; }
+.source-more-body{ font-size:14px; }
+.source-more-cite{ font-size:12px; color:var(--muted); margin-top:8px; }
+.source-more-cite a{ color:var(--accent); }
 
 /* ---- section shell ---- */
 section{margin-top:52px;}
@@ -262,6 +274,13 @@ footer{
   <h1>La bola negra: España en la carrera de los Oscar</h1>
   <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
   <p class="meta"><b>Fuente:</b> El País, Gregorio Belinchón — «'La bola negra' entra en la carrera de los Oscar con una expectación insólita y la campaña más grande de la historia del cine español»</p>
+  <details class="source-more">
+    <summary>Leer más sobre la fuente</summary>
+    <div class="source-more-body">
+      <p>La Academia de Cine española ha elegido oficialmente "La bola negra", dirigida por Los Javis (Javier Calvo y Javier Ambrossi), como la película que representará a España en la carrera por el Oscar a Mejor Película Internacional. La cinta, muy aclamada en el Festival de Cannes —donde compartió el premio a Mejor Dirección—, fue seleccionada frente a otras dos finalistas españolas: "Los domingos", de Alauda Ruiz de Azúa, y "El ser querido", protagonizada por Javier Bardem. Está protagonizada por Lola Dueñas, con la colaboración especial de Penélope Cruz (pareja de Bardem en la vida real) y de Glenn Close. La historia, inspirada en una obra inacabada de Federico García Lorca, cuenta tres momentos de la comunidad LGTBIQ+ en España: 1932, 1937 (Guerra Civil) y 2017. Antes de una nominación real, debe pasar dos filtros más: el 15 de diciembre se anunciará una lista corta de 15 películas, y el 21 de enero de 2027 se conocerán las cinco nominadas definitivas; la ceremonia será el 14 de marzo de 2027. España no gana este premio desde 2005, cuando Alejandro Amenábar lo consiguió con "Mar adentro". Penélope Cruz destacó que el cine, con historias como esta, puede ayudar a "reactivar debates importantes" en la sociedad.</p>
+      <p class="source-more-cite">Resumen elaborado a partir de la cobertura del anuncio (no se reproduce el texto de El País, que puede estar sujeto a suscripción) — <a href="https://eldiariony.com/2026/09/16/premios-oscar-la-bola-negra-es-oficialmente-elegida-para-representar-a-espana-como-candidata-a-mejor-pelicula-internacional/" target="_blank" rel="noopener">leer una cobertura de acceso libre en El Diario NY</a>.</p>
+    </div>
+  </details>
   <div class="summary">
     <b>De qué trata:</b> la Academia de Cine española eligió «La bola negra» (Javier Calvo y Javier Ambrossi) como representante de España en los Oscar a mejor película internacional. Variety y The Hollywood Reporter auguran entre 7 y 14 nominaciones, y Netflix invertirá unos 20 millones de euros en la campaña. En el reparto están Penélope Cruz y Glenn Close.
   </div>

@@ -114,6 +114,18 @@ h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
   background:var(--surface-2); border-left:3px solid var(--accent);
   border-radius:8px; padding:14px 16px; font-size:14.5px;
 }
+details.source-more{
+  margin:10px 0 16px; background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:10px 14px;
+}
+details.source-more summary{
+  cursor:pointer; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  color:var(--gold); letter-spacing:.03em;
+}
+details.source-more[open] summary{ margin-bottom:8px; }
+.source-more-body{ font-size:14px; }
+.source-more-cite{ font-size:12px; color:var(--muted); margin-top:8px; }
+.source-more-cite a{ color:var(--accent); }
 
 section{margin-top:52px;}
 .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
@@ -256,6 +268,13 @@ footer{
   <h1>300 euros al mes para el alquiler de los jóvenes</h1>
   <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
   <p class="meta"><b>Fuente:</b> Que.es — «La ayuda al alquiler para jóvenes: 300 euros al mes para menores de 35, ya en vigor», 09/09/2026</p>
+  <details class="source-more">
+    <summary>Leer más sobre la fuente</summary>
+    <div class="source-more-body">
+      <p>El nuevo Plan Estatal de Vivienda 2026-2030, en vigor desde abril, ofrece hasta 300 euros al mes para el alquiler a personas menores de 35 años. Según el artículo, esta cantidad no es un cheque fijo para todo el mundo: cubre como máximo el 60% de la renta mensual, con un tope de 300 euros para una vivienda completa o de 200 euros para una habitación, y el alquiler no puede superar los 1.000 euros al mes. Para pedirla, hay que ser mayor de edad, tener como máximo 35 años, unos ingresos anuales de alrededor de 42.000 euros o menos, y no ser propietario de otra vivienda (salvo excepciones concretas). El texto recuerda por qué esta ayuda es tan necesaria: solo el 14,5% de los jóvenes españoles vive fuera de casa de sus padres, y el alquiler medio se lleva un 98,7% del salario medio joven. Aclara también que el País Vasco y Navarra tienen su propio sistema de vivienda y no aplican este plan estatal, y que cada comunidad autónoma gestiona de forma independiente los plazos y trámites, así que conviene informarse en cada región. Por último, advierte de que en las grandes ciudades, donde los alquileres son más caros, muchos jóvenes quedan fuera de estos límites de renta.</p>
+      <p class="source-more-cite">Resumen elaborado a partir del artículo original (no se reproduce su texto) — <a href="https://www.que.es/2026/09/09/ayuda-alquiler-jovenes-300-euros" target="_blank" rel="noopener">leer el artículo completo en Que.es</a>.</p>
+    </div>
+  </details>
   <div class="summary">
     <b>De qué trata:</b> el Plan Estatal de Vivienda 2026-2030 permite a los jóvenes de hasta 35 años solicitar hasta 300 euros al mes para el alquiler (200 para una habitación), cubriendo como máximo el 60% de la renta. El artículo explica los requisitos, los límites de ingresos y de precio del alquiler, y recuerda que la gestión depende de cada comunidad autónoma.
   </div>

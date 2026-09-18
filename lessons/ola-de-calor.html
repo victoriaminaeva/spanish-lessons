@@ -114,6 +114,18 @@ h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
   background:var(--surface-2); border-left:3px solid var(--accent);
   border-radius:8px; padding:14px 16px; font-size:14.5px;
 }
+details.source-more{
+  margin:10px 0 16px; background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:10px 14px;
+}
+details.source-more summary{
+  cursor:pointer; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  color:var(--gold); letter-spacing:.03em;
+}
+details.source-more[open] summary{ margin-bottom:8px; }
+.source-more-body{ font-size:14px; }
+.source-more-cite{ font-size:12px; color:var(--muted); margin-top:8px; }
+.source-more-cite a{ color:var(--accent); }
 
 section{margin-top:52px;}
 .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
@@ -256,6 +268,13 @@ footer{
   <h1>España registra 61 días de ola de calor en 2026</h1>
   <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
   <p class="meta"><b>Fuente:</b> Ministerio para la Transición Ecológica (AEMET) — «España registra 61 días bajo ola de calor en 2026, más que en ningún otro año», 09/09/2026</p>
+  <details class="source-more">
+    <summary>Leer más sobre la fuente</summary>
+    <div class="source-more-body">
+      <p>España vivió en 2026 el verano más caluroso de su historia reciente: se registraron 61 días bajo ola de calor, muy por encima de los 41 días del anterior récord, en 2022. La temperatura media del verano llegó a 24,5°C, el valor más alto desde que existen registros fiables (1961), 0,3°C más que el verano de 2025, hasta entonces el más cálido conocido. El calor extremo no llegó de una sola vez, sino en cuatro episodios: uno en junio, que afectó a 42 provincias; otro en julio, el más intenso de todos; un tercero que unió julio y agosto; y un cuarto ya en septiembre. Los episodios de julio y agosto fueron el tercero y el segundo más largos desde 1975, con 23 y 24 días de duración respectivamente. Lo más llamativo es que el calor extremo se salió de las fechas típicas del verano: hubo temperaturas propias de pleno verano ya en mayo, y una ola de calor adicional en septiembre. En Canarias, además, se dio un episodio extra en agosto. El comunicado concluye recordando que los diez veranos más calurosos registrados en España han ocurrido todos en lo que va del siglo XXI.</p>
+      <p class="source-more-cite">Resumen elaborado a partir del comunicado original (no se reproduce su texto) — <a href="https://www.miteco.gob.es/es/prensa/ultimas-noticias/2026/septiembre/espana-registra-61-dias-bajo-ola-de-calor-en-2026--mas-que-en-ni.html" target="_blank" rel="noopener">leer el comunicado completo del Ministerio</a>.</p>
+    </div>
+  </details>
   <div class="summary">
     <b>De qué trata:</b> AEMET confirma que el verano de 2026 ha sido el más cálido de la serie histórica en España (desde 1961), con una temperatura media de 24,5 °C. España sumó 61 días bajo ola de calor, repartidos en cuatro episodios, superando con creces el anterior récord de 2022 (41 días). El calor extremo se extendió incluso a mayo y septiembre.
   </div>

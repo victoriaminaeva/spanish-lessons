@@ -114,6 +114,18 @@ h1{font-size:clamp(27px,5vw,38px); margin:0 0 8px; color:var(--ink);}
   background:var(--surface-2); border-left:3px solid var(--accent);
   border-radius:8px; padding:14px 16px; font-size:14.5px;
 }
+details.source-more{
+  margin:10px 0 16px; background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:10px 14px;
+}
+details.source-more summary{
+  cursor:pointer; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  color:var(--gold); letter-spacing:.03em;
+}
+details.source-more[open] summary{ margin-bottom:8px; }
+.source-more-body{ font-size:14px; }
+.source-more-cite{ font-size:12px; color:var(--muted); margin-top:8px; }
+.source-more-cite a{ color:var(--accent); }
 
 section{margin-top:52px;}
 .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
@@ -256,6 +268,13 @@ footer{
   <h1>Como pez en el agua: la amistad digital</h1>
   <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
   <p class="meta"><b>Fuente:</b> The Conversation — Johanna Pérez Daza, Universidad Católica Andrés Bello — «Como pez en el agua: la amistad en el hábitat digital» (publicado originalmente en la revista Telos, Fundación Telefónica)</p>
+  <details class="source-more">
+    <summary>Leer más sobre la fuente</summary>
+    <div class="source-more-body">
+      <p>La autora parte de una idea de Marshall McLuhan (1969): a veces no vemos las cosas que nos rodean, como un pez no percibe el agua donde nada. Según ella, algo parecido pasa hoy con los adolescentes y la tecnología: para ellos, el móvil e internet no son "herramientas extra", sino el lugar natural donde viven sus amistades. El artículo describe cómo los jóvenes usan emojis, stickers, avatares y videollamadas como un verdadero lenguaje emocional. Un ejemplo central son las "rachas" (streaks) de TikTok: dos amigos deben mandarse un mensaje cada día para no romperlas, lo que crea una rutina de lealtad y atención constante. La autora no idealiza este mundo digital: también señala riesgos, como el ciberacoso o la discriminación entre grupos de amigos online. Cita además al sociólogo Zygmunt Bauman, para quien las relaciones actuales pueden volverse más frágiles y superficiales ("modernidad líquida"), aunque este efecto varía mucho según la generación. Su conclusión: no usar estas herramientas digitales puede significar quedar fuera de un grupo social, porque hoy la tecnología es casi una condición para pertenecer a una comunidad de amigos.</p>
+      <p class="source-more-cite">Resumen elaborado a partir del artículo original (no se reproduce su texto) — <a href="https://theconversation.com/como-pez-en-el-agua-la-amistad-en-el-habitat-digital-292150" target="_blank" rel="noopener">leer el artículo completo en The Conversation</a>.</p>
+    </div>
+  </details>
   <div class="summary">
     <b>De qué trata:</b> para los adolescentes de hoy, la tecnología no es solo un medio, sino el propio "hábitat" donde nacen y crecen las amistades: emojis, videollamadas, retos virales o las "rachas" de TikTok. El artículo explora cómo se construyen estos vínculos digitales, sus riesgos (ciberacoso) y la idea de la "sociedad líquida" de Zygmunt Bauman.
   </div>

@@ -114,6 +114,18 @@ h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
   background:var(--surface-2); border-left:3px solid var(--accent);
   border-radius:8px; padding:14px 16px; font-size:14.5px;
 }
+details.source-more{
+  margin:10px 0 16px; background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:10px 14px;
+}
+details.source-more summary{
+  cursor:pointer; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  color:var(--gold); letter-spacing:.03em;
+}
+details.source-more[open] summary{ margin-bottom:8px; }
+.source-more-body{ font-size:14px; }
+.source-more-cite{ font-size:12px; color:var(--muted); margin-top:8px; }
+.source-more-cite a{ color:var(--accent); }
 
 section{margin-top:52px;}
 .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
@@ -256,6 +268,13 @@ footer{
   <h1>Masificación turística y migratoria</h1>
   <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
   <p class="meta"><b>Fuente:</b> Última Hora (Palma), Julio Martínez — «Masificación turística y migratoria», Opinión/Tribuna, 09/09/2026</p>
+  <details class="source-more">
+    <summary>Leer más sobre la fuente</summary>
+    <div class="source-more-body">
+      <p>El autor de esta columna de opinión defiende que la preocupación de muchos europeos por la inmigración irregular es legítima, y que tratarla automáticamente como "racismo" impide resolver problemas reales de gestión. Pone como ejemplo la crisis migratoria de Ceuta, que mostró los límites de los sistemas de acogida ante situaciones excepcionales. En paralelo, señala que ciudades como Barcelona, Venecia o Palma sufren tensiones muy parecidas por el turismo masivo: presión sobre el espacio público, infraestructuras saturadas y subida de precios de la vivienda. Según el autor, el debate público sobre ambos temas está demasiado polarizado: cualquier crítica al turismo se etiqueta de "turismofobia", y cualquier preocupación sobre inmigración se etiqueta de discriminación, lo que impide un análisis sereno. Su argumento central es que la solución no está en rechazar el turismo o la inmigración, sino en gestionarlos mejor, para aprovechar sus beneficios y reducir sus efectos negativos. Pone como ejemplo Mallorca, donde sectores clave —hostelería, construcción, agricultura— dependen totalmente del trabajo de personas inmigrantes para funcionar. Concluye que reconocer los beneficios reales de la inmigración es compatible con pedir una gestión más ordenada y una integración basada en valores democráticos comunes.</p>
+      <p class="source-more-cite">Resumen elaborado a partir del artículo original (no se reproduce su texto) — <a href="https://www.ultimahora.es/opinion/tribuna/2026/09/09/2704685/masificacion-turistica-migratoria.html" target="_blank" rel="noopener">leer la columna completa en Última Hora</a>.</p>
+    </div>
+  </details>
   <div class="summary">
     <b>De qué trata:</b> el autor compara dos debates muy polarizados en España: la masificación turística (protestas en Barcelona, Palma y otras ciudades) y la masificación migratoria (el caso de Ceuta). Defiende que se puede reconocer los beneficios del turismo y de la inmigración para la economía de Baleares y, al mismo tiempo, pedir una mejor gestión de ambos fenómenos, sin recurrir a etiquetas como "turismofóbico" o "racista".
   </div>

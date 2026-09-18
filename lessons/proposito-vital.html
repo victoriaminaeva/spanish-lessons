@@ -114,6 +114,18 @@ h1{font-size:clamp(28px,5vw,42px); margin:0 0 8px; color:var(--ink);}
   background:var(--surface-2); border-left:3px solid var(--accent);
   border-radius:8px; padding:14px 16px; font-size:14.5px;
 }
+details.source-more{
+  margin:10px 0 16px; background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:10px 14px;
+}
+details.source-more summary{
+  cursor:pointer; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  color:var(--gold); letter-spacing:.03em;
+}
+details.source-more[open] summary{ margin-bottom:8px; }
+.source-more-body{ font-size:14px; }
+.source-more-cite{ font-size:12px; color:var(--muted); margin-top:8px; }
+.source-more-cite a{ color:var(--accent); }
 
 section{margin-top:52px;}
 .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
@@ -256,6 +268,13 @@ footer{
   <h1>Un propósito en la vida protege el cerebro</h1>
   <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
   <p class="meta"><b>Fuente:</b> The Conversation — Lucrecia Moreno Royo, Universidad CEU Cardenal Herrera — «Tener un propósito en la vida también ayuda a mantener la salud cerebral»</p>
+  <details class="source-more">
+    <summary>Leer más sobre la fuente</summary>
+    <div class="source-more-body">
+      <p>La autora explica que tener un propósito en la vida —sentir que la propia vida tiene sentido y dirección— puede proteger el cerebro casi tanto como hacer ejercicio mental o controlar la tensión arterial. Este "propósito vital" no depende de la edad, del dinero ni del estado de salud de cada persona. Según varios estudios citados, quienes tienen un propósito claro presentan menos riesgo de deterioro cognitivo, de depresión e incluso de mortalidad prematura. La autora propone varios mecanismos posibles: un propósito fuerte reduciría el estrés crónico, mejoraría la regulación hormonal, disminuiría la inflamación y aumentaría la llamada "reserva cognitiva", la capacidad del cerebro para compensar los cambios del envejecimiento. Para medirlo, los investigadores usan cuestionarios inspirados en la logoterapia del psiquiatra Viktor Frankl. Como ejemplo, cita un estudio de 2022 con personas que empezaban a tener fallos de memoria: quienes tenían mayor sentido de propósito obtenían mejores resultados en las pruebas cognitivas. Un punto clave del artículo es que el propósito no es fijo de nacimiento, sino que se puede cultivar: haciendo voluntariado, aprendiendo cosas nuevas, cuidando las relaciones sociales o participando en la comunidad. La autora concluye que el propósito vital debería considerarse un pilar más, junto al ejercicio físico, para un envejecimiento saludable.</p>
+      <p class="source-more-cite">Resumen elaborado a partir del artículo original (no se reproduce su texto) — <a href="https://theconversation.com/tener-un-proposito-en-la-vida-tambien-ayuda-a-mantener-la-salud-cerebral-289110" target="_blank" rel="noopener">leer el artículo completo en The Conversation</a>.</p>
+    </div>
+  </details>
   <div class="summary">
     <b>De qué trata:</b> además de la dieta sana o el ejercicio mental, tener un propósito en la vida (sentir que la propia existencia tiene sentido y dirección) parece proteger el cerebro y reducir el riesgo de deterioro cognitivo. El concepto se acerca al <i>ikigai</i> japonés y puede medirse con cuestionarios validados. La buena noticia: puede cultivarse a cualquier edad, incluso después de la jubilación.
   </div>

@@ -114,6 +114,18 @@ h1{font-size:clamp(27px,5vw,38px); margin:0 0 8px; color:var(--ink);}
   background:var(--surface-2); border-left:3px solid var(--accent);
   border-radius:8px; padding:14px 16px; font-size:14.5px;
 }
+details.source-more{
+  margin:10px 0 16px; background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:10px 14px;
+}
+details.source-more summary{
+  cursor:pointer; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  color:var(--gold); letter-spacing:.03em;
+}
+details.source-more[open] summary{ margin-bottom:8px; }
+.source-more-body{ font-size:14px; }
+.source-more-cite{ font-size:12px; color:var(--muted); margin-top:8px; }
+.source-more-cite a{ color:var(--accent); }
 
 section{margin-top:52px;}
 .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
@@ -256,6 +268,13 @@ footer{
   <h1>¿Cómo de sostenibles son los bioplásticos?</h1>
   <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
   <p class="meta"><b>Fuente:</b> The Conversation — Gumersindo Feijoo Costa, Universidade de Santiago de Compostela — «¿Cómo de sostenibles son los bioplásticos?»</p>
+  <details class="source-more">
+    <summary>Leer más sobre la fuente</summary>
+    <div class="source-more-body">
+      <p>El artículo empieza señalando el problema de los plásticos tradicionales: generan muchísimos residuos, no se degradan de forma natural y su reciclaje sigue siendo insuficiente. Como alternativa, el autor presenta los bioplásticos: materiales con propiedades parecidas a los plásticos normales, pero fabricados a partir de materias primas biológicas renovables en lugar de petróleo. Explica que políticas europeas, como la Estrategia de Plásticos en la Economía Circular y una directiva de la UE de 2019, están acelerando su desarrollo. Entre las ventajas, destaca que necesitan menos energía para fabricarse, generan menos gases de efecto invernadero y, en muchos casos, se pueden compostar, evitando así los microplásticos. El texto se centra en tres tipos que representan el 95% del mercado: el PEF, el PLA y el PHB. Con datos concretos, indica que el PEF reduce la huella de carbono entre un 30% y un 35%, y que el PLA reduce hasta un 60% las emisiones frente al PET tradicional, pudiendo compostarse casi por completo en menos de seis meses. También explica una idea muy original: el PHB se puede producir con bacterias que se alimentan de aguas residuales, convirtiendo las depuradoras en auténticas "biorrefinerías". Aun así, reconoce retos pendientes: estos materiales compiten por tierras agrícolas, son más difíciles de reciclar por separado y, hoy por hoy, cuestan más producir que el plástico convencional.</p>
+      <p class="source-more-cite">Resumen elaborado a partir del artículo original (no se reproduce su texto) — <a href="https://theconversation.com/como-de-sostenibles-son-los-bioplasticos-287801" target="_blank" rel="noopener">leer el artículo completo en The Conversation</a>.</p>
+    </div>
+  </details>
   <div class="summary">
     <b>De qué trata:</b> los bioplásticos son polímeros parecidos al plástico tradicional, pero fabricados a partir de materias primas biológicas. El artículo presenta los tres tipos que dominan el mercado (PEF, PLA y PHB), sus ventajas ambientales (menor huella de carbono, biodegradabilidad) y los desafíos que aún enfrentan: uso de tierras agrícolas, dificultades de reciclaje y costes más altos.
   </div>

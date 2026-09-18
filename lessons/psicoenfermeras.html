@@ -114,6 +114,18 @@ h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
   background:var(--surface-2); border-left:3px solid var(--accent);
   border-radius:8px; padding:14px 16px; font-size:14.5px;
 }
+details.source-more{
+  margin:10px 0 16px; background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:10px 14px;
+}
+details.source-more summary{
+  cursor:pointer; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  color:var(--gold); letter-spacing:.03em;
+}
+details.source-more[open] summary{ margin-bottom:8px; }
+.source-more-body{ font-size:14px; }
+.source-more-cite{ font-size:12px; color:var(--muted); margin-top:8px; }
+.source-more-cite a{ color:var(--accent); }
 
 section{margin-top:52px;}
 .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
@@ -256,6 +268,13 @@ footer{
   <h1>Cuidar lo invisible: las psicoenfermeras</h1>
   <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
   <p class="meta"><b>Fuente:</b> The Conversation — Carlos Aguilera-Serrano, Universidad de Málaga — «Cuidar lo invisible y lo cotidiano: ¿cuál es el papel de las psicoenfermeras?»</p>
+  <details class="source-more">
+    <summary>Leer más sobre la fuente</summary>
+    <div class="source-more-body">
+      <p>El autor describe cómo ha cambiado la enfermería en salud mental: antes se centraba solo en controlar síntomas, y ahora tiene un enfoque mucho más integral, que incluye el sueño, la alimentación, las relaciones sociales y el sentido de vida de cada paciente. Explica el papel de las "psicoenfermeras", profesionales que funcionan como un puente dentro de sistemas sanitarios muchas veces fragmentados: hacen una valoración completa del paciente, ofrecen educación sobre salud, coordinan a otros profesionales y acompañan a la persona durante mucho tiempo. Una de sus competencias clave es la psicoterapia enfermera, una intervención estructurada que tiene en cuenta tanto la salud física como el contexto social y familiar. En España, formarse en esta especialidad exige dos años de posgrado, con teoría y prácticas en distintos centros. El artículo señala un problema importante: aunque hay entre 6.500 y 9.000 profesionales con esta formación, muchas comunidades autónomas no han creado plazas específicas para ellas, así que su potencial está infrautilizado. Como comparación, menciona que en el Reino Unido estas enfermeras tienen funciones más avanzadas y mayor presencia comunitaria. El autor identifica obstáculos —falta de recursos, estigma social, poco reconocimiento— que frenan su desarrollo, pero defiende que la evidencia ya demuestra que pueden transformar los sistemas de salud mental.</p>
+      <p class="source-more-cite">Resumen elaborado a partir del artículo original (no se reproduce su texto) — <a href="https://theconversation.com/cuidar-lo-invisible-y-lo-cotidiano-cual-es-el-papel-de-las-psicoenfermeras-283822" target="_blank" rel="noopener">leer el artículo completo en The Conversation</a>.</p>
+    </div>
+  </details>
   <div class="summary">
     <b>De qué trata:</b> el artículo presenta a las "psicoenfermeras", especialistas en salud mental que van más allá de tratar síntomas: acompañan procesos, hacen psicoterapia enfermera y defienden los derechos de sus pacientes. En España son entre 6&nbsp;500 y 9&nbsp;000, pero la profesión sigue infrautilizada y afronta el estigma, la falta de recursos y el reconocimiento insuficiente.
   </div>
