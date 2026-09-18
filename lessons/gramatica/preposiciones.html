@@ -1,0 +1,793 @@
+<!doctype html>
+<title>Preposiciones</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Preposiciones</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Tema 1 · Nivel A2–B1</p>
+  <h1>Las preposiciones</h1>
+  <p class="subtitle">Reglas claras + ocho bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> repaso de las preposiciones más frecuentes del español (a, de, en, con, por, para, desde, hasta, hacia, sobre, entre): sus usos principales y los errores más típicos de los hablantes de ruso, sobre todo <b>a/en</b> (dirección vs. lugar) y <b>por/para</b> (causa vs. finalidad).
+  </div>
+  <p class="series-note">📚 Primer tema de la serie <b>Gramática</b> del sitio — más adelante se añadirán aquí otros temas (tiempos verbales, ser/estar, subjuntivo…). <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — chuleta de preposiciones</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada preposición.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>Por vs. Para — el contraste más difícil</h3>
+    <ul>
+      <li><b>POR</b> = causa/motivo, a través de, medio, intercambio, duración aproximada: <i>por la lluvia, paseo por el parque, por teléfono, cambié el coche por otro, por la tarde</i>.</li>
+      <li><b>PARA</b> = finalidad («para + infinitivo» = чтобы), destinatario, plazo/fecha límite, opinión: <i>estudio para aprobar, un regalo para ti, listo para el lunes, para mí es importante</i>.</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> плазо/дедлайн всегда требует <b>para</b>, а не <b>por</b>: «el informe es <b>para</b> mañana» (НЕ <s>por mañana</s>).</div>
+  </div>
+
+  <div class="contrast-box">
+    <h3>A vs. En — el segundo contraste más difícil</h3>
+    <ul>
+      <li><b>A</b> = dirección/destino con verbos de movimiento (<i>ir a, llegar a</i>), hora exacta, «a personal» delante de persona concreta como complemento directo.</li>
+      <li><b>EN</b> = ubicación (<i>estar en, vivir en</i>), medio de transporte (<i>en tren, en coche</i>), periodo de tiempo (<i>en verano, en 2020</i>).</li>
+    </ul>
+    <div class="error-box"><b>Ошибка 1:</b> «a» отвечает на «куда?», «en» — на «где?»: <b>Voy a</b> Madrid (куда), pero <b>vivo en</b> Madrid (где). <br><b>Ошибка 2:</b> в русском нет аналога «a personal» — поэтому его часто забывают: «Veo <b>a</b> mi amigo» (не <s>Veo mi amigo</s>), если после глагола стоит конкретный человек.</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Ocho bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel A2–B1 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"a", pos:"dirección · hora · «a personal»",
+   quote:"Voy <mark>a</mark> la playa todos los veranos. La clase empieza <mark>a</mark> las nueve.",
+   trans:"направление (куда?), точное время, «a personal»",
+   mean:"Con verbos de movimiento indica destino (ir a, llegar a). También marca la hora exacta y va delante de un complemento directo de persona concreta.",
+   ex:"Vi a mi hermana en la estación. — Я увидел (свою) сестру на вокзале."},
+  {term:"de", pos:"origen · posesión · material",
+   quote:"Somos <mark>de</mark> Moscú. Es el coche <mark>de</mark> mi padre.",
+   trans:"из/от (происхождение), притяжательность, материал",
+   mean:"Indica de dónde viene algo/alguien, a quién pertenece algo (sin apóstrofo, como en inglés) o de qué material es.",
+   ex:"La mesa es de madera. — Стол сделан из дерева."},
+  {term:"en", pos:"lugar · transporte · periodo",
+   quote:"Vivo <mark>en</mark> Madrid. Vamos <mark>en</mark> autobús. Nací <mark>en</mark> 1995.",
+   trans:"в/на (место, где?), на (транспорт), в течение (период)",
+   mean:"Marca ubicación (dónde), medio de transporte y un periodo de tiempo dentro del cual ocurre algo.",
+   ex:"Terminaré el informe en dos horas. — Я закончу отчёт за два часа."},
+  {term:"con", pos:"compañía · instrumento · modo",
+   quote:"Voy al cine <mark>con</mark> mi hermano. Corto el pan <mark>con</mark> un cuchillo.",
+   trans:"с (кем-то), с помощью (чего-то), с (каким образом)",
+   mean:"Indica compañía, el instrumento con el que se hace algo, o el modo en que se hace.",
+   ex:"Habló con mucho cuidado. — Он говорил очень осторожно."},
+  {term:"por", pos:"causa · a través de · medio · intercambio",
+   quote:"No pude salir <mark>por</mark> la lluvia. Paseamos <mark>por</mark> el parque.",
+   trans:"из-за, по/через, посредством, в обмен на",
+   mean:"Expresa causa o motivo, movimiento a través de un lugar, el medio por el que se hace algo, o un intercambio. Ver contraste con «para» más abajo.",
+   ex:"Te llamo por teléfono esta noche. — Я позвоню тебе по телефону сегодня вечером."},
+  {term:"para", pos:"finalidad · destinatario · plazo",
+   quote:"Estudio español <mark>para</mark> mejorar mi trabajo. Este regalo es <mark>para</mark> ti.",
+   trans:"для, чтобы (цель), к (сроку)",
+   mean:"Expresa finalidad («para + infinitivo» = чтобы), el destinatario de algo, o una fecha límite/plazo. Ver contraste con «por» más abajo.",
+   ex:"El informe tiene que estar listo para el viernes. — Отчёт должен быть готов к пятнице."},
+  {term:"desde", pos:"punto de partida",
+   quote:"Trabajo aquí <mark>desde</mark> el año 2018.",
+   trans:"с/от (начальная точка — место или время)",
+   mean:"Marca el punto de partida de un lugar o de un periodo de tiempo. Se usa a menudo junto con «hasta».",
+   ex:"Se ve el mar desde mi ventana. — Из моего окна видно море."},
+  {term:"hasta", pos:"punto final",
+   quote:"La tienda está abierta <mark>hasta</mark> las nueve de la noche.",
+   trans:"до (конечная точка — место или время)",
+   mean:"Marca el punto final de un lugar o de un periodo de tiempo, a menudo en pareja con «desde».",
+   ex:"Caminamos hasta el final de la calle. — Мы дошли до конца улицы."},
+  {term:"hacia", pos:"dirección aproximada",
+   quote:"El barco navega <mark>hacia</mark> el norte.",
+   trans:"в направлении, примерно к (время)",
+   mean:"Indica una dirección (no necesariamente el destino exacto) o una hora aproximada.",
+   ex:"Llegaré hacia las ocho. — Я приду примерно к восьми."},
+  {term:"sobre", pos:"posición · tema · aproximación",
+   quote:"El libro está <mark>sobre</mark> la mesa. Una charla <mark>sobre</mark> el clima.",
+   trans:"на (поверх), о/про (тема), около (приблизительно)",
+   mean:"Indica posición física encima de algo, el tema de algo (sinónimo de «de» en este uso) o una cantidad/hora aproximada.",
+   ex:"Llegaré sobre las diez. — Я приду примерно в десять."},
+  {term:"entre", pos:"posición intermedia",
+   quote:"Ella vive <mark>entre</mark> dos ciudades.",
+   trans:"между, среди",
+   mean:"Indica una posición intermedia entre dos o más elementos, lugares o personas.",
+   ex:"El secreto quedó entre nosotros. — Секрет остался между нами."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass, ruleHtml){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+/* ---------------- BLOQUE 1: reconocimiento (radio, 3 opciones) ---------------- */
+(function(){
+  var b = {id:"p1", items:[
+    {q:"Voy ___ la escuela en autobús.", opts:["a","de","por"], answer:0},
+    {q:"Este libro es ___ mi hermana.", opts:["en","de","con"], answer:1},
+    {q:"Vivo ___ Madrid desde hace cinco años.", opts:["a","en","por"], answer:1},
+    {q:"Como la sopa ___ una cuchara.", opts:["con","por","para"], answer:0},
+    {q:"Este regalo es ___ ti.", opts:["por","para","de"], answer:1},
+    {q:"La reunión es ___ las diez de la mañana.", opts:["a","en","desde"], answer:0}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 1 · Reconocimiento — elige la preposición correcta","fácil","easy"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="p1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="p1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 2: huecos con banco ---------------- */
+(function(){
+  var b = {id:"p2", bank:"a · de · en · con · para · por · desde · hasta", items:[
+    {stem:"Trabajo ___ una empresa de tecnología.", answers:["en"]},
+    {stem:"Llamamos ___ teléfono cuando hay una emergencia.", answers:["por"]},
+    {stem:"El tren sale ___ Barcelona a las nueve.", answers:["desde"]},
+    {stem:"Estudio español ___ mejorar mi trabajo.", answers:["para"]},
+    {stem:"El concierto empieza ___ las ocho.", answers:["a"]},
+    {stem:"Compré este cuaderno ___ cinco euros.", answers:["por"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 2 · Huecos con banco de palabras","fácil","easy"));
+  wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+b.bank+'</div>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 3: relacionar (select) ---------------- */
+(function(){
+  var b = {id:"p3",
+    words:["desde","hasta","hacia","sobre","entre"],
+    defs:["punto de partida (lugar o tiempo)","punto final (lugar o tiempo)","dirección aproximada, o cantidad/hora aproximada","posición encima de algo, o un tema","en medio de dos o más cosas/personas"],
+    answers:["a","b","c","d","e"]
+  };
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 3 · Relaciona cada preposición con su uso","medio","mid"));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Preposición</th><th>Uso</th></tr>";
+  b.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = b.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.words.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.words.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.words.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 4: huecos sin banco ---------------- */
+(function(){
+  var b = {id:"p4", items:[
+    {stem:"Mis padres nacieron ___ Ucrania.", answers:["de"]},
+    {stem:"El museo está abierto ___ las diez de la mañana.", answers:["desde"]},
+    {stem:"Caminamos ___ el centro para ver el desfile.", answers:["hacia"]},
+    {stem:"El profesor habló ___ la importancia de las preposiciones.", answers:["sobre","de"]},
+    {stem:"Se sentó ___ mi hermano y yo, en el asiento del medio.", answers:["entre"]},
+    {stem:"Vivimos ___ el número 24 de esta calle.", answers:["en"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 4 · Huecos sin banco de palabras","medio-alto","mid"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Ahora sin pistas — piensa en el uso de cada preposición.</p>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 5: por vs para (radio, 2 opciones) ---------------- */
+(function(){
+  var b = {id:"p5", items:[
+    {q:"Estudio mucho ___ aprobar el examen.", opts:["por","para"], answer:1},
+    {q:"No pude salir ___ la lluvia.", opts:["por","para"], answer:0},
+    {q:"Este café es ___ ti.", opts:["por","para"], answer:1},
+    {q:"Caminamos ___ el parque toda la tarde.", opts:["por","para"], answer:0},
+    {q:"El informe tiene que estar listo ___ el viernes.", opts:["por","para"], answer:1},
+    {q:"Cambié mi coche viejo ___ uno nuevo.", opts:["por","para"], answer:0}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 5 · Por vs. Para","alto","hard"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="p5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="p5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 6: a vs en (input libre) ---------------- */
+(function(){
+  var b = {id:"p6", items:[
+    {stem:"Llegamos ___ Barcelona por la tarde.", answers:["a"]},
+    {stem:"Los niños juegan ___ el parque.", answers:["en"]},
+    {stem:"Entramos ___ la sala en silencio.", answers:["en","a"]},
+    {stem:"Miro ___ mi hermano, que está muy cambiado.", answers:["a"]},
+    {stem:"El avión aterriza ___ las cuatro.", answers:["a"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 6 · A vs. En","alto","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Escribe solo «a» o «en», sin banco de palabras.</p>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off" style="min-width:70px;">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 7: traducción (solo la preposición) ---------------- */
+(function(){
+  var b = {id:"p7", items:[
+    {ru:"Я из России.", stem:"Soy ___ Rusia.", answers:["de"]},
+    {ru:"Этот подарок для тебя.", stem:"Este regalo es ___ ti.", answers:["para"]},
+    {ru:"Мы гуляли по парку два часа.", stem:"Paseamos ___ el parque durante dos horas.", answers:["por"]},
+    {ru:"Встреча начинается в шесть часов.", stem:"La reunión empieza ___ las seis.", answers:["a"]},
+    {ru:"Она живёт между двумя городами.", stem:"Ella vive ___ dos ciudades.", answers:["entre"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 7 · Traduce — completa solo con la preposición","alto","hard"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem"><i style="color:var(--muted);">«'+it.ru+'»</i><br>'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off" style="min-width:70px;">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 8: transformación/traducción de oraciones (respuesta modelo) ---------------- */
+(function(){
+  var items = [
+    {stem:"Traduce: «Мы едем в Барселону на поезде, чтобы увидеть мою бабушку».", model:"Vamos a Barcelona en tren para ver a mi abuela."},
+    {stem:"Traduce: «Этот текст написан студентом, о испанских традициях».", model:"Este texto está escrito por un estudiante, sobre las tradiciones españolas."},
+    {stem:"Transforma usando «desde… hasta…»: «La tienda abre a las nueve y cierra a las nueve de la noche.»", model:"La tienda abre desde las nueve de la mañana hasta las nueve de la noche."},
+    {stem:"Traduce: «Я сделал это ради тебя, а не из-за денег».", model:"Lo hice por ti, no por el dinero."}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 8 · Transformación y traducción de oraciones","el más difícil","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="p8-'+idx+'" style="min-height:44px;" placeholder="Tu traducción/transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="p8-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("p8-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
