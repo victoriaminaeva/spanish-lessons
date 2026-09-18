@@ -1,0 +1,854 @@
+<!doctype html>
+<title>Fórmula 1 en Madrid</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#35494c;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#35494c;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> F1 en Madrid · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>La Fórmula 1 vuelve a Madrid después de 45 años</h1>
+  <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> Infobae — «(Previa) Madrid vuelve a vibrar con la Fórmula 1 después de casi medio siglo», 13/09/2026</p>
+  <div class="summary">
+    <b>De qué trata:</b> la Fórmula 1 regresa a Madrid 45 años después de la última carrera en el Circuito del Jarama (1981), esta vez en el nuevo circuito urbano de Madring. El líder del Mundial, Kimi Antonelli, llega como favorito tras ganar en Monza, mientras los pilotos españoles Fernando Alonso y Carlos Sainz afrontan su segundo Gran Premio de casa de la temporada.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">04</span><h2>Test — F1 en Madrid</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "f1madrid_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {};
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+var vocab = [
+  {term:"acoger", pos:"verbo transitivo",
+   quote:"La Fórmula 1 vuelve a Madrid, que <mark>acoge</mark> el Tag Heuer Gran Premio de España.",
+   trans:"принимать, быть организатором (события)",
+   mean:"Ser la sede o el lugar donde se celebra un evento; también «recibir con hospitalidad» a personas.",
+   ex:"La ciudad acogerá el próximo campeonato mundial. — Город станет местом проведения следующего чемпионата мира."},
+  {term:"la prueba", pos:"sustantivo, f. (deportiva)",
+   quote:"...decimocuarta <mark>prueba</mark> del Mundial.",
+   trans:"этап (соревнования), гонка",
+   mean:"Cada una de las competiciones que forman parte de un campeonato; en este contexto, cada Gran Premio de la temporada.",
+   ex:"Esta es la última prueba antes de la final. — Это последний этап перед финалом."},
+  {term:"remontar", pos:"verbo intransitivo / transitivo",
+   quote:"...después de que Antonelli... <mark>remontara</mark> 18 posiciones hasta ganar en Monza.",
+   trans:"наверстывать, подниматься (в позициях)",
+   mean:"Recuperar posiciones perdidas o mejorar una situación desfavorable; muy usado en deportes.",
+   ex:"El equipo remontó tres goles en la segunda parte. — Команда наверстала три гола во второй половине."},
+  {term:"el golpe de autoridad", pos:"locución nominal",
+   quote:"...el joven piloto lo convirtió, otra vez, en un <mark>golpe de autoridad</mark>.",
+   trans:"демонстрация силы/уверенного превосходства",
+   mean:"Acción que demuestra claramente la superioridad o el control de alguien sobre una situación difícil.",
+   ex:"Ganar así fue un golpe de autoridad del equipo. — Победа таким образом стала демонстрацией силы команды."},
+  {term:"la incógnita", pos:"sustantivo, f.",
+   quote:"...la estrategia es una <mark>incógnita</mark>.",
+   trans:"неизвестная величина, загадка",
+   mean:"Aquello que no se conoce o no se puede predecir con seguridad; también término matemático (x).",
+   ex:"El resultado del examen sigue siendo una incógnita. — Результат экзамена до сих пор остаётся неизвестным."},
+  {term:"la cautela", pos:"sustantivo, f.",
+   quote:"...la <mark>cautela</mark> será el gran aliado de los pilotos.",
+   trans:"осторожность, осмотрительность",
+   mean:"Actitud prudente para evitar riesgos o errores; sinónimo de «prudencia».",
+   ex:"Actuó con mucha cautela antes de tomar la decisión. — Он действовал с большой осторожностью, прежде чем принять решение."},
+  {term:"exprimir (algo)", pos:"verbo transitivo (uso figurado)",
+   quote:"...pueden ser claves para <mark>exprimir</mark> un AMR26 que, en teoría, debería ir mejor este fin de semana.",
+   trans:"выжимать максимум (из чего-то)",
+   mean:"Aprovechar al máximo las posibilidades de algo, en sentido figurado (literalmente, extraer el jugo de una fruta).",
+   ex:"El entrenador supo exprimir el talento de su equipo. — Тренер смог выжать максимум из талантов своей команды."},
+  {term:"el rendimiento", pos:"sustantivo, m.",
+   quote:"...el <mark>rendimiento</mark> del monoplaza de la bebida energética en Madrid es una incógnita.",
+   trans:"производительность, результативность",
+   mean:"Resultado o eficacia que produce algo o alguien en relación con el esfuerzo o recursos invertidos.",
+   ex:"El rendimiento del coche mejoró mucho con las nuevas piezas. — Производительность автомобиля значительно улучшилась с новыми деталями."},
+  {term:"saltar chispas", pos:"locución verbal",
+   quote:"En Monza <mark>saltaron chispas</mark> entre el monegasco Charles Leclerc... y Hamilton.",
+   trans:"возникает искра/напряжение (между людьми)",
+   mean:"Producirse tensión, conflicto o discusión entre dos personas; expresión figurada e informal.",
+   ex:"Entre los dos candidatos saltaron chispas en el debate. — Между двумя кандидатами возникла напряжённость во время дебатов."},
+  {term:"la rencilla", pos:"sustantivo, f.",
+   quote:"...tienen una oportunidad para dejar las <mark>rencillas</mark> y ver si pueden mirar a los ojos a los Mercedes.",
+   trans:"мелкая ссора, размолвка",
+   mean:"Desacuerdo o resentimiento pequeño entre personas, generalmente prolongado en el tiempo.",
+   ex:"Prefieren dejar atrás viejas rencillas y trabajar juntos. — Они предпочитают оставить в прошлом старые размолвки и работать вместе."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var debate = [
+  {q:"¿Sigues la Fórmula 1 o algún otro deporte de motor? ¿Qué piloto o equipo prefieres?", hint:"Útil: «Me gusta/no me gusta...», «Mi piloto favorito es...»"},
+  {q:"¿Qué opinas de que se construyan circuitos nuevos en ciudades (como Madring) en lugar de usar circuitos tradicionales?", hint:"Útil: «Creo que es positivo/negativo porque...»"},
+  {q:"El artículo menciona un fuerte impacto económico para Madrid. ¿Crees que este tipo de eventos deportivos benefician realmente a una ciudad? Compara con algún evento similar en tu país.", hint:"Útil: «Por un lado..., por otro lado...», «En mi país, un evento parecido fue...»"},
+  {q:"¿Estás de acuerdo con que la Fórmula 1 debería centrarse más en circuitos históricos (como el Jarama) que en nuevos trazados urbanos? Argumenta.", hint:"Útil: «Estoy de acuerdo/en desacuerdo porque...»"},
+  {q:"Si fueras el diseñador de un nuevo circuito de F1 en tu ciudad, ¿qué características le darías?", hint:"Útil: «Yo diseñaría un circuito que...», «Incluiría...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+var gram = [
+  {id:"g1", title:"3.1 Presente de indicativo",
+   quote:"La Fórmula 1 <mark>vuelve</mark> a Madrid, que <mark>acoge</mark> el Tag Heuer Gran Premio de España.",
+   rule:"Verbos regulares e irregulares en presente. Se usa para presentar hechos actuales — muy típico en titulares y crónicas deportivas.",
+   items:[
+     {stem:"La Fórmula 1 ______ (volver) a Madrid después de 45 años.", answers:["vuelve"]},
+     {stem:"El circuito ______ (recibir) al líder del Mundial, Kimi Antonelli.", answers:["recibe"]},
+     {stem:"Los pilotos españoles ______ (vivir) un fin de semana especial.", answers:["viven"]},
+     {stem:"Madring ______ (ser) un circuito híbrido y nuevo para la mayoría.", answers:["es"]},
+     {stem:"Yo ______ (pensar) que este circuito puede dar sorpresas.", answers:["pienso"]},
+     {stem:"Ferrari ______ (tener) una ligera ventaja gracias a un test privado.", answers:["tiene"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito indefinido",
+   quote:"Hace casi medio siglo de la última vez que la F1 compitió en Madrid. <mark>Fue</mark> en 1981 y en el Circuito del Jarama, donde <mark>ganó</mark> Gilles Villeneuve.",
+   rule:"Regular -ar: -é,-aste,-ó...; -er/-ir: -í,-iste,-ió... Acción puntual y completada en el pasado, con fecha concreta.",
+   items:[
+     {stem:"La última vez que la F1 compitió en Madrid ______ (ser) en 1981.", answers:["fue"]},
+     {stem:"En esa carrera ______ (ganar) el piloto Gilles Villeneuve.", answers:["ganó"]},
+     {stem:"Antonelli ______ (remontar) 18 posiciones hasta ganar en Monza.", answers:["remontó"]},
+     {stem:"Leclerc ______ (irse) al muro en La Parabólica.", answers:["se fue"]},
+     {stem:"Hamilton ______ (tener) un toque con Leclerc en la primera curva.", answers:["tuvo"]},
+     {stem:"Nosotros ______ (ver) la carrera de Monza el domingo pasado.", answers:["vimos"]}
+   ]},
+  {id:"g3", title:"3.3 Futuro simple",
+   quote:"Los monoplazas más rápidos del mundo <mark>rodarán</mark> en Madring ante 350.000 personas que <mark>vibrarán</mark> a lo largo del fin de semana.",
+   rule:"Infinitivo completo + -é,-ás,-á,-emos,-éis,-án. Predicciones y planes futuros basados en lo que se espera del evento.",
+   items:[
+     {stem:"Los monoplazas ______ (rodar) en Madring ante 350.000 personas.", answers:["rodarán"]},
+     {stem:"El público ______ (vibrar) a lo largo de todo el fin de semana.", answers:["vibrará"]},
+     {stem:"Con el paso de las sesiones, los equipos ______ (conocer) mejor los neumáticos.", answers:["conocerán"]},
+     {stem:"¿Quién ______ (ganar), según los expertos?", answers:["ganará"]},
+     {stem:"Alonso ______ (intentar) aprovechar las mejoras de su coche.", answers:["intentará"]},
+     {stem:"Nosotros ______ (seguir) la carrera por televisión.", answers:["seguiremos"]}
+   ]},
+  {id:"g4", title:"3.4 Pretérito imperfecto",
+   quote:"...un fin de semana que <mark>se antojaba</mark> complejo, el joven piloto lo convirtió en un golpe de autoridad.",
+   rule:"Raíz + -aba/-ía... Describe estados o expectativas previas, sin foco en cuándo terminaron.",
+   items:[
+     {stem:"Antes de Monza, el fin de semana se ______ (antojar) complejo para Antonelli.", answers:["antojaba"]},
+     {stem:"Los aficionados ______ (esperar) este regreso desde hacía 45 años.", answers:["esperaban"]},
+     {stem:"De niño, Fernando Alonso siempre ______ (soñar) con ganar en España.", answers:["soñaba"]},
+     {stem:"Nosotros no ______ (saber) qué esperar de un circuito tan nuevo.", answers:["sabíamos"]},
+     {stem:"Los equipos ______ (necesitar) más datos sobre el trazado.", answers:["necesitaban"]},
+     {stem:"Sainz ______ (tener) muchas esperanzas puestas en las mejoras de Williams.", answers:["tenía"]}
+   ]},
+  {id:"g5", title:"3.5 Perífrasis «ir + gerundio»",
+   quote:"Con el paso de las sesiones <mark>irán conociendo</mark> más sobre el comportamiento en los neumáticos.",
+   rule:"<i>Ir</i> conjugado + gerundio (-ando/-iendo). Expresa una acción progresiva, que avanza poco a poco.",
+   items:[
+     {stem:"Los equipos ______ (ir) conociendo mejor el comportamiento de los neumáticos con cada sesión.", answers:["van"]},
+     {stem:"El piloto ______ (ir) mejorando sus tiempos vuelta tras vuelta.", answers:["va"]},
+     {stem:"Nosotros ______ (ir) entendiendo mejor la estrategia de cada equipo.", answers:["vamos"]},
+     {stem:"La afición ______ (ir) llenando las gradas del Madring poco a poco.", answers:["va"]},
+     {stem:"Los ingenieros ______ (ir) ajustando el monoplaza durante los libres.", answers:["van"]},
+     {stem:"Yo ______ (ir) aprendiendo las reglas de la Fórmula 1 poco a poco.", answers:["voy"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+var testList = document.getElementById("testList");
+
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"¿En qué año compitió la F1 en Madrid por última vez antes de 2026?", opts:["1975","1981","1995","2010"], answer:1},
+    {q:"¿En qué circuito se disputó aquella carrera anterior?", opts:["Jarama","Montmeló","Jerez","Valencia"], answer:0},
+    {q:"¿Quién es el líder del Mundial que llega a Madrid como favorito?", opts:["Max Verstappen","Lewis Hamilton","Kimi Antonelli","Lando Norris"], answer:2},
+    {q:"¿Cuántas posiciones remontó Antonelli para ganar en Monza?", opts:["8","12","18","20"], answer:2},
+    {q:"¿Qué dos pilotos españoles compiten en este Gran Premio?", opts:["Sainz y Alonso","Sainz y de la Rosa","Alonso y Sáinz Jr.","Alonso y Roberto Merhi"], answer:0},
+    {q:"¿Qué equipo hizo un test privado antes de la carrera en Madring?", opts:["Mercedes","Red Bull","Ferrari","McLaren"], answer:2}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"acoge · prueba · remontó · incógnita · cautela · exprimir · rendimiento · rencillas",
+  items:[
+    {stem:"Madrid ______ el Gran Premio de España, decimocuarta ______ del Mundial.", answers:["acoge"]},
+    {stem:"Antonelli ______ 18 posiciones para ganar en Monza.", answers:["remontó"]},
+    {stem:"La estrategia en un circuito nuevo es una ______.", answers:["incógnita"]},
+    {stem:"La ______ será el gran aliado de los pilotos en un trazado desconocido.", answers:["cautela"]},
+    {stem:"Alonso puede ______ un coche que debería rendir mejor este fin de semana.", answers:["exprimir"]},
+    {stem:"Ferrari busca dejar las ______ entre sus pilotos.", answers:["rencillas"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su definición",
+  words:["acoger","remontar","exprimir","el rendimiento"],
+  defs:["recibir o ser sede de un evento","recuperar posiciones perdidas","sacar el máximo provecho de algo","capacidad de funcionar bien, resultado de una máquina o persona"],
+  answers:["a","b","c","d"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Definición</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena las ideas según aparecen en el artículo",
+  events:[
+    {text:"Se recuerda que la última vez que la F1 corrió en Madrid fue en 1981, en el Jarama.", answer:1},
+    {text:"Se presenta a Antonelli como líder del Mundial tras su victoria en Monza.", answer:2},
+    {text:"Se explica que Madring es un circuito nuevo e híbrido, lo que genera incertidumbre en la estrategia.", answer:3},
+    {text:"Se destaca la expectativa en torno a los pilotos españoles Sainz y Alonso.", answer:4},
+    {text:"Se menciona la posible ventaja de Ferrari gracias a un test privado previo.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Convierte a estilo indirecto: Un periodista escribió: «La estrategia es una incógnita en este circuito.»", model:"Un periodista escribió que la estrategia era una incógnita en ese circuito."},
+    {stem:"Cambia del futuro al presente: «Los monoplazas rodarán en Madring ante 350.000 personas.»", model:"Los monoplazas ruedan en Madring ante 350.000 personas."},
+    {stem:"Transforma en pregunta: «Ferrari tiene una ligera ventaja gracias al test privado.»", model:"¿Tiene Ferrari una ligera ventaja gracias al test privado?"},
+    {stem:"Cambia a la voz pasiva: «Antonelli ganó la carrera de Monza.»", model:"La carrera de Monza fue ganada por Antonelli."},
+    {stem:"Sustituye «saltaron chispas» por una expresión sinónima, sin cambiar el sentido.", model:"Ejemplo: «hubo tensión» / «se produjo un enfrentamiento»."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «incógnita»:", opts:["certeza","misterio/duda","victoria","error"], answer:1},
+    {q:"Antónimo de «cautela»:", opts:["prudencia","imprudencia","calma","atención"], answer:1},
+    {q:"Marca la palabra intrusa:", opts:["remontar","recuperar","avanzar","retroceder"], answer:3},
+    {q:"Completa la colocación: «______ chispas»:", opts:["saltar","cocinar","vestir","plantar"], answer:0},
+    {q:"«Rendimiento» en este contexto es sinónimo de:", opts:["descanso","resultado/desempeño","precio","origen"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

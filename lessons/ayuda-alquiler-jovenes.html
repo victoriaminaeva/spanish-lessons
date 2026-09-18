@@ -1,0 +1,854 @@
+<!doctype html>
+<title>Ayuda al Alquiler</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#35494c;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#35494c;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Ayuda al Alquiler · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>300 euros al mes para el alquiler de los jóvenes</h1>
+  <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> Que.es — «La ayuda al alquiler para jóvenes: 300 euros al mes para menores de 35, ya en vigor», 09/09/2026</p>
+  <div class="summary">
+    <b>De qué trata:</b> el Plan Estatal de Vivienda 2026-2030 permite a los jóvenes de hasta 35 años solicitar hasta 300 euros al mes para el alquiler (200 para una habitación), cubriendo como máximo el 60% de la renta. El artículo explica los requisitos, los límites de ingresos y de precio del alquiler, y recuerda que la gestión depende de cada comunidad autónoma.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">04</span><h2>Test — Ayuda al alquiler</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "ayudaalquiler_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {};
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+var vocab = [
+  {term:"el alquiler", pos:"sustantivo, m.",
+   quote:"Ha entrado en vigor... la ayuda de 300 euros al mes para el <mark>alquiler</mark> de los jóvenes.",
+   trans:"аренда, съём (жилья)",
+   mean:"Pago mensual que se hace para vivir en una vivienda que no es propia; también el propio contrato de arrendamiento.",
+   ex:"El alquiler en las grandes ciudades sigue subiendo. — Аренда в крупных городах продолжает расти."},
+  {term:"la emancipación", pos:"sustantivo, f.",
+   quote:"La tasa de <mark>emancipación</mark> juvenil está en el 14,5%, lejos de la media europea.",
+   trans:"эмансипация, отделение (от семьи), обретение самостоятельности",
+   mean:"Proceso de independizarse de la familia y vivir de forma autónoma; muy usado en estadísticas sobre jóvenes.",
+   ex:"La emancipación de los jóvenes se retrasa cada año más. — Обретение самостоятельности молодыми людьми откладывается всё дальше."},
+  {term:"la cuantía", pos:"sustantivo, f.",
+   quote:"La <mark>cuantía</mark> final no puede superar el 60% de la renta mensual.",
+   trans:"сумма, размер (денежной выплаты)",
+   mean:"Cantidad exacta de dinero que se concede, se cobra o se paga; muy usado en contextos administrativos.",
+   ex:"La cuantía de la beca depende de los ingresos familiares. — Размер стипендии зависит от доходов семьи."},
+  {term:"prorrogar(se)", pos:"verbo transitivo / pronominal",
+   quote:"La prestación se concede durante dos años y puede <mark>prorrogarse</mark> hasta otros dos.",
+   trans:"продлевать(ся)",
+   mean:"Extender la duración de algo (un plazo, una ayuda, un contrato) más allá de su fecha inicial.",
+   ex:"El contrato se prorrogó un año más. — Контракт был продлён ещё на один год."},
+  {term:"el requisito", pos:"sustantivo, m.",
+   quote:"Requisitos: quién puede pedirla y quién se queda fuera.",
+   trans:"требование, условие",
+   mean:"Condición necesaria que se debe cumplir para poder hacer o solicitar algo.",
+   ex:"No cumple todos los requisitos para la beca. — Он не соответствует всем требованиям для стипендии."},
+  {term:"el usufructuario/a", pos:"sustantivo",
+   quote:"Quedan fuera quienes sean propietarios o <mark>usufructuarios</mark> de otra vivienda en España.",
+   trans:"пользователь по праву узуфрукта (имеющий право пользования)",
+   mean:"Persona que tiene derecho a usar y disfrutar un bien (como una vivienda) sin ser su propietario legal.",
+   ex:"Es usufructuaria del piso que heredó de su abuela. — Она пользуется квартирой, унаследованной от бабушки, по праву узуфрукта."},
+  {term:"la convocatoria", pos:"sustantivo, f.",
+   quote:"Sin <mark>convocatoria</mark> abierta no hay solicitud posible.",
+   trans:"объявление о наборе заявок, конкурс",
+   mean:"Anuncio oficial que abre un plazo para solicitar algo (una ayuda, una beca, un empleo público).",
+   ex:"La convocatoria de becas se abre cada septiembre. — Конкурс на получение стипендий открывается каждый сентябрь."},
+  {term:"disparado/a", pos:"participio / adjetivo",
+   quote:"...esta ayuda llega en un contexto de precios <mark>disparados</mark>.",
+   trans:"резко выросший, взлетевший (о ценах)",
+   mean:"Que ha subido de forma muy rápida y notable; de «dispararse» = subir de golpe.",
+   ex:"Los precios de la vivienda están disparados en toda la costa. — Цены на жильё резко выросли на всём побережье."},
+  {term:"el alivio", pos:"sustantivo, m.",
+   quote:"La ayuda de 300 euros supone un <mark>alivio</mark>, pero no cambia la estructura del mercado.",
+   trans:"облегчение, послабление",
+   mean:"Sensación o efecto de reducción de una carga o problema, aunque no lo resuelva por completo.",
+   ex:"La ayuda económica fue un gran alivio para la familia. — Финансовая помощь стала большим облегчением для семьи."},
+  {term:"tramitarse", pos:"verbo pronominal",
+   quote:"Aunque los fondos vienen del Estado, el proceso se <mark>tramita</mark> a través de cada comunidad autónoma.",
+   trans:"обрабатываться, оформляться (о бюрократической процедуре)",
+   mean:"Seguir los pasos administrativos necesarios para que algo se resuelva oficialmente.",
+   ex:"La solicitud se tramita en un plazo de dos meses. — Заявка обрабатывается в течение двух месяцев."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var debate = [
+  {q:"¿A qué edad te independizaste (o planeas independizarte) de tu familia? ¿Fue/será fácil encontrar vivienda?", hint:"Útil: «Me independicé a los...», «Creo que será difícil porque...»"},
+  {q:"¿Existen ayudas parecidas para jóvenes en tu país? Descríbelas.", hint:"Útil: «En mi país existe/no existe...», «La ayuda consiste en...»"},
+  {q:"El artículo dice que el alquiler medio se come el 98,7% del salario medio joven en España. ¿Cómo es la situación de la vivienda para jóvenes en tu país? Compara.", hint:"Útil: «En mi país, el alquiler...», «A diferencia de España,...»"},
+  {q:"¿Crees que ayudas económicas como esta resuelven el problema de la vivienda o solo lo alivian temporalmente? Argumenta tu opinión.", hint:"Útil: «Creo que resuelve/no resuelve el problema porque...»"},
+  {q:"Si el Gobierno te pidiera diseñar una política de vivienda joven desde cero, ¿qué medida propondrías además de esta ayuda económica?", hint:"Útil: «Yo propondría...», «Además de la ayuda, haría falta...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+var gram = [
+  {id:"g1", title:"3.1 Presente de indicativo",
+   quote:"La ayuda <mark>cubre</mark> hasta el 60% de la renta mensual, con un tope de 300 euros al mes.",
+   rule:"Verbos regulares en -ar/-er/-ir. Se usa para explicar cómo funciona algo — muy típico en artículos informativos.",
+   items:[
+     {stem:"La ayuda ______ (cubrir) hasta el 60% de la renta mensual.", answers:["cubre"]},
+     {stem:"El tope ______ (ser) de 300 euros para vivienda completa.", answers:["es"]},
+     {stem:"Los ingresos anuales no ______ (poder) superar cinco veces el IPREM.", answers:["pueden"]},
+     {stem:"País Vasco y Navarra no ______ (aplicar) este plan estatal.", answers:["aplican"]},
+     {stem:"Cada comunidad autónoma ______ (publicar) su propia convocatoria.", answers:["publica"]},
+     {stem:"Yo ______ (creer) que esta ayuda es insuficiente para las grandes ciudades.", answers:["creo"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito perfecto compuesto",
+   quote:"El Gobierno <mark>ha incluido</mark> esta ayuda en el Plan Estatal de Vivienda 2026-2030.",
+   rule:"Presente de <i>haber</i> + participio (-ado/-ido). Acción pasada con relevancia en el presente, sin fecha concreta.",
+   items:[
+     {stem:"El Gobierno ______ (incluir) esta ayuda en el nuevo Plan de Vivienda.", answers:["ha incluido"]},
+     {stem:"Los jóvenes ______ (ver) cómo suben los precios del alquiler.", answers:["han visto"]},
+     {stem:"¿Alguna vez ______ (solicitar, tú) una ayuda para el alquiler?", answers:["has solicitado"]},
+     {stem:"Esta medida ______ (generar) mucho debate en redes sociales.", answers:["ha generado"]},
+     {stem:"Nosotros ______ (leer) los requisitos con mucha atención.", answers:["hemos leído"]},
+     {stem:"El Consejo de la Juventud ______ (publicar) datos preocupantes sobre la emancipación.", answers:["ha publicado"]}
+   ]},
+  {id:"g3", title:"3.3 Pretérito indefinido",
+   quote:"El Plan Estatal de Vivienda 2026-2030 <mark>se aprobó</mark> este año y la ayuda para el alquiler <mark>entró</mark> en vigor el 24 de abril.",
+   rule:"Regular -ar: -é,-aste,-ó...; -er/-ir: -í,-iste,-ió... Acción puntual y completada, con fecha concreta.",
+   items:[
+     {stem:"El Plan Estatal de Vivienda ______ (aprobarse) este año.", answers:["se aprobó"]},
+     {stem:"La ayuda al alquiler ______ (entrar) en vigor el 24 de abril.", answers:["entró"]},
+     {stem:"El Gobierno ______ (anunciar) la medida hace unos meses.", answers:["anunció"]},
+     {stem:"Muchos jóvenes ______ (solicitar) la ayuda en las primeras semanas.", answers:["solicitaron"]},
+     {stem:"Yo ______ (mudarme) de piso el año pasado gracias a una ayuda similar.", answers:["me mudé"]},
+     {stem:"Nosotros ______ (comentar) esta noticia en clase la semana pasada.", answers:["comentamos"]}
+   ]},
+  {id:"g4", title:"3.4 Perífrasis «estar + gerundio»",
+   quote:"Independizarse se <mark>está retrasando</mark> más que nunca.",
+   rule:"<i>Estar</i> (conjugado) + gerundio (-ando/-iendo). Describe una acción en curso, con foco en su desarrollo actual.",
+   items:[
+     {stem:"Independizarse se ______ (retrasar) más que nunca en España.", answers:["está retrasando"]},
+     {stem:"Los precios del alquiler se ______ (disparar) en las grandes ciudades.", answers:["están disparando"]},
+     {stem:"Muchos jóvenes ______ (esperar) la convocatoria de su comunidad.", answers:["están esperando"]},
+     {stem:"Yo ______ (pensar) en solicitar esta ayuda pronto.", answers:["estoy pensando"]},
+     {stem:"El Gobierno ______ (revisar) los requisitos constantemente.", answers:["está revisando"]},
+     {stem:"¿Tú ______ (buscar) piso ahora mismo?", answers:["estás buscando"]}
+   ]},
+  {id:"g5", title:"3.5 Presente de subjuntivo (tras «siempre que»)",
+   quote:"...puede prorrogarse hasta otros dos, siempre que se <mark>sigan</mark> cumpliendo los requisitos y la convocatoria autonómica lo <mark>contemple</mark>.",
+   rule:"Raíz de la 1ª persona presente + vocal cambiada. «Siempre que» (condición) exige subjuntivo, igual que otras expresiones condicionales.",
+   items:[
+     {stem:"La ayuda puede prorrogarse siempre que se ______ (seguir) cumpliendo los requisitos.", answers:["sigan"]},
+     {stem:"La convocatoria autonómica debe contemplar que se ______ (mantener) la prórroga.", answers:["mantenga"]},
+     {stem:"Solo podrás cobrarla siempre que tu alquiler no ______ (superar) los 1.000 euros.", answers:["supere"]},
+     {stem:"La prórroga es posible siempre que el joven ______ (seguir) teniendo menos de 35 años.", answers:["siga"]},
+     {stem:"Podrás solicitarla siempre que ______ (cumplir) todos los requisitos de ingresos.", answers:["cumplas"]},
+     {stem:"La ayuda se mantiene siempre que la vivienda ______ (ser) tu residencia habitual.", answers:["sea"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+var testList = document.getElementById("testList");
+
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"¿Cuál es la cuantía máxima de la ayuda para una vivienda completa?", opts:["200€","250€","300€","500€"], answer:2},
+    {q:"¿Qué porcentaje máximo de la renta mensual puede cubrir la ayuda?", opts:["40%","50%","60%","100%"], answer:2},
+    {q:"¿Hasta qué edad se puede solicitar esta ayuda?", opts:["25 años","30 años","35 años","40 años"], answer:2},
+    {q:"¿Cuándo entró en vigor la ayuda?", opts:["1 de enero","24 de abril","9 de septiembre","1 de octubre"], answer:1},
+    {q:"Según el Consejo de la Juventud de España, ¿qué porcentaje de jóvenes vive fuera del domicilio familiar?", opts:["14,5%","35%","60%","98,7%"], answer:0},
+    {q:"¿Qué comunidades NO aplican este plan estatal?", opts:["Cataluña y Andalucía","País Vasco y Navarra","Madrid y Valencia","todas lo aplican"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"alquiler · emancipación · cuantía · prorrogarse · requisitos · convocatoria · disparados · alivio",
+  items:[
+    {stem:"La tasa de ______ juvenil está en el 14,5%, muy por debajo de la media europea.", answers:["emancipación"]},
+    {stem:"La ______ final no puede superar el 60% de la renta mensual.", answers:["cuantía"]},
+    {stem:"La ayuda puede ______ hasta otros dos años.", answers:["prorrogarse"]},
+    {stem:"Sin ______ abierta no hay solicitud posible.", answers:["convocatoria"]},
+    {stem:"Esta medida llega en un contexto de precios ______.", answers:["disparados"]},
+    {stem:"La ayuda supone un ______, pero no cambia la estructura del mercado.", answers:["alivio"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su definición",
+  words:["la cuantía","el usufructuario","prorrogar","el requisito"],
+  defs:["cantidad exacta de dinero que se concede","persona que tiene derecho de uso de una vivienda sin ser propietaria","extender la duración de algo más allá de su plazo inicial","condición obligatoria para poder solicitar algo"],
+  answers:["a","b","c","d"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Definición</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena las ideas según aparecen en el artículo",
+  events:[
+    {text:"Se explica que el Plan Estatal de Vivienda 2026-2030 ya está en vigor.", answer:1},
+    {text:"Se detalla que la ayuda cubre hasta el 60% de la renta, con un tope de 300 euros.", answer:2},
+    {text:"Se explican los requisitos de edad e ingresos para solicitarla.", answer:3},
+    {text:"Se explica quién queda excluido de la ayuda (propietarios de otra vivienda).", answer:4},
+    {text:"Se recuerda que hay que consultar la convocatoria de cada comunidad autónoma.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Convierte a estilo indirecto: El Gobierno anunció: «La ayuda cubre hasta el 60% de la renta.»", model:"El Gobierno anunció que la ayuda cubría hasta el 60% de la renta."},
+    {stem:"Cambia del pretérito indefinido al pretérito perfecto compuesto: «La ayuda entró en vigor en abril.»", model:"La ayuda ha entrado en vigor en abril."},
+    {stem:"Transforma en pregunta: «Los jóvenes de hasta 35 años pueden solicitar la ayuda.»", model:"¿Pueden los jóvenes de hasta 35 años solicitar la ayuda?"},
+    {stem:"Cambia a la voz pasiva: «El Gobierno aprobó el nuevo Plan de Vivienda.»", model:"El nuevo Plan de Vivienda fue aprobado por el Gobierno."},
+    {stem:"Sustituye «supone un alivio» por una expresión sinónima, sin cambiar el sentido.", model:"Ejemplo: «ayuda a aliviar la situación» / «supone un respiro»."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «disparados» (precios):", opts:["bajos","muy altos","estables","razonables"], answer:1},
+    {q:"Antónimo de «prorrogar»:", opts:["extender","finalizar","renovar","mantener"], answer:1},
+    {q:"Marca la palabra intrusa:", opts:["alquiler","renta","hipoteca (compra)","arrendamiento"], answer:2},
+    {q:"Completa la colocación: «cumplir los ______»:", opts:["requisitos","zapatos","colores","números"], answer:0},
+    {q:"«Emancipación» en este contexto es sinónimo de:", opts:["independencia (del hogar familiar)","matrimonio","jubilación","graduación"], answer:0}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

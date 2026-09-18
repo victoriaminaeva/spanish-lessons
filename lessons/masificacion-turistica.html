@@ -1,0 +1,854 @@
+<!doctype html>
+<title>Masificación Turística</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#35494c;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#35494c;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Masificación Turística · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Masificación turística y migratoria</h1>
+  <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> Última Hora (Palma), Julio Martínez — «Masificación turística y migratoria», Opinión/Tribuna, 09/09/2026</p>
+  <div class="summary">
+    <b>De qué trata:</b> el autor compara dos debates muy polarizados en España: la masificación turística (protestas en Barcelona, Palma y otras ciudades) y la masificación migratoria (el caso de Ceuta). Defiende que se puede reconocer los beneficios del turismo y de la inmigración para la economía de Baleares y, al mismo tiempo, pedir una mejor gestión de ambos fenómenos, sin recurrir a etiquetas como "turismofóbico" o "racista".
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">04</span><h2>Test — Masificación turística</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "masificacion_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {};
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+var vocab = [
+  {term:"la masificación", pos:"sustantivo, f.",
+   quote:"'<mark>Masificación</mark> turística y migratoria' [...] han surgido movimientos de contestación al modelo de turismo de masas.",
+   trans:"перенасыщенность, чрезмерное скопление людей",
+   mean:"Exceso de personas o de demanda en un lugar o servicio, hasta el punto de generar problemas de gestión; de «masa».",
+   ex:"La masificación de las playas en agosto es un problema cada verano. — Перенасыщенность пляжей в августе — это проблема каждое лето."},
+  {term:"descalificar (a alguien)", pos:"verbo transitivo",
+   quote:"...ignorar estas preocupaciones o <mark>descalificar</mark> sistemáticamente -racistas o generadores de odio- a quienes plantean la necesidad de mejorar la gestión.",
+   trans:"дискредитировать, огульно осуждать",
+   mean:"Desacreditar a alguien o rechazar su opinión sin argumentos, normalmente etiquetándolo negativamente.",
+   ex:"No deberíamos descalificar una opinión solo porque no nos gusta. — Мы не должны огульно осуждать мнение только потому, что оно нам не нравится."},
+  {term:"la acogida", pos:"sustantivo, f.",
+   quote:"...ha reabierto el debate sobre los límites de los sistemas de <mark>acogida</mark>.",
+   trans:"приём, принятие (беженцев, иммигрантов)",
+   mean:"Capacidad e infraestructura de un país o región para recibir e integrar a personas, especialmente migrantes o refugiados.",
+   ex:"El centro de acogida no tenía plazas suficientes para todos. — В центре приёма не было достаточно мест для всех."},
+  {term:"la contestación", pos:"sustantivo, f.",
+   quote:"...han surgido movimientos de <mark>contestación</mark> al modelo de turismo de masas en destinos tan diversos como Barcelona, Ámsterdam, Venecia, Lisboa y Palma.",
+   trans:"протест, оппозиция",
+   mean:"Reacción de rechazo u oposición organizada frente a una política o situación; de «contestar» en el sentido de «protestar», no de «responder».",
+   ex:"Hubo una fuerte contestación social a la nueva ley de vivienda. — Был сильный протест общества против нового закона о жилье."},
+  {term:"polarizado/a", pos:"participio / adjetivo",
+   quote:"...el debate público sobre estas cuestiones suele desarrollarse en términos excesivamente <mark>polarizados</mark>.",
+   trans:"поляризованный, разделённый на два противоположных лагеря",
+   mean:"Dividido en dos posiciones extremas y opuestas, sin espacio para posturas intermedias; de «polarizar».",
+   ex:"El debate político está muy polarizado en muchos países. — Политические дебаты во многих странах сильно поляризованы."},
+  {term:"la externalidad", pos:"sustantivo, f.",
+   quote:"...cómo gestionar su intensidad y sus efectos para maximizar los beneficios y minimizar las <mark>externalidades</mark> negativas.",
+   trans:"побочный эффект, внешний эффект (экономический термин)",
+   mean:"Efecto secundario, positivo o negativo, que una actividad económica produce sobre terceros o sobre el entorno.",
+   ex:"La contaminación es una externalidad negativa del turismo masivo. — Загрязнение — это негативный побочный эффект массового туризма."},
+  {term:"la prosperidad", pos:"sustantivo, f.",
+   quote:"La <mark>prosperidad</mark> alcanzada por la isla durante las últimas décadas no puede entenderse sin la contribución de esta industria.",
+   trans:"процветание, благополучие",
+   mean:"Situación de bienestar económico y desarrollo sostenido de una región, sociedad o persona.",
+   ex:"El turismo trajo prosperidad a muchas zonas costeras. — Туризм принёс процветание многим прибрежным районам."},
+  {term:"la hostelería", pos:"sustantivo, f.",
+   quote:"La <mark>hostelería</mark>, la construcción, los cuidados personales, la agricultura y otros ámbitos difícilmente podrían mantener sus niveles de actividad sin la aportación de mano de obra inmigrante.",
+   trans:"гостиничный и ресторанный бизнес, сфера общественного питания и гостеприимства",
+   mean:"Sector económico que incluye hoteles, restaurantes, bares y servicios de alojamiento y comida.",
+   ex:"Trabajó muchos años en la hostelería antes de montar su propio negocio. — Он много лет работал в сфере гостеприимства, прежде чем открыть свой бизнес."},
+  {term:"la etiqueta", pos:"sustantivo, f. (uso figurado)",
+   quote:"...sin recurrir automáticamente a <mark>etiquetas</mark> que empobrecen el debate público.",
+   trans:"ярлык, штамп",
+   mean:"Calificativo simplista que se aplica a una persona o idea para clasificarla, a menudo sin analizar los matices; sentido figurado de «etiqueta» (label).",
+   ex:"Es fácil poner etiquetas, pero difícil entender los matices. — Легко навешивать ярлыки, но трудно понять нюансы."},
+  {term:"empobrecer (algo)", pos:"verbo transitivo",
+   quote:"...sin recurrir automáticamente a etiquetas que <mark>empobrecen</mark> el debate público.",
+   trans:"обеднять, делать более примитивным (в переносном смысле)",
+   mean:"Hacer más pobre, simple o superficial algo que debería ser rico en matices, como un debate o una idea.",
+   ex:"Simplificar demasiado un tema complejo lo empobrece. — Слишком сильно упрощая сложную тему, мы её обедняем."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var debate = [
+  {q:"¿Has visitado alguna vez un destino turístico muy masificado (mucha gente, colas, precios altos)? ¿Cómo fue la experiencia?", hint:"Útil: «Una vez fui a...», «Había tanta gente que...»"},
+  {q:"En tu opinión, ¿el turismo es más positivo o más negativo para una ciudad o región? Da ejemplos de tu país.", hint:"Útil: «Por un lado..., por otro lado...», «En mi país, el turismo...»"},
+  {q:"El autor dice que criticar el turismo se etiqueta de \"turismofóbico\" y criticar la inmigración se etiqueta de \"racista\", lo que dificulta el debate. ¿Ocurre algo parecido en tu país con otros temas? Compara.", hint:"Útil: «Algo similar pasa con...», «En mi país, cuando alguien critica..., se le llama...»"},
+  {q:"¿Estás de acuerdo con que se puede reconocer los beneficios de la inmigración y del turismo y, al mismo tiempo, pedir una mejor gestión de ambos? Argumenta.", hint:"Útil: «Estoy de acuerdo/en desacuerdo porque...», «Creo que es posible/imposible...»"},
+  {q:"Si fueras alcalde o alcaldesa de una ciudad muy visitada por turistas, ¿qué medidas tomarías para reducir la masificación sin perder los beneficios económicos?", hint:"Útil: «Lo primero que haría sería...», «Limitaría...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+var gram = [
+  {id:"g1", title:"3.1 Presente de indicativo",
+   quote:"En toda Europa <mark>existe</mark> una creciente preocupación social por algunos de los retos asociados a la inmigración.",
+   rule:"Verbos regulares en -ar/-er/-ir. Se usa para hechos actuales y descripciones generales — muy típico en artículos de opinión.",
+   items:[
+     {stem:"En toda Europa ______ (existir) una creciente preocupación por la inmigración irregular.", answers:["existe"]},
+     {stem:"Muchas ciudades europeas ______ (experimentar) tensiones por el turismo de masas.", answers:["experimentan"]},
+     {stem:"El debate público ______ (desarrollarse) en términos muy polarizados.", answers:["se desarrolla"]},
+     {stem:"Numerosos sectores económicos de Baleares ______ (depender) de trabajadores extranjeros.", answers:["dependen"]},
+     {stem:"Yo ______ (creer) que hay que buscar soluciones basadas en datos.", answers:["creo"]},
+     {stem:"La hostelería y la construcción ______ (necesitar) mano de obra inmigrante.", answers:["necesitan"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito perfecto compuesto",
+   quote:"Esta tendencia se <mark>ha reflejado</mark> en un aumento del apoyo a formaciones políticas que denuncian la 'masificación' migratoria.",
+   rule:"Presente de <i>haber</i> + participio (-ado/-ido). Acción pasada con relevancia en el presente, sin fecha concreta.",
+   items:[
+     {stem:"Esta tendencia se ______ (reflejar) en un aumento del apoyo a partidos antiinmigración.", answers:["ha reflejado"]},
+     {stem:"El caso de Ceuta ______ (poner) de manifiesto la complejidad del debate.", answers:["ha puesto"]},
+     {stem:"En muchas ciudades europeas ______ (surgir) movimientos contra el turismo de masas.", answers:["han surgido"]},
+     {stem:"La percepción crítica sobre el turismo también ______ (aumentar).", answers:["ha aumentado"]},
+     {stem:"¿Alguna vez ______ (sentir, tú) que un destino estaba demasiado masificado?", answers:["has sentido"]},
+     {stem:"Nosotros ______ (ver) cómo el debate se polariza cada vez más.", answers:["hemos visto"]}
+   ]},
+  {id:"g3", title:"3.3 Condicional simple",
+   quote:"La cuestión no <mark>debería</mark> ser si Mallorca necesita turismo o no, sino cómo gestionar su intensidad.",
+   rule:"Infinitivo completo + -ía,-ías,-ía,-íamos,-íais,-ían. <i>Deber</i> en condicional expresa una recomendación o un juicio, no una obligación estricta.",
+   items:[
+     {stem:"La cuestión no ______ (deber) ser si hay turismo, sino cómo gestionarlo.", answers:["debería"]},
+     {stem:"Cualquier crítica al turismo no ______ (deber) interpretarse automáticamente como turismofobia.", answers:["debería"]},
+     {stem:"Yo ______ (buscar) soluciones basadas en datos, no en etiquetas.", answers:["buscaría"]},
+     {stem:"¿Qué medidas ______ (tomar) tú para reducir la masificación?", answers:["tomarías"]},
+     {stem:"En una democracia madura, ______ (poder) examinarse los efectos con serenidad.", answers:["podrían"]},
+     {stem:"Nosotros ______ (preferir) un debate menos polarizado sobre estos temas.", answers:["preferiríamos"]}
+   ]},
+  {id:"g4", title:"3.4 Perífrasis «soler + infinitivo»",
+   quote:"El debate público sobre estas cuestiones <mark>suele desarrollarse</mark> en términos excesivamente polarizados.",
+   rule:"Presente de <i>soler</i> (suelo, sueles, suele, solemos, soléis, suelen) + infinitivo — expresa una acción habitual.",
+   items:[
+     {stem:"El debate público ______ (desarrollarse) en términos muy polarizados.", answers:["suele desarrollarse"]},
+     {stem:"Los medios ______ (simplificar) estos temas complejos.", answers:["suelen simplificar"]},
+     {stem:"Yo ______ (evitar) los debates demasiado polarizados.", answers:["suelo evitar"]},
+     {stem:"¿Tú ______ (informarte) bien antes de opinar sobre inmigración o turismo?", answers:["sueles informarte"]},
+     {stem:"Las críticas al turismo ______ (recibir) la etiqueta de turismofóbicas.", answers:["suelen recibir"]},
+     {stem:"Nosotros ______ (hablar) de estos temas sin datos suficientes.", answers:["solemos hablar"]}
+   ]},
+  {id:"g5", title:"3.5 Perífrasis «llegar a + infinitivo»",
+   quote:"...puede ser percibido como una actitud hostil hacia las personas inmigrantes, <mark>llegando a calificarse</mark> de racistas a quienes reclaman medidas.",
+   rule:"<i>Llegar a</i> + infinitivo. Expresa que un proceso alcanza un punto extremo o inesperado; muy usado con gerundio («llegando a») para añadir una consecuencia.",
+   items:[
+     {stem:"Algunas críticas legítimas ______ (llegar a) calificarse de racistas.", answers:["llegan a"]},
+     {stem:"El debate ______ (llegar a) ser tan polarizado que nadie escucha al otro lado.", answers:["llega a"]},
+     {stem:"Yo no ______ (llegar a) entender por qué el debate es tan simplista.", answers:["llego a"]},
+     {stem:"Las tensiones ______ (llegar a) afectar a la convivencia en la isla.", answers:["llegan a"]},
+     {stem:"¿Tú ______ (llegar a) pensar que ambos fenómenos están relacionados?", answers:["llegas a"]},
+     {stem:"Algunos discursos ______ (llegar a) alimentar el odio en redes sociales.", answers:["llegan a"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+var testList = document.getElementById("testList");
+
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"Según el autor, ¿qué caso puso de manifiesto la complejidad del debate migratorio?", opts:["el Brexit","el caso de Ceuta","la guerra de Ucrania","la crisis de 2008"], answer:1},
+    {q:"¿Qué partidos políticos se mencionan como beneficiados por el discurso contra la \"masificación\" migratoria en España?", opts:["PSOE y Sumar","Vox y Aliança Catalana","PP y Ciudadanos","Podemos y Bildu"], answer:1},
+    {q:"¿Qué ciudades se mencionan como ejemplos de contestación al turismo de masas?", opts:["Madrid, Sevilla, Bilbao","Barcelona, Ámsterdam, Venecia, Lisboa y Palma","París, Roma, Londres","Nueva York, Miami"], answer:1},
+    {q:"Según el autor, ¿qué ocurre a menudo cuando alguien critica los efectos del turismo?", opts:["se le felicita","se le ignora","se le tacha de turismofóbico","se le premia"], answer:2},
+    {q:"¿Qué sectores económicos de Baleares dependen de la mano de obra inmigrante, según el texto?", opts:["solo la tecnología","la hostelería, la construcción, los cuidados personales y la agricultura","solo la banca","ninguno"], answer:1},
+    {q:"¿Cuál es la postura principal del autor?", opts:["el turismo y la inmigración son totalmente negativos","hay que descalificar a quienes los critican","se puede reconocer sus beneficios y a la vez pedir una mejor gestión","no hay ningún debate real sobre estos temas"], answer:2}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"masificación · descalificar · acogida · contestación · polarizados · externalidades · prosperidad · empobrecen",
+  items:[
+    {stem:"Han surgido movimientos de ______ al modelo de turismo de masas.", answers:["contestación"]},
+    {stem:"El debate público se desarrolla en términos excesivamente ______.", answers:["polarizados"]},
+    {stem:"Hay que gestionar el turismo para minimizar las ______ negativas.", answers:["externalidades"]},
+    {stem:"La ______ de Mallorca no puede entenderse sin el turismo.", answers:["prosperidad"]},
+    {stem:"No hay que ______ sistemáticamente a quienes piden mejor gestión migratoria.", answers:["descalificar"]},
+    {stem:"Las etiquetas simplistas ______ el debate público.", answers:["empobrecen"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su definición",
+  words:["la acogida","la contestación","empobrecer","la externalidad"],
+  defs:["sistema o capacidad para recibir e integrar a personas","movimiento de protesta u oposición","hacer más pobre o simplista algo, como un debate","efecto secundario (positivo o negativo) de una actividad económica"],
+  answers:["a","b","c","d"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Definición</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena las ideas según aparecen en el artículo",
+  events:[
+    {text:"Se plantea la preocupación europea por la inmigración irregular y el auge de partidos que denuncian la \"masificación\".", answer:1},
+    {text:"Se menciona el caso de Ceuta como ejemplo de crisis de control fronterizo.", answer:2},
+    {text:"Se señala el aumento de movimientos de contestación al turismo de masas en varias ciudades europeas.", answer:3},
+    {text:"Se critica la polarización del debate público sobre turismo e inmigración en Mallorca.", answer:4},
+    {text:"Se argumenta que se puede reconocer los beneficios de ambos fenómenos y aun así pedir mejor gestión.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Convierte a estilo indirecto: El autor escribió: «El debate público suele desarrollarse en términos excesivamente polarizados.»", model:"El autor escribió que el debate público solía desarrollarse en términos excesivamente polarizados."},
+    {stem:"Cambia del presente al pretérito perfecto compuesto: «Los movimientos de contestación surgen en varias ciudades.»", model:"Los movimientos de contestación han surgido en varias ciudades."},
+    {stem:"Transforma en pregunta: «Numerosos sectores dependen de trabajadores inmigrantes.»", model:"¿Dependen numerosos sectores de trabajadores inmigrantes?"},
+    {stem:"Cambia a la voz pasiva: «Muchos ciudadanos rechazan la masificación turística.»", model:"La masificación turística es rechazada por muchos ciudadanos."},
+    {stem:"Sustituye «descalificar sistemáticamente» por una expresión sinónima, sin cambiar el sentido.", model:"Ejemplo: «criticar sin argumentos» / «rechazar de entrada»."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «masificación»:", opts:["escasez","sobrepoblación/saturación","organización","reducción"], answer:1},
+    {q:"Antónimo de «prosperidad»:", opts:["riqueza","pobreza","crecimiento","éxito"], answer:1},
+    {q:"Marca la palabra intrusa:", opts:["acogida","integración","recepción","rechazo"], answer:3},
+    {q:"Completa la colocación: «______ un debate»:", opts:["polarizar","cocinar","vestir","plantar"], answer:0},
+    {q:"«Externalidad» en este contexto es sinónimo de:", opts:["efecto secundario","error","beneficio directo","pregunta"], answer:0}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
