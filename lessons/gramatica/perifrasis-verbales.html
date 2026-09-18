@@ -1,0 +1,760 @@
+<!doctype html>
+<title>Perífrasis verbales</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Perífrasis verbales</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>Las perífrasis verbales</h1>
+  <p class="subtitle">Reglas claras + dieciséis bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> las perífrasis verbales más frecuentes del español: <b>ir a</b>, <b>acabar de</b>, <b>volver a</b>, <b>dejar de</b>, <b>empezar a / ponerse a</b>, <b>seguir</b> + gerundio, <b>soler</b>, la obligación (<b>tener que / hay que / deber</b>), <b>llevar</b> + gerundio y <b>llevar sin</b> + infinitivo, <b>estar a punto de</b>, el contraste <b>deber</b> / <b>deber de</b>, <b>andar</b> / <b>venir</b> + gerundio, <b>acabar</b> + gerundio / <b>acabar por</b>, <b>tener</b> + participio y <b>estar por</b>. Especial atención a <b>deber vs. deber de</b> (obligación vs. probabilidad) y a <b>tener que vs. hay que</b> (personal vs. impersonal), dos contrastes muy típicos en los errores de hablantes de ruso.
+  </div>
+  <p class="series-note">📚 Tema de la serie <b>Gramática</b> del sitio. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — las perífrasis verbales</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada perífrasis.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>Deber vs. deber de — obligación vs. probabilidad</h3>
+    <ul>
+      <li><b>DEBER + infinitivo</b> = obligación, consejo moral: <i>debes estudiar más</i> (тебе следует/ты должен учиться больше).</li>
+      <li><b>DEBER DE + infinitivo</b> = probabilidad, suposición: <i>debe de tener 40 años</i> (ему, должно быть, лет 40).</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> в разговорной речи испанцы сами часто путают эти формы (опускают «de» для вероятности или наоборот), но на уровне B2 важно знать разницу: без «de» — обязанность/совет, с «de» — предположение. «Debes de tener razón» в строгой норме означает «должно быть, ты прав» (вероятность), а не «ты обязан быть правым».</div>
+  </div>
+
+  <div class="contrast-box">
+    <h3>Tener que vs. hay que — obligación personal vs. impersonal</h3>
+    <ul>
+      <li><b>TENER QUE + infinitivo</b> = obligación personal, con sujeto concreto: <i>tengo que terminar el informe</i> (у меня есть конкретная обязанность).</li>
+      <li><b>HAY QUE + infinitivo</b> = obligación impersonal, general, sin sujeto concreto: <i>hay que reservar con antelación</i> (нужно/следует — обращено ко всем).</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> в русском часто нет разницы между «мне нужно» и «нужно» (безличное), поэтому учащиеся путают эти конструкции. Проверка: если можно вставить конкретное подлежащее (yo, tú, mi jefe…) — нужен <b>tener que</b>; если правило касается всех/никого конкретно — нужен <b>hay que</b> (форма всегда неизменна: только «hay que», без спряжения).</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Dieciséis bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"IR A + infinitivo", pos:"futuro próximo · intención",
+   quote:"Mañana <mark>voy a</mark> visitar a mis abuelos.",
+   trans:"собираться сделать что-то (близкое будущее/намерение)",
+   mean:"Expresa un plan o una acción que va a ocurrir pronto, o una intención decidida.",
+   ex:"Este verano vamos a viajar a Italia. — Этим летом мы собираемся поехать в Италию."},
+  {term:"ACABAR DE + infinitivo", pos:"acción recién terminada",
+   quote:"<mark>Acabo de</mark> llegar, todavía tengo la maleta en la mano.",
+   trans:"только что сделать что-то",
+   mean:"Indica que la acción ha terminado hace muy poco tiempo, casi en el mismo momento del habla.",
+   ex:"Acaban de anunciar los resultados. — Только что объявили результаты."},
+  {term:"VOLVER A + infinitivo", pos:"repetición",
+   quote:"<mark>Vuelvo a</mark> ver esa película, me encanta.",
+   trans:"сделать что-то снова",
+   mean:"Expresa que una acción se repite, se vuelve a hacer después de haberla hecho antes.",
+   ex:"Ha vuelto a suspender el examen. — Он снова провалил экзамен."},
+  {term:"DEJAR DE + infinitivo", pos:"interrupción de un hábito",
+   quote:"Mi padre <mark>dejó de</mark> fumar hace un año.",
+   trans:"перестать делать что-то",
+   mean:"Marca el final de una acción habitual o continuada, algo que antes se hacía y ya no.",
+   ex:"Deja de hacer ruido, por favor. — Прекрати шуметь, пожалуйста."},
+  {term:"EMPEZAR A / PONERSE A + infinitivo", pos:"inicio de la acción",
+   quote:"El niño <mark>se puso a</mark> llorar sin motivo. La clase <mark>empieza a</mark> las nueve.",
+   trans:"начать делать что-то (ponerse a = более внезапно)",
+   mean:"Ambas marcan el comienzo de una acción; ponerse a añade un matiz de inicio más repentino o inesperado que empezar a.",
+   ex:"De repente se puso a llover muy fuerte. — Вдруг сильно полил дождь."},
+  {term:"SEGUIR + gerundio", pos:"continuidad",
+   quote:"Mi abuela <mark>sigue trabajando</mark> a los setenta años.",
+   trans:"продолжать делать что-то",
+   mean:"Indica que una acción que ya empezó continúa en el presente, sin interrupción.",
+   ex:"A pesar de la lluvia, seguimos caminando. — Несмотря на дождь, мы продолжали идти."},
+  {term:"SOLER + infinitivo", pos:"habitualidad (solo presente/imperfecto)",
+   quote:"Los domingos <mark>suelo</mark> levantarme tarde.",
+   trans:"обычно делать что-то (привычка)",
+   mean:"Expresa una acción habitual, repetida con frecuencia. Solo se usa en presente e imperfecto de indicativo.",
+   ex:"En Madrid solía llover mucho en abril. — В Мадриде обычно (раньше) много дождило в апреле."},
+  {term:"TENER QUE / HAY QUE / DEBER + infinitivo", pos:"obligación — tres matices",
+   quote:"<mark>Tengo que</mark> terminar el informe. <mark>Hay que</mark> reservar con antelación. <mark>Debes</mark> estudiar más.",
+   trans:"я должен / нужно (безлично) / тебе следует",
+   mean:"Tener que expresa una obligación personal y concreta; hay que, una obligación impersonal y general (forma invariable); deber añade un matiz de consejo o deber moral.",
+   ex:"Hay que llevar paraguas, va a llover. — Нужно взять зонт, будет дождь."},
+  {term:"LLEVAR + gerundio / LLEVAR SIN + infinitivo", pos:"duración",
+   quote:"<mark>Llevo dos años estudiando</mark> español. <mark>Llevamos tres días sin dormir</mark> bien.",
+   trans:"делать что-то уже (какое-то время) / не делать чего-то уже (какое-то время)",
+   mean:"Llevar + gerundio expresa cuánto tiempo se lleva haciendo algo; llevar + sin + infinitivo expresa cuánto tiempo se lleva sin hacer algo.",
+   ex:"Llevo sin verle desde el verano. — Я не видел его с самого лета."},
+  {term:"ESTAR A PUNTO DE + infinitivo", pos:"inminencia",
+   quote:"El avión <mark>está a punto de</mark> aterrizar.",
+   trans:"вот-вот сделать что-то",
+   mean:"Indica que una acción va a ocurrir de manera inminente, en cuestión de segundos o minutos.",
+   ex:"Estábamos a punto de salir cuando sonó el teléfono. — Мы уже собирались выходить, когда зазвонил телефон."},
+  {term:"DEBER + infinitivo vs. DEBER DE + infinitivo", pos:"obligación vs. probabilidad",
+   quote:"<mark>Debes</mark> respetar las normas. <mark>Debe de</mark> tener unos cuarenta años.",
+   trans:"ты должен (обязанность) / должно быть (вероятность)",
+   mean:"Deber + infinitivo expresa obligación o consejo; deber de + infinitivo expresa una suposición o probabilidad. Es un contraste típico de B2. Ver más abajo.",
+   ex:"No contesta al teléfono, debe de estar durmiendo. — Он не отвечает по телефону, должно быть, спит."},
+  {term:"ANDAR / VENIR + gerundio", pos:"proceso con matiz",
+   quote:"Mi compañero <mark>anda diciendo</mark> tonterías todo el día. El gobierno <mark>viene prometiendo</mark> esta reforma desde hace años.",
+   trans:"ходить и делать что-то (негативный оттенок) / делать что-то (процесс, приближающийся к настоящему)",
+   mean:"Andar + gerundio suele tener un matiz negativo o de acción errática/repetida molesta; venir + gerundio describe un proceso que empezó en el pasado y se acerca o llega hasta el presente.",
+   ex:"Mi vecino viene quejándose del ruido desde hace meses. — Мой сосед уже несколько месяцев жалуется на шум."},
+  {term:"ACABAR + gerundio / ACABAR POR + infinitivo", pos:"resultado final de un proceso",
+   quote:"Después de discutir tanto, <mark>acabó llorando</mark>. Al final <mark>acabaron por</mark> aceptar las condiciones.",
+   trans:"в итоге сделать что-то / в конце концов сделать что-то",
+   mean:"Ambas describen el resultado final de un proceso largo o de una serie de eventos; son prácticamente intercambiables en muchos contextos.",
+   ex:"Si sigues así, acabarás perdiendo a tus amigos. — Если так продолжишь, в итоге потеряешь друзей."},
+  {term:"TENER + participio", pos:"objeto directo + participio concordado",
+   quote:"Ya <mark>tengo escritas</mark> tres páginas del informe.",
+   trans:"иметь что-то сделанным (причастие согласуется с объектом)",
+   mean:"El participio concuerda en género y número con el complemento directo, no con el sujeto; se usa para destacar el resultado acumulado de una acción.",
+   ex:"Tenemos reservadas las entradas para el concierto. — У нас уже забронированы билеты на концерт."},
+  {term:"ESTAR POR + infinitivo", pos:"con ganas de, sin decidir todavía",
+   quote:"<mark>Estoy por</mark> dejarlo todo y mudarme al campo, aunque no lo he decidido.",
+   trans:"быть склонным сделать что-то, ещё не решив окончательно",
+   mean:"Expresa una inclinación o tentación hacia una acción, sin que se haya tomado todavía la decisión final; no confundir con estar a punto de (inminencia real).",
+   ex:"Estoy por llamarle para decirle lo que pienso. — Я склоняюсь к тому, чтобы позвонить ему и сказать, что думаю."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass, ruleHtml){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+function buildRadioBlock(id, title, tag, tagClass, items, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(hintText){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>'; }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function buildFillBlock(id, title, tag, tagClass, items, bank, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(bank){ wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+bank+'</div>'; }
+  if(hintText){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>'; }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function buildOpenBlock(id, title, tag, tagClass, items, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(hintText){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>'; }
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="'+id+'-'+idx+'" style="min-height:44px;" placeholder="Tu traducción/transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="'+id+'-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById(id+"-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE 1: ir a / acabar de / volver a — reconocimiento ---------------- */
+buildRadioBlock("pv1", "Bloque 1 · Ir a, acabar de, volver a — reconocimiento", "fácil", "easy", [
+  {q:"Mañana ___ visitar a mis abuelos.", opts:["voy a","acabo de"], answer:0},
+  {q:"___ llegar, todavía tengo la maleta en la mano.", opts:["Voy a","Acabo de"], answer:1},
+  {q:"Este verano ___ viajar a Italia.", opts:["vamos a","volvemos a"], answer:0},
+  {q:"___ ver esa película, me encanta.", opts:["Voy a","Vuelvo a"], answer:1},
+  {q:"Mi hermana ___ casarse en junio.", opts:["va a","acaba de"], answer:0},
+  {q:"He ___ suspender el examen, qué mala suerte.", opts:["ido a","vuelto a"], answer:1}
+]);
+
+/* ---------------- BLOQUE 2: dejar de / empezar a / ponerse a / seguir ---------------- */
+buildRadioBlock("pv2", "Bloque 2 · Dejar de, empezar a, ponerse a, seguir — reconocimiento", "fácil", "easy", [
+  {q:"___ llover, podemos salir sin paraguas.", opts:["Deja de","Empieza a"], answer:0},
+  {q:"De repente ___ llover muy fuerte.", opts:["se puso a","siguió"], answer:0},
+  {q:"___ trabajar en esta empresa el mes que viene.", opts:["Dejo de","Empiezo a"], answer:1},
+  {q:"A pesar de la lluvia, ___ caminando hasta casa.", opts:["seguimos","dejamos de"], answer:0},
+  {q:"Mi padre ___ beber café hace un año.", opts:["dejó de","empezó a"], answer:0},
+  {q:"El niño ___ llorar sin motivo aparente.", opts:["siguió","se puso a"], answer:1}
+]);
+
+/* ---------------- BLOQUE 3: obligación — huecos con banco ---------------- */
+buildFillBlock("pv3", "Bloque 3 · Tener que, hay que, deber — huecos con banco", "fácil", "easy", [
+  {stem:"(Yo) ___ terminar este informe hoy.", answers:["tengo que"]},
+  {stem:"___ respetar las normas de la biblioteca.", answers:["hay que"]},
+  {stem:"Mis padres ___ trabajar duro para pagar la hipoteca.", answers:["tienen que"]},
+  {stem:"(Tú) ___ estudiar más si quieres aprobar.", answers:["debes"]},
+  {stem:"Antes de viajar, ___ revisar el pasaporte.", answers:["hay que"]},
+  {stem:"(Nosotros) ___ llamar al médico.", answers:["tenemos que"]}
+], "tengo que · tienes que · tiene que · tenemos que · hay que · debes · debe");
+
+/* ---------------- BLOQUE 4: llevar + gerundio / llevar sin + infinitivo — sin banco ---------------- */
+buildFillBlock("pv4", "Bloque 4 · Llevar + gerundio / llevar sin + infinitivo", "medio", "mid", [
+  {stem:"(Yo) ___ dos años estudiando español.", answers:["llevo"]},
+  {stem:"(Nosotros) ___ tres días sin dormir bien por el calor.", answers:["llevamos"]},
+  {stem:"Mi hermana ___ seis meses trabajando en esa empresa.", answers:["lleva"]},
+  {stem:"(Ellos) ___ una semana sin hablarse después de la discusión.", answers:["llevan"]},
+  {stem:"¿Cuánto tiempo ___ (tú) viviendo en Madrid?", answers:["llevas"]},
+  {stem:"(Yo) ___ sin ver a mi mejor amigo desde el verano.", answers:["llevo"]}
+], null, "Escribe solo la forma de «llevar» (presente); el gerundio o «sin + infinitivo» ya está en la frase.");
+
+/* ---------------- BLOQUE 5: deber vs deber de — significado ---------------- */
+buildRadioBlock("pv5", "Bloque 5 · Deber vs. deber de — obligación o probabilidad", "medio", "mid", [
+  {q:"Debes terminar los deberes antes de salir.", opts:["obligación / consejo","probabilidad"], answer:0},
+  {q:"No contesta al teléfono, debe de estar durmiendo.", opts:["obligación / consejo","probabilidad"], answer:1},
+  {q:"Mi jefe debe de tener unos cincuenta años, aunque no lo parece.", opts:["obligación / consejo","probabilidad"], answer:1},
+  {q:"Debéis llegar puntuales a la reunión.", opts:["obligación / consejo","probabilidad"], answer:0},
+  {q:"Con ese abrigo tan caro, debe de tener mucho dinero.", opts:["obligación / consejo","probabilidad"], answer:1},
+  {q:"Debes pedir perdón si te has equivocado.", opts:["obligación / consejo","probabilidad"], answer:0}
+], "Elige si la frase expresa una obligación/consejo o una suposición/probabilidad.");
+
+/* ---------------- BLOQUE 6: soler / estar a punto de / acabar de — huecos con banco ---------------- */
+buildFillBlock("pv6", "Bloque 6 · Soler, estar a punto de, acabar de — huecos con banco", "medio", "mid", [
+  {stem:"Los domingos ___ levantarme tarde.", answers:["suelo"]},
+  {stem:"¡Corre! El tren ___ salir.", answers:["está a punto de"]},
+  {stem:"___ llegar a casa, estamos agotados.", answers:["acabamos de"]},
+  {stem:"Mis abuelos ___ cenar temprano.", answers:["suelen"]},
+  {stem:"La reunión ___ empezar, siéntate.", answers:["está a punto de"]},
+  {stem:"Mi hermana ___ graduarse en la universidad.", answers:["acaba de"]}
+], "suelo · suelen · acabamos de · acaba de · está a punto de");
+
+/* ---------------- BLOQUE 7: andar / venir + gerundio — matices ---------------- */
+buildRadioBlock("pv7", "Bloque 7 · Andar vs. venir + gerundio — matices", "medio-alto", "mid", [
+  {q:"Mi compañero ___ diciendo tonterías todo el día, ya no lo soporto.", opts:["anda","viene"], answer:0},
+  {q:"Mi vecino ___ quejándose del ruido desde hace meses.", opts:["anda","viene"], answer:1},
+  {q:"Los rumores ___ circulando por la oficina, nadie sabe si son ciertos.", opts:["andan","vienen"], answer:0},
+  {q:"El gobierno ___ prometiendo esta reforma desde hace años.", opts:["anda","viene"], answer:1},
+  {q:"¿Qué ___ haciendo por aquí a estas horas?", opts:["andas","vienes"], answer:0},
+  {q:"La empresa ___ anunciando resultados récord trimestre tras trimestre.", opts:["anda","viene"], answer:1}
+], "Andar + gerundio suele tener un matiz negativo o errante; venir + gerundio describe un proceso que se acerca al presente.");
+
+/* ---------------- BLOQUE 8: acabar + gerundio / acabar por + infinitivo ---------------- */
+buildFillBlock("pv8", "Bloque 8 · Acabar + gerundio vs. acabar por + infinitivo", "medio-alto", "mid", [
+  {stem:"Después de tanto discutir, ella ___ llorando.", answers:["acabó"]},
+  {stem:"Al final, mis padres ___ por aceptar mi decisión.", answers:["acabaron"]},
+  {stem:"Si sigues así, ___ perdiendo a todos tus amigos.", answers:["acabarás"]},
+  {stem:"Tras muchas dudas, ___ por comprar el piso más caro.", answers:["acabamos"]},
+  {stem:"El proyecto ___ costando el doble de lo previsto.", answers:["acabó"]}
+], null, "Escribe solo la forma conjugada de «acabar»; el gerundio o «por + infinitivo» ya está en la frase.");
+
+/* ---------------- BLOQUE 9: tener + participio — concordancia ---------------- */
+buildFillBlock("pv9", "Bloque 9 · Tener + participio — concordancia con el objeto", "alto", "hard", [
+  {stem:"Ya tengo ___ (escribir) tres páginas del informe.", answers:["escritas"]},
+  {stem:"Tengo ___ (preparar) la maleta para el viaje.", answers:["preparada"]},
+  {stem:"Tenemos ___ (reservar) las entradas para el concierto.", answers:["reservadas"]},
+  {stem:"Tengo ___ (leer) dos capítulos del libro.", answers:["leídos"]},
+  {stem:"Ya tiene ___ (terminar) el trabajo de fin de curso.", answers:["terminado"]}
+], null, "El participio concuerda en género y número con el objeto directo, no con el sujeto.");
+
+/* ---------------- BLOQUE 10: relacionar — perífrasis con su significado en ruso ---------------- */
+(function(){
+  var id = "pv10";
+  var words = ["ir a + infinitivo","acabar de + infinitivo","volver a + infinitivo","dejar de + infinitivo","empezar a / ponerse a + infinitivo","seguir + gerundio","soler + infinitivo","llevar + gerundio","estar a punto de + infinitivo","deber de + infinitivo","andar + gerundio","tener + participio"];
+  var defs = [
+    "собираться сделать что-то (близкое будущее)","только что сделать что-то","сделать что-то снова",
+    "перестать делать что-то","начать делать что-то (ponerse a — более внезапно)","продолжать делать что-то",
+    "обычно делать что-то (привычка)","делать что-то уже (какое-то время)","вот-вот сделать что-то",
+    "должно быть, вероятно","ходить и делать что-то (с негативным оттенком)","иметь что-то сделанным (согласуется с объектом)"
+  ];
+  var letters = words.map(function(_, i){ return String.fromCharCode(97+i); });
+  var answers = letters.slice();
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 10 · Relaciona cada perífrasis con su significado en ruso", "alto", "hard"));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Perífrasis</th><th>Significado</th></tr>";
+  words.forEach(function(w, idx){
+    var opts = letters.map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = defs.map(function(d,i){ return letters[i]+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+words.length+"</b>";
+    blockScores[id] = {correct:correct, total:words.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:words.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 11: mixto — huecos sin banco (repaso avanzado) ---------------- */
+buildFillBlock("pv11", "Bloque 11 · Perífrasis mezcladas — repaso avanzado", "alto", "hard", [
+  {stem:"(Yo) ___ dos años estudiando español y todavía me cuesta el subjuntivo.", answers:["llevo"]},
+  {stem:"Mi jefe ___ tener unos cincuenta años, aunque no lo parece.", answers:["debe de"]},
+  {stem:"___ reservar mesa si quieres cenar allí el sábado.", answers:["hay que"]},
+  {stem:"Después de tantos intentos, ___ por rendirse.", answers:["acabó"]},
+  {stem:"Mi madre ___ trabajando a los setenta años.", answers:["sigue"]},
+  {stem:"(Nosotros) ___ tres días sin dormir bien por el calor.", answers:["llevamos"]}
+]);
+
+/* ---------------- BLOQUE 12: estar por vs estar a punto de ---------------- */
+buildRadioBlock("pv12", "Bloque 12 · Estar por vs. estar a punto de", "alto", "hard", [
+  {q:"Estoy ___ dejarlo todo y mudarme al campo, aunque no lo he decidido.", opts:["por","a punto de"], answer:0},
+  {q:"¡Cuidado, el vaso está ___ caerse!", opts:["por","a punto de"], answer:1},
+  {q:"Está ___ empezar la película, apaga el móvil.", opts:["por","a punto de"], answer:1},
+  {q:"Estoy ___ llamarle para decirle lo que pienso, aunque no sé si merece la pena.", opts:["por","a punto de"], answer:0},
+  {q:"El avión está ___ aterrizar.", opts:["por","a punto de"], answer:1}
+], "Estar por = tentación, sin decidir todavía; estar a punto de = inminencia real, va a pasar ya.");
+
+/* ---------------- BLOQUE 13: traducción abierta 1 ---------------- */
+buildOpenBlock("pv13", "Bloque 13 · Traduce — elige la perífrasis adecuada", "el más difícil", "hard", [
+  {stem:"Traduce: «Я уже два года учу испанский.»", model:"Llevo dos años estudiando español."},
+  {stem:"Traduce: «Мы только что пришли домой.»", model:"Acabamos de llegar a casa."},
+  {stem:"Traduce: «Ему, должно быть, лет сорок.»", model:"Debe de tener unos cuarenta años."},
+  {stem:"Traduce: «Нужно записаться заранее, чтобы попасть на приём.»", model:"Hay que pedir cita con antelación para conseguir consulta."}
+], "Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).");
+
+/* ---------------- BLOQUE 14: traducción abierta 2 ---------------- */
+buildOpenBlock("pv14", "Bloque 14 · Traduce — repetición, interrupción, resultado", "el más difícil", "hard", [
+  {stem:"Traduce: «Я бросил курить два года назад.»", model:"Dejé de fumar hace dos años."},
+  {stem:"Traduce: «Она снова опоздала на работу.»", model:"Ha vuelto a llegar tarde al trabajo."},
+  {stem:"Traduce: «Мы три дня не спим нормально из-за жары.»", model:"Llevamos tres días sin dormir bien por el calor."},
+  {stem:"Traduce: «В конце концов он согласился на условия.»", model:"Acabó por aceptar las condiciones."}
+]);
+
+/* ---------------- BLOQUE 15: traducción abierta 3 ---------------- */
+buildOpenBlock("pv15", "Bloque 15 · Traduce — repaso final", "el más difícil", "hard", [
+  {stem:"Traduce: «Автобус вот-вот отправится, беги!»", model:"El autobús está a punto de salir, ¡corre!"},
+  {stem:"Traduce: «Мой сосед уже некоторое время постоянно жалуется на всё подряд.»", model:"Mi vecino viene quejándose de todo desde hace tiempo."},
+  {stem:"Traduce: «У меня уже написаны три страницы отчёта.»", model:"Ya tengo escritas tres páginas del informe."}
+]);
+
+/* ---------------- BLOQUE 16: repaso general — mixto ---------------- */
+buildRadioBlock("pv16", "Bloque 16 · Repaso general", "alto", "hard", [
+  {q:"Mira esas nubes, ___ llover.", opts:["va a","suele"], answer:0},
+  {q:"En abril ___ llover mucho en esta región.", opts:["va a","suele"], answer:1},
+  {q:"Mi hermano ___ fumar hace un mes.", opts:["dejó de","sigue"], answer:0},
+  {q:"Mi hermano ___ fumando a pesar de los consejos del médico.", opts:["dejó de","sigue"], answer:1},
+  {q:"Tú ___ estudiar más para el examen.", opts:["tienes que","debes de"], answer:0},
+  {q:"Con ese abrigo tan caro, ___ tener mucho dinero.", opts:["tiene que","debe de"], answer:1}
+], "Bloque final — combina todo lo visto: futuro próximo, hábito, interrupción, continuidad y obligación/probabilidad.");
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

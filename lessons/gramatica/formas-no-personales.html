@@ -1,0 +1,795 @@
+<!doctype html>
+<title>Formas no personales del verbo</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Formas no personales</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>Infinitivo, gerundio y participio</h1>
+  <p class="subtitle">Reglas claras + dieciséis bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> las formas no personales del verbo español — infinitivo, gerundio y participio — y sus construcciones compuestas: infinitivo compuesto (<i>haber comido</i>), gerundio compuesto (<i>habiendo comido</i>) y participio absoluto (<i>terminada la clase...</i>). Especial atención al error más frecuente de los hablantes de ruso: usar el gerundio después de una preposición.
+  </div>
+  <p class="series-note">📚 Tema de la serie <b>Gramática</b> del sitio — más adelante se añadirán aquí otros temas. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — infinitivo, gerundio, participio</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada forma.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>Gerundio tras preposición — el error más frecuente</h3>
+    <ul>
+      <li>En español, el gerundio <b>nunca</b> va después de una preposición (a, de, en, por, para, sin, antes de, después de, hasta...). En esa posición se usa siempre el <b>infinitivo</b>, aunque en ruso el hablante piense en una acción «en proceso» y le salga instintivamente un gerundio.</li>
+      <li>La única excepción es la construcción arcaica y muy poco frecuente «en + gerundio» (<i>en llegando el verano...</i>), propia de la lengua literaria o de refranes — evítala en el uso normal.</li>
+      <li>El gerundio tampoco puede funcionar como sustantivo ni como sujeto de una oración, a diferencia de las formas verbales sustantivadas del ruso (курение, чтение). Para eso el español usa el infinitivo: <i>Fumar es malo</i>, NO <s>Fumando es malo</s>.</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> «antes de <s>saliendo</s>» — НЕПРАВИЛЬНО. После любого предлога — только инфинитив: «antes de <b>salir</b>». То же с «para», «sin», «después de», «al»: <b>para entender</b>, <b>sin decir</b> nada, <b>al llegar</b>.</div>
+  </div>
+
+  <div class="contrast-box">
+    <h3>Tres formas para la «acción anterior» — ¿cuál elijo?</h3>
+    <ul>
+      <li><b>Infinitivo compuesto</b> (haber + participio): tras preposición o con verbos de sentimiento — <i>después de haber comido, siento haberte molestado</i>. Es la opción más neutra y frecuente.</li>
+      <li><b>Gerundio compuesto</b> (habiendo + participio): funciona como una subordinada adverbial completa, registro formal/escrito — <i>habiendo terminado el trabajo, se fue a casa</i>. Menos frecuente en la lengua oral.</li>
+      <li><b>Participio absoluto</b>: una cláusula sin verbo conjugado, el participio concuerda con el sustantivo que introduce — <i>terminada la clase, los alumnos salieron</i>. Muy típico de la lengua escrita y periodística.</li>
+    </ul>
+    <div class="error-box"><b>Внимание:</b> el participio absoluto SIEMPRE concuerda en género y número con su sustantivo: <b>terminada</b> la clase (fem.), pero <b>terminado</b> el proyecto (masc.), <b>terminados</b> los exámenes (masc. pl.).</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Dieciséis bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"Infinitivo tras preposición", pos:"antes de / después de / para / sin + infinitivo",
+   quote:"<mark>Antes de salir</mark>, cierra la ventana. Trabajo mucho <mark>para ganar</mark> más dinero.",
+   trans:"перед тем как выйти..., чтобы заработать...",
+   mean:"Después de cualquier preposición (a, de, en, por, para, sin, antes de, después de, hasta, al) el verbo va siempre en infinitivo, nunca en gerundio ni conjugado. Es obligatorio incluso cuando el sujeto es el mismo que el de la oración principal, lo que provoca errores frecuentes en hablantes de ruso.",
+   ex:"Sin decir nada, se fue de la habitación. — Не сказав ни слова, он вышел из комнаты (в испанском после «sin» обязателен инфинитив)."},
+  {term:"Estar + gerundio", pos:"acción en curso (progresivo)",
+   quote:"<mark>Estoy estudiando</mark> para el examen. <mark>Estábamos viendo</mark> la tele cuando llamaste.",
+   trans:"нахожусь в процессе (делаю сейчас) / был(а) в процессе",
+   mean:"La perífrasis «estar + gerundio» expresa una acción que está sucediendo en el momento del que se habla (presente, pasado o futuro). El gerundio es invariable y se puede combinar con pronombres átonos antes de «estar» o pegados al gerundio: me lo estoy explicando / estoy explicándomelo.",
+   ex:"Los niños estaban jugando en el jardín cuando empezó a llover. — Дети играли (были в процессе игры) в саду, когда начался дождь."},
+  {term:"Infinitivo compuesto", pos:"haber + participio — acción anterior",
+   quote:"Siento <mark>haberte molestado</mark> ayer. <mark>Después de haber comido</mark>, salimos a pasear.",
+   trans:"сделав это раньше / после того, как я сделал",
+   mean:"Se forma con «haber» en infinitivo + participio pasado. Expresa una acción terminada, anterior a la del verbo principal, sobre todo tras preposiciones («después de», «por», «al») y con verbos de sentimiento (sentir, lamentar, alegrarse de). Registro algo formal.",
+   ex:"Al haber terminado el proyecto antes de tiempo, el equipo recibió un bono. — Так как команда закончила проект досрочно, она получила премию."},
+  {term:"Gerundio compuesto", pos:"habiendo + participio — B2, formal",
+   quote:"<mark>Habiendo terminado</mark> el trabajo, se fue a casa. <mark>Habiendo estudiado</mark> tanto, aprobó sin problemas.",
+   trans:"закончив (сделав это раньше)... — формальный, письменный регистр",
+   mean:"Se forma con «habiendo» + participio pasado. Expresa una acción ya terminada y anterior a la del verbo principal, funcionando como una subordinada adverbial sin sujeto propio expreso. Es un uso típico del registro formal/escrito, poco frecuente en la lengua oral.",
+   ex:"Habiendo revisado todos los documentos, el abogado firmó el contrato. — Просмотрев все документы, адвокат подписал контракт."},
+  {term:"Participio absoluto", pos:"B2 — cláusula participial con concordancia",
+   quote:"<mark>Terminada la clase</mark>, los alumnos salieron corriendo. <mark>Rotas las negociaciones</mark>, el conflicto continuó.",
+   trans:"когда/после того как закончился урок... (причастный оборот)",
+   mean:"Un participio pasado colocado delante de un sustantivo con el que concuerda en género y número, sin ningún verbo conjugado ni «haber». Sustituye a una oración temporal o causal («cuando terminó la clase…»). El participio SIEMPRE concuerda con el sustantivo: terminada/terminado/terminados/terminadas.",
+   ex:"Firmado el acuerdo, las dos empresas empezaron a colaborar. — После того как соглашение было подписано, обе компании начали сотрудничество."},
+  {term:"Gerundio de causa/condición", pos:"B2 — matiz lógico, no solo tiempo",
+   quote:"<mark>Estudiando así</mark>, aprobarás sin problema. <mark>Sabiendo</mark> lo que sé ahora, no habría venido.",
+   trans:"если ты будешь так заниматься.../ так как я знаю то, что знаю...",
+   mean:"Además de simultaneidad o modo, el gerundio puede tener valor de condición («si + verbo»: estudiando así = si estudias así) o de causa («como/ya que + verbo»: sabiendo esto = como sé esto). El valor exacto depende del contexto, no de la forma.",
+   ex:"Trabajando tantas horas, es normal que estés cansado. — Так как ты работаешь столько часов, естественно, что ты устал."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass, ruleHtml){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+function makeRadioBlock(cfg){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(cfg.title, cfg.tag, cfg.tagClass));
+  if(cfg.hint){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+cfg.hint+'</p>'; }
+  var list = document.createElement("div");
+  cfg.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+cfg.id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    cfg.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+cfg.id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+cfg.items.length+"</b>";
+    blockScores[cfg.id] = {correct:correct, total:cfg.items.length};
+    updateGlobalScore();
+  });
+  blockScores[cfg.id] = {correct:0, total:cfg.items.length};
+  exList.appendChild(wrap);
+}
+
+function makeFillBlock(cfg){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(cfg.title, cfg.tag, cfg.tagClass));
+  if(cfg.bank){ wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+cfg.bank+'</div>'; }
+  if(cfg.hint){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+cfg.hint+'</p>'; }
+  var list = document.createElement("div");
+  cfg.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+(it.pre?it.pre:"")+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    cfg.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+cfg.items.length+"</b>";
+    blockScores[cfg.id] = {correct:correct, total:cfg.items.length};
+    updateGlobalScore();
+  });
+  blockScores[cfg.id] = {correct:0, total:cfg.items.length};
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE 1: infinitivo tras preposición (radio) ---------------- */
+makeRadioBlock({id:"f1", tag:"fácil", tagClass:"easy",
+  title:"Bloque 1 · Infinitivo tras preposición — elige la forma correcta",
+  items:[
+    {q:"Antes de ___, cierra la puerta con llave.", opts:["salir","saliendo"], answer:0},
+    {q:"Después de ___ el examen, nos fuimos a celebrar.", opts:["terminar","terminando"], answer:0},
+    {q:"Sin ___ nada, salió de la sala.", opts:["decir","diciendo"], answer:0},
+    {q:"Para ___ bien español, hay que practicar cada día.", opts:["hablar","hablando"], answer:0},
+    {q:"Al ___ a casa, encontró la puerta abierta.", opts:["llegar","llegando"], answer:0},
+    {q:"Estudió mucho en vez de ___ la televisión toda la tarde.", opts:["ver","viendo"], answer:0}
+  ]});
+
+/* ---------------- BLOQUE 2: estar + gerundio (huecos con banco) ---------------- */
+makeFillBlock({id:"f2", tag:"fácil", tagClass:"easy",
+  title:"Bloque 2 · Estar + gerundio — completa con el gerundio del banco",
+  bank:"estudiando · comiendo · leyendo · durmiendo · lloviendo · trabajando",
+  items:[
+    {stem:"Ahora mismo estoy ___ para el examen de mañana.", answers:["estudiando"]},
+    {stem:"¿Qué estás ___? Huele muy bien.", answers:["comiendo"]},
+    {stem:"Cuando llamaste, estaba ___ el periódico.", answers:["leyendo"]},
+    {stem:"Los niños están ___ — no hagas ruido.", answers:["durmiendo"]},
+    {stem:"Afuera está ___ mucho, coge el paraguas.", answers:["lloviendo"]},
+    {stem:"Mis padres estaban ___ hasta muy tarde ese día.", answers:["trabajando"]}
+  ]});
+
+/* ---------------- BLOQUE 3: gerundios irregulares (radio) ---------------- */
+makeRadioBlock({id:"f3", tag:"fácil", tagClass:"easy",
+  title:"Bloque 3 · Gerundios irregulares — elige la forma correcta",
+  items:[
+    {q:"pedir → ?", opts:["pidiendo","pediendo","pidendo"], answer:0},
+    {q:"dormir → ?", opts:["dormiendo","durmiendo","duermiendo"], answer:1},
+    {q:"leer → ?", opts:["leendo","leyendo","liendo"], answer:1},
+    {q:"ir → ?", opts:["yendo","iendo","yiendo"], answer:0},
+    {q:"poder → ?", opts:["podiendo","pudiendo","poidendo"], answer:1},
+    {q:"decir → ?", opts:["deciendo","diciendo","dicendo"], answer:1}
+  ]});
+
+/* ---------------- BLOQUE 4: estar+gerundio vs presente simple (radio) ---------------- */
+makeRadioBlock({id:"f4", tag:"fácil-medio", tagClass:"easy",
+  title:"Bloque 4 · ¿Progresivo o presente simple?",
+  hint:"El progresivo «estar + gerundio» solo se usa para acciones en curso ahora mismo, no para acciones habituales.",
+  items:[
+    {q:"Normalmente ___ en una oficina, pero hoy trabajo desde casa.", opts:["trabajo","estoy trabajando"], answer:0},
+    {q:"Ahora mismo ___ desde casa porque hay huelga de transporte.", opts:["trabajo","estoy trabajando"], answer:1},
+    {q:"Todos los días ___ a las siete.", opts:["me levanto","estoy levantándome"], answer:0},
+    {q:"¡Mira! El bebé ___ solo por primera vez.", opts:["camina","está caminando"], answer:1}
+  ]});
+
+/* ---------------- BLOQUE 5: infinitivo compuesto (huecos sin banco) ---------------- */
+makeFillBlock({id:"f5", tag:"medio", tagClass:"mid",
+  title:"Bloque 5 · Infinitivo compuesto — «haber» + participio",
+  hint:"Escribe la forma completa: haber + participio (ej.: haber comido).",
+  items:[
+    {stem:"Después de ___ tanto, no quiero cenar esta noche.", pre:"(comer) → ", answers:["haber comido"]},
+    {stem:"Siento ___ tarde a la reunión de ayer.", pre:"(llegar) → ", answers:["haber llegado"]},
+    {stem:"Al ___ sus estudios, empezó a trabajar en un banco.", pre:"(terminar) → ", answers:["haber terminado"]},
+    {stem:"Se disculpó por ___ a sus vecinos.", pre:"(molestar) → ", answers:["haber molestado"]},
+    {stem:"Después de ___ la película, discutimos sobre el final.", pre:"(ver) → ", answers:["haber visto"]},
+    {stem:"Me alegro de ___ el viaje contigo.", pre:"(hacer) → ", answers:["haber hecho"]}
+  ]});
+
+/* ---------------- BLOQUE 6: relacionar forma <-> función ---------------- */
+(function(){
+  var b = {id:"f6",
+    words:["Infinitivo tras preposición","Estar + gerundio","Infinitivo compuesto","Gerundio compuesto","Participio absoluto","Gerundio de causa/condición"],
+    defs:[
+      "acción obligatoria tras cualquier preposición del español",
+      "acción en curso, en desarrollo en un momento dado",
+      "acción anterior terminada: «haber» + participio en infinitivo",
+      "acción anterior terminada: «habiendo» + participio, registro formal",
+      "cláusula participial que concuerda en género y número, sin verbo conjugado",
+      "expresa una condición o una causa en lugar de tiempo/modo"
+    ],
+    answers:["a","b","c","d","e","f"]
+  };
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 6 · Relaciona cada forma con su función","medio","mid"));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Forma</th><th>Función</th></tr>";
+  b.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e","f"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = b.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.words.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.words.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.words.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 7: participio absoluto — concordancia ---------------- */
+makeFillBlock({id:"f7", tag:"medio", tagClass:"mid",
+  title:"Bloque 7 · Participio absoluto — concuerda con el sustantivo",
+  hint:"Escribe el participio en la forma correcta (género y número deben concordar con el sustantivo que sigue).",
+  items:[
+    {stem:"___ la clase, los alumnos salieron al patio.", pre:"(terminar) → ", answers:["terminada"]},
+    {stem:"___ el contrato, las dos empresas empezaron a colaborar.", pre:"(firmar) → ", answers:["firmado"]},
+    {stem:"___ los problemas técnicos, el proyecto pudo continuar.", pre:"(resolver) → ", answers:["resueltos"]},
+    {stem:"___ las tiendas, la calle quedó en silencio.", pre:"(cerrar) → ", answers:["cerradas"]},
+    {stem:"___ las negociaciones, el conflicto continuó.", pre:"(romper) → ", answers:["rotas"]},
+    {stem:"___ la carta, la echó al correo.", pre:"(escribir) → ", answers:["escrita"]}
+  ]});
+
+/* ---------------- BLOQUE 8: gerundio compuesto (huecos sin banco) ---------------- */
+makeFillBlock({id:"f8", tag:"medio-alto", tagClass:"mid",
+  title:"Bloque 8 · Gerundio compuesto — «habiendo» + participio",
+  hint:"Escribe la forma completa: habiendo + participio (ej.: habiendo comido).",
+  items:[
+    {stem:"___ el informe, lo envió a su jefe.", pre:"(terminar) → ", answers:["habiendo terminado"]},
+    {stem:"___ todos los documentos, el abogado firmó el contrato.", pre:"(revisar) → ", answers:["habiendo revisado"]},
+    {stem:"___ tanto, aprobó el examen sin ningún problema.", pre:"(estudiar) → ", answers:["habiendo estudiado"]},
+    {stem:"___ el tren, tuvo que esperar dos horas en la estación.", pre:"(perder) → ", answers:["habiendo perdido"]},
+    {stem:"___ el problema, decidieron actuar de inmediato.", pre:"(ver) → ", answers:["habiendo visto"]}
+  ]});
+
+/* ---------------- BLOQUE 9: gerundio de causa/condición — interpretación (radio) ---------------- */
+makeRadioBlock({id:"f9", tag:"alto", tagClass:"hard",
+  title:"Bloque 9 · Gerundio de causa/condición — ¿qué significa?",
+  items:[
+    {q:"«Estudiando así, aprobarás.» ¿Qué significa?", opts:["Si estudias así...","Mientras estudias así..."], answer:0},
+    {q:"«Caminando por el parque, vimos a Juan.» ¿Qué significa?", opts:["Mientras caminábamos...","Porque caminábamos..."], answer:0},
+    {q:"«Sabiendo lo que sé ahora, no habría venido.» ¿Qué significa?", opts:["Como sé lo que sé ahora...","Cuando supe lo que sé ahora..."], answer:0},
+    {q:"«Trabajando tantas horas, es normal que estés cansado.» ¿Qué significa?", opts:["Como trabajas tantas horas...","Para trabajar tantas horas..."], answer:0}
+  ]});
+
+/* ---------------- BLOQUE 10: corrección de errores (radio) ---------------- */
+makeRadioBlock({id:"f10", tag:"alto", tagClass:"hard",
+  title:"Bloque 10 · Corrige el error — gerundio mal usado",
+  items:[
+    {q:"«Después de comiendo, se durmió en el sofá.» → forma correcta:", opts:["Después de comer","Después de come","Después de comido"], answer:0},
+    {q:"«Sin diciendo nada, se marchó.» → forma correcta:", opts:["Sin decir","Sin dice","Sin dicho"], answer:0},
+    {q:"«Al llegando a casa, encendió la tele.» → forma correcta:", opts:["Al llegar","Al llega","Al llegado"], answer:0},
+    {q:"«Para hablando bien español, practica cada día.» → forma correcta:", opts:["Para hablar","Para habla","Para hablado"], answer:0},
+    {q:"«Fumando es malo para la salud.» (gerundio como sujeto) → forma correcta:", opts:["Fumar es malo para la salud","Fumando es malo para la salud","Fuma es malo para la salud"], answer:0}
+  ]});
+
+/* ---------------- BLOQUE 11: cuando → participio absoluto (huecos sin banco) ---------------- */
+makeFillBlock({id:"f11", tag:"alto", tagClass:"hard",
+  title:"Bloque 11 · Transforma «cuando...» en participio absoluto",
+  hint:"Escribe solo el participio (con la concordancia correcta) que sustituye a la oración con «cuando».",
+  items:[
+    {stem:"Cuando terminó la guerra, el país empezó a reconstruirse. → ___ la guerra, el país empezó a reconstruirse.", answers:["terminada"]},
+    {stem:"Cuando se resolvió el problema, todos se calmaron. → ___ el problema, todos se calmaron.", answers:["resuelto"]},
+    {stem:"Cuando se cerraron las puertas, empezó la función. → ___ las puertas, empezó la función.", answers:["cerradas"]},
+    {stem:"Cuando se publicaron los resultados, hubo mucha sorpresa. → ___ los resultados, hubo mucha sorpresa.", answers:["publicados"]}
+  ]});
+
+/* ---------------- BLOQUE 12: repaso mixto (huecos sin banco) ---------------- */
+makeFillBlock({id:"f12", tag:"el más difícil", tagClass:"hard",
+  title:"Bloque 12 · Repaso mixto — infinitivo, gerundio y participio",
+  hint:"Elige la forma no personal correcta para cada contexto (puede ser infinitivo, gerundio, infinitivo compuesto, gerundio compuesto o participio).",
+  items:[
+    {stem:"___ la reunión, todos guardaron silencio.", pre:"(empezar) → ", answers:["empezada"]},
+    {stem:"En este momento estoy ___ un correo urgente.", pre:"(escribir) → ", answers:["escribiendo"]},
+    {stem:"___ el contrato dos veces, decidió firmarlo.", pre:"(leer) → ", answers:["habiendo leido","habiendo leído"]},
+    {stem:"Antes de ___, lee bien las condiciones.", pre:"(firmar) → ", answers:["firmar"]},
+    {stem:"Siento ___ tarde otra vez.", pre:"(llegar) → ", answers:["haber llegado"]}
+  ]});
+
+/* ---------------- BLOQUE 13: traducción con participio absoluto (respuesta modelo) ---------------- */
+(function(){
+  var items = [
+    {stem:"Traduce: «Когда контракт был подписан, обе компании начали сотрудничество.»", model:"Firmado el contrato, las dos empresas empezaron a colaborar."},
+    {stem:"Traduce: «После того как проблема была решена, все успокоились.»", model:"Resuelto el problema, todos se calmaron."},
+    {stem:"Traduce: «Когда занятие закончилось, ученики вышли на улицу.»", model:"Terminada la clase, los alumnos salieron a la calle."},
+    {stem:"Traduce: «После того как результаты были опубликованы, поднялся большой шум.»", model:"Publicados los resultados, se armó un gran revuelo."}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 13 · Traduce usando el participio absoluto","alto","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="f13-'+idx+'" style="min-height:44px;" placeholder="Tu traducción..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="f13-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("f13-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 14: traducción con gerundio compuesto (respuesta modelo) ---------------- */
+(function(){
+  var items = [
+    {stem:"Traduce: «Закончив работу, он пошёл домой.»", model:"Habiendo terminado el trabajo, se fue a casa."},
+    {stem:"Traduce: «Просмотрев все документы, адвокат подписал контракт.»", model:"Habiendo revisado todos los documentos, el abogado firmó el contrato."},
+    {stem:"Traduce: «Так много позанимавшись, она сдала экзамен без проблем.»", model:"Habiendo estudiado tanto, aprobó el examen sin ningún problema."},
+    {stem:"Traduce: «Опоздав на поезд, ему пришлось ждать два часа.»", model:"Habiendo perdido el tren, tuvo que esperar dos horas."}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 14 · Traduce usando el gerundio compuesto","alto","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="f14-'+idx+'" style="min-height:44px;" placeholder="Tu traducción..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="f14-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("f14-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 15: infinitivo como sujeto/sustantivo (radio) ---------------- */
+makeRadioBlock({id:"f15", tag:"medio", tagClass:"mid",
+  title:"Bloque 15 · El infinitivo como sujeto (no el gerundio)",
+  hint:"El gerundio nunca puede funcionar como sustantivo o sujeto en español.",
+  items:[
+    {q:"___ es bueno para la salud.", opts:["Nadar","Nadando","Nada"], answer:0},
+    {q:"Me encanta ___ por la mañana.", opts:["correr","corriendo","corro"], answer:0},
+    {q:"___ mucho no siempre significa aprender mucho.", opts:["Estudiar","Estudiando","Estudia"], answer:0},
+    {q:"___ es un placer para muchas personas.", opts:["Viajar","Viajando","Viaja"], answer:0}
+  ]});
+
+/* ---------------- BLOQUE 16: transforma con la forma no personal más natural (respuesta modelo) ---------------- */
+(function(){
+  var items = [
+    {stem:"Transforma con participio absoluto: «Cuando se cerró la fábrica, muchos trabajadores perdieron su empleo.»", model:"Cerrada la fábrica, muchos trabajadores perdieron su empleo."},
+    {stem:"Transforma con gerundio compuesto: «Como había terminado sus estudios, decidió buscar trabajo.»", model:"Habiendo terminado sus estudios, decidió buscar trabajo."},
+    {stem:"Traduce: «Прочитав книгу, он вернул её в библиотеку.»", model:"Habiendo leído el libro, lo devolvió a la biblioteca."},
+    {stem:"Traduce: «Закрыв все окна, она вышла из дома.»", model:"Habiendo cerrado todas las ventanas, salió de casa."}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 16 · Transformación y traducción final","el más difícil","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="f16-'+idx+'" style="min-height:44px;" placeholder="Tu respuesta..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="f16-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("f16-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

@@ -1,0 +1,710 @@
+<!doctype html>
+<title>Verbos de cambio</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Verbos de cambio</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B2</p>
+  <h1>Los verbos de cambio («convertirse en», «ponerse»...)</h1>
+  <p class="subtitle">Reglas claras + dieciséis bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> en español no existe un solo verbo equivalente al ruso <i>становиться</i> — según el tipo de cambio (temporal o permanente, voluntario o involuntario, gradual o repentino, un simple estado o un logro) se usa <b>ponerse</b>, <b>volverse</b>, <b>quedarse</b>, <b>hacerse</b>, <b>convertirse en</b> o <b>llegar a ser</b>. Distinguirlos es uno de los puntos más difíciles del nivel B2 para hablantes de ruso.
+  </div>
+  <p class="series-note">📚 Tema de la serie <b>Gramática</b> del sitio. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — seis formas de «volverse»</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada verbo.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>Los seis verbos de cambio, en una sola tabla</h3>
+    <table class="match-table">
+      <tr><th>Verbo</th><th>Tipo de cambio</th><th>Ejemplo</th></tr>
+      <tr><td><b>ponerse</b> + adj.</td><td>temporal, involuntario, emocional/físico</td><td>se puso nervioso, se puso rojo</td></tr>
+      <tr><td><b>volverse</b> + adj.</td><td>permanente, del carácter, involuntario, a veces brusco</td><td>se volvió loco, se volvió desconfiado</td></tr>
+      <tr><td><b>quedarse</b> + adj./part.</td><td>resultado de un proceso o suceso, a menudo con pérdida</td><td>se quedó sordo, se quedó sin trabajo</td></tr>
+      <tr><td><b>hacerse</b> + adj./sust.</td><td>gradual o voluntario: estatus, profesión, ideología</td><td>se hizo rico, se hizo médico, se hizo budista</td></tr>
+      <tr><td><b>convertirse en</b> + sust.</td><td>radical/estructural, con un proceso detrás</td><td>el agua se convirtió en hielo</td></tr>
+      <tr><td><b>llegar a ser</b> + sust./adj.</td><td>resultado de un proceso largo, un logro</td><td>llegó a ser presidente</td></tr>
+    </table>
+    <div class="error-box"><b>Ошибка типичная для русскоговорящих:</b> в русском языке для всех этих оттенков значения используется, по сути, один глагол — <b>становиться/стать</b> (иногда «превращаться»). Поэтому носители русского языка склонны везде подставлять один и тот же испанский эквивалент (чаще всего <i>hacerse</i> или <i>convertirse en</i>), не различая временность/постоянство, произвольность/непроизвольность и постепенность/результат. Перед тем как выбрать глагол, задайте себе вопрос: это <u>временно или надолго</u>? <u>само происходит или это заслуга человека</u>? <u>это результат потери/события</u> или <u>это достижение после долгого пути</u>?</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Dieciséis bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"ponerse + adj.", pos:"cambio temporal, involuntario, emocional/físico",
+   quote:"Se puso <mark>nervioso</mark> antes del examen. Se puso <mark>rojo</mark> de vergüenza.",
+   trans:"стать (временно, непроизвольно — эмоция или физическое состояние)",
+   mean:"Describe un cambio temporal e involuntario en el estado emocional o físico. No implica un cambio duradero de la personalidad ni de la identidad de la persona.",
+   ex:"Cuando vio a su ex en la fiesta, se puso pálida. — Увидев на вечеринке своего бывшего, она побледнела."},
+  {term:"volverse + adj.", pos:"cambio permanente del carácter, involuntario",
+   quote:"Desde el accidente se ha vuelto muy <mark>desconfiado</mark>. Se volvió <mark>loco</mark> de dolor.",
+   trans:"стать (надолго/навсегда — обычно о характере)",
+   mean:"Indica un cambio más permanente, a menudo del carácter o de la forma de ser de una persona; es involuntario y a veces bastante repentino.",
+   ex:"Con los años se ha vuelto una persona mucho más tolerante. — С годами он стал гораздо более терпимым человеком."},
+  {term:"quedarse + adj./part.", pos:"resultado de un proceso o suceso, a menudo con pérdida",
+   quote:"Se quedó <mark>sordo</mark> tras el concierto. Se quedó <mark>sin trabajo</mark> en marzo.",
+   trans:"остаться/оказаться (в результате чего-то — часто с потерей)",
+   mean:"Señala el resultado de un proceso o de un suceso concreto, con frecuencia con connotación de pérdida, carencia o de algo que ya no cambiará.",
+   ex:"Se quedó callado al escuchar la noticia. — Услышав новость, он замолчал (остался в молчании)."},
+  {term:"hacerse + adj./sust.", pos:"cambio gradual o voluntario: estatus, profesión, ideología",
+   quote:"Se hizo <mark>rico</mark> con su empresa. Se hizo <mark>médico</mark> a los treinta años.",
+   trans:"стать (постепенно или по собственной воле — статус, профессия, взгляды)",
+   mean:"Expresa un cambio gradual o alcanzado por voluntad propia, a menudo relacionado con estatus social, profesión, religión o ideología.",
+   ex:"Se hizo budista después de viajar por Asia. — Он стал буддистом после путешествия по Азии."},
+  {term:"convertirse en + sust.", pos:"cambio radical/estructural, con un proceso detrás",
+   quote:"El agua se convirtió en <mark>hielo</mark>. La aldea se convirtió en una <mark>ciudad</mark> próspera.",
+   trans:"превратиться в (радикальное, структурное изменение)",
+   mean:"Indica un cambio más radical o estructural: una cosa se transforma en otra completamente distinta, normalmente como resultado de un proceso.",
+   ex:"Esa estrella se convirtió en un agujero negro. — Эта звезда превратилась в чёрную дыру."},
+  {term:"llegar a ser + sust./adj.", pos:"resultado de un proceso largo, un logro",
+   quote:"Llegó a ser <mark>presidente</mark> del país. Llegó a ser <mark>una de las mejores</mark> abogadas.",
+   trans:"стать, добиться того, чтобы стать (в результате долгого пути — достижение)",
+   mean:"Presenta el cambio como resultado de un proceso largo, a menudo con esfuerzo, subrayando el logro conseguido.",
+   ex:"Llegó a ser director de la empresa en la que empezó como becario. — Он стал директором компании, в которой начинал стажёром."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+function makeRadioBlock(id, title, tag, tagClass, items){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeFillBlock(id, title, tag, tagClass, items, bank, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(bank){ wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+bank+'</div>'; }
+  if(hintText){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>'; }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var pre = it.ru ? '<i style="color:var(--muted);">«'+it.ru+'»</i><br>' : "";
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+pre+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeMatchBlock(id, title, tag, tagClass, words, defs, answers){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  var table = document.createElement("table"); table.className = "match-table";
+  var letters = defs.map(function(d,i){ return String.fromCharCode(97+i); });
+  var rows = "<tr><th>Verbo</th><th>Tipo de cambio</th></tr>";
+  words.forEach(function(w, idx){
+    var opts = letters.map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = defs.map(function(d,i){ return letters[i]+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+words.length+"</b>";
+    blockScores[id] = {correct:correct, total:words.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:words.length};
+  exList.appendChild(wrap);
+}
+
+function makeOpenBlock(id, title, tag, tagClass, items, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(hintText){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>'; }
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="'+id+'-'+idx+'" style="min-height:44px;" placeholder="Tu traducción..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="'+id+'-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById(id+"-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE 1: radio, elige el verbo correcto (fácil) ---------------- */
+makeRadioBlock("p1", "Bloque 1 · Elige el verbo de cambio correcto", "fácil", "easy", [
+  {q:"Cuando le dieron la mala noticia, ___ muy triste.", opts:["se puso","se convirtió en","llegó a ser"], answer:0},
+  {q:"Con los años, su carácter ___ más agrio y desconfiado.", opts:["se puso","se volvió","se quedó"], answer:1},
+  {q:"Tras el despido, ___ sin ingresos durante meses.", opts:["se hizo","se quedó","se convirtió en"], answer:1},
+  {q:"Trabajando duro desde joven, ___ empresario de éxito.", opts:["se puso","se hizo","se quedó"], answer:1},
+  {q:"El agua, al enfriarse mucho, ___ hielo.", opts:["se convirtió en","se hizo","se puso"], answer:0},
+  {q:"Después de treinta años de carrera, ___ uno de los científicos más respetados del país.", opts:["se quedó","llegó a ser","se puso"], answer:1}
+]);
+
+/* ---------------- BLOQUE 2: huecos CON banco (fácil) ---------------- */
+makeFillBlock("p2", "Bloque 2 · Huecos con banco de palabras", "fácil", "easy", [
+  {stem:"Cuando la vio, ___ rojo de vergüenza.", answers:["se puso"]},
+  {stem:"Después de la traición, ___ muy desconfiado con todo el mundo.", answers:["se volvió"]},
+  {stem:"Tras el accidente, ___ ciego del ojo izquierdo.", answers:["se quedó"]},
+  {stem:"Estudiando mucho, ___ abogado en solo cuatro años.", answers:["se hizo"]},
+  {stem:"La oruga ___ una preciosa mariposa.", answers:["se convirtió en"]},
+  {stem:"Empezando desde abajo, ___ director general de la empresa.", answers:["llegó a ser"]}
+], "se puso · se volvió · se quedó · se hizo · se convirtió en · llegó a ser");
+
+/* ---------------- BLOQUE 3: huecos SIN banco (medio) ---------------- */
+makeFillBlock("p3", "Bloque 3 · Huecos sin banco de palabras", "medio", "mid", [
+  {stem:"Tras el golpe en la cabeza, se ___ ciego para siempre.", answers:["quedó"]},
+  {stem:"Después de vivir diez años en Japón, se ___ un experto en cerámica tradicional.", answers:["hizo"]},
+  {stem:"El príncipe se ___ en rana por un hechizo.", answers:["convirtió"]},
+  {stem:"Con los años, mi abuelo se ___ más religioso.", answers:["hizo","volvió"]},
+  {stem:"Al enterarse del engaño, se ___ pálida.", answers:["puso"]},
+  {stem:"Tras una larga carrera política, ___ primera ministra.", answers:["llegó a ser","se convirtió en"]}
+], null, "Escribe solo el verbo (con el pronombre si hace falta) — sin banco de palabras.");
+
+/* ---------------- BLOQUE 4: relacionar verbo ↔ tipo de cambio (medio) ---------------- */
+makeMatchBlock("p4", "Bloque 4 · Relaciona cada verbo con su tipo de cambio", "medio", "mid",
+  ["ponerse","volverse","quedarse","hacerse","convertirse en","llegar a ser"],
+  ["cambio temporal, emocional o físico",
+   "cambio permanente del carácter, involuntario",
+   "resultado de un proceso o suceso, a menudo con pérdida",
+   "cambio gradual o por voluntad propia (estatus/profesión/ideología)",
+   "cambio radical o estructural",
+   "resultado de un logro tras un proceso largo"],
+  ["a","b","c","d","e","f"]
+);
+
+/* ---------------- BLOQUE 5: ponerse vs volverse (medio-alto) ---------------- */
+makeRadioBlock("p5", "Bloque 5 · Ponerse vs. volverse", "medio-alto", "mid", [
+  {q:"Al escuchar la sorpresa, ___ pálido por un momento.", opts:["se puso","se volvió"], answer:0},
+  {q:"Desde que perdió su trabajo, ___ muy pesimista y ya no confía en nadie.", opts:["se puso","se volvió"], answer:1},
+  {q:"Cuando el árbitro pitó el penalti, el público ___ furioso.", opts:["se puso","se volvió"], answer:0},
+  {q:"Tras años de decepciones, ___ una persona muy cínica.", opts:["se puso","se volvió"], answer:1},
+  {q:"El cielo ___ gris justo antes de la tormenta.", opts:["se puso","se volvió"], answer:0}
+]);
+
+/* ---------------- BLOQUE 6: quedarse vs hacerse vs convertirse en (alto) ---------------- */
+makeRadioBlock("p6", "Bloque 6 · Quedarse vs. hacerse vs. convertirse en", "alto", "hard", [
+  {q:"Perdió la vista en el accidente: ___ ciego para siempre.", opts:["se quedó","se hizo","se convirtió en"], answer:0},
+  {q:"Trabajó duro veinte años y ___ dueño de tres restaurantes.", opts:["se quedó","se hizo","se convirtió en"], answer:1},
+  {q:"La crisálida ___ mariposa en cuestión de días.", opts:["se quedó","se hizo","se convirtió en"], answer:2},
+  {q:"Después del divorcio, ___ solo en aquella casa enorme.", opts:["se quedó","se hizo","se convirtió en"], answer:0},
+  {q:"Con la nueva ley, esa pequeña reforma ___ un escándalo nacional.", opts:["se quedó","se hizo","se convirtió en"], answer:2}
+]);
+
+/* ---------------- BLOQUE 7: huecos CON banco — convertirse en vs llegar a ser (medio) ---------------- */
+makeFillBlock("p7", "Bloque 7 · Convertirse en vs. llegar a ser", "medio", "mid", [
+  {stem:"Aquel pueblo pesquero ___ un destino turístico de moda.", answers:["se convirtió en"]},
+  {stem:"Gracias a su talento y disciplina, ___ campeón olímpico.", answers:["llegó a ser"]},
+  {stem:"Las dos empresas rivales ___ socias tras la fusión.", answers:["se convirtieron en"]},
+  {stem:"Con mucho esfuerzo, los hermanos ___ referentes en su campo.", answers:["llegaron a ser"]}
+], "se convirtió en · llegó a ser · se convirtieron en · llegaron a ser");
+
+/* ---------------- BLOQUE 8: huecos SIN banco, personas y plurales (alto) ---------------- */
+makeFillBlock("p8", "Bloque 8 · Huecos sin banco — todas las personas", "alto", "hard", [
+  {stem:"Mis abuelos se ___ (volverse) muy religiosos en su vejez.", answers:["volvieron"]},
+  {stem:"El jugador joven se ___ (hacerse) titular del equipo en su segunda temporada.", answers:["hizo"]},
+  {stem:"Los niños se ___ (ponerse) muy nerviosos durante la tormenta.", answers:["pusieron"]},
+  {stem:"Su casa se ___ (convertirse) en el punto de encuentro de todos los vecinos.", answers:["convirtió"]},
+  {stem:"Tras la operación, se ___ (quedarse) con una ligera cojera.", answers:["quedó"]},
+  {stem:"Después de estudiar toda su vida, ___ (llegar a ser) una autoridad mundial en la materia.", answers:["llegó a ser"]}
+], null, "Escribe solo la parte que falta del verbo, en la forma correcta.");
+
+/* ---------------- BLOQUE 9: radio, los seis mezclados (alto) ---------------- */
+makeRadioBlock("p9", "Bloque 9 · Los seis verbos mezclados", "alto", "hard", [
+  {q:"El famoso actor ___ irreconocible tras el maquillaje.", opts:["se puso","se convirtió en","se quedó","se volvió"], answer:2},
+  {q:"La start-up ___ una de las empresas más valiosas del sector en solo cinco años.", opts:["se hizo","se convirtió en","se puso","se quedó"], answer:1},
+  {q:"Tras el shock, ___ muda durante varios minutos.", opts:["se quedó","se hizo","se volvió","llegó a ser"], answer:0},
+  {q:"Poco a poco, ___ una persona mucho más paciente.", opts:["se puso","se volvió","se quedó","se hizo"], answer:1},
+  {q:"El hijo del panadero ___ el mejor pastelero de la ciudad.", opts:["se puso","se hizo","se quedó","se convirtió en"], answer:1},
+  {q:"Después de ganar tres medallas, ___ una leyenda del atletismo español.", opts:["se puso","se hizo","se convirtió en","llegó a ser"], answer:3}
+]);
+
+/* ---------------- BLOQUE 10: personas y pronombres, SIN banco (alto) ---------------- */
+makeFillBlock("p10", "Bloque 10 · Pronombres y personas verbales", "alto", "hard", [
+  {stem:"Nosotros ___ (ponerse) muy contentos al saber la noticia.", answers:["nos pusimos"]},
+  {stem:"¿Tú ___ (hacerse) vegetariano hace mucho?", answers:["te hiciste"]},
+  {stem:"Ellas ___ (convertirse) en las mejores amigas del colegio.", answers:["se convirtieron"]},
+  {stem:"Yo ___ (quedarse) sin palabras cuando me lo dijo.", answers:["me quedé"]},
+  {stem:"Vosotros ___ (volverse) demasiado exigentes con los demás.", answers:["os volvisteis"]},
+  {stem:"Con los años, ellos ___ (llegar a ser) referentes de su generación.", answers:["llegaron a ser"]}
+], null, "Escribe el verbo completo, con el pronombre reflexivo correcto para cada persona.");
+
+/* ---------------- BLOQUE 11: hacerse vs llegar a ser (alto) ---------------- */
+makeRadioBlock("p11", "Bloque 11 · Hacerse vs. llegar a ser", "alto", "hard", [
+  {q:"Trabajó como voluntario en el hospital durante años, hasta que finalmente ___ el mejor cirujano del país.", opts:["se hizo","llegó a ser"], answer:1},
+  {q:"Al terminar la carrera, ___ profesor de instituto.", opts:["se hizo","llegó a ser"], answer:0},
+  {q:"Después de décadas luchando por sus ideales, ___ un símbolo de la resistencia.", opts:["se hizo","llegó a ser"], answer:1},
+  {q:"Con el tiempo, aquel joven idealista ___ un político pragmático.", opts:["se hizo","llegó a ser"], answer:0}
+]);
+
+/* ---------------- BLOQUE 12: traduce — completa solo con el verbo (alto) ---------------- */
+makeFillBlock("p12", "Bloque 12 · Traduce — completa solo con el verbo de cambio", "alto", "hard", [
+  {ru:"Она побледнела, услышав новость.", stem:"___ pálida al oír la noticia.", answers:["se puso"]},
+  {ru:"Он стал очень подозрительным после предательства.", stem:"___ muy desconfiado después de la traición.", answers:["se volvió"]},
+  {ru:"Он остался без работы после увольнения.", stem:"___ sin trabajo tras el despido.", answers:["se quedó"]},
+  {ru:"Она стала известным адвокатом.", stem:"___ una abogada muy conocida.", answers:["se hizo"]},
+  {ru:"Гусеница превратилась в бабочку.", stem:"La oruga ___ mariposa.", answers:["se convirtió en"]}
+]);
+
+/* ---------------- BLOQUE 13: repaso general, radio (el más difícil) ---------------- */
+makeRadioBlock("p13", "Bloque 13 · Repaso general — el verbo exacto", "el más difícil", "hard", [
+  {q:"Al mudarse a otra ciudad, ___ una persona mucho más independiente.", opts:["se puso","se hizo","se quedó","se convirtió en"], answer:1},
+  {q:"El escándalo ___ el tema principal de todos los periódicos.", opts:["se hizo","se convirtió en","se quedó","se puso"], answer:1},
+  {q:"Cuando supo que había aprobado, ___ loca de alegría.", opts:["se puso","se convirtió en","llegó a ser","se hizo"], answer:0},
+  {q:"Aquel humilde carpintero ___ uno de los artistas más admirados de su tiempo.", opts:["se puso","se quedó","llegó a ser","se volvió"], answer:2},
+  {q:"Con la sequía, el río ___ un hilo de agua.", opts:["se hizo","se convirtió en","se puso","llegó a ser"], answer:1},
+  {q:"Después del susto, ___ mudo durante un buen rato.", opts:["se quedó","se hizo","se volvió","llegó a ser"], answer:0}
+]);
+
+/* ---------------- BLOQUE 14: traducción abierta 1 (respuesta modelo) ---------------- */
+makeOpenBlock("p14", "Bloque 14 · Traduce — «стал/стала» (1)", "el más difícil", "hard", [
+  {stem:"Traduce: «После травмы он остался хромым на всю жизнь.»", model:"Tras la lesión, se quedó cojo de por vida."},
+  {stem:"Traduce: «Она стала очень религиозной после того путешествия в Индию.»", model:"Se hizo muy religiosa después de aquel viaje a la India."},
+  {stem:"Traduce: «Вода превратилась в пар при кипении.»", model:"El agua se convirtió en vapor al hervir."},
+  {stem:"Traduce: «Спустя годы упорного труда он стал послом своей страны.»", model:"Tras años de trabajo duro, llegó a ser embajador de su país."}
+], "Respuestas abiertas — escribe tu traducción y compárala con el modelo (puede haber más de una forma correcta).");
+
+/* ---------------- BLOQUE 15: traducción abierta 2 (respuesta modelo) ---------------- */
+makeOpenBlock("p15", "Bloque 15 · Traduce — «стал/стала» (2)", "el más difícil", "hard", [
+  {stem:"Traduce: «Мой отец с возрастом стал более терпеливым.»", model:"Mi padre se ha vuelto más paciente con la edad."},
+  {stem:"Traduce: «После скандала эта тема стала табу в семье.»", model:"Después del escándalo, ese tema se convirtió en un tabú en la familia."},
+  {stem:"Traduce: «Он начинал простым продавцом и стал владельцем сети магазинов.»", model:"Empezó como simple vendedor y llegó a ser dueño de una cadena de tiendas."},
+  {stem:"Traduce: «Услышав крик, все замолчали.»", model:"Al oír el grito, todos se quedaron callados."}
+], "Respuestas abiertas — escribe tu traducción y compárala con el modelo.");
+
+/* ---------------- BLOQUE 16: traducción exprés SIN banco (alto) ---------------- */
+makeFillBlock("p16", "Bloque 16 · Traducción exprés — el verbo exacto", "alto", "hard", [
+  {ru:"Дорога превратилась в реку после ливня.", stem:"El camino ___ un río después del aguacero.", answers:["se convirtió en"]},
+  {ru:"Он стал угрюмым после развода.", stem:"___ muy huraño después del divorcio.", answers:["se volvió"]},
+  {ru:"Она осталась одна после того, как все ушли.", stem:"___ sola después de que todos se fueran.", answers:["se quedó"]},
+  {ru:"В конце концов он стал ректором университета.", stem:"Al final, ___ rector de la universidad.", answers:["llegó a ser","se convirtió en"]}
+]);
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

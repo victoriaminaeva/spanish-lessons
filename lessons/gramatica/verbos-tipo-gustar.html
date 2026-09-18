@@ -1,0 +1,758 @@
+<!doctype html>
+<title>Verbos tipo gustar</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Verbos tipo gustar</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>Gustar y otros verbos con la misma estructura</h1>
+  <p class="subtitle">Reglas claras + dieciséis bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> el grupo de verbos que funcionan como <b>gustar</b> (encantar, interesar, molestar, importar, doler, apetecer, parecer, caer bien/mal, dar igual, hacer ilusión, dar pena/vergüenza/miedo): su estructura inversa (me/te/le/nos/os/les + verbo que concuerda con lo que sigue), los pronombres de énfasis <b>a mí / a ti / a él…</b>, y en B2 su uso con <b>que + subjuntivo</b>.
+  </div>
+  <p class="series-note">📚 Tema de la serie <b>Gramática</b> del sitio. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — la familia de «gustar»</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada verbo.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>La estructura inversa — el sujeto es lo que gusta, no la persona</h3>
+    <ul>
+      <li>En español, con estos verbos, <b>el sujeto gramatical es la cosa o la actividad</b>, y la persona aparece como complemento indirecto: <i>me/te/le/nos/os/les</i> + verbo. El verbo concuerda con lo que sigue: singular → <i>gusta</i>, plural → <i>gustan</i>.</li>
+      <li>Compara: <i>Me gusta el cine</i> (el cine = sujeto, singular) / <i>Me gustan los conciertos</i> (los conciertos = sujeto, plural).</li>
+      <li>Toda la familia funciona igual: <b>gustar, encantar, interesar, molestar, importar, doler, apetecer, parecer</b>, y también <b>caer bien/mal, dar igual, hacer ilusión, dar pena/vergüenza/miedo</b>.</li>
+    </ul>
+    <div class="error-box"><b>Ошибка типичная у носителей русского:</b> в русском «мне нравится» имеет совсем другую структуру (я — подлежащее только формально, а по факту тоже дательный падеж), поэтому многие говорят <s>yo gusto el chocolate</s>. Это неверно — по-испански нужно <b>a mí me gusta el chocolate</b>: verbo concuerda con «el chocolate», no con «yo». Nunca digas «yo gusto», «tú gustas» con el sentido de «нравиться» — esas formas casi no se usan con este significado.</div>
+  </div>
+
+  <div class="contrast-box">
+    <h3>A mí, a ti, a él… — énfasis y aclaración de le/les</h3>
+    <ul>
+      <li>Los pronombres <i>me/te/le/nos/os/les</i> son obligatorios; <i>a mí / a ti / a él / a ella / a usted / a nosotros / a vosotros / a ellos / a ellas / a ustedes</i> son opcionales y sirven para dar <b>énfasis</b> o <b>aclarar</b> a quién se refiere «le»/«les», que por sí solos son ambiguos.</li>
+      <li>Énfasis/contraste: <i>A mí me encanta el jazz, pero a mi hermano no le gusta nada.</i></li>
+      <li>Aclaración: <i>A Pedro le duele la cabeza</i> (sin el nombre, «le duele» no dice quién).</li>
+    </ul>
+  </div>
+
+  <div class="contrast-box">
+    <h3>B2 — gustar/molestar/encantar… + que + subjuntivo</h3>
+    <ul>
+      <li>Cuando la persona que siente la emoción y la persona que realiza la acción <b>son distintas</b>, se usa <i>que + subjuntivo</i>: <i>Me molesta que llegues tarde</i> (yo me molesto, tú llegas).</li>
+      <li>Cuando el sujeto es <b>el mismo</b>, se usa el infinitivo, sin «que»: <i>Me molesta llegar tarde</i> (yo me molesto, yo llego).</li>
+      <li>Es el mismo patrón que con otros verbos de emoción/valoración (me alegra que…, es una pena que…).</li>
+    </ul>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Dieciséis bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"gustar", pos:"estructura inversa: me/te/le + gusta/gustan",
+   quote:"Me <mark>gusta</mark> el cine. Nos <mark>gustan</mark> los conciertos.",
+   trans:"нравиться (структура «мне нравится»)",
+   mean:"El sujeto gramatical es la cosa que gusta, no la persona: por eso el verbo concuerda con lo que sigue (singular→gusta, plural→gustan), no con la persona.",
+   ex:"A mis padres les gusta viajar. — Моим родителям нравится путешествовать."},
+  {term:"encantar", pos:"como gustar, pero más intenso",
+   quote:"Me <mark>encanta</mark> la música clásica.",
+   trans:"обожать, очень нравиться",
+   mean:"Misma estructura que gustar; expresa un gusto muy fuerte, entusiasmo.",
+   ex:"Les encanta bailar salsa. — Они обожают танцевать сальсу."},
+  {term:"interesar", pos:"estructura inversa",
+   quote:"Me <mark>interesa</mark> la política.",
+   trans:"интересовать",
+   mean:"Misma estructura: lo que interesa es el sujeto gramatical, no la persona.",
+   ex:"¿Te interesan las series históricas? — Тебя интересуют исторические сериалы?"},
+  {term:"molestar", pos:"estructura inversa · +que+subjuntivo",
+   quote:"Me <mark>molesta</mark> el ruido.",
+   trans:"раздражать, мешать",
+   mean:"Misma estructura; en B2 se usa mucho con «que + subjuntivo» cuando cambia el sujeto.",
+   ex:"Me molesta que llegues tarde. — Меня раздражает, что ты опаздываешь."},
+  {term:"importar", pos:"estructura inversa",
+   quote:"No me <mark>importa</mark> la opinión de los demás.",
+   trans:"быть важным, волновать",
+   mean:"Misma estructura inversa; muy frecuente en frases negativas y preguntas de cortesía.",
+   ex:"¿Te importa si abro la ventana? — Ты не против, если я открою окно?"},
+  {term:"doler", pos:"estructura inversa · partes del cuerpo",
+   quote:"Me <mark>duele</mark> la cabeza. Me <mark>duelen</mark> los pies.",
+   trans:"болеть (о части тела)",
+   mean:"Concuerda con la parte del cuerpo: singular→duele, plural→duelen.",
+   ex:"A mi abuela le duelen las rodillas. — У моей бабушки болят колени."},
+  {term:"apetecer", pos:"estructura inversa · ofrecimientos",
+   quote:"¿Te <mark>apetece</mark> un café?",
+   trans:"хотеться (о желании чего-либо)",
+   mean:"Muy frecuente en España en ofrecimientos y planes; misma estructura inversa.",
+   ex:"Nos apetece salir a caminar. — Нам хочется выйти погулять."},
+  {term:"parecer", pos:"estructura inversa · opiniones",
+   quote:"Me <mark>parece</mark> injusto. Me <mark>parecen</mark> caros.",
+   trans:"казаться",
+   mean:"Concuerda con lo que sigue; se usa mucho para dar opiniones (me parece que…).",
+   ex:"¿Qué te parece esta idea? — Как тебе кажется эта идея (что ты думаешь о ней)?"},
+  {term:"caer bien / caer mal", pos:"solo con personas",
+   quote:"Ese chico me <mark>cae</mark> muy bien.",
+   trans:"нравиться/не нравиться (о человеке, как личности)",
+   mean:"Solo se usa con personas: describe la impresión que causa alguien, no una actividad o cosa (para eso se usa gustar).",
+   ex:"Su jefe le cae mal. — Его/её начальник ему/ей не нравится (как человек)."},
+  {term:"dar igual", pos:"estructura inversa · indiferencia",
+   quote:"Me <mark>da igual</mark> la hora.",
+   trans:"быть всё равно",
+   mean:"Misma estructura inversa; expresa indiferencia total.",
+   ex:"Nos da igual el color. — Нам всё равно, какой цвет."},
+  {term:"hacer ilusión", pos:"estructura inversa · expresión española",
+   quote:"Me <mark>hace ilusión</mark> el viaje.",
+   trans:"радовать, вызывать волнение/предвкушение",
+   mean:"Expresión muy española: alegría anticipada por algo que va a pasar.",
+   ex:"Le hace ilusión conocer Madrid. — Он/она с волнением ждёт знакомства с Мадридом."},
+  {term:"dar pena / vergüenza / miedo", pos:"estructura inversa",
+   quote:"Me <mark>da pena</mark> el final. Me <mark>da vergüenza</mark> hablar en público.",
+   trans:"быть жаль / быть стыдно / быть страшно",
+   mean:"Mismo patrón que dar igual; con infinitivo o con sustantivo.",
+   ex:"A los niños les da miedo la oscuridad. — Дети боятся темноты."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+function makeRadioBlock(id, title, tag, tagClass, items){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeFillBlock(id, title, tag, tagClass, items, bank, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(bank){
+    wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+bank+'</div>';
+  }
+  if(hintText){
+    wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>';
+  }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeMatchBlock(id, title, tag, tagClass, leftLabel, rightLabel, words, defs, answers){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  var table = document.createElement("table"); table.className = "match-table";
+  var letters = defs.map(function(d,i){ return String.fromCharCode(97+i); });
+  var rows = "<tr><th>"+leftLabel+"</th><th>"+rightLabel+"</th></tr>";
+  words.forEach(function(w, idx){
+    var opts = letters.map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = defs.map(function(d,i){ return letters[i]+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+words.length+"</b>";
+    blockScores[id] = {correct:correct, total:words.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:words.length};
+  exList.appendChild(wrap);
+}
+
+function makeTranslateBlock(id, title, tag, tagClass, items, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> <i style="color:var(--muted);">«'+it.ru+'»</i></div>'+
+      '<textarea class="q-answer" id="'+id+'-'+idx+'" style="min-height:44px;" placeholder="Tu traducción..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="'+id+'-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById(id+"-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE 1: gustar/gustan — concordancia (radio, fácil) ---------------- */
+makeRadioBlock("g1","Bloque 1 · Elige la forma correcta de «gustar»","fácil","easy",[
+  {q:"A mí ___ los libros de aventuras.", opts:["gusta","gustan"], answer:1},
+  {q:"A Juan ___ el fútbol.", opts:["gusta","gustan"], answer:0},
+  {q:"A nosotros ___ la playa en verano.", opts:["gusta","gustan"], answer:0},
+  {q:"A ellos ___ las películas de terror.", opts:["gusta","gustan"], answer:1},
+  {q:"A ti ___ cocinar los domingos.", opts:["gusta","gustan"], answer:0},
+  {q:"A mis padres ___ los conciertos de jazz.", opts:["gusta","gustan"], answer:1}
+]);
+
+/* ---------------- BLOQUE 2: a mí / a ti — pronombres de énfasis (con banco) ---------------- */
+makeFillBlock("g2","Bloque 2 · Completa con el pronombre de énfasis","fácil","easy",[
+  {stem:"[yo] ___ me gustan los gatos, pero los perros no.", answers:["a mí"]},
+  {stem:"[tú] ¿___ te interesa la política?", answers:["a ti"]},
+  {stem:"[él] ___ le encanta cocinar los fines de semana.", answers:["a él"]},
+  {stem:"[ella] ___ le da igual el resultado del partido.", answers:["a ella"]},
+  {stem:"[nosotros] ___ nos apetece salir esta noche.", answers:["a nosotros"]},
+  {stem:"[ellos] ___ les molesta el humo del tabaco.", answers:["a ellos"]}
+], "a mí · a ti · a él · a ella · a nosotros · a ellos");
+
+/* ---------------- BLOQUE 3: pronombre + verbo, sin banco ---------------- */
+makeFillBlock("g3","Bloque 3 · Completa con el pronombre y el verbo entre paréntesis","medio","mid",[
+  {stem:"A los estudiantes ___ los debates. (interesar)", answers:["les interesan"]},
+  {stem:"A mi abuelo ___ las piernas después de caminar. (doler)", answers:["le duelen"]},
+  {stem:"A mí ___ la política. (importar)", answers:["me importa"]},
+  {stem:"A vosotros, ¿___ un helado? (apetecer)", answers:["os apetece"]},
+  {stem:"A ella ___ mucho los idiomas. (interesar)", answers:["le interesan"]},
+  {stem:"A nosotros ___ las tapas españolas. (encantar)", answers:["nos encantan"]}
+], null, "Escribe el pronombre (me/te/le/nos/os/les) junto con el verbo conjugado.");
+
+/* ---------------- BLOQUE 4: relacionar verbo con su uso típico ---------------- */
+makeMatchBlock("g4","Bloque 4 · Relaciona cada verbo con su uso típico","medio","mid","Verbo","Uso",
+  ["doler","apetecer","caer bien/mal","hacer ilusión","dar igual","molestar"],
+  [
+    "hablar de partes del cuerpo que duelen",
+    "preguntar o expresar ganas de algo, sobre todo comida o planes",
+    "describir la impresión que causa una persona",
+    "expresar alegría anticipada por algo que va a pasar",
+    "expresar indiferencia total",
+    "expresar que algo resulta molesto o incómodo"
+  ],
+  ["a","b","c","d","e","f"]
+);
+
+/* ---------------- BLOQUE 5: caer bien/mal vs. gustar ---------------- */
+makeRadioBlock("g5","Bloque 5 · Caer bien/mal (personas) vs. gustar (cosas/actividades)","medio","mid",[
+  {q:"Mi nuevo compañero de trabajo me ___ muy bien; es simpático y generoso.", opts:["gusta","cae"], answer:1},
+  {q:"Me ___ mucho el fútbol; lo veo todos los domingos.", opts:["gusta","cae"], answer:0},
+  {q:"La verdad es que ese profesor nos ___ fatal, es muy antipático.", opts:["gusta","cae"], answer:1},
+  {q:"A mis padres les ___ la casa nueva.", opts:["gusta","cae"], answer:0},
+  {q:"Esa cantante me ___ muy bien, parece una persona humilde.", opts:["gusta","cae"], answer:1}
+]);
+
+/* ---------------- BLOQUE 6: dar igual / hacer ilusión / dar pena-vergüenza-miedo (con banco) ---------------- */
+makeFillBlock("g6","Bloque 6 · Completa con la expresión correcta","medio","mid",[
+  {stem:"Me ___ mucho el viaje a Japón; llevo meses esperándolo.", answers:["hace ilusión"]},
+  {stem:"A los niños les ___ la oscuridad.", answers:["da miedo"]},
+  {stem:"No sé qué película ver, la verdad, me ___ cualquiera.", answers:["da igual"]},
+  {stem:"Me ___ hablar en público delante de tanta gente.", answers:["da vergüenza"]},
+  {stem:"Me ___ ver la ciudad tan abandonada.", answers:["da pena"]}
+], "da igual · hace ilusión · da pena · da vergüenza · da miedo");
+
+/* ---------------- BLOQUE 7: mixto — concordancia singular/plural, sin banco ---------------- */
+makeFillBlock("g7","Bloque 7 · Completa con el verbo entre paréntesis (concordancia)","medio","mid",[
+  {stem:"A mi hermano le ___ los videojuegos. (encantar)", answers:["encantan"]},
+  {stem:"A mí me ___ ese tema. (interesar)", answers:["interesa"]},
+  {stem:"A ellos les ___ las mentiras. (molestar)", answers:["molestan"]},
+  {stem:"A ti te ___ buena idea, ¿no? (parecer)", answers:["parece"]},
+  {stem:"A nosotros nos ___ unas vacaciones. (apetecer)", answers:["apetecen"]},
+  {stem:"A la profesora le ___ mucho la puntualidad. (importar)", answers:["importa"]}
+]);
+
+/* ---------------- BLOQUE 8: gustar+que+subjuntivo — conjuga ---------------- */
+makeFillBlock("g8","Bloque 8 · Conjuga el verbo en subjuntivo","alto","hard",[
+  {stem:"Me molesta que ___ siempre tarde. (llegar, tú)", answers:["llegues"]},
+  {stem:"Nos encanta que ___ a visitarnos. (venir, vosotros)", answers:["vengáis"]},
+  {stem:"Le da pena que sus hijos ___ tan lejos. (vivir)", answers:["vivan"]},
+  {stem:"Me hace ilusión que ___ a mi cumpleaños. (venir, tú)", answers:["vengas"]},
+  {stem:"Nos molesta que la gente ___ tan alto en el cine. (hablar)", answers:["hable"]}
+], null, "Cambio de sujeto → subjuntivo. Escribe solo la forma verbal.");
+
+/* ---------------- BLOQUE 9: infinitivo vs. que+subjuntivo ---------------- */
+makeRadioBlock("g9","Bloque 9 · Infinitivo (mismo sujeto) o que+subjuntivo (sujeto distinto)","alto","hard",[
+  {q:"Me gusta ___ tarde los sábados (yo mismo).", opts:["levantarme","que me levante"], answer:0},
+  {q:"Me gusta que mi hijo ___ tarde los sábados — así descansa.", opts:["duerme","duerma"], answer:1},
+  {q:"A ella le molesta ___ cuando tiene mucho trabajo (ella misma).", opts:["madrugar","que madrugue"], answer:0},
+  {q:"A ella le molesta que su compañero ___ tan tarde a la oficina.", opts:["llega","llegue"], answer:1},
+  {q:"Nos encanta ___ películas en casa los viernes (nosotros mismos).", opts:["ver","que veamos"], answer:0},
+  {q:"Nos encanta que los niños ___ tan bien en el colegio.", opts:["se portan","se porten"], answer:1}
+]);
+
+/* ---------------- BLOQUE 10: corrige el error típico (yo gusto → a mí me gusta) ---------------- */
+makeRadioBlock("g10","Bloque 10 · ¿Cuál es la frase correcta?","alto","hard",[
+  {q:"¿Cuál es correcta?", opts:["Yo gusto mucho el chocolate.","A mí me gusta mucho el chocolate."], answer:1},
+  {q:"¿Cuál es correcta?", opts:["Nosotros gustamos la música clásica.","A nosotros nos gusta la música clásica."], answer:1},
+  {q:"¿Cuál es correcta?", opts:["Ella gusta los libros de misterio.","A ella le gustan los libros de misterio."], answer:1},
+  {q:"¿Cuál es correcta?", opts:["Ellos gustan viajar en tren.","A ellos les gusta viajar en tren."], answer:1},
+  {q:"¿Cuál es correcta?", opts:["Tú gustas el deporte, ¿verdad?","A ti te gusta el deporte, ¿verdad?"], answer:1}
+]);
+
+/* ---------------- BLOQUE 11: doler + partes del cuerpo, sin banco ---------------- */
+makeFillBlock("g11","Bloque 11 · Doler — completa con la forma correcta","medio","mid",[
+  {stem:"Después de correr, me ___ las piernas. (doler)", answers:["duelen"]},
+  {stem:"Me ___ mucho la cabeza hoy. (doler)", answers:["duele"]},
+  {stem:"A mi madre le ___ la espalda desde ayer. (doler)", answers:["duele"]},
+  {stem:"Nos ___ los pies después de la excursión. (doler)", answers:["duelen"]},
+  {stem:"¿Te ___ la garganta? (doler)", answers:["duele"]}
+]);
+
+/* ---------------- BLOQUE 12: relacionar pronombres personales con me/te/le... ---------------- */
+makeMatchBlock("g12","Bloque 12 · Relaciona la persona con su pronombre","medio","mid","Persona","Pronombre",
+  ["a mí","a ti","a él / a ella / a usted","a nosotros/-as","a vosotros/-as","a ellos / a ellas / a ustedes"],
+  ["me","te","le","nos","os","les"],
+  ["a","b","c","d","e","f"]
+);
+
+/* ---------------- BLOQUE 13: repaso mixto de concordancia ---------------- */
+makeRadioBlock("g13","Bloque 13 · Repaso mixto — elige la opción correcta","alto","hard",[
+  {q:"A los turistas ___ el ambiente de la ciudad.", opts:["le gusta","les gusta","les gustan"], answer:1},
+  {q:"A mi hermana ___ las series turcas.", opts:["le gusta","le gustan","les gustan"], answer:1},
+  {q:"A ti ___ que te ayuden, ¿verdad?", opts:["te gusta","te gustas","te gustan"], answer:0},
+  {q:"A nosotros ___ mucho estos actores.", opts:["nos gusta","nos gustan","les gustan"], answer:1},
+  {q:"A usted, ¿___ el clima de aquí?", opts:["le gusta","le gustan","te gusta"], answer:0}
+]);
+
+/* ---------------- BLOQUE 14: repaso final, sin banco ---------------- */
+makeFillBlock("g14","Bloque 14 · Repaso — completa con el verbo entre paréntesis","alto","hard",[
+  {stem:"A mí no me ___ el precio, sino la calidad. (importar)", answers:["importa"]},
+  {stem:"¿A vosotros os ___ bien el plan? (parecer)", answers:["parece"]},
+  {stem:"A los vecinos les ___ el ruido por la noche. (molestar)", answers:["molesta"]},
+  {stem:"A mi hermana le ___ las muelas. (doler)", answers:["duelen"]},
+  {stem:"A todos nos ___ saber la verdad. (interesar)", answers:["interesa"]}
+]);
+
+/* ---------------- BLOQUE 15: traducción abierta 1 ---------------- */
+makeTranslateBlock("g15","Bloque 15 · Traduce","alto","hard",[
+  {ru:"Мне очень нравятся испанские фильмы.", model:"Me gustan mucho las películas españolas."},
+  {ru:"Ему всё равно, во сколько мы придём.", model:"Le da igual a qué hora lleguemos."},
+  {ru:"Нас раздражает, что он всегда опаздывает.", model:"Nos molesta que siempre llegue tarde."},
+  {ru:"Мне стыдно за эту ошибку.", model:"Me da vergüenza este error."}
+], "Respuestas abiertas — compara tu traducción con el modelo (puede haber más de una forma correcta).");
+
+/* ---------------- BLOQUE 16: traducción abierta 2 ---------------- */
+makeTranslateBlock("g16","Bloque 16 · Traduce","el más difícil","hard",[
+  {ru:"Этот человек мне не нравится (как личность).", model:"Esa persona me cae mal."},
+  {ru:"Нам хочется прогуляться по парку.", model:"Nos apetece dar un paseo por el parque."},
+  {ru:"Моей бабушке нравится, когда мы её навещаем.", model:"A mi abuela le encanta que la visitemos."},
+  {ru:"Мне не терпится (я жду с радостным волнением) начать новую работу.", model:"Me hace ilusión empezar el nuevo trabajo."}
+], "Respuestas abiertas — compara tu traducción con el modelo (puede haber más de una forma correcta).");
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

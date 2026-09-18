@@ -1,0 +1,741 @@
+<!doctype html>
+<title>Futuro y condicional</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Futuro y condicional</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>El futuro y el condicional</h1>
+  <p class="subtitle">Reglas claras + dieciséis bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> el futuro simple, el futuro compuesto, el condicional simple y el condicional compuesto — su formación (incluidos los irregulares más frecuentes: tendré, podré, sabré, querré, vendré, saldré, diré, haré) y, sobre todo, su uso para expresar <b>probabilidad o suposición</b> (no siempre hablan de un futuro real), además del futuro en el pasado del estilo indirecto (dijo que vendría).
+  </div>
+  <p class="series-note">📚 Parte de la serie <b>Gramática</b> del sitio — más adelante se añadirán aquí otros temas. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — futuro y condicional</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada tiempo verbal.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>El error típico de los rusohablantes</h3>
+    <ul>
+      <li>En ruso, la probabilidad se expresa con palabras modales (наверное, вероятно, должно быть), no con la forma del verbo; por eso muchos estudiantes traducen «estará en casa» literalmente como un futuro real y no reconocen que aquí no se habla del futuro, sino de una suposición sobre el presente.</li>
+      <li>Al revés, también se confunde el uso de cortesía/consejo del condicional simple (¿Podrías...?, Yo que tú...) con su uso de probabilidad sobre el pasado (Serían las diez), que son dos usos completamente distintos de la misma forma verbal.</li>
+    </ul>
+    <div class="error-box"><b>Ошибка 1:</b> traducir «Estará cansado» como «он <s>БУДЕТ</s> уставшим» (буквальное будущее) вместо правильного «он, наверное, устал» (предположение о настоящем). <br><b>Ошибка 2:</b> no reconocer «habría ido» como un pasado hipotético no realizado y confundirlo con un simple futuro compuesto.</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Dieciséis bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"futuro simple — formación", pos:"infinitivo + terminaciones",
+   quote:"Mañana <mark>hablaré</mark> con el director. El año que viene <mark>viviremos</mark> en Madrid.",
+   trans:"я сделаю / буду делать",
+   mean:"Se forma añadiendo las terminaciones -é, -ás, -á, -emos, -éis, -án al infinitivo completo (hablar→hablaré, comer→comeré, vivir→viviré). Expresa una acción futura, una promesa, una predicción o una decisión tomada en el momento de hablar.",
+   ex:"Te llamaré en cuanto llegue. — Я позвоню тебе, как только приеду."},
+  {term:"futuro simple — irregulares", pos:"tendré · podré · sabré · querré · vendré · saldré · diré · haré",
+   quote:"No <mark>podré</mark> venir mañana. ¿Qué <mark>harás</mark> este fin de semana?",
+   trans:"неправильные основы, но обычные окончания",
+   mean:"Un grupo de verbos frecuentes tiene una raíz irregular pero conserva las mismas terminaciones: tener→tendré, poder→podré, saber→sabré, querer→querré, venir→vendré, salir→saldré, poner→pondré, decir→diré, hacer→haré, haber→habrá.",
+   ex:"Cuando tenga tiempo, te diré toda la verdad. — Когда у меня будет время, я расскажу тебе всю правду."},
+  {term:"futuro compuesto", pos:"habré + participio",
+   quote:"Para las ocho ya <mark>habré terminado</mark> el informe.",
+   trans:"я уже успею сделать (к будущему моменту)",
+   mean:"Se forma con el futuro de haber (habré/habrás/habrá/habremos/habréis/habrán) + participio. Expresa una acción futura que estará terminada antes de otro momento o acción futura.",
+   ex:"Cuando vuelvas, ya habré hecho la compra. — Когда ты вернёшься, я уже успею сделать покупки."},
+  {term:"condicional simple — cortesía y consejo", pos:"¿Podrías...? · Yo que tú... · Me gustaría...",
+   quote:"¿<mark>Podrías</mark> ayudarme un momento? Yo que tú, <mark>hablaría</mark> con ella.",
+   trans:"я бы сделал / не мог бы ты...",
+   mean:"Se forma añadiendo -ía, -ías, -ía, -íamos, -íais, -ían al infinitivo (con las mismas raíces irregulares que el futuro: tendría, podría, sabría...). Se usa para pedir algo con cortesía, dar consejos («yo que tú / yo en tu lugar») y expresar deseos («me gustaría»).",
+   ex:"Me gustaría reservar una mesa para dos. — Я хотел бы забронировать столик на двоих."},
+  {term:"condicional compuesto", pos:"habría + participio",
+   quote:"Si lo hubiera sabido, <mark>habría venido</mark> antes.",
+   trans:"я бы уже сделал (в прошлом, но не сделал)",
+   mean:"Se forma con el condicional de haber (habría/habrías/habría/habríamos/habríais/habrían) + participio. Expresa una acción hipotética no realizada en el pasado — lo que habría pasado si otra cosa hubiera sido diferente.",
+   ex:"Yo, en tu lugar, habría dicho la verdad. — На твоём месте я бы сказал правду (в прошлом, но так и не сказал)."},
+  {term:"futuro simple — probabilidad sobre el presente", pos:"NO es futuro literal",
+   quote:"No contesta al teléfono... <mark>estará</mark> en una reunión.",
+   trans:"он, наверное, сейчас... (предположение о настоящем)",
+   mean:"El futuro simple no siempre habla del futuro: también expresa una suposición o cálculo sobre el presente (=probablemente está/es). Es un uso muy distinto del futuro literal, y muy frecuente en la conversación.",
+   ex:"¿Qué hora es? — No sé, serán las cinco. — Не знаю, сейчас, наверное, часов пять (предположение о настоящем, не буквальное будущее)."},
+  {term:"futuro compuesto — probabilidad sobre el pasado reciente", pos:"NO es futuro literal",
+   quote:"No está en su despacho... <mark>habrá salido</mark> a comer.",
+   trans:"он, наверное, уже... (предположение о недавнем прошлом)",
+   mean:"El futuro compuesto expresa una suposición sobre algo que probablemente ya ha ocurrido (pasado reciente o relacionado con el presente) — equivale a «probablemente ha + participio».",
+   ex:"Han llamado y no contesta — habrá perdido el móvil. — Ему звонили, а он не отвечает — он, наверное, потерял телефон."},
+  {term:"condicional simple — probabilidad sobre el pasado", pos:"NO es condicional literal",
+   quote:"Cuando ocurrió el accidente, <mark>serían</mark> las diez de la noche.",
+   trans:"было, наверное... (предположение о прошлом)",
+   mean:"El condicional simple expresa también una suposición sobre un momento del pasado — equivale a «probablemente era/eran». No es un condicional literal ni tiene valor de futuro.",
+   ex:"Tendría unos veinte años cuando se fue a vivir a Londres. — Ему было, наверное, около двадцати, когда он уехал жить в Лондон."},
+  {term:"futuro en el pasado — estilo indirecto", pos:"dijo que vendría",
+   quote:"Me dijo que <mark>vendría</mark> a las ocho. Prometió que me <mark>llamaría</mark>.",
+   trans:"сказал, что придёт/позвонит (в прямой речи было бы «vendré/llamaré»)",
+   mean:"Cuando contamos en pasado lo que alguien dijo sobre su futuro (estilo indirecto), el futuro simple de la frase original se transforma en condicional simple: «Vendré» → dijo que vendría.",
+   ex:"Anunciaron que subirían los precios. — Они объявили, что поднимут цены (в прямой речи: «subiremos los precios»)."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+function buildRadioBlock(cfg){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(cfg.title, cfg.tag, cfg.tagClass));
+  if(cfg.hint){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+cfg.hint+'</p>'; }
+  var list = document.createElement("div");
+  cfg.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+cfg.id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    cfg.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+cfg.id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+cfg.items.length+"</b>";
+    blockScores[cfg.id] = {correct:correct, total:cfg.items.length};
+    updateGlobalScore();
+  });
+  blockScores[cfg.id] = {correct:0, total:cfg.items.length};
+  exList.appendChild(wrap);
+}
+
+function buildFillBlock(cfg){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(cfg.title, cfg.tag, cfg.tagClass));
+  if(cfg.bank){ wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+cfg.bank+'</div>'; }
+  if(cfg.hint){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+cfg.hint+'</p>'; }
+  var list = document.createElement("div");
+  cfg.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    cfg.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+cfg.items.length+"</b>";
+    blockScores[cfg.id] = {correct:correct, total:cfg.items.length};
+    updateGlobalScore();
+  });
+  blockScores[cfg.id] = {correct:0, total:cfg.items.length};
+  exList.appendChild(wrap);
+}
+
+function buildMatchBlock(cfg){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(cfg.title, cfg.tag, cfg.tagClass));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>"+cfg.colLeft+"</th><th>"+cfg.colRight+"</th></tr>";
+  cfg.words.forEach(function(w, idx){
+    var opts = cfg.letters.map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = cfg.defs.map(function(d,i){ return cfg.letters[i]+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    cfg.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === cfg.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+cfg.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+cfg.words.length+"</b>";
+    blockScores[cfg.id] = {correct:correct, total:cfg.words.length};
+    updateGlobalScore();
+  });
+  blockScores[cfg.id] = {correct:0, total:cfg.words.length};
+  exList.appendChild(wrap);
+}
+
+function buildOpenBlock(cfg){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(cfg.title, cfg.tag, cfg.tagClass));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).</p>';
+  cfg.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="'+cfg.id+'-'+idx+'" style="min-height:44px;" placeholder="Tu respuesta..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="'+cfg.id+'-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById(cfg.id+"-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE 1: reconocimiento del futuro simple regular ---------------- */
+buildRadioBlock({id:"q1", title:"Bloque 1 · Reconoce el futuro simple regular", tag:"fácil", tagClass:"easy", items:[
+  {q:"Mañana (yo) ___ con el director.", opts:["hablaré","hablo","hablaba"], answer:0},
+  {q:"El año que viene (nosotros) ___ en Madrid.", opts:["vivimos","viviremos","vivíamos"], answer:1},
+  {q:"¿A qué hora ___ (vosotros) mañana?", opts:["llegasteis","llegaréis","llegabais"], answer:1},
+  {q:"Ellos ___ el proyecto la semana próxima.", opts:["terminarán","terminaron","terminaban"], answer:0},
+  {q:"¿Me ___ (tú) al médico mañana?", opts:["acompañas","acompañarás","acompañabas"], answer:1},
+  {q:"Creo que ___ (nosotros) tarde a la boda.", opts:["llegaremos","llegamos","llegábamos"], answer:0}
+]});
+
+/* ---------------- BLOQUE 2: huecos con banco — futuro irregular ---------------- */
+buildFillBlock({id:"q2", title:"Bloque 2 · Conjuga en futuro simple — verbos irregulares (con banco)", tag:"fácil", tagClass:"easy",
+  bank:"tendré · podrás · sabrá · querremos · vendréis · saldrán · diré · haré",
+  items:[
+    {stem:"Mañana no (tener, yo) ___ tiempo para verte.", answers:["tendré"]},
+    {stem:"¿(poder, tú) ___ venir a la fiesta?", answers:["podrás"]},
+    {stem:"Ella (saber) ___ la nota del examen la próxima semana.", answers:["sabrá"]},
+    {stem:"(querer, nosotros) ___ hablar contigo cuando llegues.", answers:["querremos"]},
+    {stem:"¿(venir, vosotros) ___ a la boda?", answers:["vendréis"]},
+    {stem:"Mis padres (salir) ___ de viaje el viernes.", answers:["saldrán"]},
+    {stem:"Te lo (decir, yo) ___ mañana sin falta.", answers:["diré"]},
+    {stem:"Yo (hacer) ___ todo lo posible para ayudarte.", answers:["haré"]}
+  ]});
+
+/* ---------------- BLOQUE 3: relacionar — raíz irregular con infinitivo ---------------- */
+buildMatchBlock({id:"q3", title:"Bloque 3 · Relaciona la raíz irregular con el infinitivo", tag:"fácil-medio", tagClass:"easy",
+  colLeft:"Infinitivo", colRight:"Raíz irregular (futuro/condicional)",
+  words:["tener","poder","saber","querer","venir","salir","decir","hacer"],
+  letters:["a","b","c","d","e","f","g","h"],
+  defs:["podr-","dir-","tendr-","har-","sabr-","vendr-","querr-","saldr-"],
+  answers:["c","a","e","g","f","h","b","d"]});
+
+/* ---------------- BLOQUE 4: huecos con banco — condicional irregular ---------------- */
+buildFillBlock({id:"q4", title:"Bloque 4 · Conjuga en condicional simple — verbos irregulares (con banco)", tag:"medio", tagClass:"mid",
+  bank:"tendría · podríamos · sabrían · querría · vendrías · saldría · diríamos · haría",
+  items:[
+    {stem:"(tener, yo) ___ mucho gusto en ayudarte.", answers:["tendría"]},
+    {stem:"(poder, nosotros) ___ quedar mañana si te viene bien.", answers:["podríamos"]},
+    {stem:"Ellos (saber) ___ la respuesta si estudiaran más.", answers:["sabrían"]},
+    {stem:"Yo (querer) ___ pedirte un favor.", answers:["querría"]},
+    {stem:"¿(venir, tú) ___ si te invitara?", answers:["vendrías"]},
+    {stem:"Ella (salir) ___ antes si pudiera.", answers:["saldría"]},
+    {stem:"(decir, nosotros) ___ la verdad en tu lugar.", answers:["diríamos"]},
+    {stem:"Yo (hacer) ___ lo mismo que tú.", answers:["haría"]}
+  ]});
+
+/* ---------------- BLOQUE 5: huecos sin banco — condicional simple ---------------- */
+buildFillBlock({id:"q5", title:"Bloque 5 · Condicional simple — huecos sin banco", tag:"medio", tagClass:"mid",
+  hint:"Conjuga el verbo dado en condicional simple, sin ayuda de banco.",
+  items:[
+    {stem:"¿(poder, tú) ___ cerrar la ventana, por favor?", answers:["podrías"]},
+    {stem:"Yo que tú, (hablar) ___ con ella cuanto antes.", answers:["hablaría"]},
+    {stem:"Me (gustar) ___ visitar Japón algún día.", answers:["gustaría"]},
+    {stem:"En tu lugar, (tener, yo) ___ más paciencia.", answers:["tendría"]},
+    {stem:"¿(poder, usted) ___ repetir la pregunta, por favor?", answers:["podría"]},
+    {stem:"Nosotros (deber) ___ salir antes para no llegar tarde.", answers:["deberíamos"]}
+  ]});
+
+/* ---------------- BLOQUE 6: futuro simple vs futuro compuesto ---------------- */
+buildRadioBlock({id:"q6", title:"Bloque 6 · Futuro simple vs. futuro compuesto", tag:"medio", tagClass:"mid", items:[
+  {q:"Para las ocho ya ___ el informe.", opts:["terminaré","habré terminado"], answer:1},
+  {q:"El próximo mes ___ 30 años.", opts:["cumpliré","habré cumplido"], answer:0},
+  {q:"Cuando llegues, ya ___ la cena.", opts:["haré","habré hecho"], answer:1},
+  {q:"Mañana ___ a la playa si hace buen tiempo.", opts:["iré","habré ido"], answer:0},
+  {q:"Antes de las diez, ya ___ a todos los invitados.", opts:["llamaré","habré llamado"], answer:1},
+  {q:"El sábado ___ con mis amigos.", opts:["saldré","habré salido"], answer:0}
+]});
+
+/* ---------------- BLOQUE 7: futuro literal vs futuro de probabilidad ---------------- */
+buildRadioBlock({id:"q7", title:"Bloque 7 · Futuro literal vs. futuro de probabilidad", tag:"medio", tagClass:"mid",
+  hint:"Elige qué significa realmente la frase: ¿un hecho futuro o una suposición sobre el presente?",
+  items:[
+    {q:"«Mañana estaré en casa todo el día.»", opts:["предположение о настоящем","обещание/факт о будущем"], answer:1},
+    {q:"«Estará en casa ahora mismo, no contesta porque duerme.»", opts:["предположение о настоящем","обещание/факт о будущем"], answer:0},
+    {q:"«Tendrás que estudiar más si quieres aprobar.»", opts:["предположение","совет/необходимость в будущем"], answer:1},
+    {q:"«Tendrán unos cuarenta años, calculo yo.»", opts:["предположение о возрасте (сейчас)","факт о будущем"], answer:0},
+    {q:"«¿Quién llama a estas horas? Será el cartero.»", opts:["предположение о настоящем","обещание о будущем"], answer:0},
+    {q:"«El año que viene será muy importante para la empresa.»", opts:["предположение","факт/прогноз о будущем"], answer:1}
+  ]});
+
+/* ---------------- BLOQUE 8: condicional simple vs condicional compuesto (sin banco) ---------------- */
+buildFillBlock({id:"q8", title:"Bloque 8 · Condicional simple (cortesía/consejo) vs. compuesto (hipótesis pasada)", tag:"medio-alto", tagClass:"mid",
+  hint:"Decide si hace falta el condicional simple o el compuesto según el contexto, y conjuga el verbo dado.",
+  items:[
+    {stem:"¿(poder, tú) ___ ayudarme con esto? (petición cortés, ahora)", answers:["podrías"]},
+    {stem:"Si hubiera sabido que venías, (preparar, yo) ___ algo de comer. (hipótesis pasada no realizada)", answers:["habría preparado"]},
+    {stem:"Yo que tú, (llamar) ___ al médico. (consejo, ahora)", answers:["llamaría"]},
+    {stem:"De haber tenido más tiempo, (nosotros/terminar) ___ el proyecto a tiempo. (hipótesis pasada)", answers:["habríamos terminado"]},
+    {stem:"Me (encantar) ___ conocer París algún día. (deseo)", answers:["encantaría"]},
+    {stem:"Si me lo hubieras dicho antes, (yo/venir) ___ enseguida. (hipótesis pasada)", answers:["habría venido"]}
+  ]});
+
+/* ---------------- BLOQUE 9: futuro compuesto — probabilidad vs literal ---------------- */
+buildRadioBlock({id:"q9", title:"Bloque 9 · Futuro compuesto — ¿probabilidad o futuro literal?", tag:"alto", tagClass:"hard", items:[
+  {q:"«No está aquí — habrá salido a fumar.»", opts:["предположение о недавнем прошлом","точный факт о будущем"], answer:0},
+  {q:"«Para el viernes ya habré terminado el informe.»", opts:["предположение","факт о будущем (завершится к сроку)"], answer:1},
+  {q:"«Han llamado dos veces y no contesta — habrá perdido el móvil.»", opts:["предположение о недавнем прошлом","факт о будущем"], answer:0},
+  {q:"«Cuando vuelvas, ya habré hecho la compra.»", opts:["предположение","факт о будущем к моменту"], answer:1},
+  {q:"«El tren ya habrá salido — vamos a llegar tarde.»", opts:["предположение","обещание"], answer:0},
+  {q:"«Antes de las nueve ya habremos llegado al hotel.»", opts:["предположение","факт о будущем"], answer:1}
+]});
+
+/* ---------------- BLOQUE 10: condicional simple — probabilidad sobre el pasado vs literal ---------------- */
+buildRadioBlock({id:"q10", title:"Bloque 10 · Condicional simple — ¿probabilidad sobre el pasado o uso literal?", tag:"alto", tagClass:"hard", items:[
+  {q:"«Serían las diez cuando ocurrió el accidente.»", opts:["предположение о прошлом (было, наверное, около 10)","условие/вежливая просьба"], answer:0},
+  {q:"«¿Podrías cerrar la puerta, por favor?»", opts:["предположение о прошлом","вежливая просьба"], answer:1},
+  {q:"«Tendría unos veinte años cuando se fue a vivir fuera.»", opts:["предположение о прошлом","совет"], answer:0},
+  {q:"«Yo que tú, hablaría con ella.»", opts:["предположение о прошлом","совет"], answer:1},
+  {q:"«Habría unas cien personas en la boda, calculo yo.»", opts:["предположение о прошлом","вежливая просьба"], answer:0},
+  {q:"«Me gustaría viajar más este año.»", opts:["предположение о прошлом","желание"], answer:1}
+]});
+
+/* ---------------- BLOQUE 11: futuro en el pasado — estilo indirecto ---------------- */
+buildFillBlock({id:"q11", title:"Bloque 11 · Futuro en el pasado — estilo indirecto (sin banco)", tag:"alto", tagClass:"hard",
+  hint:"Transforma el futuro de la frase directa en condicional simple para el estilo indirecto.",
+  items:[
+    {stem:"Directo: «Vendré a las ocho.» → Indirecto: Me dijo que (venir) ___ a las ocho.", answers:["vendría"]},
+    {stem:"Directo: «Te llamaré mañana.» → Indirecto: Prometió que me (llamar) ___ al día siguiente.", answers:["llamaría"]},
+    {stem:"Directo: «Haremos todo lo posible.» → Indirecto: Anunciaron que (hacer) ___ todo lo posible.", answers:["harían"]},
+    {stem:"Directo: «No podré ir.» → Indirecto: Me explicó que no (poder) ___ ir.", answers:["podría"]},
+    {stem:"Directo: «Subiremos los precios.» → Indirecto: La empresa comunicó que (subir) ___ los precios.", answers:["subirían"]},
+    {stem:"Directo: «Saldré temprano.» → Indirecto: Dijo que (salir) ___ temprano.", answers:["saldría"]}
+  ]});
+
+/* ---------------- BLOQUE 12: mezcla — futuro/condicional simple/compuesto (4 opciones) ---------------- */
+buildRadioBlock({id:"q12", title:"Bloque 12 · Elige la forma correcta (4 opciones)", tag:"alto", tagClass:"hard", items:[
+  {q:"No contesta al móvil... ___ sin batería.", opts:["estará","habrá estado","estaría","habría estado"], answer:0},
+  {q:"Cuando llegamos a la fiesta, ya ___ (ellos) toda la comida — apenas quedaba nada.", opts:["habrán preparado","prepararán","habrían preparado","prepararían"], answer:2},
+  {q:"Para el año que viene, ya ___ (nosotros) la reforma de la casa.", opts:["habremos terminado","terminaremos","habríamos terminado","terminaríamos"], answer:0},
+  {q:"___ unas cien personas en el concierto, calculo yo.", opts:["Habrá","Habrán","Habría","Habrían"], answer:2},
+  {q:"No coge el teléfono — ___ el modo avión.", opts:["habrá activado","activará","habría activado","activaría"], answer:0},
+  {q:"Me dijo que ___ a las nueve, pero al final llegó a las diez.", opts:["vendrá","habrá venido","vendría","habría venido"], answer:2}
+]});
+
+/* ---------------- BLOQUE 13: huecos sin banco — probabilidad mezclada ---------------- */
+buildFillBlock({id:"q13", title:"Bloque 13 · Expresiones de probabilidad mezcladas (sin banco)", tag:"alto", tagClass:"hard",
+  items:[
+    {stem:"¿Dónde está Juan? — No sé, (estar) ___ todavía en la oficina.", answers:["estará"]},
+    {stem:"El jefe no ha llegado — (haber) ___ mucho tráfico esta mañana.", answers:["habrá habido"]},
+    {stem:"Cuando lo conocí, (tener, él) ___ unos treinta años.", answers:["tendría"]},
+    {stem:"Son las once y no llama — ya (acostarse) ___.", answers:["se habrá acostado"]},
+    {stem:"El examen (ser) ___ difícil, porque todos salieron muy serios.", answers:["sería"]},
+    {stem:"No encuentro las llaves — las (dejar, yo) ___ en el coche.", answers:["habré dejado"]}
+  ]});
+
+/* ---------------- BLOQUE 14: narrativa — estilo indirecto + probabilidad ---------------- */
+buildFillBlock({id:"q14", title:"Bloque 14 · Narrativa — estilo indirecto y probabilidad combinados", tag:"el más difícil", tagClass:"hard",
+  items:[
+    {stem:"Me dijo que (llegar, él) ___ antes de las nueve, pero al final se retrasó.", answers:["llegaría"]},
+    {stem:"Prometieron que nos (avisar) ___ en cuanto tuvieran noticias.", answers:["avisarían"]},
+    {stem:"En aquella época (tener, yo) ___ unos quince años, más o menos.", answers:["tendría"]},
+    {stem:"El profesor anunció que (haber) ___ examen sorpresa la semana siguiente.", answers:["habría"]},
+    {stem:"No cogen el teléfono en la oficina — ya (cerrar) ___ por hoy.", answers:["habrán cerrado"]},
+    {stem:"Dijo que nos (llamar) ___ en cuanto aterrizara el avión.", answers:["llamaría"]}
+  ]});
+
+/* ---------------- BLOQUE 15: traducción — probabilidad ---------------- */
+buildOpenBlock({id:"q15", title:"Bloque 15 · Traduce — expresa la probabilidad con futuro/condicional", tag:"el más difícil", tagClass:"hard", items:[
+  {stem:"Traduce: «Наверное, сейчас около шести».", model:"Serán las seis, más o menos."},
+  {stem:"Traduce: «Она, наверное, уже ушла — свет выключен».", model:"Ya se habrá ido — la luz está apagada."},
+  {stem:"Traduce: «Ему, наверное, было около тридцати, когда он переехал в Мадрид».", model:"Tendría unos treinta años cuando se mudó a Madrid."}
+]});
+
+/* ---------------- BLOQUE 16: transformación — estilo directo a indirecto ---------------- */
+buildOpenBlock({id:"q16", title:"Bloque 16 · Transforma a estilo indirecto", tag:"el más difícil", tagClass:"hard", items:[
+  {stem:"Convierte en estilo indirecto: María dijo: «Terminaré el proyecto a tiempo.»", model:"María dijo que terminaría el proyecto a tiempo."},
+  {stem:"Convierte en estilo indirecto: Mis padres dijeron: «Te visitaremos en verano.»", model:"Mis padres dijeron que me visitarían en verano."},
+  {stem:"Convierte en estilo indirecto: El director anunció: «Habrá cambios en la empresa.»", model:"El director anunció que habría cambios en la empresa."},
+  {stem:"Convierte en estilo indirecto: Ella prometió: «Te escribiré todas las semanas.»", model:"Ella prometió que me escribiría todas las semanas."}
+]});
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

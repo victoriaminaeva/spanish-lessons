@@ -1,0 +1,735 @@
+<!doctype html>
+<title>Probabilidad e hipótesis</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Probabilidad e hipótesis</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B2 · repaso</p>
+  <h1>Cómo expresar probabilidad e hipótesis</h1>
+  <p class="subtitle">Reglas claras + dieciséis bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> esta es una página de <b>repaso y consolidación</b> — no introduce gramática nueva, sino que reúne y contrasta recursos ya vistos en las páginas de <i>futuro/condicional</i> y de <i>subjuntivo</i>, centrándose exclusivamente en cómo se usan para expresar <b>probabilidad, conjetura y grados de duda</b>: a lo mejor/igual, quizás/tal vez, puede que/es posible que, el futuro y el condicional de probabilidad, y deber de + infinitivo.
+  </div>
+  <p class="series-note">📚 Tema de la serie <b>Gramática</b> del sitio. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — repaso de expresiones de probabilidad</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada expresión.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>Chuleta comparativa — de más a menos certeza (aprox.)</h3>
+    <ul>
+      <li><b>Futuro simple/compuesto y condicional simple/compuesto</b> — conjetura sobre el presente/pasado, sin marcador explícito: <i>Estará en casa. Habrá salido. Serían las diez cuando llegó.</i></li>
+      <li><b>Quizás / tal vez / posiblemente + indicativo</b> — el hablante lo ve bastante probable: <i>Quizás viene mañana.</i></li>
+      <li><b>A lo mejor / igual (coloquial, España) + SIEMPRE indicativo</b> — probabilidad percibida como alta, muy frecuente en el habla informal: <i>A lo mejor llueve esta tarde.</i></li>
+      <li><b>Quizás / tal vez / posiblemente + subjuntivo</b> — mayor duda que con indicativo: <i>Quizás venga mañana</i> (menos seguro que «viene»).</li>
+      <li><b>Deber de + infinitivo</b> — conjetura razonada: <i>Debe de tener 40 años.</i></li>
+      <li><b>Puede que / es posible que + SIEMPRE subjuntivo</b> — la forma más neutra de decir «es posible»: <i>Puede que llueva.</i></li>
+    </ul>
+    <div class="error-box"><b>Trampa:</b> <b>a lo mejor</b> e <b>igual</b> (con este sentido de probabilidad) NUNCA llevan subjuntivo, aunque expresan duda: <s>a lo mejor venga</s> es incorrecto → <b>a lo mejor viene</b>. Es la excepción que más confunde a los estudiantes de subjuntivo.</div>
+  </div>
+
+  <div class="contrast-box">
+    <h3>Deber de + infinitivo (probabilidad) vs. deber + infinitivo (obligación)</h3>
+    <ul>
+      <li><b>Deber de + infinitivo</b> = conjetura/probabilidad: <i>Debe de tener 40 años</i> (= probablemente tiene 40 años).</li>
+      <li><b>Deber + infinitivo</b> (sin «de») = obligación: <i>Debes terminar el informe hoy</i> (= es tu obligación).</li>
+      <li>En el habla cotidiana esta distinción se pierde a menudo, pero en el registro cuidado (y en los exámenes B2) se mantiene.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Dieciséis bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B2 · repaso · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"a lo mejor / igual", pos:"coloquial (España) · SIEMPRE + indicativo",
+   quote:"<mark>A lo mejor</mark> llueve esta tarde. <mark>Igual</mark> no viene nadie.",
+   trans:"возможно, может быть (разговорное, Испания)",
+   mean:"Muy frecuentes en el habla coloquial española; expresan una probabilidad que el hablante siente bastante alta. Nunca llevan subjuntivo.",
+   ex:"A lo mejor me quedo en casa este finde. — Может быть, я останусь дома в эти выходные."},
+  {term:"quizás / tal vez / posiblemente", pos:"+ indicativo o subjuntivo",
+   quote:"<mark>Quizás</mark> viene mañana. <mark>Quizás</mark> venga mañana.",
+   trans:"возможно, вероятно",
+   mean:"Admiten indicativo (más seguro) o subjuntivo (más duda). Se pueden usar antes o después del verbo.",
+   ex:"Tal vez tenga razón, no estoy seguro. — Возможно, он/она прав(а), я не уверен."},
+  {term:"puede que / es posible que", pos:"SIEMPRE + subjuntivo",
+   quote:"<mark>Puede que</mark> llueva. <mark>Es posible que</mark> lleguemos tarde.",
+   trans:"возможно, что...; может быть, что...",
+   mean:"Estructura impersonal que siempre exige subjuntivo, sin excepción — es la forma más «neutra» de expresar posibilidad.",
+   ex:"Puede que no haya entradas para el concierto. — Возможно, не будет билетов на концерт."},
+  {term:"futuro simple de probabilidad", pos:"conjetura sobre el presente",
+   quote:"¿Dónde está Pedro? — No sé, <mark>estará</mark> en casa.",
+   trans:"наверное, вероятно (о настоящем)",
+   mean:"El futuro simple no siempre habla del futuro: también expresa una suposición sobre algo presente.",
+   ex:"¿Qué hora es? — Serán las tres. — Который час? — Наверное, три."},
+  {term:"futuro compuesto de probabilidad", pos:"conjetura sobre el pasado reciente",
+   quote:"No contesta al teléfono, <mark>habrá salido</mark> ya.",
+   trans:"наверное, уже (о недавнем прошлом)",
+   mean:"El futuro compuesto (habré/habrás + participio) expresa una conjetura sobre algo que ya ha pasado.",
+   ex:"Habrá perdido el autobús. — Наверное, он опоздал на автобус."},
+  {term:"condicional simple de probabilidad", pos:"conjetura sobre el pasado",
+   quote:"<mark>Serían</mark> las diez cuando llegó a casa.",
+   trans:"наверное, было (о прошлом)",
+   mean:"El condicional simple expresa una suposición sobre un momento del pasado, muy usado con la hora.",
+   ex:"Tendría unos veinte años cuando se casó. — Ему/ей было, наверное, около двадцати лет, когда он/она женился/вышла замуж."},
+  {term:"condicional compuesto de probabilidad", pos:"conjetura sobre un pasado anterior",
+   quote:"No llegó a tiempo; <mark>habría salido</mark> tarde de casa.",
+   trans:"наверное, к тому моменту уже...",
+   mean:"El condicional compuesto (habría + participio) expresa una conjetura sobre algo anterior a otro momento pasado.",
+   ex:"Cuando llegamos ya se habría marchado. — Когда мы пришли, он, наверное, уже ушёл."},
+  {term:"deber de + infinitivo", pos:"probabilidad (≠ deber + infinitivo = obligación)",
+   quote:"<mark>Debe de tener</mark> unos 40 años.",
+   trans:"наверное, должно быть",
+   mean:"Expresa una conjetura razonada; no confundir con «deber + infinitivo», que expresa obligación.",
+   ex:"Deben de haber llegado ya. — Они, должно быть, уже приехали."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+function makeRadioBlock(id, title, tag, tagClass, items){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeFillBlock(id, title, tag, tagClass, items, bank, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(bank){
+    wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+bank+'</div>';
+  }
+  if(hintText){
+    wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>';
+  }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeMatchBlock(id, title, tag, tagClass, leftLabel, rightLabel, words, defs, answers){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  var table = document.createElement("table"); table.className = "match-table";
+  var letters = defs.map(function(d,i){ return String.fromCharCode(97+i); });
+  var rows = "<tr><th>"+leftLabel+"</th><th>"+rightLabel+"</th></tr>";
+  words.forEach(function(w, idx){
+    var opts = letters.map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = defs.map(function(d,i){ return letters[i]+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+words.length+"</b>";
+    blockScores[id] = {correct:correct, total:words.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:words.length};
+  exList.appendChild(wrap);
+}
+
+function makeTranslateBlock(id, title, tag, tagClass, items, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> <i style="color:var(--muted);">«'+it.ru+'»</i></div>'+
+      '<textarea class="q-answer" id="'+id+'-'+idx+'" style="min-height:44px;" placeholder="Tu traducción..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="'+id+'-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById(id+"-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE 1: reconocimiento — indicativo o subjuntivo obligatorio ---------------- */
+makeRadioBlock("h1","Bloque 1 · Elige la forma verbal correcta","fácil","easy",[
+  {q:"A lo mejor ___ (venir) mi primo este fin de semana.", opts:["viene","venga"], answer:0},
+  {q:"Puede que ___ (llover) mañana.", opts:["llueve","llueva"], answer:1},
+  {q:"Es posible que no ___ (haber) entradas.", opts:["hay","haya"], answer:1},
+  {q:"Igual ___ (ir) al cine esta noche.", opts:["voy","vaya"], answer:0},
+  {q:"Puede que ella no ___ (querer) venir.", opts:["quiere","quiera"], answer:1},
+  {q:"A lo mejor ___ (ser) mejor esperar un poco.", opts:["es","sea"], answer:0}
+]);
+
+/* ---------------- BLOQUE 2: futuro/condicional de probabilidad, con banco ---------------- */
+makeFillBlock("h2","Bloque 2 · Completa con el futuro o condicional de probabilidad","fácil","easy",[
+  {stem:"¿Qué hora es? — No sé, ___ las cinco. (ser)", answers:["serán"]},
+  {stem:"¿Dónde está Marta? — No contesta, ___ en el trabajo todavía. (estar)", answers:["estará"]},
+  {stem:"No sé cuántos años tenía mi abuelo cuando emigró; ___ unos veinte. (tener)", answers:["tendría"]},
+  {stem:"El jefe no está en su despacho; ___ ya. (salir)", answers:["habrá salido"]},
+  {stem:"Cuando llegamos a la fiesta, ya ___ casi todos los invitados. (marcharse)", answers:["se habrían marchado"]}
+], "será/serán · estará · tendría · habrá salido · se habrían marchado");
+
+/* ---------------- BLOQUE 3: quizás + indicativo vs. quizás + subjuntivo (grado de duda) ---------------- */
+makeRadioBlock("h3","Bloque 3 · Quizás — ¿más seguridad o más duda?","medio","mid",[
+  {q:"Está casi convencido: «Quizás ___ razón, la verdad es que sonaba muy seguro.» (más certeza)", opts:["tiene","tenga"], answer:0},
+  {q:"No tiene ni idea: «Quizás ___ razón, no sé, es difícil saberlo.» (más duda)", opts:["tiene","tenga"], answer:1},
+  {q:"Tal vez ___ (venir) mañana — de hecho ya me lo confirmó por mensaje. (casi seguro)", opts:["viene","venga"], answer:0},
+  {q:"Tal vez ___ (venir) mañana, aunque todavía no es seguro. (duda real)", opts:["viene","venga"], answer:1},
+  {q:"Posiblemente ella ya lo ___ (saber) — me lo dijo ayer. (certeza)", opts:["sabe","sepa"], answer:0}
+]);
+
+/* ---------------- BLOQUE 4: a lo mejor/igual — siempre indicativo, sin banco ---------------- */
+makeFillBlock("h4","Bloque 4 · A lo mejor / igual — completa (siempre indicativo)","medio","mid",[
+  {stem:"A lo mejor ___ mucha gente en la fiesta. (haber)", answers:["hay"]},
+  {stem:"Igual no ___ tiempo de terminar hoy. (tener, nosotros)", answers:["tenemos"]},
+  {stem:"A lo mejor ella ya lo ___. (saber)", answers:["sabe"]},
+  {stem:"Igual ___ mejor llamar antes de ir. (ser)", answers:["es"]},
+  {stem:"A lo mejor no ___ (querer, ellos) venir con nosotros.", answers:["quieren"]}
+]);
+
+/* ---------------- BLOQUE 5: puede que / es posible que — siempre subjuntivo ---------------- */
+makeFillBlock("h5","Bloque 5 · Puede que / es posible que — completa (siempre subjuntivo)","medio","mid",[
+  {stem:"Puede que ya no ___ entradas para el concierto. (quedar)", answers:["queden"]},
+  {stem:"Es posible que ___ (llegar, nosotros) tarde por el tráfico.", answers:["lleguemos"]},
+  {stem:"Puede que no ___ (poder, tú) venir mañana.", answers:["puedas"]},
+  {stem:"Es posible que ya lo ___ (saber, ella).", answers:["sepa"]},
+  {stem:"Puede que ___ (hacer) frío en la sierra por la noche.", answers:["haga"]}
+]);
+
+/* ---------------- BLOQUE 6: deber de vs. deber (probabilidad vs. obligación) ---------------- */
+makeRadioBlock("h6","Bloque 6 · Deber de (probabilidad) vs. deber (obligación)","medio","mid",[
+  {q:"Ese señor tiene el pelo blanco; ___ tener más de setenta años.", opts:["debe","debe de"], answer:1},
+  {q:"Mañana tienes examen, así que ___ estudiar esta tarde.", opts:["debes","debes de"], answer:0},
+  {q:"No contesta al teléfono; ___ estar en el metro, sin cobertura.", opts:["debe","debe de"], answer:1},
+  {q:"Según el contrato, ___ pagar el alquiler antes del día 5.", opts:["debes","debes de"], answer:0},
+  {q:"Llevan tres horas de viaje; ya ___ estar cerca.", opts:["deben","deben de"], answer:1}
+]);
+
+/* ---------------- BLOQUE 7: futuro compuesto y condicional compuesto de probabilidad, sin banco ---------------- */
+makeFillBlock("h7","Bloque 7 · Futuro y condicional compuestos de probabilidad","alto","hard",[
+  {stem:"No están en casa; ___ al cine. (ir, ellos — futuro compuesto)", answers:["habrán ido"]},
+  {stem:"El suelo está mojado; ___ durante la noche. (llover — futuro compuesto)", answers:["habrá llovido"]},
+  {stem:"Cuando llamé, ya ___ la reunión. (terminar — condicional compuesto)", answers:["habría terminado"]},
+  {stem:"Se fueron tan rápido que ___ algo urgente. (pasar — condicional compuesto)", answers:["habría pasado"]},
+  {stem:"No sé por qué no vino; ___ algún problema. (tener — condicional compuesto)", answers:["habría tenido"]}
+]);
+
+/* ---------------- BLOQUE 8: repaso — elige la expresión de probabilidad correcta ---------------- */
+makeRadioBlock("h8","Bloque 8 · ¿Qué expresión encaja mejor aquí?","alto","hard",[
+  {q:"Registro coloquial, alta seguridad: «___ llueve esta tarde, mira esas nubes.»", opts:["A lo mejor","Es posible que"], answer:0},
+  {q:"Registro neutro, cualquier grado de duda: «___ llueva esta tarde.»", opts:["Puede que","A lo mejor"], answer:0},
+  {q:"Conjetura sobre la hora, sin marcador: «___ las once cuando se fue.»", opts:["Serían","Puede que fueran"], answer:0},
+  {q:"Conjetura razonada sobre la edad: «___ tener unos cincuenta años.»", opts:["Debe de","Debe"], answer:0},
+  {q:"Duda real, más fuerte que «a lo mejor»: «___ tenga razón, pero no estoy nada seguro.»", opts:["Tal vez","A lo mejor"], answer:0}
+]);
+
+/* ---------------- BLOQUE 9: relacionar expresión con su grado de certeza ---------------- */
+makeMatchBlock("h9","Bloque 9 · Relaciona la expresión con su matiz","alto","hard","Expresión","Matiz",
+  ["a lo mejor / igual","puede que / es posible que","quizás + indicativo","quizás + subjuntivo","deber de + infinitivo","futuro/condicional de probabilidad"],
+  [
+    "probabilidad alta sentida por el hablante; registro coloquial; siempre indicativo",
+    "forma neutra e impersonal de decir «es posible»; siempre subjuntivo",
+    "duda moderada, el hablante lo ve bastante probable",
+    "mayor grado de duda que con indicativo",
+    "conjetura razonada, basada en indicios (≠ obligación sin «de»)",
+    "conjetura sobre el presente o el pasado, sin marcador explícito de duda"
+  ],
+  ["a","b","c","d","e","f"]
+);
+
+/* ---------------- BLOQUE 10: repaso final — huecos mixtos sin banco ---------------- */
+makeFillBlock("h10","Bloque 10 · Repaso final — completa con la forma correcta","alto","hard",[
+  {stem:"Puede que mañana ___ (hacer) mal tiempo, según el pronóstico.", answers:["haga"]},
+  {stem:"A lo mejor ___ (ser) buena idea reservar mesa antes.", answers:["es"]},
+  {stem:"Quizás ella ya lo ___ (saber) — parecía tranquila. (certeza)", answers:["sabe"]},
+  {stem:"Deben de ___ (tener) mucho trabajo, llevan luz encendida hasta tarde.", answers:["tener"]},
+  {stem:"No cogió el paraguas; ___ (pensar) que no iba a llover.", answers:["habría pensado","pensaría"]}
+]);
+
+/* ---------------- BLOQUE 11: futuro simple vs. condicional simple de probabilidad (presente vs. pasado) ---------------- */
+makeFillBlock("h11","Bloque 11 · ¿Presente o pasado? Futuro o condicional de probabilidad","alto","hard",[
+  {stem:"¿Qué hora es? — No sé, ___ las cuatro. (ser)", answers:["serán"]},
+  {stem:"¿Qué hora era cuando llegaste anoche? — No sé, ___ las dos. (ser)", answers:["serían"]},
+  {stem:"¿Dónde está Ana ahora? — ___ en el gimnasio. (estar)", answers:["estará"]},
+  {stem:"¿Dónde estaba Ana cuando la llamaste? — ___ en el gimnasio, por eso no contestó. (estar)", answers:["estaría"]},
+  {stem:"¿Cuántos años tiene el profesor? — ___ unos cincuenta. (tener)", answers:["tendrá"]}
+], null, "Fíjate si la pregunta se refiere al presente (futuro simple) o al pasado (condicional simple).");
+
+/* ---------------- BLOQUE 12: mini-diálogo — completa con la expresión de probabilidad ---------------- */
+makeFillBlock("h12","Bloque 12 · Mini-historia — elige la expresión correcta","alto","hard",[
+  {stem:"Ana no contesta desde esta mañana; ___ se le ha acabado la batería.", answers:["a lo mejor"]},
+  {stem:"___ esté todavía en clase, no lo sé seguro.", answers:["puede que"]},
+  {stem:"___ tiene el teléfono en silencio, como siempre — me lo imagino.", answers:["quizás","tal vez","posiblemente"]},
+  {stem:"___ haya salido ya y esté de camino a casa.", answers:["es posible que"]},
+  {stem:"___ tener mucho trabajo hoy, por eso no contesta.", answers:["debe de"]}
+], "a lo mejor · puede que · quizás · es posible que · debe de");
+
+/* ---------------- BLOQUE 13: repaso — ¿cuál es la frase correcta? ---------------- */
+makeRadioBlock("h13","Bloque 13 · ¿Cuál es la frase correcta?","alto","hard",[
+  {q:"Conjetura razonada por un indicio (luces encendidas hasta tarde):", opts:["Debe tener mucho trabajo.","Debe de tener mucho trabajo."], answer:1},
+  {q:"Duda fuerte, no solo una impresión:", opts:["A lo mejor venga mañana.","Puede que venga mañana."], answer:1},
+  {q:"Obligación, no probabilidad:", opts:["Debes de entregar el informe hoy.","Debes entregar el informe hoy."], answer:1},
+  {q:"Conjetura sobre el pasado con el condicional:", opts:["Serían las diez cuando se fue.","Serán las diez cuando se fue."], answer:0},
+  {q:"Registro coloquial, con indicativo:", opts:["Igual viene mañana.","Igual venga mañana."], answer:0}
+]);
+
+/* ---------------- BLOQUE 14: relacionar ejemplo con la estructura gramatical ---------------- */
+makeMatchBlock("h14","Bloque 14 · Relaciona el ejemplo con su estructura","el más difícil","hard","Ejemplo","Estructura",
+  ["Estará cansado después del viaje.","Puede que no venga.","A lo mejor llueve.","Debe de tener unos 60 años.","Serían las nueve cuando llegó.","Es posible que ya lo sepa."],
+  [
+    "futuro simple de probabilidad (presente)",
+    "puede que + subjuntivo",
+    "a lo mejor + indicativo",
+    "deber de + infinitivo",
+    "condicional simple de probabilidad (pasado)",
+    "es posible que + subjuntivo"
+  ],
+  ["a","b","c","d","e","f"]
+);
+
+/* ---------------- BLOQUE 15: traducción abierta 1 — grados de certeza ---------------- */
+makeTranslateBlock("h15","Bloque 15 · Traduce (grados de certeza)","alto","hard",[
+  {ru:"Наверное, ей около тридцати лет.", model:"Tendrá unos treinta años. / Debe de tener unos treinta años."},
+  {ru:"Может быть, дождь пойдёт вечером (я почти уверен, судя по тучам).", model:"A lo mejor llueve esta tarde."},
+  {ru:"Возможно, он ещё не видел это письмо (я совсем не уверен).", model:"Puede que todavía no haya visto esta carta."},
+  {ru:"Наверное, они уже ушли, когда мы позвонили.", model:"Ya se habrían marchado cuando llamamos."}
+], "Respuestas abiertas — compara tu traducción con el modelo (puede haber más de una forma correcta).");
+
+/* ---------------- BLOQUE 16: traducción abierta 2 — grados de certeza ---------------- */
+makeTranslateBlock("h16","Bloque 16 · Traduce (grados de certeza)","el más difícil","hard",[
+  {ru:"Возможно, он прав, но я не совсем уверен (лёгкое сомнение).", model:"Tal vez tenga razón, pero no estoy del todo seguro."},
+  {ru:"Наверное, ты, должно быть, устал после такой долгой поездки.", model:"Debes de estar cansado después de un viaje tan largo."},
+  {ru:"Может быть, я останусь дома в эти выходные (разговорный вариант).", model:"Igual me quedo en casa este fin de semana."},
+  {ru:"Возможно, уже не осталось билетов на этот концерт.", model:"Es posible que ya no queden entradas para este concierto."}
+], "Respuestas abiertas — compara tu traducción con el modelo (puede haber más de una forma correcta).");
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

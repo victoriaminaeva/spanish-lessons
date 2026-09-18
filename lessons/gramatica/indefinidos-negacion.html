@@ -1,0 +1,729 @@
+<!doctype html>
+<title>Indefinidos y negación</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Indefinidos y negación</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>Palabras indefinidas y la negación</h1>
+  <p class="subtitle">Reglas claras + dieciséis bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> la doble negación obligatoria en español (nadie/nada/nunca/tampoco), los pares alguno/ninguno, algo/nada, también/tampoco, cualquier/cualquiera, apenas, ni siquiera, ni...ni..., todo vs. cada, y el uso de «otro» sin artículo indefinido — con especial atención a los errores más frecuentes de los hablantes de ruso.
+  </div>
+  <p class="series-note">📚 Parte de la serie <b>Gramática</b> del sitio. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — chuleta de indefinidos y negación</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada regla.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>Doble negación — el orden de palabras decide</h3>
+    <ul>
+      <li>Si la palabra negativa va <b>DESPUÉS</b> del verbo, es obligatorio poner «no» ANTES del verbo: <i>No viene nadie. No tengo nada. No lo hago nunca. Yo tampoco lo sé.</i> → <i>Yo no lo sé tampoco.</i></li>
+      <li>Si la palabra negativa va <b>ANTES</b> del verbo, «no» desaparece: <i>Nadie viene. Nada me gusta. Nunca lo hago.</i></li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> в русском двойное отрицание — ошибка («никто не пришёл» = один минус), а в испанском оно ОБЯЗАТЕЛЬНО, если отрицательное слово стоит после глагола: <s>Viene nadie</s> → <b>No viene nadie</b> (правильно), или <b>Nadie viene</b> (тоже правильно, без «no»).</div>
+  </div>
+
+  <div class="contrast-box">
+    <h3>Otro/otra — nunca con artículo indefinido</h3>
+    <ul>
+      <li><b>otro/otra/otros/otras</b> se usa SIN «un/una» delante: <i>otro café, otra vez, otros libros</i>.</li>
+      <li>Puede llevar artículo definido u otros determinantes: <i>el otro día, mi otro hermano</i>, pero nunca «un otro» / «una otra».</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> калька с русского «ещё один» → <s>un otro café</s>. Правильно: <b>otro café</b> (без артикля «un»).</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Dieciséis bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"nadie / nada / nunca / tampoco", pos:"palabras negativas — doble negación",
+   quote:"<mark>No</mark> viene <mark>nadie</mark> a la fiesta. — <mark>Nadie</mark> viene a la fiesta.",
+   trans:"никто / ничто / никогда / тоже не",
+   mean:"Cuando la palabra negativa va después del verbo, es obligatorio poner «no» antes del verbo. Cuando va antes del verbo, «no» desaparece.",
+   ex:"No tengo nada que decir. — Мне нечего сказать."},
+  {term:"alguno / ninguno", pos:"indefinidos — afirmativo/negativo",
+   quote:"¿Tienes <mark>algún</mark> libro sobre este tema? — No, no tengo <mark>ninguno</mark>.",
+   trans:"какой-то/некоторый / никакой",
+   mean:"Alguno concuerda en género y número (algún, alguna, algunos, algunas); ninguno casi siempre se usa en singular (ningún, ninguna), aunque el sustantivo sea contable en plural.",
+   ex:"No hay ninguna solución fácil. — Нет никакого лёгкого решения."},
+  {term:"algo / nada", pos:"indefinidos — pronombres neutros",
+   quote:"¿Quieres <mark>algo</mark> de comer? — No, no quiero <mark>nada</mark>.",
+   trans:"что-то / ничто",
+   mean:"Pronombres neutros e invariables que se refieren a cosas no especificadas. Nada requiere «no» si va después del verbo.",
+   ex:"Nada me hace más feliz que viajar. — Ничто не делает меня счастливее, чем путешествия."},
+  {term:"también / tampoco", pos:"concordancia afirmativa/negativa",
+   quote:"Yo estudio español. — Yo <mark>también</mark>. / Yo no hablo francés. — Yo <mark>tampoco</mark>.",
+   trans:"тоже / тоже не",
+   mean:"También confirma una afirmación anterior; tampoco confirma una negación anterior («тоже не»). Tampoco funciona como palabra negativa: exige «no» si va después del verbo.",
+   ex:"No me gusta el café, y a él tampoco. — Мне не нравится кофе, и ему тоже не (нравится)."},
+  {term:"cualquier / cualquiera", pos:"indefinido — apócope",
+   quote:"Puedes llamarme <mark>cualquier</mark> día. — Eso lo sabe <mark>cualquiera</mark>.",
+   trans:"любой (перед сущ.) / кто угодно, любой (местоимение/после сущ.)",
+   mean:"Cualquier es la forma apocopada, usada delante de un sustantivo (singular). Cualquiera se usa como pronombre o después del sustantivo: un día cualquiera.",
+   ex:"Cualquiera puede cometer un error. — Любой может ошибиться."},
+  {term:"apenas", pos:"adverbio — negación atenuada",
+   quote:"<mark>Apenas</mark> tengo tiempo para comer.",
+   trans:"едва, почти не",
+   mean:"Equivale a «casi no». Se coloca normalmente delante del verbo y no requiere «no».",
+   ex:"Apenas la conozco. — Я её почти не знаю."},
+  {term:"ni siquiera", pos:"locución — énfasis negativo",
+   quote:"<mark>Ni siquiera</mark> me llamó para explicarlo.",
+   trans:"даже не",
+   mean:"Añade énfasis a una negación, indicando que ni la opción mínima se cumple.",
+   ex:"Ni siquiera tengo un euro. — У меня даже евро нет."},
+  {term:"ni ... ni ...", pos:"conjunción negativa doble",
+   quote:"<mark>No</mark> vino <mark>ni</mark> Juan <mark>ni</mark> María. / <mark>Ni</mark> Juan <mark>ni</mark> María vinieron.",
+   trans:"ни ... ни ...",
+   mean:"Si «ni...ni...» va después del verbo, se necesita «no» antes del verbo. Si va antes del verbo (como sujeto), «no» no es necesario.",
+   ex:"No como ni carne ni pescado. — Я не ем ни мясо, ни рыбу."},
+  {term:"todo / cada", pos:"totalidad vs. distribución individual",
+   quote:"<mark>Todos los</mark> días desayuno café. / <mark>Cada</mark> día es diferente.",
+   trans:"весь/каждый (todo) / каждый в отдельности (cada)",
+   mean:"Todo/toda/todos/todas va con artículo + sustantivo, indicando totalidad. Cada va con sustantivo singular SIN artículo, indicando cada elemento individualmente.",
+   ex:"Cada alumno tiene su propio horario. — У каждого ученика своё расписание."},
+  {term:"otro / otra", pos:"indefinido — sin artículo indefinido",
+   quote:"¿Me pones <mark>otro</mark> café, por favor?",
+   trans:"другой/ещё один (БЕЗ артикля «un/una»)",
+   mean:"Otro/otra/otros/otras nunca lleva «un/una» delante. Es un error muy común calcar del ruso «ещё один» como «un otro».",
+   ex:"Necesito otra oportunidad. — Мне нужен ещё один шанс."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+function makeRadioBlock(id, title, tag, tagClass, items, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(hintText){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>'; }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeFillBlock(id, title, tag, tagClass, items, bank){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(bank){ wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+bank+'</div>'; }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeMatchBlock(id, title, tag, tagClass, words, defs){
+  var letters = defs.map(function(_,i){ return String.fromCharCode(97+i); });
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Elemento</th><th>Significado</th></tr>";
+  words.forEach(function(w, idx){
+    var opts = letters.map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = defs.map(function(d,i){ return letters[i]+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === letters[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+letters[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+words.length+"</b>";
+    blockScores[id] = {correct:correct, total:words.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:words.length};
+  exList.appendChild(wrap);
+}
+
+function makeOpenBlock(id, title, tag, tagClass, items, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(hintText){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>'; }
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="'+id+'-'+idx+'" style="min-height:44px;" placeholder="Tu traducción/transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="'+id+'-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById(id+"-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE n1: doble negación — orden de palabras (radio) ---------------- */
+makeRadioBlock("n1","Bloque 1 · Doble negación — elige el orden correcto","fácil","easy",[
+  {q:"Elige la frase correcta.", opts:["No viene nadie a la fiesta.","No nadie viene a la fiesta."], answer:0},
+  {q:"Elige la frase correcta.", opts:["Nunca no como carne.","Nunca como carne."], answer:1},
+  {q:"Elige la frase correcta.", opts:["No tengo nada que decir.","Tengo no nada que decir."], answer:0},
+  {q:"Elige la frase correcta.", opts:["Nada me interesa de eso.","No nada me interesa de eso."], answer:0},
+  {q:"Elige la frase correcta.", opts:["Yo tampoco lo sabía.","Yo no lo sabía tampoco no."], answer:0},
+  {q:"Elige la frase correcta.", opts:["No he visto a nadie hoy.","He no visto a nadie hoy."], answer:0}
+], "Si la palabra negativa va después del verbo, hace falta «no» antes del verbo. Si va antes, no hace falta «no».");
+
+/* ---------------- BLOQUE n2: alguno/ninguno/algo/nada/también/tampoco (huecos con banco) ---------------- */
+makeFillBlock("n2","Bloque 2 · Huecos con banco de palabras","fácil","easy",[
+  {stem:"¿Tienes ___ pregunta sobre la lección?", answers:["alguna"]},
+  {stem:"No, no tengo ___ pregunta.", answers:["ninguna"]},
+  {stem:"¿Quieres ___ de beber?", answers:["algo"]},
+  {stem:"Gracias, pero no quiero ___.", answers:["nada"]},
+  {stem:"A mí me encanta el chocolate. — A mí ___.", answers:["también"]},
+  {stem:"No me gusta madrugar. — A mí ___.", answers:["tampoco"]}
+], "alguna · ninguna · algo · nada · también · tampoco");
+
+/* ---------------- BLOQUE n3: algún/ningún — apócope y concordancia (radio) ---------------- */
+makeRadioBlock("n3","Bloque 3 · Algún/ninguna — apócope y concordancia de género","fácil-medio","easy",[
+  {q:"No tengo ___ problema con el horario.", opts:["ningún","ninguna"], answer:0},
+  {q:"No hay ___ solución fácil para esto.", opts:["ningún","ninguna"], answer:1},
+  {q:"¿Hay ___ día libre esta semana?", opts:["algún","alguna"], answer:0},
+  {q:"¿Conoces ___ ciudad interesante cerca de aquí?", opts:["algún","alguna"], answer:1},
+  {q:"No tenemos ___ duda al respecto.", opts:["ningún","ninguna"], answer:1},
+  {q:"¿Tienes ___ amigo que hable ruso?", opts:["algún","alguna"], answer:0}
+], "Algún/ningún se usan delante de sustantivo masculino singular; alguna/ninguna, delante de femenino.");
+
+/* ---------------- BLOQUE n4: cualquier vs cualquiera (huecos sin banco) ---------------- */
+makeFillBlock("n4","Bloque 4 · Cualquier vs. cualquiera","medio","mid",[
+  {stem:"Puedes venir ___ día de la semana.", answers:["cualquier"]},
+  {stem:"Eso lo puede hacer ___.", answers:["cualquiera"]},
+  {stem:"Es un problema que puede tener ___ persona.", answers:["cualquier"]},
+  {stem:"No es un restaurante ___, es especial.", answers:["cualquiera"]},
+  {stem:"Llámame a ___ hora, no importa.", answers:["cualquier"]},
+  {stem:"— ¿Quién puede ayudarme? — ___ de nosotros.", answers:["cualquiera"]}
+], "Cualquier va delante del sustantivo (apócope); cualquiera va como pronombre o después del sustantivo.");
+
+/* ---------------- BLOQUE n5: apenas / ni siquiera (radio) ---------------- */
+makeRadioBlock("n5","Bloque 5 · Apenas vs. ni siquiera","medio","mid",[
+  {q:"«Едва успеваю» — elige la opción correcta.", opts:["Apenas tengo tiempo.","Ni siquiera tengo tiempo."], answer:0},
+  {q:"«У меня даже евро нет» — elige la opción correcta.", opts:["Apenas tengo un euro.","No tengo ni siquiera un euro."], answer:1},
+  {q:"«Я её почти не знаю» — elige la opción correcta.", opts:["Apenas la conozco.","Ni siquiera la conozco."], answer:0},
+  {q:"«Он даже не поздоровался» — elige la opción correcta.", opts:["Apenas saludó.","Ni siquiera saludó."], answer:1},
+  {q:"«Едва слышно» — elige la opción correcta.", opts:["Apenas se oye.","Ni siquiera se oye."], answer:0}
+]);
+
+/* ---------------- BLOQUE n6: ni...ni... (huecos sin banco) ---------------- */
+makeFillBlock("n6","Bloque 6 · Ni ... ni ... — construcción y orden","medio","mid",[
+  {stem:"No como ___ carne ni pescado.", answers:["ni"]},
+  {stem:"No vino ni Juan ___ María a la reunión.", answers:["ni"]},
+  {stem:"___ Juan ni María vinieron a la reunión. (sin «no», porque va antes del verbo)", answers:["Ni"]},
+  {stem:"No tengo tiempo ___ ganas de salir hoy.", answers:["ni"]},
+  {stem:"___ tú ni yo tenemos razón en esto.", answers:["Ni"]}
+]);
+
+/* ---------------- BLOQUE n7: todo vs cada (huecos sin banco) ---------------- */
+makeFillBlock("n7","Bloque 7 · Todo/toda/todos/todas vs. cada","medio","mid",[
+  {stem:"___ los días desayuno café con leche.", answers:["Todos"]},
+  {stem:"___ día es una nueva oportunidad.", answers:["Cada"]},
+  {stem:"He leído ___ los libros de esta serie.", answers:["todos"]},
+  {stem:"___ alumno tiene su propio horario.", answers:["Cada"]},
+  {stem:"___ la clase aprobó el examen.", answers:["Toda"]},
+  {stem:"___ uno de nosotros tiene su opinión.", answers:["Cada"]}
+], "Todo/toda/todos/todas + artículo + sustantivo (totalidad). Cada + sustantivo singular SIN artículo (distribución individual).");
+
+/* ---------------- BLOQUE n8: otro/otra sin artículo (huecos sin banco) ---------------- */
+makeFillBlock("n8","Bloque 8 · Otro/otra — nunca con «un/una»","medio-alto","mid",[
+  {stem:"¿Me pones ___ café, por favor?", answers:["otro"]},
+  {stem:"Necesito ___ oportunidad.", answers:["otra"]},
+  {stem:"Vamos a intentarlo de ___ manera.", answers:["otra"]},
+  {stem:"Tengo ___ pregunta más.", answers:["otra"]},
+  {stem:"Compramos ___ dos entradas para el concierto.", answers:["otras"]},
+  {stem:"Es ___ día cualquiera de verano.", answers:["otro"]}
+], "Recuerda: nunca se dice «un otro» / «una otra».");
+
+/* ---------------- BLOQUE n9: relacionar palabra indefinida con su significado ---------------- */
+makeMatchBlock("n9","Bloque 9 · Relaciona la palabra con su significado","medio","mid",
+  ["alguno/alguna","ninguno/ninguna","apenas","ni siquiera","cualquiera"],
+  ["какой-то, некоторый","никакой, ни один","едва, почти не","даже не","любой, кто угодно"]
+);
+
+/* ---------------- BLOQUE n10: corrección de errores típicos ---------------- */
+makeFillBlock("n10","Bloque 10 · Corrige el error — escribe la palabra/frase correcta","alto","hard",[
+  {stem:"Incorrecto: «Quiero un otro café.» Escribe las dos palabras correctas:", answers:["otro café"]},
+  {stem:"Incorrecto: «Viene nadie a la fiesta.» (falta «no») Escribe la frase corregida:", answers:["no viene nadie"]},
+  {stem:"Incorrecto: «Tengo algún duda.» (concordancia de género) Escribe la forma correcta:", answers:["alguna duda"]},
+  {stem:"Incorrecto: «No me gusta tampoco no el café.» Escribe la frase corregida (tres palabras):", answers:["no me gusta tampoco","tampoco me gusta el cafe","tampoco me gusta el café"]},
+  {stem:"Incorrecto: «Cada los días llamo a mi madre.» (cada no lleva artículo) Escribe la frase corregida:", answers:["todos los dias","todos los días"]}
+]);
+
+/* ---------------- BLOQUE n11: también vs tampoco en diálogos (radio) ---------------- */
+makeRadioBlock("n11","Bloque 11 · También vs. tampoco en diálogos","alto","hard",[
+  {q:"— Me encanta viajar. — A mí ___.", opts:["también","tampoco"], answer:0},
+  {q:"— No soporto el ruido. — A mí ___.", opts:["también","tampoco"], answer:1},
+  {q:"— He estado en Japón. — Yo ___.", opts:["también","tampoco"], answer:0},
+  {q:"— Nunca he probado el sushi. — Yo ___.", opts:["también","tampoco"], answer:1},
+  {q:"— No tengo coche. — Nosotros ___.", opts:["también","tampoco"], answer:1}
+]);
+
+/* ---------------- BLOQUE n12: transformación del orden (huecos sin banco) ---------------- */
+makeFillBlock("n12","Bloque 12 · Transforma el orden de palabras","alto","hard",[
+  {stem:"Transforma sin cambiar el sentido: «No viene nadie.» → «___ viene.» (una palabra, sin «no»)", answers:["Nadie"]},
+  {stem:"Transforma: «Nada me preocupa.» → «No me preocupa ___.» (una palabra)", answers:["nada"]},
+  {stem:"Transforma: «Nunca llega tarde.» → «___ llega tarde.» (sin «no»)", answers:["Nunca"]},
+  {stem:"Transforma: «No he visto a nadie.» → «___ he visto.» (sin «no»)", answers:["A nadie"]},
+  {stem:"Transforma: «Tampoco lo sé.» → «No lo sé ___.» (una palabra)", answers:["tampoco"]}
+], "El significado no cambia — solo el orden y la presencia o ausencia de «no».");
+
+/* ---------------- BLOQUE n13: traducción — completa solo la palabra que falta ---------------- */
+makeFillBlock("n13","Bloque 13 · Traduce — completa solo la palabra que falta","alto","hard",[
+  {stem:"«Дай мне ещё одну попытку.» — Dame ___ oportunidad.", answers:["otra"]},
+  {stem:"«Ты можешь прийти в любой день.» — Puedes venir ___ día.", answers:["cualquier"]},
+  {stem:"«Мне это тоже не нравится.» — A mí ___ me gusta.", answers:["tampoco"]},
+  {stem:"«Он даже не позвонил.» — Ni ___ llamó.", answers:["siquiera"]},
+  {stem:"«У меня едва есть время.» — ___ tengo tiempo.", answers:["Apenas"]}
+]);
+
+/* ---------------- BLOQUE n14: traducción — completa solo la palabra que falta (nivel avanzado) ---------------- */
+makeFillBlock("n14","Bloque 14 · Traduce — nivel avanzado","alto","hard",[
+  {stem:"«Никто не пришёл на встречу.» — ___ vino a la reunión. (sin «no»)", answers:["Nadie"]},
+  {stem:"«У меня нет никакой идеи.» — No tengo ___ idea.", answers:["ninguna"]},
+  {stem:"«Каждый студент должен принести свою книгу.» — ___ estudiante debe traer su libro.", answers:["Cada"]},
+  {stem:"«Все студенты сдали экзамен.» — ___ los estudiantes aprobaron el examen.", answers:["Todos"]},
+  {stem:"«Я не ем ни мясо, ни рыбу.» — No como ___ carne ni pescado.", answers:["ni"]}
+]);
+
+/* ---------------- BLOQUE n15: transformación/traducción abierta 1 ---------------- */
+makeOpenBlock("n15","Bloque 15 · Transformación y traducción de oraciones","alto","hard",[
+  {stem:"Traduce: «Никто не знает ответа на этот вопрос».", model:"Nadie sabe la respuesta a esta pregunta."},
+  {stem:"Traduce: «Дай мне ещё один шанс, пожалуйста — это может случиться с кем угодно».", model:"Dame otra oportunidad, por favor — le puede pasar a cualquiera."},
+  {stem:"Transforma cambiando el orden (misma idea, sin «no»): «No tengo ninguna duda.»", model:"Ninguna duda tengo."},
+  {stem:"Traduce: «Я не ем ни мясо, ни рыбу, и мой брат тоже не ест».", model:"No como ni carne ni pescado, y mi hermano tampoco come."}
+], "Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).");
+
+/* ---------------- BLOQUE n16: transformación/traducción abierta 2 (el más difícil) ---------------- */
+makeOpenBlock("n16","Bloque 16 · Transformación y traducción — nivel avanzado","el más difícil","hard",[
+  {stem:"Traduce: «Он даже не поздоровался ни с кем, когда вошёл — очень странное поведение».", model:"No saludó ni siquiera a nadie cuando entró — un comportamiento muy extraño."},
+  {stem:"Traduce: «У меня едва хватает времени на любой из этих проектов, ни на один из них».", model:"Apenas tengo tiempo para cualquiera de estos proyectos, ni para uno solo."},
+  {stem:"Corrige y traduce: «Компра эль ещё один билет каждый день» debería ser: «Compra otro billete cada día», tradúcelo mostrando bien otro/cada.", model:"Compra otro billete cada día."},
+  {stem:"Traduce: «Ни один студент не сдал экзамен, и ни один преподаватель этому не удивился».", model:"Ningún estudiante aprobó el examen, y ningún profesor se sorprendió por ello."}
+], "Respuestas abiertas — escribe la tuya y compárala con el modelo.");
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

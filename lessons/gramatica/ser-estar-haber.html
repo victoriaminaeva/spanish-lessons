@@ -1,0 +1,730 @@
+<!doctype html>
+<title>Ser, estar y haber</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Ser, estar y haber</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>Ser, estar y haber</h1>
+  <p class="subtitle">Reglas claras + dieciséis bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> los usos de <b>ser</b>, <b>estar</b> y <b>hay</b> (de haber): identidad y ubicación, existencia frente a localización, los adjetivos que cambian de significado según el verbo (listo, malo, aburrido, rico, verde, despierto, orgulloso), el contraste <b>ser + participio</b> / <b>estar + participio</b>, y el uso de <b>ser en</b> para el lugar de un evento. Especial atención a <b>hay</b> vs. <b>está/están</b>, uno de los errores más frecuentes entre hablantes de ruso.
+  </div>
+  <p class="series-note">📚 Tema de la serie <b>Gramática</b> del sitio. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — ser, estar y haber</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada caso.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>Adjetivos que cambian de significado con ser/estar — chuleta rápida</h3>
+    <ul>
+      <li><b>listo</b>: ser listo = умный, сообразительный &nbsp;·&nbsp; estar listo = готов (к чему-то)</li>
+      <li><b>malo</b>: ser malo = плохого качества / плохой человек &nbsp;·&nbsp; estar malo = болен</li>
+      <li><b>aburrido</b>: ser aburrido = скучный (наводит скуку) &nbsp;·&nbsp; estar aburrido = скучающий (испытывать скуку)</li>
+      <li><b>rico</b>: ser rico = богатый (деньги) &nbsp;·&nbsp; estar rico = вкусный (о еде)</li>
+      <li><b>verde</b>: ser verde = зелёного цвета &nbsp;·&nbsp; estar verde = незрелый</li>
+      <li><b>despierto</b>: ser despierto = сообразительный, бойкий &nbsp;·&nbsp; estar despierto = не спать, бодрствовать</li>
+      <li><b>orgulloso</b>: ser orgulloso = гордец, высокомерный (черта характера) &nbsp;·&nbsp; estar orgulloso (de algo) = гордиться чем-то (в данный момент)</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> запоминайте пару целиком, а не отдельное слово — «es listo» и «está listo» означают совершенно разное. Смысл почти всегда подсказывает контекст: постоянный признак → <b>ser</b>, временное состояние/результат → <b>estar</b>.</div>
+  </div>
+
+  <div class="contrast-box">
+    <h3>Hay vs. está/están — la confusión más frecuente</h3>
+    <ul>
+      <li><b>HAY</b> = existencia de algo nuevo o indefinido: <i>un/una/unos/unas, números, algo, nada</i>, o sustantivo sin artículo. Responde a «¿qué hay?».</li>
+      <li><b>ESTÁ/ESTÁN</b> = ubicación de algo que ya conocemos (artículo definido, posesivo, nombre propio). Responde a «¿dónde está?».</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> в русском и «hay», и «está» часто переводятся как «есть», поэтому их путают. Но <b>hay</b> НЕЛЬЗЯ использовать с определённым артиклем: <s>el bar hay en la esquina</s> — неправильно; правильно «el bar <b>está</b> en la esquina». И наоборот, если предмет ещё не назван и мы просто сообщаем о его существовании, нужен <b>hay</b>: «<b>Hay</b> un bar muy bueno cerca» (а не <s>está un bar</s>).</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Dieciséis bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"SER", pos:"identidad · profesión · origen · material · hora · rasgos permanentes",
+   quote:"<mark>Soy</mark> profesora. Este anillo <mark>es</mark> de plata. <mark>Son</mark> las cinco de la tarde.",
+   trans:"быть (кто/что; постоянные признаки)",
+   mean:"Se usa para identidad, profesión, nacionalidad/origen, material del que está hecho algo, la hora, y características que consideramos permanentes o definitorias (color, tamaño, carácter).",
+   ex:"Mi padre es alto y muy trabajador. — Мой отец высокий и очень трудолюбивый."},
+  {term:"ESTAR", pos:"ubicación · estado temporal o resultado · gerundio",
+   quote:"El museo <mark>está</mark> cerca del centro. Hoy <mark>estoy</mark> muy cansado. <mark>Estamos</mark> aprendiendo español.",
+   trans:"быть/находиться (где; временное состояние; действие в процессе)",
+   mean:"Se usa para la ubicación de personas y cosas, estados temporales o el resultado de un cambio, y con el gerundio para acciones en curso (estar + gerundio).",
+   ex:"La puerta está abierta porque alguien la dejó así. — Дверь открыта, потому что кто-то её так оставил."},
+  {term:"HAY", pos:"existencia · algo nuevo o indefinido",
+   quote:"<mark>Hay</mark> un bar muy bueno cerca de aquí. En esta calle <mark>hay</mark> tres farmacias.",
+   trans:"есть/имеется (существование чего-то нового)",
+   mean:"Hay (forma invariable del verbo haber) introduce algo cuya existencia el oyente todavía no conoce: un/una/unos/unas, números, algo, nada, o un sustantivo sin artículo.",
+   ex:"¿Hay algún supermercado por aquí? — Здесь есть какой-нибудь супермаркет?"},
+  {term:"ESTÁ / ESTÁN", pos:"ubicación de algo ya conocido o definido",
+   quote:"El bar que me recomendaste <mark>está</mark> en la esquina. Los libros que buscas <mark>están</mark> en esa estantería.",
+   trans:"находится/находятся (место чего-то уже известного)",
+   mean:"Cuando el sustantivo ya es conocido por ambos hablantes (artículo definido, posesivo, nombre propio), usamos estar/están para decir dónde está, no hay.",
+   ex:"Mi coche está en el garaje. — Моя машина (та самая) в гараже."},
+  {term:"SER + participio", pos:"voz pasiva — la acción",
+   quote:"El edificio <mark>fue construido</mark> en 1990. Estas cartas <mark>fueron escritas</mark> por mi abuela.",
+   trans:"быть + причастие = было сделано (сам процесс)",
+   mean:"La pasiva con ser describe la acción en sí (a menudo con complemento agente «por...»): quién o qué la realizó y cuándo.",
+   ex:"La novela fue traducida al ruso en 2005. — Роман был переведён на русский в 2005 году."},
+  {term:"ESTAR + participio", pos:"estado — el resultado",
+   quote:"El edificio ya <mark>está construido</mark>. La puerta <mark>está cerrada</mark>.",
+   trans:"быть + причастие = (уже) сделано, готово (результат)",
+   mean:"Estar + participio describe el estado resultante, sin interesar quién hizo la acción ni cuándo: es una fotografía del resultado.",
+   ex:"Los deberes ya están terminados. — Домашнее задание уже сделано."},
+  {term:"SER + EN", pos:"dónde se celebra un evento",
+   quote:"La fiesta <mark>es en</mark> mi casa. La boda <mark>fue en</mark> una playa de Cádiz.",
+   trans:"проходить/быть в... (место мероприятия)",
+   mean:"Cuando hablamos de dónde tiene lugar un evento (fiesta, boda, reunión, examen, concierto), usamos ser + en, no estar, aunque el evento «ocurra» en un lugar.",
+   ex:"El examen es en el aula 3. — Экзамен проходит в аудитории 3."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass, ruleHtml){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+function buildRadioBlock(id, title, tag, tagClass, items, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(hintText){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>'; }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function buildFillBlock(id, title, tag, tagClass, items, bank, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(bank){ wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+bank+'</div>'; }
+  if(hintText){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>'; }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function buildOpenBlock(id, title, tag, tagClass, items, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(hintText){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>'; }
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="'+id+'-'+idx+'" style="min-height:44px;" placeholder="Tu traducción/transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="'+id+'-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById(id+"-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE 1: ser vs estar — reconocimiento básico ---------------- */
+buildRadioBlock("se1", "Bloque 1 · Ser vs. estar — reconocimiento básico", "fácil", "easy", [
+  {q:"Mi hermana ___ médica.", opts:["es","está"], answer:0},
+  {q:"El café ___ muy caliente, cuidado.", opts:["es","está"], answer:1},
+  {q:"Nosotros ___ de Rusia.", opts:["somos","estamos"], answer:0},
+  {q:"¿Dónde ___ el baño?", opts:["es","está"], answer:1},
+  {q:"Hoy ___ lunes.", opts:["es","está"], answer:0},
+  {q:"Los niños ___ jugando en el parque.", opts:["son","están"], answer:1}
+]);
+
+/* ---------------- BLOQUE 2: es / está / hay — tres opciones ---------------- */
+buildRadioBlock("se2", "Bloque 2 · Es, está o hay — elige la opción correcta", "fácil", "easy", [
+  {q:"___ un restaurante muy bueno en esta calle.", opts:["Es","Está","Hay"], answer:2},
+  {q:"El restaurante que me recomendaste ___ en esa calle.", opts:["es","está","hay"], answer:1},
+  {q:"Mi abuelo ___ una persona muy generosa.", opts:["es","está","hay"], answer:0},
+  {q:"___ tres ventanas en esta habitación.", opts:["Son","Están","Hay"], answer:2},
+  {q:"Las ventanas de mi habitación ___ abiertas.", opts:["son","están","hay"], answer:1},
+  {q:"Madrid ___ la capital de España.", opts:["es","está","hay"], answer:0}
+]);
+
+/* ---------------- BLOQUE 3: hay vs está/están — huecos con banco ---------------- */
+buildFillBlock("se3", "Bloque 3 · Hay vs. está/están — huecos con banco", "fácil", "easy", [
+  {stem:"En mi barrio ___ un mercado estupendo.", answers:["hay"]},
+  {stem:"El mercado ___ al final de la calle.", answers:["está"]},
+  {stem:"___ muchas tiendas cerca de mi casa.", answers:["hay"]},
+  {stem:"Mis llaves ___ encima de la mesa.", answers:["están"]},
+  {stem:"¿___ algún banco por aquí?", answers:["hay"]},
+  {stem:"El banco que buscas ___ a la derecha.", answers:["está"]}
+], "hay · está · están");
+
+/* ---------------- BLOQUE 4: hay vs está/están — huecos sin banco ---------------- */
+buildFillBlock("se4", "Bloque 4 · Hay vs. está/están — huecos sin banco", "medio", "mid", [
+  {stem:"___ dos cafeterías en esta plaza.", answers:["hay"]},
+  {stem:"La cafetería Luna ___ justo enfrente del ayuntamiento.", answers:["está"]},
+  {stem:"No ___ leche en la nevera.", answers:["hay"]},
+  {stem:"La leche que compraste ayer ___ en la nevera, en la puerta.", answers:["está"]},
+  {stem:"___ mucha gente en la fiesta esta noche.", answers:["hay"]}
+], null, "Ahora sin pistas — piensa si el sustantivo es nuevo/indefinido (hay) o ya conocido (está/están).");
+
+/* ---------------- BLOQUE 5: adjetivos que cambian de significado — huecos sin banco ---------------- */
+buildFillBlock("se5", "Bloque 5 · Adjetivos con doble sentido — elige ser o estar", "medio", "mid", [
+  {stem:"Mi sobrino ___ muy listo: saca las mejores notas de la clase.", answers:["es"]},
+  {stem:"La cena ya ___ lista, podemos sentarnos a comer.", answers:["está"]},
+  {stem:"Esta tela ___ mala, se rompe enseguida.", answers:["es"]},
+  {stem:"Mi madre ___ mala desde el lunes, tiene fiebre.", answers:["está"]},
+  {stem:"Esta película ___ aburridísima, no pasa nada interesante.", answers:["es"]},
+  {stem:"Los alumnos ___ aburridos porque llevan dos horas esperando.", answers:["están"]},
+  {stem:"Este plato ___ riquísimo, felicidades al cocinero.", answers:["está"]},
+  {stem:"Mi tío ___ muy rico, tiene tres casas.", answers:["es"]},
+  {stem:"Estos plátanos todavía ___ verdes, espera unos días para comerlos.", answers:["están"]},
+  {stem:"La abuela, a pesar de su edad, ___ muy despierta: entiende todo enseguida.", answers:["es"]},
+  {stem:"Mi hermano ___ muy orgulloso de haber aprobado el examen.", answers:["está"]}
+], null, "El contexto entre paréntesis o la frase entera te indica qué significado se busca.");
+
+/* ---------------- BLOQUE 6: adjetivos con doble sentido — elige el significado ---------------- */
+buildRadioBlock("se6", "Bloque 6 · Adjetivos con doble sentido — ¿qué significa aquí?", "medio", "mid", [
+  {q:"Mi hermano es muy listo.", opts:["умный, сообразительный","готовый к чему-то"], answer:0},
+  {q:"¿Estás listo para salir?", opts:["умный","готов"], answer:1},
+  {q:"Este coche es malo, se avería todo el tiempo.", opts:["плохого качества","болен"], answer:0},
+  {q:"Mi abuelo está malo, no puede levantarse de la cama.", opts:["плохого качества","болен"], answer:1},
+  {q:"Estoy aburrido, no tengo nada que hacer.", opts:["скучный (наводит скуку)","скучающий (испытывает скуку)"], answer:1},
+  {q:"Esta serie es muy aburrida, la dejé a la mitad.", opts:["скучная (наводит скуку)","скучающая"], answer:0}
+], "Elige la traducción que corresponde al significado de la frase.");
+
+/* ---------------- BLOQUE 7: ser + participio vs estar + participio ---------------- */
+buildRadioBlock("se7", "Bloque 7 · Ser + participio (acción) vs. estar + participio (resultado)", "medio-alto", "mid", [
+  {q:"La Sagrada Familia todavía no ___ terminada; llevan más de 100 años construyéndola.", opts:["fue","está"], answer:1},
+  {q:"El Quijote ___ escrito por Cervantes.", opts:["fue","está"], answer:0},
+  {q:"Estas galletas ___ hechas con mantequilla, no con aceite.", opts:["fueron","están"], answer:1},
+  {q:"Los primeros ordenadores ___ inventados en el siglo XX.", opts:["fueron","están"], answer:0},
+  {q:"La ventana ___ rota; no sé quién lo hizo, pero hay que arreglarla.", opts:["fue","está"], answer:1},
+  {q:"El puente ___ construido en solo dos años, todo un récord.", opts:["fue","está"], answer:0}
+]);
+
+/* ---------------- BLOQUE 8: ser en vs estar en ---------------- */
+buildRadioBlock("se8", "Bloque 8 · Ser en (evento) vs. estar en (lugar)", "medio-alto", "mid", [
+  {q:"La boda de mi prima ___ en un hotel muy bonito.", opts:["es","está"], answer:0},
+  {q:"Mis padres ___ en el hotel donde se casó mi prima.", opts:["son","están"], answer:1},
+  {q:"El concierto ___ en el estadio municipal.", opts:["es","está"], answer:0},
+  {q:"El estadio municipal ___ en las afueras de la ciudad.", opts:["es","está"], answer:1},
+  {q:"La reunión de mañana ___ en la sala 2.", opts:["es","está"], answer:0},
+  {q:"La sala 2 ___ al fondo del pasillo.", opts:["es","está"], answer:1}
+], "Piensa si la frase habla de un evento (ser en) o de la ubicación de un lugar/persona (estar en).");
+
+/* ---------------- BLOQUE 9: relacionar — adjetivo+ser/estar con su significado en ruso ---------------- */
+(function(){
+  var id = "se9";
+  var words = ["ser listo","estar listo","ser malo","estar malo","ser aburrido","estar aburrido","ser rico","estar rico","ser verde","estar verde","ser despierto","estar despierto","ser orgulloso","estar orgulloso (de algo)"];
+  var defs = [
+    "умный, сообразительный","готовый (к чему-то)","плохого качества / плохой человек","болен",
+    "скучный (наводит скуку)","скучающий","богатый (деньги)","вкусный (о еде)",
+    "зелёного цвета","незрелый","сообразительный, бойкий","не спящий, бодрствующий",
+    "гордец, высокомерный (черта характера)","гордиться чем-то (сейчас)"
+  ];
+  var letters = words.map(function(_, i){ return String.fromCharCode(97+i); });
+  var answers = letters.slice();
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 9 · Relaciona cada combinación con su significado en ruso", "alto", "hard"));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Combinación</th><th>Significado</th></tr>";
+  words.forEach(function(w, idx){
+    var opts = letters.map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = defs.map(function(d,i){ return letters[i]+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+words.length+"</b>";
+    blockScores[id] = {correct:correct, total:words.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:words.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 10: mixto ser/estar/hay — huecos sin banco ---------------- */
+buildFillBlock("se10", "Bloque 10 · Ser, estar y hay mezclados", "alto", "hard", [
+  {stem:"___ una cafetería nueva al lado de mi trabajo.", answers:["hay"]},
+  {stem:"La cafetería nueva ___ muy cerca de mi trabajo.", answers:["está"]},
+  {stem:"Mi compañero de piso ___ una persona muy tranquila, casi nunca se enfada.", answers:["es"]},
+  {stem:"Hoy mi compañero ___ nervioso porque tiene un examen.", answers:["está"]},
+  {stem:"___ demasiados exámenes este mes, estoy agotado.", answers:["hay"]},
+  {stem:"El examen más difícil ___ el viernes.", answers:["es"]}
+]);
+
+/* ---------------- BLOQUE 11: ser+participio vs estar+participio — avanzado ---------------- */
+buildRadioBlock("se11", "Bloque 11 · Ser + participio vs. estar + participio — avanzado", "alto", "hard", [
+  {q:"El puente nuevo ___ inaugurado la semana pasada por el alcalde.", opts:["fue","está"], answer:0},
+  {q:"Ahora mismo el puente ya ___ terminado y abierto al tráfico.", opts:["fue","está"], answer:1},
+  {q:"Estas normas ___ aprobadas por el parlamento en 2020.", opts:["fueron","están"], answer:0},
+  {q:"Las normas ya ___ aprobadas, así que hay que cumplirlas.", opts:["fueron","están"], answer:1},
+  {q:"Mi tesis ya ___ revisada; puedo entregarla mañana.", opts:["fue","está"], answer:1}
+]);
+
+/* ---------------- BLOQUE 12: ser en vs estar en — matices ---------------- */
+buildFillBlock("se12", "Bloque 12 · Ser en vs. estar en — matices adicionales", "alto", "hard", [
+  {stem:"La entrevista de trabajo ___ en la sede central de la empresa.", answers:["es"]},
+  {stem:"La sede central ___ en la calle Mayor, número 10.", answers:["está"]},
+  {stem:"El festival de música ___ este año en la playa.", answers:["es"]},
+  {stem:"La playa donde se celebra el festival ___ a veinte minutos del centro.", answers:["está"]},
+  {stem:"La ceremonia de graduación ___ en el paraninfo de la universidad.", answers:["es"]}
+]);
+
+/* ---------------- BLOQUE 13: traducción abierta 1 ---------------- */
+buildOpenBlock("se13", "Bloque 13 · Traduce — ser, estar o hay", "el más difícil", "hard", [
+  {stem:"Traduce: «В этом районе есть отличный ресторан.»", model:"En este barrio hay un restaurante estupendo."},
+  {stem:"Traduce: «Ресторан, который ты мне посоветовал, находится рядом с моим домом.»", model:"El restaurante que me recomendaste está cerca de mi casa."},
+  {stem:"Traduce: «Мой брат умный, но сейчас он не готов к экзамену.»", model:"Mi hermano es listo, pero ahora no está listo para el examen."},
+  {stem:"Traduce: «Этот суп очень вкусный, кто его приготовил?»", model:"Esta sopa está riquísima, ¿quién la ha hecho?"}
+], "Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).");
+
+/* ---------------- BLOQUE 14: traducción abierta 2 ---------------- */
+buildOpenBlock("se14", "Bloque 14 · Traduce — participio, ser en, adjetivos con doble sentido", "el más difícil", "hard", [
+  {stem:"Traduce: «Дом был построен в 1920 году, но сейчас он полностью отремонтирован.»", model:"La casa fue construida en 1920, pero ahora está completamente reformada."},
+  {stem:"Traduce: «Вечеринка будет у меня дома в субботу.»", model:"La fiesta es en mi casa el sábado."},
+  {stem:"Traduce: «Мой дедушка гордый человек, но сегодня он особенно горд за внука.»", model:"Mi abuelo es orgulloso, pero hoy está especialmente orgulloso de su nieto."},
+  {stem:"Traduce: «В центре города есть много баров, но тот, который тебе нужен, находится на площади.»", model:"En el centro hay muchos bares, pero el que buscas está en la plaza."}
+]);
+
+/* ---------------- BLOQUE 15: traducción abierta 3 ---------------- */
+buildOpenBlock("se15", "Bloque 15 · Traduce — repaso final", "el más difícil", "hard", [
+  {stem:"Traduce: «Эти бананы ещё зелёные, подожди пару дней.»", model:"Estos plátanos todavía están verdes, espera un par de días."},
+  {stem:"Traduce: «Собрание пройдёт в переговорной номер 5.»", model:"La reunión es en la sala de reuniones número 5."},
+  {stem:"Traduce: «Домашнее задание уже готово, можем идти гулять.»", model:"Los deberes ya están hechos, podemos salir a pasear."}
+]);
+
+/* ---------------- BLOQUE 16: repaso general — mixto ---------------- */
+buildRadioBlock("se16", "Bloque 16 · Repaso general", "alto", "hard", [
+  {q:"___ una farmacia 24 horas cerca de aquí.", opts:["Es","Está","Hay"], answer:2},
+  {q:"La farmacia que buscas ___ a dos calles de aquí.", opts:["es","está","hay"], answer:1},
+  {q:"Mi hermana ___ enfermera.", opts:["es","está","hay"], answer:0},
+  {q:"La cena de Nochebuena ___ en casa de mis suegros este año.", opts:["es","está","hay"], answer:0},
+  {q:"Estos documentos ___ firmados ya por el director.", opts:["fueron","están","hay"], answer:1},
+  {q:"El contrato ___ firmado ayer por las dos partes.", opts:["fue","está","hay"], answer:0}
+], "Bloque final — combina todo lo visto: ser, estar, hay, participios y adjetivos con doble sentido.");
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

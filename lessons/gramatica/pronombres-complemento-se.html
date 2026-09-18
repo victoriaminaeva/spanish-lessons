@@ -1,0 +1,756 @@
+<!doctype html>
+<title>Pronombres de complemento y se</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Pronombres y se</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>Pronombres de complemento y el multiuso «se»</h1>
+  <p class="subtitle">Reglas claras + dieciséis bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> los pronombres de complemento directo (me, te, lo/la, nos, os, los/las) e indirecto (me, te, le, nos, os, les), la combinación obligatoria le/les → se delante de lo/la/los/las, la duplicación del complemento, y los cinco valores del pronombre <b>se</b> (reflexivo, recíproco, pasivo, impersonal y el «se involuntario» de sucesos no intencionados: <i>se me olvidó, se me rompió</i>), una construcción sin equivalente directo en ruso.
+  </div>
+  <p class="series-note">📚 Tema de la serie <b>Gramática</b> del sitio — más adelante se añadirán aquí otros temas. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — pronombres y «se»</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada regla.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>Le/les → se — la regla más olvidada</h3>
+    <ul>
+      <li>Cuando en la misma frase coinciden un complemento indirecto (<b>le/les</b>) y un complemento directo (<b>lo/la/los/las</b>), <b>le/les se convierte siempre en se</b>.</li>
+      <li>El orden es fijo: <b>se + CD + verbo</b> (nunca «CD + se», ni «se + verbo + CD»).</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> «<s>Le lo di</s>» — НЕВЕРНО. Правильно: «<b>Se lo</b> di» (сначала se, потом lo/la/los/las, потом глагол).</div>
+  </div>
+
+  <div class="contrast-box">
+    <h3>Pasivo con se vs. impersonal con se vs. se involuntario</h3>
+    <ul>
+      <li><b>Pasivo con se:</b> el verbo concuerda en número con el sustantivo, que es el sujeto gramatical: <i>Se venden pisos</i> (pisos = sujeto, plural → venden).</li>
+      <li><b>Impersonal con se:</b> el verbo va siempre en 3ª persona del singular, no hay sujeto gramatical concreto: <i>Se vive bien aquí; Se trabaja mucho</i>.</li>
+      <li><b>Se involuntario / de afectación:</b> se + pronombre de CI (me/te/le/nos/os/les) + verbo, para sucesos no intencionados: <i>Se me olvidó la cita</i>. El verbo concuerda con lo olvidado/roto/perdido, NO con la persona afectada.</li>
+    </ul>
+    <div class="error-box"><b>Внимание:</b> в русском языке нет прямого аналога конструкции «se me olvidó» — она не переводится как «я забыл», а буквально как «мне (само) забылось». Местоимение (me/te/le/nos/os/les) указывает, кого это касается, а <b>глагол согласуется с предметом</b>: «Se me olvid<b>aron</b> las llaves» (llaves — мн. число → olvidaron), а НЕ «se me olvidó las llaves».</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Dieciséis bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS ---------------- */
+var rules = [
+  {term:"me, te, lo/la, nos, os, los/las", pos:"complemento directo (CD)",
+   quote:"¿Ves la película? Sí, <mark>la</mark> veo. ¿Compraste los billetes? Sí, <mark>los</mark> compré.",
+   trans:"меня, тебя, его/её/это, нас, вас, их — прямое дополнение",
+   mean:"Sustituye al objeto directo (responde a «¿qué?» o «¿a quién?» sin preposición). Concuerda en género y número con el sustantivo que sustituye.",
+   ex:"¿Dónde está mi móvil? No lo veo. — Где мой телефон? Я его не вижу."},
+  {term:"me, te, le, nos, os, les", pos:"complemento indirecto (CI)",
+   quote:"<mark>Le</mark> escribo un correo a mi jefe. <mark>Les</mark> compré un regalo a mis padres.",
+   trans:"мне, тебе, ему/ей, нам, вам, им — косвенное дополнение",
+   mean:"Sustituye al destinatario/beneficiario de la acción (verbos como dar, decir, escribir, comprar...). No cambia de forma según el género, solo según el número.",
+   ex:"Le mandé un mensaje a Elena. — Я отправил Елене сообщение."},
+  {term:"se lo, se la, se los, se las", pos:"combinación CI + CD",
+   quote:"Le di el libro a mi hermano → <mark>Se lo</mark> di. (NO «le lo di»)",
+   trans:"ему/ей/им это — комбинация двух местоимений",
+   mean:"Cuando el complemento indirecto le/les va seguido de un complemento directo lo/la/los/las, le/les se transforma obligatoriamente en se. El orden es siempre CI + CD + verbo.",
+   ex:"¿Le diste las llaves a Ana? Sí, se las di. — Ты отдал Ане ключи? Да, я ей их отдал."},
+  {term:"a Juan le..., el libro lo...", pos:"duplicación del complemento",
+   quote:"<mark>A Juan</mark> <mark>le</mark> dije que viniera. <mark>El libro</mark> <mark>lo</mark> tengo yo.",
+   trans:"дублирование дополнения местоимением",
+   mean:"En español es muy frecuente repetir el complemento con el pronombre correspondiente, casi obligatorio cuando el complemento indirecto va delante del verbo, y habitual cuando se quiere destacar el complemento directo.",
+   ex:"A mis padres les encanta viajar. — Мои родители обожают путешествовать."},
+  {term:"se lava, se peina, se viste", pos:"se reflexivo",
+   quote:"Ana <mark>se</mark> lava las manos antes de comer.",
+   trans:"себя — возвратное значение",
+   mean:"El sujeto realiza y recibe la acción sobre sí mismo. El pronombre (me, te, se, nos, os, se) concuerda con el sujeto.",
+   ex:"Me ducho todas las mañanas. — Я принимаю душ каждое утро."},
+  {term:"se abrazan, se escriben", pos:"se recíproco",
+   quote:"Los dos amigos <mark>se</mark> abrazaron al verse.",
+   trans:"друг друга — взаимное значение",
+   mean:"Dos o más sujetos realizan la acción el uno sobre el otro. Solo es posible con sujetos plurales.",
+   ex:"Nos escribimos todas las semanas. — Мы пишем друг другу каждую неделю."},
+  {term:"se venden pisos", pos:"pasiva refleja (pasivo con se)",
+   quote:"<mark>Se venden</mark> pisos en el centro.",
+   trans:"продаются (кем-то, неважно кем) — пассив с se",
+   mean:"El verbo concuerda en número con el sustantivo, que es el sujeto gramatical (aunque no realiza la acción). Solo funciona con verbos transitivos.",
+   ex:"Se alquila piso amueblado. — Сдаётся меблированная квартира."},
+  {term:"se vive bien aquí", pos:"se impersonal",
+   quote:"<mark>Se vive</mark> muy bien en este barrio.",
+   trans:"живётся хорошо (безличная форма, без конкретного субъекта)",
+   mean:"El verbo va siempre en 3ª persona del singular; no hay sujeto gramatical concreto, se refiere a la gente en general. Habitual con verbos intransitivos.",
+   ex:"Se trabaja mucho en esta empresa. — В этой компании много работают."},
+  {term:"se me olvidó, se me rompió", pos:"se involuntario / de afectación",
+   quote:"<mark>Se me olvidó</mark> el paraguas. <mark>Se le rompió</mark> el vaso.",
+   trans:"у меня вылетело из головы, у него/неё разбилось — непреднамеренное событие",
+   mean:"Construcción se + pronombre de CI (me/te/le/nos/os/les) + verbo, para eventos no intencionados o accidentales. El verbo concuerda con el sujeto gramatical (lo que se olvida/rompe/pierde), NO con la persona afectada.",
+   ex:"Se nos acabó el café esta mañana. — У нас сегодня утром закончился кофе."},
+  {term:"ir/irse, dormir/dormirse...", pos:"verbos que cambian de sentido con se",
+   quote:"Voy al trabajo (иду) — <mark>Me voy</mark> ya, es tarde (ухожу).",
+   trans:"пары глаголов, меняющих значение с se",
+   mean:"ir (идти) / irse (уйти, уехать); dormir (спать) / dormirse (заснуть); quedar (встретиться / оставаться в излишке) / quedarse (остаться, пребывать); llevar (нести/носить) / llevarse (унести с собой); parecer (казаться) / parecerse (быть похожим); acordar (договориться) / acordarse (вспомнить, помнить).",
+   ex:"No me acuerdo de su nombre. — Я не помню его имени."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass, ruleHtml){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+/* helper builders for repeated block types */
+function buildRadioBlock(id, title, tag, tagClass, items, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(hintText){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>'; }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function buildFillBlock(id, title, tag, tagClass, items, bank, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(bank){ wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+bank+'</div>'; }
+  if(hintText){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>'; }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE 1: CD — reconocimiento (radio) ---------------- */
+buildRadioBlock("sc1", "Bloque 1 · Elige el pronombre de complemento directo (CD)", "fácil", "easy", [
+  {q:"¿Tienes las llaves? Sí, ___ tengo.", opts:["lo","la","las"], answer:2},
+  {q:"¿Compraste el pan? Sí, ___ compré.", opts:["lo","la","los"], answer:0},
+  {q:"¿Ves a mis hermanos? Sí, ___ veo.", opts:["los","las","le"], answer:0},
+  {q:"¿Necesitas la información? Sí, ___ necesito.", opts:["lo","la","le"], answer:1},
+  {q:"¿Escribiste las cartas? Sí, ___ escribí.", opts:["los","las","les"], answer:1},
+  {q:"¿Trajiste el paraguas? No, no ___ traje.", opts:["lo","la","le"], answer:0}
+]);
+
+/* ---------------- BLOQUE 2: CI — reconocimiento (radio) ---------------- */
+buildRadioBlock("sc2", "Bloque 2 · Elige el pronombre de complemento indirecto (CI)", "fácil", "easy", [
+  {q:"___ escribo un correo a mi jefe.", opts:["lo","le","la"], answer:1},
+  {q:"¿___ diste el regalo a tus padres?", opts:["les","los","las"], answer:0},
+  {q:"María ___ dice la verdad a nosotros.", opts:["nos","les","los"], answer:0},
+  {q:"¿Qué ___ vas a regalar a tu hermana?", opts:["le","la","lo"], answer:0},
+  {q:"El camarero ___ trajo la cuenta a los clientes.", opts:["les","los","las"], answer:0},
+  {q:"¿___ puedes explicar la regla a mí?", opts:["me","te","lo"], answer:0}
+]);
+
+/* ---------------- BLOQUE 3: CD vs CI — distinción (radio) ---------------- */
+buildRadioBlock("sc3", "Bloque 3 · Complemento directo o indirecto — ¿cuál toca?", "medio", "mid", [
+  {q:"¿Viste a mi profesora ayer? Sí, ___ vi (CD, persona).", opts:["la","le","las"], answer:0},
+  {q:"¿Escribiste a tu profesora? Sí, ___ escribí (CI, destinatario).", opts:["la","le","las"], answer:1},
+  {q:"¿Compraste el coche? Sí, ___ compré (CD, cosa).", opts:["lo","le","los"], answer:0},
+  {q:"¿Le compraste algo a tu padre? Sí, ___ compré una corbata (CI, destinatario).", opts:["lo","le","la"], answer:1},
+  {q:"¿Conoces a mis vecinos? Sí, ___ conozco (CD, personas).", opts:["los","les","las"], answer:0}
+], "Fíjate: si el verbo actúa directamente sobre alguien/algo, es CD; si alguien recibe o se beneficia de la acción, es CI.");
+
+/* ---------------- BLOQUE 4: le/les → se con banco ---------------- */
+buildFillBlock("sc4", "Bloque 4 · Transforma le/les + lo/la/los/las en se", "medio", "mid", [
+  {stem:"Le di el libro a mi hermano. → ___ di.", answers:["se lo"]},
+  {stem:"Les conté la noticia a mis amigos. → ___ conté.", answers:["se la"]},
+  {stem:"Le envié los documentos a la profesora. → ___ envié.", answers:["se los"]},
+  {stem:"Les mostré las fotos a mis padres. → ___ mostré.", answers:["se las"]},
+  {stem:"Le compré el anillo a mi novia. → ___ compré.", answers:["se lo"]},
+  {stem:"Les devolví las llaves a los vecinos. → ___ devolví.", answers:["se las"]}
+], "se lo · se la · se los · se las");
+
+/* ---------------- BLOQUE 5: «le lo» vs «se lo» (radio) ---------------- */
+buildRadioBlock("sc5", "Bloque 5 · ¿«le lo» o «se lo»? Elige la forma correcta", "medio", "mid", [
+  {q:"Le dije el secreto a mi madre. → ___ dije.", opts:["le lo","se lo"], answer:1},
+  {q:"Les expliqué el problema a los alumnos. → ___ expliqué.", opts:["se lo","les lo"], answer:0},
+  {q:"Le presté el bolígrafo a Juan. → ___ presté.", opts:["se lo","le lo"], answer:0},
+  {q:"Le envié las fotos a María. → ___ envié.", opts:["se las","le las"], answer:0},
+  {q:"Les traje la cuenta a los clientes. → ___ traje.", opts:["se la","les la"], answer:0}
+]);
+
+/* ---------------- BLOQUE 6: duplicación del complemento (radio) ---------------- */
+buildRadioBlock("sc6", "Bloque 6 · Duplicación del complemento", "medio-alto", "mid", [
+  {q:"A Juan ___ dije que viniera.", opts:["le","lo","-"], answer:0},
+  {q:"El libro ___ tengo yo (no tú).", opts:["lo","le","-"], answer:0},
+  {q:"A mis padres ___ escribo cada semana.", opts:["les","los","-"], answer:0},
+  {q:"Esta canción ___ escuché anoche.", opts:["la","le","-"], answer:0},
+  {q:"A ti ___ lo digo en serio.", opts:["te","-","lo"], answer:0}
+], "El español repite muy a menudo el complemento con su pronombre correspondiente, sobre todo si va delante del verbo o se quiere destacar.");
+
+/* ---------------- BLOQUE 7: valores de se — reconocimiento (radio) ---------------- */
+buildRadioBlock("sc7", "Bloque 7 · ¿Qué valor tiene «se» en cada frase?", "medio-alto", "mid", [
+  {q:"Los dos hermanos se abrazan al verse.", opts:["reflexivo","recíproco","pasivo con se"], answer:1},
+  {q:"Se venden pisos en el centro.", opts:["reflexivo","pasivo con se","impersonal"], answer:1},
+  {q:"Se vive bien en este pueblo.", opts:["pasivo con se","impersonal","reflexivo"], answer:1},
+  {q:"Ana se lava las manos antes de comer.", opts:["reflexivo","recíproco","impersonal"], answer:0},
+  {q:"Se trabaja mucho los lunes.", opts:["pasivo con se","impersonal","reflexivo"], answer:1}
+]);
+
+/* ---------------- BLOQUE 8: pasivo con se vs impersonal (radio) ---------------- */
+buildRadioBlock("sc8", "Bloque 8 · Pasivo con se vs. impersonal con se", "alto", "hard", [
+  {q:"Se alquila piso en el centro.", opts:["pasivo con se","impersonal"], answer:0},
+  {q:"Se buscan camareros con experiencia.", opts:["pasivo con se","impersonal"], answer:0},
+  {q:"Se come bien en este restaurante.", opts:["pasivo con se","impersonal"], answer:1},
+  {q:"Aquí no se fuma.", opts:["pasivo con se","impersonal"], answer:1},
+  {q:"Se necesitan voluntarios para el proyecto.", opts:["pasivo con se","impersonal"], answer:0},
+  {q:"Se duerme mal con este calor.", opts:["pasivo con se","impersonal"], answer:1}
+], "Pista: en el pasivo con se el verbo concuerda en número con el sustantivo (sujeto gramatical); en el impersonal el verbo va siempre en singular.");
+
+/* ---------------- BLOQUE 9: se involuntario — solo el pronombre ---------------- */
+buildFillBlock("sc9", "Bloque 9 · Se involuntario — completa con se + pronombre de CI", "alto", "hard", [
+  {stem:"(A mí) ___ olvidó el paraguas en casa.", answers:["se me"]},
+  {stem:"(A ti) ¿___ rompió el vaso?", answers:["se te"]},
+  {stem:"(A Juan) ___ perdieron las llaves.", answers:["se le"]},
+  {stem:"(A nosotros) ___ acabó el café.", answers:["se nos"]},
+  {stem:"(A vosotros) ___ cayeron los papeles.", answers:["se os"]},
+  {stem:"(A mis padres) ___ estropeó el coche.", answers:["se les"]}
+], null, "Escribe solo «se + pronombre» (por ejemplo, «se me»), sin banco de palabras.");
+
+/* ---------------- BLOQUE 10: se involuntario — pronombre + verbo, concordancia ---------------- */
+buildFillBlock("sc10", "Bloque 10 · Se involuntario — pronombre y verbo con la concordancia correcta", "alto", "hard", [
+  {stem:"A mi hermana ___ (olvidar — las llaves) esta mañana.", answers:["se le olvidaron"]},
+  {stem:"A mí ___ (romper — el vaso) ayer.", answers:["se me rompió"]},
+  {stem:"A nosotros ___ (acabar — la leche) hace dos días.", answers:["se nos acabó"]},
+  {stem:"A ti ___ (caer — los papeles) al suelo.", answers:["se te cayeron"]},
+  {stem:"A los niños ___ (perder — el balón) en el parque.", answers:["se les perdió"]}
+], null, "El verbo concuerda con lo que se olvida/rompe/cae/pierde, no con la persona afectada — fíjate bien en el número.");
+
+/* ---------------- BLOQUE 11: verbos que cambian de sentido con se (radio) ---------------- */
+buildRadioBlock("sc11", "Bloque 11 · Verbos que cambian de sentido con se", "alto", "hard", [
+  {q:"Cuando terminó la reunión, todos ___ rápidamente (ушли).", opts:["fueron","se fueron"], answer:1},
+  {q:"Empecé a leer y ___ enseguida (заснул).", opts:["dormí","me dormí"], answer:1},
+  {q:"¿___ mañana a las ocho para cenar? (встретимся)", opts:["Quedamos","Nos quedamos"], answer:0},
+  {q:"___ mi paraguas sin pedirlo (унёс без спроса).", opts:["Llevó","Se llevó"], answer:1},
+  {q:"Mi hermano ___ mucho a mi padre (похож).", opts:["parece","se parece"], answer:1},
+  {q:"No ___ de tu nombre (не помню).", opts:["acuerdo","me acuerdo"], answer:1}
+]);
+
+/* ---------------- BLOQUE 12: matching — verbo+se ↔ significado ---------------- */
+(function(){
+  var b = {id:"sc12",
+    words:["irse","dormirse","quedarse","llevarse","parecerse","acordarse"],
+    defs:["уйти, уехать откуда-то (направление/отбытие)","заснуть — момент, когда начинаешь спать","остаться, пребывать в каком-то месте","забрать/унести что-то с собой (часто без спроса)","быть похожим на кого-то","помнить, вспоминать что-то"],
+    answers:["a","b","c","d","e","f"]
+  };
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 12 · Relaciona cada verbo con «se» con su significado","alto","hard"));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Verbo</th><th>Significado</th></tr>";
+  b.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e","f"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = b.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.words.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.words.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.words.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 13: reflexivo vs recíproco (radio) ---------------- */
+buildRadioBlock("sc13", "Bloque 13 · Se reflexivo o recíproco — ¿cuál es?", "alto", "hard", [
+  {q:"Pedro y Ana se miraron en silencio.", opts:["reflexivo (себя)","recíproco (друг друга)"], answer:1},
+  {q:"Me miro en el espejo cada mañana.", opts:["reflexivo","recíproco"], answer:0},
+  {q:"Los amigos se ayudan siempre.", opts:["reflexivo","recíproco"], answer:1},
+  {q:"El gato se lame las patas.", opts:["reflexivo","recíproco"], answer:0},
+  {q:"Nos escribimos cartas todas las semanas.", opts:["reflexivo","recíproco"], answer:1}
+]);
+
+/* ---------------- BLOQUE 14: traducción — se involuntario (abierto) ---------------- */
+(function(){
+  var items = [
+    {stem:"Traduce: «Я забыл ключи дома».", model:"Se me olvidaron las llaves en casa."},
+    {stem:"Traduce: «У неё сломался телефон».", model:"Se le rompió el teléfono."},
+    {stem:"Traduce: «У нас закончился хлеб».", model:"Se nos acabó el pan."},
+    {stem:"Traduce: «Ты уронил документы?» (случайно)", model:"¿Se te cayeron los documentos?"}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 14 · Traduce — se involuntario","muy alto","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="sc14-'+idx+'" style="min-height:44px;" placeholder="Tu traducción..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="sc14-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("sc14-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 15: traducción — se pasivo/impersonal/se lo (abierto) ---------------- */
+(function(){
+  var items = [
+    {stem:"Traduce: «Здесь говорят по-испански и по-английски» (безличное se).", model:"Aquí se habla español e inglés."},
+    {stem:"Traduce: «В этом магазине продаются старые книги» (пассив с se).", model:"En esta tienda se venden libros antiguos."},
+    {stem:"Traduce: «Он отдал ей книгу» (используй se lo/se la — «el libro» мужского рода!).", model:"Se lo dio."},
+    {stem:"Traduce: «У меня разбилась чашка сегодня утром».", model:"Se me rompió la taza esta mañana."}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 15 · Traduce — pasivo, impersonal y se lo/se la","muy alto","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="sc15-'+idx+'" style="min-height:44px;" placeholder="Tu traducción..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="sc15-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("sc15-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 16: repaso mixto — sin banco ---------------- */
+buildFillBlock("sc16", "Bloque 16 · Repaso mixto — sin banco de palabras", "el más difícil", "hard", [
+  {stem:"Le compré flores a mi madre. → ___ compré.", answers:["se las"]},
+  {stem:"(A ellos) ___ rompieron los platos sin querer.", answers:["se les"]},
+  {stem:"En este bar ___ fuma mucho (impersonal).", answers:["se"]},
+  {stem:"En esta librería ___ venden libros de segunda mano (pasivo, verbo ya en plural).", answers:["se"]},
+  {stem:"(A mí) ___ perdió el móvil ayer.", answers:["se me"]}
+], null, "Bloque final: combina todo lo aprendido — le/les → se, duplicación y se involuntario.");
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

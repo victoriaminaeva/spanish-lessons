@@ -1,0 +1,832 @@
+<!doctype html>
+<title>Artículos y sustantivos</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Artículos y sustantivos</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>Los artículos y casos especiales de sustantivos</h1>
+  <p class="subtitle">Reglas claras + dieciséis bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> cuándo se usa y cuándo se omite el artículo en español (el tema más difícil para hablantes de ruso, que no tiene artículos), los sustantivos de género irregular (el agua, el mapa, la mano, la moto...) y las construcciones con «lo»: lo + adjetivo, lo que, lo de, y la exclamativa «lo + adjetivo/adverbio + que».
+  </div>
+  <p class="series-note">📚 Tema de la serie <b>Gramática</b> del sitio — más adelante se añadirán aquí otros temas. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — artículos y sustantivos</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada regla.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>La omisión sistemática del artículo — el error más frecuente</h3>
+    <ul>
+      <li>Como el ruso no tiene artículos, los hablantes de ruso tienden a omitirlos en español incluso cuando son obligatorios: <i>*Tengo coche</i> en vez de <i>Tengo un coche</i>; <i>*Café es bueno</i> en vez de <i>El café es bueno</i>.</li>
+      <li>Con verbos tipo gustar/encantar/odiar, el sustantivo genérico SIEMPRE lleva artículo determinado: <i>me gusta el café</i>, no <s>me gusta café</s>.</li>
+      <li>Un sustantivo genérico como sujeto también necesita artículo determinado: <i>los perros son animales leales</i>, no <s>perros son animales leales</s>.</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> «<s>Me gusta café</s>» — НЕПРАВИЛЬНО, нужен артикль: «Me gusta <b>el</b> café». «<s>Perros son animales leales</s>» — НЕПРАВИЛЬНО: «<b>Los</b> perros son animales leales».</div>
+  </div>
+
+  <div class="contrast-box">
+    <h3>Chuleta: palabras femeninas que llevan «el»/«un» en singular</h3>
+    <ul>
+      <li><b>el agua / las aguas</b>, <b>el hacha / las hachas</b>, <b>el águila / las águilas</b>, <b>el alma / las almas</b>, <b>el arma / las armas</b>, <b>el hambre</b>, <b>el aula / las aulas</b>, <b>el área / las áreas</b>, <b>el ave / las aves</b>.</li>
+      <li>Son femeninas: en plural usan «las», y cualquier adjetivo que las acompañe va en femenino — <i>el agua fría</i> (no <s>el agua frío</s>), <i>esta agua</i> (no <s>este agua</s>).</li>
+      <li>La regla es solo fonética: se usa «el»/«un» en singular para evitar el choque de dos «a» tónicas seguidas (la + água). Con adjetivo delante no se aplica: <i>la misma agua</i>, <i>la pura verdad</i> no es de este grupo.</li>
+    </ul>
+    <div class="error-box"><b>Внимание:</b> «el agua» ≠ мужской род! Это женское существительное — просто перед ним по звуковым причинам стоит «el», а не «la». Во множественном числе — снова «las»: <b>las aguas</b>.</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Dieciséis bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"Artículo con verbos tipo gustar", pos:"sustantivo genérico + artículo",
+   quote:"Me gusta <mark>el</mark> café. Odio <mark>las</mark> arañas.",
+   trans:"мне нравится кофе (вообще), ненавижу пауков (вообще)",
+   mean:"Con verbos como gustar, encantar, odiar, preferir, el sustantivo genérico/abstracto SÍ lleva artículo determinado en español, aunque hable de algo general — al contrario que en ruso, donde no hay artículos. «Me gusta el café» no significa un café concreto, sino el café en general.",
+   ex:"Nos encanta la música clásica. — Нам нравится классическая музыка (в целом)."},
+  {term:"Profesión/nacionalidad tras ser", pos:"sin artículo, salvo con adjetivo",
+   quote:"Mi padre <mark>es médico</mark>. Ana <mark>es rusa</mark>.",
+   trans:"мой отец — врач / Аня — русская",
+   mean:"Con «ser» + profesión, nacionalidad o religión SIN adjetivo, el español omite el artículo indefinido. Pero si el sustantivo lleva un adjetivo calificativo, el artículo indefinido reaparece.",
+   ex:"Es profesora. — pero — Es una profesora excelente. (Она — учительница. / Она прекрасная учительница.)"},
+  {term:"Expresiones fijas sin artículo", pos:"ir a clase, estar en casa...",
+   quote:"Voy a <mark>clase</mark>. Estoy en <mark>casa</mark>. Vamos a <mark>pie</mark>.",
+   trans:"иду на занятие / я дома / идём пешком",
+   mean:"Muchas expresiones fijas con «a», «en», «de» no llevan artículo: ir a clase/misa, estar en casa, salir de compras, ir a pie, tener hambre/sed/razón/miedo, dar clase. Son bloques que hay que memorizar, no una regla general.",
+   ex:"Tengo mucha hambre — vamos a comer algo. — Я очень голоден — пойдём что-нибудь съедим."},
+  {term:"Femeninos con «el» en singular", pos:"el agua, el hacha, el águila...",
+   quote:"<mark>El agua</mark> está fría, pero <mark>las aguas</mark> del río bajan sucias.",
+   trans:"вода холодная / воды реки",
+   mean:"Los sustantivos femeninos que empiezan por «a-»/«ha-» tónica usan «el»/«un» en singular por razones de sonido, pero siguen siendo femeninos: los adjetivos y el plural van en femenino. Ejemplos: el agua/las aguas, el hacha/las hachas, el águila/las águilas, el alma/las almas, el arma/las armas, el hambre.",
+   ex:"El agua está helada. Esta agua está muy fría. — concordancia femenina con el adjetivo/demostrativo, pero «el» delante del sustantivo."},
+  {term:"Masculinos en -a / femeninos en -o", pos:"el mapa, el día... / la mano, la moto...",
+   quote:"<mark>El</mark> mapa, <mark>el</mark> día, <mark>el</mark> problema — pero — <mark>la</mark> mano, <mark>la</mark> moto, <mark>la</mark> foto.",
+   trans:"карта, день, проблема (м.р.) — рука, мотоцикл, фото (ж.р.)",
+   mean:"Un grupo de palabras terminadas en -a son masculinas (casi todas de origen griego: -ma): el mapa, el día, el problema, el clima, el planeta, el idioma, el sistema, el tema, el programa. Y algunas palabras terminadas en -o son femeninas, por ser abreviaturas: la mano, la foto (de fotografía), la moto (de motocicleta), la radio.",
+   ex:"La moto de mi hermano es nueva, pero el mapa que tengo es viejo. — Мотоцикл моего брата новый, а карта, которая у меня есть, старая."},
+  {term:"Lo + adjetivo / lo que / lo de", pos:"neutro abstracto",
+   quote:"<mark>Lo</mark> importante es que llegues a tiempo. No entiendo <mark>lo que</mark> dices. Olvídate de <mark>lo de</mark> ayer.",
+   trans:"важно то, что... / то, что ты говоришь / то, что было вчера",
+   mean:"«Lo + adjetivo» convierte un adjetivo en un concepto abstracto neutro (lo bueno = хорошее; lo difícil = сложное). «Lo que» es un relativo neutro que se refiere a una idea o cosa no nombrada directamente (equivalente a «то, что»). «Lo de» introduce de forma informal un asunto ya conocido por los interlocutores (lo de ayer = то, что было вчера).",
+   ex:"Lo bueno de este trabajo es el horario. — Хорошее в этой работе — это график."},
+  {term:"Lo + adjetivo/adverbio + que", pos:"exclamativo/enfático, B2",
+   quote:"No sabes <mark>lo cansada que</mark> estoy. No te imaginas <mark>lo rápido que</mark> corre.",
+   trans:"ты не представляешь, какая я уставшая / ты не представляешь, как быстро он бежит",
+   mean:"Estructura enfática/exclamativa: «lo + adjetivo/adverbio + que + verbo». El adjetivo concuerda en género y número con el sujeto de la oración (lo cansada que estoy = fem., porque habla una mujer); el adverbio no cambia. Equivale a «qué + adjetivo» pero con más énfasis.",
+   ex:"¡Lo caro que es vivir en esta ciudad! — Какая же дорогая жизнь в этом городе!"}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass, ruleHtml){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+function makeRadioBlock(cfg){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(cfg.title, cfg.tag, cfg.tagClass));
+  if(cfg.hint){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+cfg.hint+'</p>'; }
+  var list = document.createElement("div");
+  cfg.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+cfg.id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    cfg.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+cfg.id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+cfg.items.length+"</b>";
+    blockScores[cfg.id] = {correct:correct, total:cfg.items.length};
+    updateGlobalScore();
+  });
+  blockScores[cfg.id] = {correct:0, total:cfg.items.length};
+  exList.appendChild(wrap);
+}
+
+function makeFillBlock(cfg){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(cfg.title, cfg.tag, cfg.tagClass));
+  if(cfg.bank){ wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+cfg.bank+'</div>'; }
+  if(cfg.hint){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+cfg.hint+'</p>'; }
+  var list = document.createElement("div");
+  cfg.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+(it.pre?it.pre:"")+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off" style="min-width:70px;">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    cfg.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+cfg.items.length+"</b>";
+    blockScores[cfg.id] = {correct:correct, total:cfg.items.length};
+    updateGlobalScore();
+  });
+  blockScores[cfg.id] = {correct:0, total:cfg.items.length};
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE 1: ser + profesión, con/sin adjetivo (radio) ---------------- */
+makeRadioBlock({id:"g1", tag:"fácil", tagClass:"easy",
+  title:"Bloque 1 · Ser + profesión — ¿con o sin artículo?",
+  items:[
+    {q:"Mi hermano ___ ingeniero.", opts:["es","es un"], answer:0},
+    {q:"Mi hermano ___ ingeniero excelente.", opts:["es","es un"], answer:1},
+    {q:"Ella ___ profesora de historia.", opts:["es","es una"], answer:0},
+    {q:"Ella ___ profesora muy exigente.", opts:["es","es una"], answer:1},
+    {q:"Mis padres ___ españoles.", opts:["son","son unos"], answer:0},
+    {q:"Mi tío ___ católico practicante.", opts:["es","es un"], answer:1}
+  ]});
+
+/* ---------------- BLOQUE 2: el/la para sustantivos de género irregular (huecos con banco) ---------------- */
+makeFillBlock({id:"g2", tag:"fácil", tagClass:"easy",
+  title:"Bloque 2 · El o la — sustantivos de género irregular",
+  bank:"el · la",
+  items:[
+    {stem:"___ agua de este río está muy limpia.", answers:["el"]},
+    {stem:"___ mano derecha me duele un poco.", answers:["la"]},
+    {stem:"___ mapa de España está en la pared.", answers:["el"]},
+    {stem:"___ moto de mi vecino hace mucho ruido.", answers:["la"]},
+    {stem:"___ problema principal es la falta de tiempo.", answers:["el"]},
+    {stem:"___ foto que hiciste es preciosa.", answers:["la"]},
+    {stem:"___ águila real vive en las montañas.", answers:["el"]},
+    {stem:"___ clima de esta región es muy seco.", answers:["el"]}
+  ]});
+
+/* ---------------- BLOQUE 3: gustar-type + artículo genérico (radio) ---------------- */
+makeRadioBlock({id:"g3", tag:"fácil-medio", tagClass:"easy",
+  title:"Bloque 3 · Gustar/encantar/odiar — sustantivo genérico con artículo",
+  items:[
+    {q:"Me gusta ___ chocolate.", opts:["(ningún artículo)","el"], answer:1},
+    {q:"Odio ___ mentiras.", opts:["(ningún artículo)","las"], answer:1},
+    {q:"Prefiero ___ té al café.", opts:["(ningún artículo)","el"], answer:1},
+    {q:"Nos encantan ___ animales.", opts:["(ningún artículo)","los"], answer:1},
+    {q:"A mis padres les gusta ___ silencio por la noche.", opts:["(ningún artículo)","el"], answer:1}
+  ]});
+
+/* ---------------- BLOQUE 4: artículo o guion, mixto (huecos sin banco) ---------------- */
+makeFillBlock({id:"g4", tag:"medio", tagClass:"mid",
+  title:"Bloque 4 · Artículo o «-» si no hace falta ninguno",
+  hint:"Escribe el artículo (el/la/los/las) o un guion «-» si en esa posición no se necesita ningún artículo.",
+  items:[
+    {stem:"Todos los días voy a ___ clase a las nueve.", answers:["-","sin articulo","ninguno"]},
+    {stem:"___ perros son animales muy leales.", answers:["los"]},
+    {stem:"Estoy en ___ casa todo el día hoy.", answers:["-","sin articulo","ninguno"]},
+    {stem:"Vamos a ___ pie, no hace falta coger el autobús.", answers:["-","sin articulo","ninguno"]},
+    {stem:"___ vida en la ciudad es más cara que en el pueblo.", answers:["la"]},
+    {stem:"Tengo ___ prisa, no puedo quedarme.", answers:["-","sin articulo","ninguno"]}
+  ]});
+
+/* ---------------- BLOQUE 5: relacionar sustantivo <-> artículo correcto ---------------- */
+(function(){
+  var b = {id:"g5",
+    words:["idioma","día","tema","problema","mano","moto","radio","foto"],
+    answers:["el","el","el","el","la","la","la","la"]
+  };
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 5 · Relaciona cada sustantivo con su artículo","medio","mid"));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Sustantivo</th><th>Artículo</th></tr>";
+  b.words.forEach(function(w, idx){
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option><option value="el">el</option><option value="la">la</option></select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.words.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.words.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.words.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 6: lo + adjetivo / lo que / lo de (huecos con banco) ---------------- */
+makeFillBlock({id:"g6", tag:"medio", tagClass:"mid",
+  title:"Bloque 6 · Lo bueno, lo que, lo de — completa con el banco",
+  bank:"lo bueno · lo que · lo importante · lo de · lo difícil",
+  items:[
+    {stem:"___ de este trabajo es el buen ambiente.", answers:["lo bueno"]},
+    {stem:"No entiendo ___ quieres decir.", answers:["lo que"]},
+    {stem:"___ es que lleguemos a tiempo mañana.", answers:["lo importante"]},
+    {stem:"Olvídate de ___ ayer, ya no importa.", answers:["lo de"]},
+    {stem:"___ de aprender un idioma es la gramática, según muchos estudiantes.", answers:["lo dificil","lo difícil"]},
+    {stem:"Haz ___ puedas, nadie te pide más.", answers:["lo que"]}
+  ]});
+
+/* ---------------- BLOQUE 7: lo + adjetivo/adverbio + que exclamativo (radio) ---------------- */
+makeRadioBlock({id:"g7", tag:"medio-alto", tagClass:"mid",
+  title:"Bloque 7 · Lo + adjetivo/adverbio + que — concordancia",
+  hint:"El adjetivo concuerda en género/número con el sujeto; el adverbio no cambia.",
+  items:[
+    {q:"(dice una mujer) No sabes ___ estoy.", opts:["lo cansado que","lo cansada que"], answer:1},
+    {q:"(dice un hombre) No te imaginas ___ estoy.", opts:["lo ocupado que","lo ocupada que"], answer:0},
+    {q:"No sabéis ___ corre este chico.", opts:["lo rápido que","lo rápida que"], answer:0},
+    {q:"(dice ella) ¡No sabes ___ estoy hoy!", opts:["lo contento que","lo contenta que"], answer:1},
+    {q:"(hablando de dos hermanas) No sabes ___ son.", opts:["lo simpáticas que","lo simpático que"], answer:0}
+  ]});
+
+/* ---------------- BLOQUE 8: expresiones fijas sin artículo (huecos sin banco) ---------------- */
+makeFillBlock({id:"g8", tag:"alto", tagClass:"hard",
+  title:"Bloque 8 · Expresiones fijas sin artículo",
+  hint:"Escribe un guion «-» donde no se necesite ningún artículo.",
+  items:[
+    {stem:"Después del trabajo, prefiero quedarme en ___ casa.", answers:["-","sin articulo","ninguno"]},
+    {stem:"Mi tía da ___ clase de matemáticas en un instituto.", answers:["-","sin articulo","ninguno"]},
+    {stem:"No cojas el coche — vamos a ___ pie, está cerca.", answers:["-","sin articulo","ninguno"]},
+    {stem:"Cuando tengo ___ miedo, prefiero no estar solo.", answers:["-","sin articulo","ninguno"]},
+    {stem:"Este fin de semana nos vamos de ___ compras al centro.", answers:["-","sin articulo","ninguno"]},
+    {stem:"Siempre tienes ___ razón en estas discusiones.", answers:["-","sin articulo","ninguno"]}
+  ]});
+
+/* ---------------- BLOQUE 9: ¿cuál es correcta? (radio, 3 opciones) ---------------- */
+makeRadioBlock({id:"g9", tag:"alto", tagClass:"hard",
+  title:"Bloque 9 · ¿Cuál de las tres frases es correcta?",
+  items:[
+    {q:"¿Cuál es correcta?", opts:["Me gusta café con leche.","Me gusta el café con leche.","Me gusta un café con leche."], answer:1},
+    {q:"¿Cuál es correcta?", opts:["Mi padre es un médico.","Mi padre es médico.","Mi padre médico es."], answer:1},
+    {q:"¿Cuál es correcta?", opts:["Perros son animales leales.","Los perros son animales leales.","Un perros es animal leal."], answer:1},
+    {q:"¿Cuál es correcta?", opts:["No sabes lo cansada que estoy.","No sabes la cansada que estoy.","No sabes cansada que estoy."], answer:0}
+  ]});
+
+/* ---------------- BLOQUE 10: repaso mixto (huecos sin banco) ---------------- */
+makeFillBlock({id:"g10", tag:"el más difícil", tagClass:"hard",
+  title:"Bloque 10 · Repaso mixto — artículo, «-» o «lo»",
+  items:[
+    {stem:"___ importante es no rendirse nunca.", answers:["lo"]},
+    {stem:"Mi hermana es ___ arquitecta muy creativa.", answers:["una"]},
+    {stem:"___ tema de la reunión de hoy es muy complicado.", answers:["el"]},
+    {stem:"No te imaginas ___ difícil que fue el examen.", answers:["lo"]},
+    {stem:"Está en ___ casa, no salió hoy.", answers:["-","sin articulo","ninguno"]},
+    {stem:"Se acuerda muy bien de ___ de aquel verano.", answers:["lo de"]}
+  ]});
+
+/* ---------------- BLOQUE 11: ser + nacionalidad/religión, con/sin adjetivo (radio) ---------------- */
+makeRadioBlock({id:"g11", tag:"medio", tagClass:"mid",
+  title:"Bloque 11 · Ser + nacionalidad/religión — ¿con o sin artículo?",
+  items:[
+    {q:"Mi vecina ___ francesa.", opts:["es","es una"], answer:0},
+    {q:"Mi vecina ___ francesa encantadora.", opts:["es","es una"], answer:1},
+    {q:"Él ___ musulmán practicante.", opts:["es","es un"], answer:1},
+    {q:"Ellos ___ argentinos.", opts:["son","son unos"], answer:0},
+    {q:"Mi jefe ___ alemán muy estricto.", opts:["es","es un"], answer:1}
+  ]});
+
+/* ---------------- BLOQUE 12: femeninos con «el»/«las» — singular y plural (huecos sin banco) ---------------- */
+makeFillBlock({id:"g12", tag:"medio-alto", tagClass:"mid",
+  title:"Bloque 12 · Femeninos con «el» — singular y plural",
+  hint:"Recuerda: en singular «el», en plural siempre «las» (son sustantivos femeninos).",
+  items:[
+    {stem:"___ agua que bebemos aquí es de manantial.", answers:["el"]},
+    {stem:"Todas ___ aguas de esta región vienen de las montañas.", answers:["las"]},
+    {stem:"___ hacha del leñador estaba muy afilada.", answers:["el"]},
+    {stem:"___ águila es un símbolo de libertad en muchas culturas.", answers:["el"]},
+    {stem:"Se rompieron todas ___ alas del avión de juguete.", answers:["las"]},
+    {stem:"___ arma del crimen nunca se encontró.", answers:["el"]}
+  ]});
+
+/* ---------------- BLOQUE 13: relacionar «lo + adjetivo» con su significado ---------------- */
+(function(){
+  var b = {id:"g13",
+    words:["lo bueno","lo malo","lo importante","lo que","lo de","lo difícil"],
+    defs:[
+      "хорошее (в чём-то), положительная сторона",
+      "плохое, отрицательная сторона",
+      "то, что важно",
+      "то, что (относительное, нейтральное)",
+      "дело/история (неформально, уже известная собеседникам)",
+      "сложное, трудность"
+    ],
+    answers:["a","b","c","d","e","f"]
+  };
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 13 · Relaciona «lo + adjetivo» con su significado","medio","mid"));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Expresión</th><th>Significado</th></tr>";
+  b.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e","f"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = b.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.words.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.words.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.words.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 14: traducción — artículo, incluido «sin artículo» (respuesta modelo) ---------------- */
+(function(){
+  var items = [
+    {stem:"Traduce: «Мне нравится испанская музыка.»", model:"Me gusta la música española."},
+    {stem:"Traduce: «Мой брат — инженер.»", model:"Mi hermano es ingeniero."},
+    {stem:"Traduce: «Собаки — очень преданные животные.»", model:"Los perros son animales muy leales."},
+    {stem:"Traduce: «Я иду домой пешком, дождя нет.»", model:"Voy a casa a pie, no llueve."}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 14 · Traduce — artículo, incluidos los casos sin artículo","alto","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="g14-'+idx+'" style="min-height:44px;" placeholder="Tu traducción..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="g14-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("g14-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 15: traducción — lo + adjetivo / lo que / lo de (respuesta modelo) ---------------- */
+(function(){
+  var items = [
+    {stem:"Traduce: «Самое сложное в этом упражнении — согласование времён.»", model:"Lo más difícil de este ejercicio es la concordancia de los tiempos."},
+    {stem:"Traduce: «Ты не представляешь, как я устала сегодня.»", model:"No sabes lo cansada que estoy hoy."},
+    {stem:"Traduce: «Забудь про то, что случилось вчера.»", model:"Olvídate de lo de ayer."},
+    {stem:"Traduce: «Я не понимаю, что ты хочешь сказать.»", model:"No entiendo lo que quieres decir."}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 15 · Traduce usando lo + adjetivo, lo que, lo de","alto","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="g15-'+idx+'" style="min-height:44px;" placeholder="Tu traducción..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="g15-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("g15-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 16: traducción final mixta (respuesta modelo) ---------------- */
+(function(){
+  var items = [
+    {stem:"Traduce: «Мой отец — прекрасный врач, и ему нравится классическая музыка.»", model:"Mi padre es un médico excelente, y le gusta la música clásica."},
+    {stem:"Traduce: «Вода в этой реке очень холодная зимой.»", model:"El agua de este río está muy fría en invierno."},
+    {stem:"Traduce: «Ты не представляешь, насколько это трудно.»", model:"No sabes lo difícil que es esto."},
+    {stem:"Traduce: «Я дома, не хочу никуда идти.»", model:"Estoy en casa, no quiero ir a ningún sitio."}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 16 · Traducción final — repaso mixto","el más difícil","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="g16-'+idx+'" style="min-height:44px;" placeholder="Tu traducción..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="g16-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("g16-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

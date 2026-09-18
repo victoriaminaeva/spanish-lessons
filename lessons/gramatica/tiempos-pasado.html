@@ -1,0 +1,740 @@
+<!doctype html>
+<title>Tiempos del pasado (indicativo)</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Tiempos del pasado</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>Los tiempos del pasado</h1>
+  <p class="subtitle">Reglas claras + dieciséis bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> el sistema de pasados del indicativo en español (pretérito perfecto, pretérito indefinido, pretérito imperfecto, pretérito pluscuamperfecto y, brevemente, pretérito anterior), con especial atención a los verbos cuyo significado cambia entre indefinido e imperfecto (conocí/conocía, supe/sabía, quise/quería, pude/podía) y a los errores más típicos de los hablantes de ruso.
+  </div>
+  <p class="series-note">📚 Parte de la serie <b>Gramática</b> del sitio — más adelante se añadirán aquí otros temas. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — los pasados del indicativo</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada tiempo o par de verbos.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>El error típico de los rusohablantes</h3>
+    <ul>
+      <li>En ruso no existe una distinción gramatical equivalente a <b>perfecto/indefinido</b> (el aspecto perfectivo/imperfectivo ruso no coincide con este sistema); por eso muchos estudiantes usan el <b>indefinido</b> para todo, incluso cuando el contexto pide claramente <b>perfecto</b> (hoy, esta semana, todavía no, en mi vida...).</li>
+      <li>El segundo error frecuente es usar el <b>indefinido</b> también para describir el fondo de una historia (cómo era un lugar, qué tiempo hacía, qué se hacía habitualmente), donde el español exige <b>imperfecto</b>.</li>
+    </ul>
+    <div class="error-box"><b>Ошибка 1:</b> «<s>Ya terminé el informe esta mañana</s>» dicho todavía dentro de esa misma mañana → debería ser «Ya <b>he terminado</b> el informe esta mañana». <br><b>Ошибка 2:</b> «<s>Cuando yo era pequeño, fui muy tímido</s>» (se describe cómo era, no un hecho puntual) → debería ser «Cuando yo era pequeño, <b>era</b> muy tímido».</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Dieciséis bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"pretérito perfecto", pos:"hoy · esta semana · en mi vida · todavía",
+   quote:"Hoy <mark>he tenido</mark> una reunión importante. Todavía no <mark>he terminado</mark> el informe.",
+   trans:"я сделал / у меня уже есть сделанное (в рамке, включающей настоящее)",
+   mean:"Se forma con el presente de haber (he/has/ha/hemos/habéis/han) + participio. Se usa para acciones pasadas dentro de un marco temporal que incluye el presente (hoy, esta semana, este mes, este año, en mi vida, todavía, ya, nunca) o cuyo resultado sigue siendo relevante ahora. Es muy frecuente en el español de España.",
+   ex:"Esta semana he ido al gimnasio tres veces. — На этой неделе я уже три раза сходил в спортзал (неделя ещё не закончилась)."},
+  {term:"pretérito indefinido", pos:"ayer · el año pasado · en 2019",
+   quote:"Ayer <mark>fui</mark> al cine. El año pasado <mark>visitamos</mark> Portugal.",
+   trans:"я сделал (законченное, датированное прошлое)",
+   mean:"Se usa para una acción pasada, completa y fechada, sin conexión con el presente: ayer, anoche, la semana pasada, en 2019, hace tres años, el otro día. Narra el hecho central de una historia — responde a «¿qué pasó?».",
+   ex:"Nací en Moscú en 1998. — Я родился в Москве в 1998 году."},
+  {term:"pretérito imperfecto", pos:"descripción · hábito · fondo de la historia",
+   quote:"Cuando era niño, <mark>vivía</mark> en el campo y todos los días <mark>jugaba</mark> en el jardín.",
+   trans:"я делал / было (фон, повторяющееся действие)",
+   mean:"Describe el fondo de una historia: circunstancias, descripciones, hábitos o acciones repetidas en el pasado, y acciones en desarrollo sin indicar su final. Responde a «¿cómo eran las cosas?», no «¿qué pasó?».",
+   ex:"Llovía mucho cuando salimos de casa. — Шёл сильный дождь, когда мы вышли из дома (фон для события)."},
+  {term:"pretérito pluscuamperfecto", pos:"antes de otro pasado",
+   quote:"Cuando llegué a la estación, el tren ya <mark>había salido</mark>.",
+   trans:"я уже сделал (до другого момента в прошлом)",
+   mean:"Se forma con el imperfecto de haber (había/habías/había/habíamos/habíais/habían) + participio. Expresa una acción pasada anterior a otra acción también pasada: el pluscuamperfecto va «antes», el otro pasado (normalmente indefinido) va «después».",
+   ex:"No pudimos entrar porque ya habían cerrado la puerta. — Мы не смогли войти, потому что дверь уже закрыли (до этого момента)."},
+  {term:"pretérito anterior", pos:"literario · formal · raro en el habla",
+   quote:"Apenas <mark>hubo terminado</mark> de hablar, todos aplaudieron.",
+   trans:"как только сделал (книжный стиль)",
+   mean:"Forma literaria y muy formal (hube/hubiste/hubo... + participio), casi ausente en el habla actual. Indica una acción pasada inmediatamente anterior a otra, normalmente tras apenas, en cuanto, cuando, después de que. Basta con reconocerla al leer — no se usa activamente al hablar.",
+   ex:"Cuando hubo terminado el discurso, se retiró. — Как только он закончил речь, он удалился (стиль книжный/литературный)."},
+  {term:"conocer: conocí vs conocía", pos:"познакомился vs был знаком",
+   quote:"<mark>Conocí</mark> a mi marido en la universidad. Antes no lo <mark>conocía</mark> de nada.",
+   trans:"conocí = познакомился (момент); conocía = был знаком (состояние)",
+   mean:"Conocí (indefinido) = el momento puntual de conocer a alguien por primera vez. Conocía (imperfecto) = ya tenía trato o conocimiento de alguien o algo, un estado que ya existía.",
+   ex:"Conocí a Ana en 2015. En ese momento ya conocía a su hermano. — Я познакомился с Аной в 2015. К тому моменту я уже был знаком с её братом."},
+  {term:"saber: supe vs sabía", pos:"узнал vs знал",
+   quote:"<mark>Supe</mark> la noticia ayer por la tarde. Yo no <mark>sabía</mark> nada de esto.",
+   trans:"supe = узнал (момент); sabía = знал (состояние)",
+   mean:"Supe (indefinido) = me enteré de algo en un momento concreto. Sabía (imperfecto) = ya tenía ese conocimiento, un estado continuado.",
+   ex:"Cuando supe que había aprobado, llamé a mis padres. — Когда я узнал, что сдал экзамен, я позвонил родителям."},
+  {term:"querer: quise vs quería", pos:"попытался/отказался vs хотел",
+   quote:"<mark>Quise</mark> llamarte, pero no tenía batería. De niña <mark>quería</mark> ser bailarina.",
+   trans:"quise = попытался (momento); no quise = отказался; quería = хотел (постоянно)",
+   mean:"Quise (indefinido) = intenté hacer algo en un momento concreto (a veces sin éxito); «no quise» = me negué. Quería (imperfecto) = deseaba algo de forma general o continuada, sin indicar si se cumplió.",
+   ex:"No quise contestar a esa pregunta. — Я отказался отвечать на этот вопрос (конкретный момент)."},
+  {term:"poder: pude vs podía", pos:"удалось vs мог (вообще)",
+   quote:"Al final <mark>pude</mark> terminar el proyecto a tiempo. Antes no <mark>podía</mark> correr ni un kilómetro.",
+   trans:"pude = удалось (в конкретной ситуации); podía = мог (общая возможность)",
+   mean:"Pude (indefinido) = logré hacer algo en una situación concreta. Podía (imperfecto) = tenía la capacidad o posibilidad en general, sin especificar si finalmente lo hizo.",
+   ex:"Pudimos reservar mesa a última hora. — Нам удалось забронировать столик в последний момент."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+function buildRadioBlock(cfg){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(cfg.title, cfg.tag, cfg.tagClass));
+  if(cfg.hint){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+cfg.hint+'</p>'; }
+  var list = document.createElement("div");
+  cfg.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+cfg.id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    cfg.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+cfg.id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+cfg.items.length+"</b>";
+    blockScores[cfg.id] = {correct:correct, total:cfg.items.length};
+    updateGlobalScore();
+  });
+  blockScores[cfg.id] = {correct:0, total:cfg.items.length};
+  exList.appendChild(wrap);
+}
+
+function buildFillBlock(cfg){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(cfg.title, cfg.tag, cfg.tagClass));
+  if(cfg.bank){ wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+cfg.bank+'</div>'; }
+  if(cfg.hint){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+cfg.hint+'</p>'; }
+  var list = document.createElement("div");
+  cfg.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    cfg.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+cfg.items.length+"</b>";
+    blockScores[cfg.id] = {correct:correct, total:cfg.items.length};
+    updateGlobalScore();
+  });
+  blockScores[cfg.id] = {correct:0, total:cfg.items.length};
+  exList.appendChild(wrap);
+}
+
+function buildMatchBlock(cfg){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(cfg.title, cfg.tag, cfg.tagClass));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>"+cfg.colLeft+"</th><th>"+cfg.colRight+"</th></tr>";
+  cfg.words.forEach(function(w, idx){
+    var opts = cfg.letters.map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = cfg.defs.map(function(d,i){ return cfg.letters[i]+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    cfg.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === cfg.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+cfg.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+cfg.words.length+"</b>";
+    blockScores[cfg.id] = {correct:correct, total:cfg.words.length};
+    updateGlobalScore();
+  });
+  blockScores[cfg.id] = {correct:0, total:cfg.words.length};
+  exList.appendChild(wrap);
+}
+
+function buildOpenBlock(cfg){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(cfg.title, cfg.tag, cfg.tagClass));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).</p>';
+  cfg.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="'+cfg.id+'-'+idx+'" style="min-height:44px;" placeholder="Tu respuesta..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="'+cfg.id+'-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById(cfg.id+"-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE 1: perfecto vs indefinido (marcadores temporales) ---------------- */
+buildRadioBlock({id:"p1", title:"Bloque 1 · Perfecto vs. indefinido — marcadores de tiempo", tag:"fácil", tagClass:"easy", items:[
+  {q:"Esta semana ___ al gimnasio tres veces.", opts:["he ido","fui"], answer:0},
+  {q:"Ayer ___ al cine con mi hermana.", opts:["he ido","fui"], answer:1},
+  {q:"Todavía no ___ el informe.", opts:["he terminado","terminé"], answer:0},
+  {q:"En 2015 ___ a Italia por primera vez.", opts:["he viajado","viajé"], answer:1},
+  {q:"Esta mañana ___ muy temprano.", opts:["me he levantado","me levanté"], answer:0},
+  {q:"El año pasado ___ mis estudios.", opts:["he terminado","terminé"], answer:1}
+]});
+
+/* ---------------- BLOQUE 2: imperfecto vs indefinido (reconocimiento básico) ---------------- */
+buildRadioBlock({id:"p2", title:"Bloque 2 · Imperfecto vs. indefinido — reconocimiento", tag:"fácil", tagClass:"easy", items:[
+  {q:"Cuando ___ niño, vivía en un pueblo pequeño.", opts:["era","fui"], answer:0},
+  {q:"Ayer ___ un accidente en la autopista.", opts:["había","hubo"], answer:1},
+  {q:"Todos los días ___ café por la mañana.", opts:["tomaba","tomé"], answer:0},
+  {q:"El sábado pasado ___ una fiesta en casa de Marta.", opts:["hacíamos","hicimos"], answer:1},
+  {q:"Mientras yo ___ la cena, sonó el teléfono.", opts:["preparaba","preparé"], answer:0},
+  {q:"De repente, alguien ___ a la puerta.", opts:["llamaba","llamó"], answer:1}
+]});
+
+/* ---------------- BLOQUE 3: huecos con banco — indefinido regular ---------------- */
+buildFillBlock({id:"p3", title:"Bloque 3 · Conjuga en pretérito indefinido (con banco)", tag:"fácil", tagClass:"easy",
+  bank:"hablé · comimos · escribieron · trabajaste · vivió · estudiasteis",
+  hint:"Escribe la forma correcta del infinitivo entre paréntesis en pretérito indefinido.",
+  items:[
+    {stem:"Ayer (hablar, yo) ___ con mi jefe.", answers:["hablé"]},
+    {stem:"El domingo (comer, nosotros) ___ en casa de mis abuelos.", answers:["comimos"]},
+    {stem:"Los alumnos (escribir, ellos) ___ un examen la semana pasada.", answers:["escribieron"]},
+    {stem:"¿(trabajar, tú) ___ ayer hasta muy tarde?", answers:["trabajaste"]},
+    {stem:"Ella (vivir) ___ dos años en Londres antes de volver a España.", answers:["vivió"]},
+    {stem:"¿(estudiar, vosotros) ___ para el examen anoche?", answers:["estudiasteis"]}
+  ]});
+
+/* ---------------- BLOQUE 4: relacionar — infinitivo con forma irregular de indefinido ---------------- */
+buildMatchBlock({id:"p4", title:"Bloque 4 · Relaciona el infinitivo con su forma irregular (yo)", tag:"fácil", tagClass:"easy",
+  colLeft:"Infinitivo", colRight:"Forma (yo, indefinido)",
+  words:["tener","estar","poner","venir","hacer","decir"],
+  letters:["a","b","c","d","e","f"],
+  defs:["puse","vine","dije","tuve","hice","estuve"],
+  answers:["d","f","a","b","e","c"]});
+
+/* ---------------- BLOQUE 5: huecos con banco — imperfecto ---------------- */
+buildFillBlock({id:"p5", title:"Bloque 5 · Conjuga en pretérito imperfecto (con banco)", tag:"medio", tagClass:"mid",
+  bank:"vivía · jugábamos · tenías · era · hacía · íbamos",
+  items:[
+    {stem:"Cuando (ser, yo) ___ pequeño, tenía un perro.", answers:["era"]},
+    {stem:"Mi abuela (vivir) ___ en un pueblo de Galicia.", answers:["vivía"]},
+    {stem:"De pequeños, (jugar, nosotros) ___ en la calle todas las tardes.", answers:["jugábamos"]},
+    {stem:"¿(tener, tú) ___ miedo a la oscuridad de niño?", answers:["tenías"]},
+    {stem:"En verano siempre (hacer) ___ mucho calor en esa ciudad.", answers:["hacía"]},
+    {stem:"Todos los domingos (ir, nosotros) ___ a casa de los abuelos.", answers:["íbamos"]}
+  ]});
+
+/* ---------------- BLOQUE 6: relacionar — tiempo verbal con su uso ---------------- */
+buildMatchBlock({id:"p6", title:"Bloque 6 · Relaciona cada tiempo con su uso típico", tag:"medio", tagClass:"mid",
+  colLeft:"Tiempo verbal", colRight:"Uso",
+  words:["pretérito perfecto","pretérito indefinido","pretérito imperfecto","pretérito pluscuamperfecto","pretérito anterior"],
+  letters:["a","b","c","d","e"],
+  defs:[
+    "acción pasada dentro de un marco que incluye el presente (hoy, esta semana, todavía)",
+    "acción pasada, completa y fechada, sin conexión con el presente",
+    "descripción, hábito o acción en desarrollo en el pasado (el fondo de la historia)",
+    "acción pasada anterior a otra acción pasada",
+    "forma literaria y formal, poco usada en el habla, para una acción justo anterior a otra"
+  ],
+  answers:["a","b","c","d","e"]});
+
+/* ---------------- BLOQUE 7: huecos sin banco — perfecto vs indefinido ---------------- */
+buildFillBlock({id:"p7", title:"Bloque 7 · Perfecto o indefinido — huecos sin banco", tag:"medio", tagClass:"mid",
+  hint:"Elige el tiempo correcto según el marcador temporal y conjuga el verbo dado.",
+  items:[
+    {stem:"Todavía no (yo/terminar) ___ los deberes.", answers:["he terminado"]},
+    {stem:"El mes pasado (nosotros/mudarnos) ___ de casa.", answers:["nos mudamos"]},
+    {stem:"¿Alguna vez (tú/estar) ___ en Argentina?", answers:["has estado"]},
+    {stem:"En 2020 (ellos/casarse) ___ en Sevilla.", answers:["se casaron"]},
+    {stem:"Esta tarde ya (yo/hacer) ___ la compra.", answers:["he hecho"]},
+    {stem:"Ayer por la noche (nosotros/cenar) ___ muy tarde.", answers:["cenamos"]}
+  ]});
+
+/* ---------------- BLOQUE 8: imperfecto vs indefinido — narrativa ---------------- */
+buildRadioBlock({id:"p8", title:"Bloque 8 · Imperfecto vs. indefinido — narración", tag:"medio", tagClass:"mid", items:[
+  {q:"El cielo ___ gris y hacía frío cuando salimos.", opts:["estaba","estuvo"], answer:0},
+  {q:"De repente, el coche ___ y no arrancó más.", opts:["se paraba","se paró"], answer:1},
+  {q:"Mientras ella ___ la radio, yo leía el periódico.", opts:["escuchaba","escuchó"], answer:0},
+  {q:"Aquel verano ___ a la playa todos los fines de semana.", opts:["íbamos","fuimos"], answer:0},
+  {q:"En ese momento, alguien ___ y todos nos callamos.", opts:["entraba","entró"], answer:1},
+  {q:"La casa ___ grande, con un jardín precioso.", opts:["era","fue"], answer:0}
+]});
+
+/* ---------------- BLOQUE 9: huecos sin banco — pluscuamperfecto ---------------- */
+buildFillBlock({id:"p9", title:"Bloque 9 · Pretérito pluscuamperfecto — huecos sin banco", tag:"medio-alto", tagClass:"mid",
+  items:[
+    {stem:"Cuando llegué al aeropuerto, el avión ya (despegar) ___.", answers:["había despegado"]},
+    {stem:"No pude ver la película porque ya la (ver, yo) ___ antes.", answers:["había visto"]},
+    {stem:"Cuando empezó a llover, nosotros ya (volver) ___ a casa.", answers:["habíamos vuelto"]},
+    {stem:"Le pregunté si (terminar, él) ___ el trabajo, y me dijo que sí.", answers:["había terminado"]},
+    {stem:"Cuando los invitados llegaron, María ya (preparar) ___ la cena.", answers:["había preparado"]}
+  ]});
+
+/* ---------------- BLOQUE 10: conocí/conocía, supe/sabía, quise/quería, pude/podía (radio) ---------------- */
+buildRadioBlock({id:"p10", title:"Bloque 10 · Conocí/conocía, supe/sabía, quise/quería, pude/podía", tag:"alto", tagClass:"hard", items:[
+  {q:"___ a mi mejor amiga en el colegio, cuando teníamos seis años.", opts:["Conocí","Conocía"], answer:0},
+  {q:"Antes de la boda, ya ___ a toda su familia.", opts:["conocí","conocía"], answer:1},
+  {q:"___ la verdad justo ayer por la tarde.", opts:["Supe","Sabía"], answer:0},
+  {q:"Yo ya ___ que iban a despedirlo — se veía venir.", opts:["supe","sabía"], answer:1},
+  {q:"___ llamarte varias veces, pero tenías el móvil apagado.", opts:["Quise","Quería"], answer:0},
+  {q:"De pequeño siempre ___ ser piloto.", opts:["quise","quería"], answer:1},
+  {q:"Al final ___ terminar el maratón, aunque me costó mucho.", opts:["pude","podía"], answer:0},
+  {q:"Antes de operarse, no ___ subir ni un piso de escaleras.", opts:["pudo","podía"], answer:1}
+]});
+
+/* ---------------- BLOQUE 11: conocí/conocía, supe/sabía, quise/quería, pude/podía (sin banco) ---------------- */
+buildFillBlock({id:"p11", title:"Bloque 11 · Conjuga el verbo correcto (sin banco)", tag:"alto", tagClass:"hard",
+  items:[
+    {stem:"(conocer, yo) ___ a mi marido en una fiesta de la universidad.", answers:["conocí"]},
+    {stem:"Cuando me mudé a este barrio, ya (conocer, yo) ___ a varios vecinos.", answers:["conocía"]},
+    {stem:"(saber, nosotros) ___ la noticia por las redes sociales, ayer mismo.", answers:["supimos"]},
+    {stem:"Nadie (saber) ___ dónde estaba la llave — llevábamos horas buscándola.", answers:["sabía"]},
+    {stem:"(no querer, ella) ___ hablar del tema durante la cena.", answers:["no quiso"]},
+    {stem:"Antes (poder, tú) ___ dormir hasta tarde los fines de semana, pero ahora ya no.", answers:["podías"]}
+  ]});
+
+/* ---------------- BLOQUE 12: mezcla imperfecto + indefinido + pluscuamperfecto ---------------- */
+buildFillBlock({id:"p12", title:"Bloque 12 · Imperfecto, indefinido y pluscuamperfecto mezclados", tag:"alto", tagClass:"hard",
+  items:[
+    {stem:"Cuando (llegar, yo) ___ a casa, mis padres ya habían cenado.", answers:["llegué"]},
+    {stem:"Antes de venir a España, (yo/vivir) ___ dos años en Alemania.", answers:["viví"]},
+    {stem:"Aquella tarde (hacer) ___ mucho viento y las calles estaban vacías.", answers:["hacía"]},
+    {stem:"Cuando sonó el despertador, ya (yo/despertarse) ___.", answers:["me había despertado"]},
+    {stem:"Mientras (nosotros/esperar) ___ el autobús, empezó a llover.", answers:["esperábamos"]},
+    {stem:"De repente, el perro (empezar) ___ a ladrar sin motivo.", answers:["empezó"]}
+  ]});
+
+/* ---------------- BLOQUE 13: elige el tiempo correcto (4 opciones) ---------------- */
+buildRadioBlock({id:"p13", title:"Bloque 13 · Elige el tiempo correcto (4 opciones)", tag:"alto", tagClass:"hard", items:[
+  {q:"Cuando por fin encontramos las llaves, ya ___ media hora buscándolas.", opts:["hemos pasado","pasamos","pasábamos","habíamos pasado"], answer:3},
+  {q:"___ a este restaurante muchas veces cuando vivía en el barrio.", opts:["He ido","Fui","Iba","Había ido"], answer:2},
+  {q:"___ esta mañana a las siete, antes de que amaneciera.", opts:["Me he levantado","Me levanté","Me levantaba","Me había levantado"], answer:1},
+  {q:"Todavía no ___ la respuesta del banco.", opts:["he recibido","recibí","recibía","había recibido"], answer:0},
+  {q:"Cuando el médico la examinó, la paciente ya ___ dos veces.", opts:["ha vomitado","vomitó","vomitaba","había vomitado"], answer:3},
+  {q:"___ tranquilamente por el parque cuando empezó a llover.", opts:["He paseado","Paseé","Paseaba","Había paseado"], answer:2}
+]});
+
+/* ---------------- BLOQUE 14: mini-historia — huecos sin banco ---------------- */
+buildFillBlock({id:"p14", title:"Bloque 14 · Mini-historia — conjuga cada verbo", tag:"el más difícil", tagClass:"hard",
+  hint:"Las seis frases forman una pequeña historia continua.",
+  items:[
+    {stem:"Aquel día yo (despertarse) ___ más tarde de lo normal.", answers:["me desperté"]},
+    {stem:"(hacer) ___ mucho frío y el cielo estaba muy gris.", answers:["hacía"]},
+    {stem:"Cuando (salir, yo) ___ de casa, ya había empezado a nevar.", answers:["salí"]},
+    {stem:"El autobús ya (pasar) ___, así que decidí ir andando.", answers:["había pasado"]},
+    {stem:"Mientras (caminar, yo) ___, me encontré con un viejo amigo.", answers:["caminaba"]},
+    {stem:"Al final, (llegar, yo) ___ a la oficina con solo cinco minutos de retraso.", answers:["llegué"]}
+  ]});
+
+/* ---------------- BLOQUE 15: traducción — narrativa con varios pasados ---------------- */
+buildOpenBlock({id:"p15", title:"Bloque 15 · Traduce — elige bien los tiempos del pasado", tag:"el más difícil", tagClass:"hard", items:[
+  {stem:"Traduce: «Когда я пришёл домой, мама уже приготовила ужин».", model:"Cuando llegué a casa, mi madre ya había preparado la cena."},
+  {stem:"Traduce: «В детстве я каждое лето ездил к бабушке в деревню».", model:"De pequeño, todos los veranos iba al pueblo de mi abuela."},
+  {stem:"Traduce: «Сегодня утром я уже дважды звонил тебе, но ты не отвечал».", model:"Esta mañana ya te he llamado dos veces, pero no contestabas."}
+]});
+
+/* ---------------- BLOQUE 16: transformación — añade una cláusula con pluscuamperfecto ---------------- */
+buildOpenBlock({id:"p16", title:"Bloque 16 · Transforma añadiendo el pluscuamperfecto", tag:"el más difícil", tagClass:"hard", items:[
+  {stem:"Transforma añadiendo una acción anterior (pluscuamperfecto): «Llegué a la estación. El tren salió.»", model:"Cuando llegué a la estación, el tren ya había salido."},
+  {stem:"Traduce usando pluscuamperfecto: «Он опоздал на встречу, потому что уже началось совещание».", model:"Llegó tarde a la reunión porque la reunión ya había empezado."},
+  {stem:"Combina en una sola frase usando pluscuamperfecto: «Terminé de estudiar. Empezó el examen.»", model:"Cuando empezó el examen, ya había terminado de estudiar."},
+  {stem:"Traduce: «Мы не смогли посмотреть фильм, потому что уже видели его раньше».", model:"No pudimos ver la película porque ya la habíamos visto antes."}
+]});
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

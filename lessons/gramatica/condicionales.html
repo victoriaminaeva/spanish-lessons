@@ -1,0 +1,715 @@
+<!doctype html>
+<title>Oraciones condicionales</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Oraciones condicionales</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>Las oraciones condicionales</h1>
+  <p class="subtitle">Reglas claras + dieciséis bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> los cuatro tipos de oraciones condicionales del español (real, posible/irreal en presente, irreal en pasado y mixto), otras conjunciones condicionales (en caso de que, siempre que, con tal de que, a no ser que, como, de + infinitivo) y el error más típico de los hablantes de ruso: qué tiempo verbal va — y qué tiempo verbal <b>nunca</b> va — justo después de «si».
+  </div>
+  <p class="series-note">📚 Tema de la serie <b>Gramática</b> del sitio. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — los tipos de condicional</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada estructura.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>El error más frecuente: qué va justo después de «si»</h3>
+    <ul>
+      <li><b>Tipo 1 (real):</b> si + <b>presente de indicativo</b> → presente / futuro / imperativo.</li>
+      <li><b>Tipo 2 (irreal en presente):</b> si + <b>imperfecto de subjuntivo</b> → condicional simple.</li>
+      <li><b>Tipo 3 / mixto (irreal en pasado):</b> si + <b>pluscuamperfecto de subjuntivo</b> → condicional compuesto (tipo 3) o condicional simple (mixto).</li>
+      <li>Después de «si» <b>nunca</b> va futuro, condicional ni presente de subjuntivo.</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> hablantes de ruso a veces ponen futuro o presente de subjuntivo justo después de «si», por analogía con otras lenguas: <s>si tendré tiempo</s>, <s>si tenga tiempo</s> — incorrecto. Correcto: <b>si tengo</b> tiempo (tipo 1) o <b>si tuviera</b> tiempo (tipo 2). Después de «si» solo caben presente de indicativo, imperfecto de subjuntivo o pluscuamperfecto de subjuntivo, según el tipo.</div>
+  </div>
+
+  <div class="contrast-box">
+    <h3>Tipo 2 vs. tipo 3 vs. mixto — no los confundas</h3>
+    <ul>
+      <li><b>Tipo 2:</b> condición y consecuencia están las dos en el presente/futuro hipotético: <i>si tuviera dinero, viajaría</i> (ahora o en general).</li>
+      <li><b>Tipo 3:</b> condición y consecuencia están las dos en el pasado: <i>si hubiera tenido dinero, habría viajado</i> (en aquel momento).</li>
+      <li><b>Mixto:</b> la condición es del pasado, pero la consecuencia se siente ahora: <i>si hubiera estudiado medicina, ahora sería médico</i>.</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> usar condicional compuesto (habría + participio) en la consecuencia del tipo mixto cuando esta es presente — debe ser condicional <b>simple</b>: <s>si hubiera estudiado, ahora habría sido médico</s> → correcto: <b>si hubiera estudiado, ahora sería médico</b>.</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Dieciséis bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"Tipo 1 — real", pos:"si + presente de indicativo",
+   quote:"Si <mark>tengo</mark> tiempo, <mark>voy</mark> a verte. Si <mark>llueve</mark>, <mark>quédate</mark> en casa.",
+   trans:"реальное/возможное условие в настоящем или будущем",
+   mean:"La condición es real o muy probable. «si + presente de indicativo» + presente, futuro o imperativo en la consecuencia — nunca futuro ni condicional justo después de «si».",
+   ex:"Si tienes hambre, come algo. — Если ты голоден, поешь что-нибудь."},
+  {term:"Tipo 2 — posible/irreal en presente", pos:"si + imperfecto de subjuntivo, + condicional simple",
+   quote:"Si <mark>tuviera</mark> tiempo, <mark>iría</mark> contigo. Si <mark>fuera</mark> rico, <mark>viajaría</mark> por el mundo.",
+   trans:"нереальное или маловероятное условие в настоящем",
+   mean:"La condición es hipotética, poco probable o contraria a la realidad actual. «si + imperfecto de subjuntivo» + «condicional simple» en la consecuencia.",
+   ex:"Si supiera la respuesta, te la diría. — Если бы я знал ответ, я бы тебе его сказал."},
+  {term:"Tipo 3 — irreal en pasado", pos:"si + pluscuamperfecto de subjuntivo, + condicional compuesto",
+   quote:"Si <mark>hubiera sabido</mark> la verdad, <mark>habría venido</mark> antes.",
+   trans:"нереальное условие в прошлом — упущенная возможность",
+   mean:"Habla de una condición pasada que no se cumplió; condición y consecuencia están las dos en el pasado. «si + pluscuamperfecto de subjuntivo» + «condicional compuesto».",
+   ex:"Si hubiéramos salido antes, no habríamos perdido el tren. — Если бы мы вышли раньше, мы бы не опоздали на поезд."},
+  {term:"Condicional mixto", pos:"si + pluscuamperfecto de subjuntivo, + condicional simple",
+   quote:"Si <mark>hubiera estudiado</mark> medicina, ahora <mark>sería</mark> médico.",
+   trans:"условие в прошлом → следствие в настоящем",
+   mean:"Combina una condición irreal en el pasado (pluscuamperfecto de subjuntivo) con una consecuencia que se siente en el presente (condicional simple, no compuesto).",
+   ex:"Si hubiera aprendido a nadar de niño, ahora no tendría miedo al agua. — Если бы я научился плавать в детстве, сейчас я бы не боялся воды."},
+  {term:"Otras conjunciones condicionales", pos:"en caso de que · siempre que · con tal de que · a no ser que · como · de + infinitivo",
+   quote:"<mark>En caso de que</mark> llueva, llevaremos paraguas. <mark>Como</mark> llegues tarde, nos vamos sin ti.",
+   trans:"другие условные союзы + subjuntivo",
+   mean:"Estas conjunciones van seguidas de subjuntivo (incluida «como» con valor de amenaza/advertencia). «De + infinitivo» es una alternativa más literaria a «si»: de haberlo sabido = si lo hubiera sabido.",
+   ex:"Iré a la fiesta con tal de que tú también vayas. — Я пойду на вечеринку при условии, что ты тоже пойдёшь."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass, ruleHtml){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+function makeRadioBlock(id, titleText, tag, tagClass, items){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(titleText, tag, tagClass));
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    var pre = it.pre ? '<i style="color:var(--muted);">'+it.pre+'</i><br>' : "";
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+pre+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeFillBlock(id, titleText, tag, tagClass, items, bank){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(titleText, tag, tagClass));
+  if(bank){
+    wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+bank+'</div>';
+  }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeOpenBlock(id, titleText, tag, tagClass, items){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(titleText, tag, tagClass));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="'+id+'-'+idx+'" style="min-height:44px;" placeholder="Tu traducción/transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="'+id+'-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById(id+"-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE c1: identifica el tipo (radio) ---------------- */
+makeRadioBlock("c1", "Bloque 1 · ¿Qué tipo de condicional es?", "fácil", "easy", [
+  {q:"Si tengo tiempo, te ayudo.", opts:["tipo 1","tipo 2","tipo 3"], answer:0},
+  {q:"Si tuviera dinero, compraría una casa.", opts:["tipo 1","tipo 2","tipo 3"], answer:1},
+  {q:"Si hubiera llovido, no habríamos salido.", opts:["tipo 1","tipo 2","tipo 3"], answer:2},
+  {q:"Si estudias, apruebas.", opts:["tipo 1","tipo 2","tipo 3"], answer:0},
+  {q:"Si fuera tú, no lo haría.", opts:["tipo 1","tipo 2","tipo 3"], answer:1},
+  {q:"Si hubieras llamado, te habría contestado.", opts:["tipo 1","tipo 2","tipo 3"], answer:2}
+]);
+
+/* ---------------- BLOQUE c2: tipo 1, consecuencia correcta (radio) ---------------- */
+makeRadioBlock("c2", "Bloque 2 · Tipo 1 — elige la consecuencia correcta", "fácil", "easy", [
+  {q:"Si llueve, ___ en casa.", opts:["nos quedamos","nos quedáramos","nos quedaríamos"], answer:0},
+  {q:"Si tienes hambre, ___ algo.", opts:["come","comas","comerías"], answer:0},
+  {q:"Si apruebo el examen, ___ una fiesta.", opts:["haré","hiciera","haría"], answer:0},
+  {q:"Si necesitas ayuda, ___me.", opts:["llama","llames","llamarías"], answer:0},
+  {q:"Si no llegamos a tiempo, ___ el tren.", opts:["perdemos","perdiéramos","perderíamos"], answer:0},
+  {q:"Si vas al supermercado, ___ leche.", opts:["compra","comprarías","compraras"], answer:0}
+]);
+
+/* ---------------- BLOQUE c3: tipo 1, cláusula con «si» (huecos con banco) ---------------- */
+makeFillBlock("c3", "Bloque 3 · Tipo 1 — completa la cláusula con «si»", "fácil", "easy", [
+  {stem:"Si ___ tiempo mañana, te llamo.", answers:["tengo"]},
+  {stem:"Si ___ frío, cierra la ventana.", answers:["hace"]},
+  {stem:"Si ___, ven conmigo al cine.", answers:["quieres"]},
+  {stem:"Si ___ mañana, quédate en casa.", answers:["llueve"]},
+  {stem:"Si ___ mucho, aprobarás el examen.", answers:["estudias"]},
+  {stem:"Si ___ ayudarme, te lo agradezco.", answers:["puedes"]}
+], "tengo · llueve · quieres · puedes · hace · estudias");
+
+/* ---------------- BLOQUE c4: tipo 1, consecuencia (huecos con banco) ---------------- */
+makeFillBlock("c4", "Bloque 4 · Tipo 1 — completa la consecuencia", "medio", "mid", [
+  {stem:"Si tienes tiempo, ___ contigo.", answers:["voy"]},
+  {stem:"Si me invitas, ___ a la fiesta.", answers:["vendré"]},
+  {stem:"Si necesitas algo, ___me.", answers:["llama"]},
+  {stem:"Si estudias cada día, ___ el examen.", answers:["aprobarás"]},
+  {stem:"Si ves a Marta, ___ que la espero.", answers:["dile"]},
+  {stem:"Si tu amigo tiene problemas, ___lo.", answers:["ayuda"]}
+], "voy · vendré · llama · aprobarás · dile · ayuda");
+
+/* ---------------- BLOQUE c5: tipo 2, cláusula con «si» (sin banco) ---------------- */
+makeFillBlock("c5", "Bloque 5 · Tipo 2 — imperfecto de subjuntivo tras «si»", "medio", "mid", [
+  {stem:"Si ___ (tener) más tiempo libre, aprendería a tocar el piano.", answers:["tuviera","tuviese"]},
+  {stem:"Si ___ (ser) más joven, viajaría por todo el mundo.", answers:["fuera","fuese"]},
+  {stem:"Si ___ (saber) la verdad, te la diría.", answers:["supiera","supiese"]},
+  {stem:"Si ella ___ (poder) venir, nos avisaría.", answers:["pudiera","pudiese"]},
+  {stem:"Si nosotros ___ (vivir) en Madrid, hablaríamos mejor español.", answers:["viviéramos","viviésemos"]},
+  {stem:"Si tú ___ (querer), podríamos ir juntos al concierto.", answers:["quisieras","quisieses"]}
+]);
+
+/* ---------------- BLOQUE c6: tipo 2, consecuencia (sin banco) ---------------- */
+makeFillBlock("c6", "Bloque 6 · Tipo 2 — condicional simple en la consecuencia", "medio", "mid", [
+  {stem:"Si yo fuera tú, no ___ (decir) nada.", answers:["diría"]},
+  {stem:"Si tuviéramos más dinero, ___ (comprar) una casa más grande.", answers:["compraríamos"]},
+  {stem:"Si hiciera buen tiempo, nosotros ___ (salir) a pasear.", answers:["saldríamos"]},
+  {stem:"Si mis padres vivieran cerca, yo los ___ (ver) cada semana.", answers:["vería"]},
+  {stem:"Si tú me lo pidieras, yo te lo ___ (dar).", answers:["daría"]},
+  {stem:"Si ganáramos la lotería, ___ (viajar) por el mundo.", answers:["viajaríamos"]}
+]);
+
+/* ---------------- BLOQUE c7: tipo 1 vs. tipo 2 según el contexto (radio) ---------------- */
+makeRadioBlock("c7", "Bloque 7 · Tipo 1 o tipo 2 — según la probabilidad", "medio", "mid", [
+  {pre:"Реалистичная ситуация — у тебя, скорее всего, будет время.", q:"Si ___ tiempo este fin de semana, te ayudo con la mudanza.", opts:["tengo","tuviera"], answer:0},
+  {pre:"Маловероятная ситуация — вряд ли ты станешь миллионером.", q:"Si ___ millonario, me compraría una isla.", opts:["soy","fuera"], answer:1},
+  {pre:"Реалистично — возможно, завтра пойдёт дождь.", q:"Si ___ mañana, cogeremos el paraguas.", opts:["llueve","lloviera"], answer:0},
+  {pre:"Гипотетически — если бы я был президентом (нереально).", q:"Si ___ presidente, cambiaría muchas leyes.", opts:["soy","fuera"], answer:1},
+  {pre:"Реалистично — если тебе понадобится помощь.", q:"Si ___ ayuda, dímelo.", opts:["necesitas","necesitaras"], answer:0},
+  {pre:"Гипотетически — если бы у нас были крылья.", q:"Si nosotros ___ alas, volaríamos.", opts:["tenemos","tuviéramos"], answer:1}
+]);
+
+/* ---------------- BLOQUE c8: tipo 3 (sin banco, ambas cláusulas) ---------------- */
+makeFillBlock("c8", "Bloque 8 · Tipo 3 — pluscuamperfecto de subjuntivo y condicional compuesto", "alto", "hard", [
+  {stem:"Si ___ (saber) la verdad, habría actuado de otra manera.", answers:["hubiera sabido","hubiese sabido"]},
+  {stem:"Si hubiéramos salido antes, no ___ (perder) el tren.", answers:["habríamos perdido"]},
+  {stem:"Si tú me lo ___ (decir), te habría ayudado.", answers:["hubieras dicho","hubieses dicho"]},
+  {stem:"Si no hubiera llovido, nosotros ___ (ir) a la playa.", answers:["habríamos ido"]},
+  {stem:"Si ella ___ (estudiar) más, habría aprobado el examen.", answers:["hubiera estudiado","hubiese estudiado"]},
+  {stem:"Si hubieras llamado antes, yo ___ (poder) recogerte en la estación.", answers:["habría podido"]}
+]);
+
+/* ---------------- BLOQUE c9: condicional mixto ---------------- */
+makeFillBlock("c9", "Bloque 9 · Condicional mixto — pasado + presente", "alto", "hard", [
+  {stem:"Si ___ (estudiar) medicina, ahora sería médico.", answers:["hubiera estudiado","hubiese estudiado"]},
+  {stem:"Si no hubiéramos vendido la casa, ahora ___ (vivir) allí.", answers:["viviríamos"]},
+  {stem:"Si de joven ___ (aprender) inglés, ahora tendría mejor trabajo.", answers:["hubiera aprendido","hubiese aprendido"]},
+  {stem:"Si hubiera nacido en España, ahora ___ (hablar) español como lengua materna.", answers:["hablaría"]},
+  {stem:"Si no ___ (perder) las llaves ayer, ahora no estaríamos aquí esperando al cerrajero.", answers:["hubiera perdido","hubiese perdido"]},
+  {stem:"Si hubiéramos ahorrado más, ahora ___ (poder) comprar esa casa.", answers:["podríamos"]}
+]);
+
+/* ---------------- BLOQUE c10: otras conjunciones + subjuntivo ---------------- */
+makeFillBlock("c10", "Bloque 10 · En caso de que / siempre que / con tal de que / a no ser que", "alto", "hard", [
+  {stem:"En caso de que ___ (llover), llevaremos paraguas.", answers:["llueva"]},
+  {stem:"Siempre que ___ (tener) tiempo, voy al gimnasio.", answers:["tenga"]},
+  {stem:"Con tal de que me ___ (ayudar) tú, lo haré encantado.", answers:["ayudes"]},
+  {stem:"A no ser que tú ___ (cambiar) de opinión, no iremos a la fiesta.", answers:["cambies"]},
+  {stem:"En caso de que usted no ___ (poder) venir, avísenos con tiempo.", answers:["pueda"]},
+  {stem:"No iré a la reunión a no ser que me lo ___ (pedir) el jefe.", answers:["pida"]}
+]);
+
+/* ---------------- BLOQUE c11: relacionar conjunción ↔ significado ---------------- */
+(function(){
+  var b = {id:"c11",
+    words:["en caso de que","siempre que","con tal de que","a no ser que","como (+ subjuntivo)"],
+    defs:["expresa una condición hipotética, equivalente a «si» — por si acaso","condición que se cumple habitualmente, equivalente a «cada vez que» / «siempre y cuando»","condición-requisito, equivalente a «siempre y cuando» / «con la condición de que»","condición negativa, equivalente a «excepto si» / «si no»","amenaza o advertencia coloquial, con tono más fuerte que «si»"],
+    answers:["a","b","c","d","e"]
+  };
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 11 · Relaciona la conjunción con su significado","medio","mid"));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Conjunción</th><th>Significado</th></tr>";
+  b.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = b.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.words.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.words.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.words.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE c12: corrige el error (radio, oración completa) ---------------- */
+makeRadioBlock("c12", "Bloque 12 · Elige la oración gramaticalmente correcta", "alto", "hard", [
+  {q:"", opts:["Si tenga tiempo, te ayudo.","Si tendré tiempo, te ayudo.","Si tengo tiempo, te ayudo."], answer:2},
+  {q:"", opts:["Si tuviera más dinero, viajaría más.","Si tenga más dinero, viajaría más.","Si tendría más dinero, viajaría más."], answer:0},
+  {q:"", opts:["Si hubiera sabido la verdad, te lo habría dicho.","Si habría sabido la verdad, te lo hubiera dicho.","Si sepa la verdad, te lo diré."], answer:0},
+  {q:"", opts:["Si estudies más, aprobarás.","Si estudiarás más, aprobarás.","Si estudias más, aprobarás."], answer:2},
+  {q:"", opts:["Si fuera rico, no trabajaría.","Si sería rico, no trabajaría.","Si sea rico, no trabajaría."], answer:0},
+  {q:"", opts:["Si hubieras llegado a tiempo, no habríamos discutido.","Si habrías llegado a tiempo, no hubiéramos discutido.","Si llegarías a tiempo, no habríamos discutido."], answer:0}
+]);
+
+/* ---------------- BLOQUE c13: como (amenaza) y de + infinitivo ---------------- */
+makeFillBlock("c13", "Bloque 13 · «Como» (amenaza) y «de + infinitivo»", "alto", "hard", [
+  {stem:"Como ___ (llegar) tarde otra vez, no te esperamos.", answers:["llegues"]},
+  {stem:"Como no ___ (terminar) el trabajo hoy, tendrás problemas con el jefe.", answers:["termines"]},
+  {stem:"De ___ (haber) sabido que venías, habría preparado algo de comer.", answers:["haber sabido"]},
+  {stem:"De ___ (saber) la respuesta, te la diría.", answers:["saber"]},
+  {stem:"Como no me ___ (hacer) caso, se lo diré a tus padres.", answers:["hagas"]},
+  {stem:"De ___ (tener) tiempo, iría contigo, pero hoy no puedo.", answers:["tener"]}
+]);
+
+/* ---------------- BLOQUE c14: traducción abierta 1 ---------------- */
+makeOpenBlock("c14", "Bloque 14 · Traduce al español — elige el tipo correcto", "alto", "hard", [
+  {stem:"Traduce: «Если у меня будет время завтра, я тебе позвоню».", model:"Si tengo tiempo mañana, te llamo. / Si tengo tiempo mañana, te llamaré."},
+  {stem:"Traduce: «Если бы я был на твоём месте, я бы не стал спорить».", model:"Si yo fuera tú / Si estuviera en tu lugar, no discutiría."},
+  {stem:"Traduce: «Если бы ты позвонил мне вчера, я бы тебе помог».", model:"Si me hubieras llamado ayer, te habría ayudado."},
+  {stem:"Traduce: «Если бы я тогда выучил английский, сейчас у меня была бы работа получше».", model:"Si entonces hubiera aprendido inglés, ahora tendría un trabajo mejor."}
+]);
+
+/* ---------------- BLOQUE c15: traducción abierta 2 (otras conjunciones) ---------------- */
+makeOpenBlock("c15", "Bloque 15 · Traduce y transforma — otras conjunciones", "alto", "hard", [
+  {stem:"Traduce: «В случае если пойдёт дождь, встреча пройдёт в помещении».", model:"En caso de que llueva, la reunión será en el interior."},
+  {stem:"Traduce: «Я приду на вечеринку при условии, что ты тоже придёшь».", model:"Iré a la fiesta con tal de que tú también vengas."},
+  {stem:"Traduce: «Если только ты не позвонишь мне сегодня вечером, я буду думать, что что-то случилось».", model:"A no ser que me llames esta noche, pensaré que algo ha pasado."},
+  {stem:"Transforma usando «de + infinitivo» en lugar de «si»: «Si lo hubiera sabido, no habría venido.»", model:"De haberlo sabido, no habría venido."}
+]);
+
+/* ---------------- BLOQUE c16: repaso mixto (el más difícil) ---------------- */
+makeFillBlock("c16", "Bloque 16 · Repaso mixto — todos los tipos", "el más difícil", "hard", [
+  {stem:"Si mañana ___ (hacer) sol, iremos a la playa.", answers:["hace"]},
+  {stem:"Si yo ___ (tener) tu talento, sería músico profesional.", answers:["tuviera","tuviese"]},
+  {stem:"Si no ___ (llover) tanto ayer, habríamos salido a caminar.", answers:["hubiera llovido","hubiese llovido"]},
+  {stem:"Si de pequeño ___ (practicar) más deporte, ahora estaría más en forma.", answers:["hubiera practicado","hubiese practicado"]},
+  {stem:"Si ___ (querer) aprender rápido, practica todos los días.", answers:["quieres"]},
+  {stem:"Si hubiéramos reservado antes, ___ (conseguir) mejores precios.", answers:["habríamos conseguido"]}
+]);
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

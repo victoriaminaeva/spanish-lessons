@@ -1,0 +1,726 @@
+<!doctype html>
+<title>Subjuntivo: usos básicos</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Subjuntivo: usos básicos</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>El subjuntivo — usos básicos</h1>
+  <p class="subtitle">Reglas claras + quince bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> esta es la <b>parte 2 de 3</b> de la miniserie sobre el subjuntivo — va después de «<b>Subjuntivo: formas</b>» (cómo se conjuga) y antes de «<b>Subjuntivo: usos avanzados</b>» (los usos más complejos). Aquí se asume que ya conoces las formas del presente de subjuntivo y nos centramos solo en las reglas de uso MÁS FRECUENTES: deseo, emoción/valoración, ruegos y consejos, opinión negada (no creo que), finalidad (para que), «cuando» + subjuntivo/indicativo, y las expresiones de probabilidad (quizás, puede que, a lo mejor).
+  </div>
+  <p class="series-note">📚 Parte 2 de 3 de la serie sobre el <b>subjuntivo</b> dentro de <b>Gramática</b> — antes: «Subjuntivo: formas»; después: «Subjuntivo: usos avanzados». <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — los usos más frecuentes</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada regla.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>Mismo sujeto → infinitivo · cambio de sujeto → que + subjuntivo</h3>
+    <ul>
+      <li>Si el sujeto que desea/pide y el sujeto que realiza la acción son <b>la misma persona</b>, se usa el <b>infinitivo</b>, sin «que»: <i>Quiero comer</i> (yo quiero, yo como).</li>
+      <li>Si son <b>personas distintas</b>, se usa <b>que + subjuntivo</b>: <i>Quiero que comas</i> (yo quiero, tú comes).</li>
+      <li>Esta misma regla vale para: querer, preferir, pedir, recomendar, es importante, me alegra, para (que), y en general para todos los verbos de deseo, ruego y valoración.</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> русскоговорящие часто используют инфинитив даже при смене субъекта — по аналогии с русским «хочу, чтобы ты пришёл», где для второго лица нет отдельной инфинитивной формы после «хочу». В испанском это невозможно: <b>Quiero que vengas</b> (НЕ <s>Quiero vengas</s> и НЕ <s>Quiero que venir</s>). Проверка: спроси себя, кто выполняет второе действие — если это не тот же человек, обязательно нужно «que + subjuntivo».</div>
+  </div>
+
+  <div class="contrast-box">
+    <h3>A lo mejor nunca lleva subjuntivo</h3>
+    <ul>
+      <li><b>A lo mejor</b> + indicativo siempre: <i>A lo mejor llueve mañana.</i></li>
+      <li><b>Quizás / tal vez</b> + indicativo o subjuntivo, según el grado de duda: <i>Quizás tiene razón</i> (más seguro) / <i>Quizás tenga razón</i> (más duda).</li>
+      <li><b>Puede que</b> + subjuntivo siempre: <i>Puede que llueva mañana.</i></li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> по аналогии с «quizás» и «puede que» многие ставят сослагательное наклонение и после «a lo mejor» — это распространённая ошибка: <b>A lo mejor viene</b> (НЕ <s>a lo mejor venga</s>). «A lo mejor» — единственное из этих трёх выражений, которое требует ТОЛЬКО индикатива.</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Quince bloques, cada uno con su propio botón «Comprobar» (excepto los de traducción abierta, con respuesta modelo). La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Subjuntivo, parte 2 de 3 · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS ---------------- */
+var rules = [
+  {term:"querer/preferir que · ojalá", pos:"deseo y voluntad",
+   quote:"Quiero <mark>que vengas</mark> a la fiesta. ¡<mark>Ojalá</mark> apruebe el examen!",
+   trans:"хотеть, чтобы... / хоть бы...",
+   mean:"Cuando el sujeto de «querer/preferir» desea algo para OTRA persona (cambio de sujeto), se usa «que + subjuntivo». «Ojalá» siempre va con subjuntivo: presente para un deseo realizable, imperfecto para un deseo poco probable o irreal.",
+   ex:"Ojalá tuviera más tiempo libre. — Вот бы у меня было больше свободного времени (менее вероятно)."},
+  {term:"me alegra que · es importante que...", pos:"emoción y valoración",
+   quote:"Me alegra <mark>que estés</mark> aquí. Es una pena <mark>que no puedas</mark> venir.",
+   trans:"меня радует, что... / важно, чтобы...",
+   mean:"Los verbos y expresiones de emoción o valoración (alegrarse, sorprender, ser + adjetivo como importante/normal/una pena) van seguidos de subjuntivo cuando hay cambio de sujeto.",
+   ex:"Es normal que tengas dudas al principio. — Нормально, что у тебя есть сомнения вначале."},
+  {term:"te pido/recomiendo/prohíbo que...", pos:"ruegos, consejos, prohibiciones",
+   quote:"Te pido <mark>que me escuches</mark>. Te prohíbo <mark>que salgas</mark> esta noche.",
+   trans:"прошу тебя, чтобы... / запрещаю тебе, чтобы...",
+   mean:"Los verbos de influencia sobre otra persona (pedir, recomendar, prohibir, exigir, sugerir) exigen subjuntivo en la cláusula con «que», porque casi siempre hay cambio de sujeto.",
+   ex:"Te recomiendo que leas el contrato antes de firmarlo. — Советую тебе прочитать контракт перед подписанием."},
+  {term:"creo que + indicativo / no creo que + subjuntivo", pos:"opinión (creer, pensar)",
+   quote:"Creo <mark>que tiene</mark> razón. No creo <mark>que tenga</mark> razón.",
+   trans:"думаю, что... (изъявительное) / не думаю, что... (сослагательное)",
+   mean:"En afirmativo, «creer/pensar que» va con indicativo, porque se presenta como un hecho seguro. En negativo, «no creer/no pensar que» va con subjuntivo, porque se presenta como algo dudoso o no confirmado.",
+   ex:"No pienso que sea una buena idea. — Не думаю, что это хорошая идея."},
+  {term:"para que + subjuntivo / para + infinitivo", pos:"finalidad",
+   quote:"Te llamo <mark>para que sepas</mark> la noticia. Te llamo <mark>para saber</mark> cómo estás.",
+   trans:"чтобы (кто-то другой сделал) / чтобы (я сам сделал)",
+   mean:"«Para + infinitivo» se usa cuando el sujeto de las dos acciones es el mismo. «Para que + subjuntivo» se usa cuando cambia el sujeto de la segunda acción.",
+   ex:"Abro la ventana para que entre el aire fresco. — Открываю окно, чтобы вошёл свежий воздух (другое действующее лицо — воздух)."},
+  {term:"cuando + subjuntivo (futuro) / cuando + indicativo (habitual)", pos:"tiempo",
+   quote:"<mark>Cuando llegues</mark>, llámame. <mark>Cuando llego</mark> a casa, ceno.",
+   trans:"когда (в будущем — сослаг.) / когда (обычно, привычно — изъяв.)",
+   mean:"«Cuando» + subjuntivo se refiere a una acción futura o hipotética que todavía no ha ocurrido. «Cuando» + indicativo describe hechos habituales, repetidos o pasados.",
+   ex:"Cuando era niño, jugaba en la calle todas las tardes. — Когда я был ребёнком, я играл на улице каждый вечер (изъявительное, прошлое)."},
+  {term:"quizás/tal vez · puede que · a lo mejor", pos:"expresiones de probabilidad",
+   quote:"Quizás <mark>venga</mark> mañana. <mark>Puede que llueva</mark> esta tarde. A lo mejor <mark>viene</mark> mañana.",
+   trans:"возможно... (изъяв./сослаг.) / возможно... (только сослаг.) / возможно... (только изъяв.)",
+   mean:"«Quizás/tal vez» admiten indicativo (más seguridad) o subjuntivo (más duda). «Puede que» siempre va con subjuntivo. «A lo mejor» siempre va con indicativo — nunca con subjuntivo (ver el contraste más abajo).",
+   ex:"Quizás tiene razón. — Возможно, он прав (говорящий более уверен, чем при «tenga»)."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass, ruleHtml){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+/* helper: build a radio-choice block (word/phrase options) */
+function buildRadioBlock(id, title, tag, tagClass, items){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+/* helper: build a fill-in-the-blank block, optionally with a word bank */
+function buildFillBlock(id, title, tag, tagClass, items, bank, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(bank){
+    wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+bank+'</div>';
+  }
+  if(hintText){
+    wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>';
+  }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE 1: creo que vs. no creo que (radio) ---------------- */
+buildRadioBlock("s1", "Bloque 1 · Creo que / no creo que — indicativo o subjuntivo", "fácil", "easy", [
+  {q:"Creo que ___ razón.", opts:["tiene","tenga"], answer:0},
+  {q:"No creo que ___ razón.", opts:["tiene","tenga"], answer:1},
+  {q:"Pienso que ___ una buena idea.", opts:["es","sea"], answer:0},
+  {q:"No pienso que ___ una buena idea.", opts:["es","sea"], answer:1},
+  {q:"Creo que ___ a llover.", opts:["va","vaya"], answer:0},
+  {q:"No creo que ___ a llover.", opts:["va","vaya"], answer:1}
+]);
+
+/* ---------------- BLOQUE 2: huecos con banco — deseo y emoción ---------------- */
+buildFillBlock("s2", "Bloque 2 · Huecos con banco — deseo y emoción", "fácil", "easy", [
+  {stem:"Quiero que ___ a mi fiesta de cumpleaños. (venir, tú)", answers:["vengas"]},
+  {stem:"Me alegra que ___ aquí con nosotros. (estar, tú)", answers:["estés"]},
+  {stem:"¡Ojalá ___ mucha suerte en el examen! (tener, tú)", answers:["tengas"]},
+  {stem:"Es una pena que no ___ posible venir todos juntos. (ser)", answers:["sea"]},
+  {stem:"Espero que ___ vernos pronto. (poder, nosotros)", answers:["podamos"]},
+  {stem:"Prefiero que tú me ___ con la mudanza. (ayudar, tú)", answers:["ayudes"]}
+], "vengas · estés · tengas · sea · podamos · ayudes");
+
+/* ---------------- BLOQUE 3: deseo/emoción/ruego — reconocimiento (radio) ---------------- */
+buildRadioBlock("s3", "Bloque 3 · Verbos de deseo, emoción y ruego — elige la forma correcta", "fácil-medio", "easy", [
+  {q:"Te pido que ___ a tiempo.", opts:["llegas","llegues"], answer:1},
+  {q:"Te recomiendo que ___ el contrato.", opts:["lees","leas"], answer:1},
+  {q:"Es importante que ___ todos los días.", opts:["estudias","estudies"], answer:1},
+  {q:"Me sorprende que no ___ nada.", opts:["dices","digas"], answer:1},
+  {q:"Te prohíbo que ___ sin permiso.", opts:["sales","salgas"], answer:1},
+  {q:"Es normal que ___ dudas al principio.", opts:["tienes","tengas"], answer:1}
+]);
+
+/* ---------------- BLOQUE 4: huecos sin banco — ruegos, consejos, prohibiciones ---------------- */
+buildFillBlock("s4", "Bloque 4 · Huecos sin banco — ruegos, consejos, prohibiciones", "medio", "mid", [
+  {stem:"Te pido que me ___ un momento. (escuchar, tú)", answers:["escuches"]},
+  {stem:"Os recomiendo que ___ la mesa con antelación. (reservar, vosotros)", answers:["reservéis"]},
+  {stem:"Te prohíbo que le ___ así a tu hermana. (hablar, tú)", answers:["hables"]},
+  {stem:"Os pido que ___ silencio durante la película. (guardar, vosotros)", answers:["guardéis"]},
+  {stem:"Le recomiendo que ___ más. (descansar, él/ella)", answers:["descanse"]},
+  {stem:"Te exijo que ___ la verdad. (decir, tú)", answers:["digas"]}
+], null, "Ahora sin pistas de banco — usa el verbo entre paréntesis en subjuntivo.");
+
+/* ---------------- BLOQUE 5: infinitivo vs. que + subjuntivo (mismo sujeto) ---------------- */
+buildRadioBlock("s5", "Bloque 5 · Infinitivo o «que + subjuntivo» — ¿cambia el sujeto?", "medio", "mid", [
+  {q:"Yo quiero ___ (yo mismo) esta noche.", opts:["descansar","que descanse"], answer:0},
+  {q:"Yo quiero ___ (tú) esta noche.", opts:["que descanses","descansar"], answer:0},
+  {q:"Preferimos ___ (nosotros mismos) la película en casa.", opts:["ver","que veamos"], answer:0},
+  {q:"Preferimos ___ (vosotros) la película en casa.", opts:["que veáis","ver"], answer:0},
+  {q:"Es importante ___ (en general, uno mismo) dormir bien.", opts:["dormir","que duerma"], answer:0},
+  {q:"Es importante ___ (que los niños) duerman bien.", opts:["que duerman","dormir"], answer:0}
+]);
+
+/* ---------------- BLOQUE 6: huecos sin banco — finalidad (para / para que) ---------------- */
+buildFillBlock("s6", "Bloque 6 · Huecos sin banco — para + infinitivo / para que + subjuntivo", "medio", "mid", [
+  {stem:"Trabajo mucho para ___ dinero. (ahorrar — mismo sujeto)", answers:["ahorrar"]},
+  {stem:"Te doy la llave para que ___ cuando quieras. (entrar, tú)", answers:["entres"]},
+  {stem:"Hablo despacio para que me ___ todos. (entender, ellos)", answers:["entiendan"]},
+  {stem:"Estudio cada día para ___ el examen. (aprobar — mismo sujeto)", answers:["aprobar"]},
+  {stem:"Le escribo una nota para que no se le ___ la cita. (olvidar)", answers:["olvide"]},
+  {stem:"Abro la ventana para que ___ el aire fresco. (entrar)", answers:["entre"]}
+]);
+
+/* ---------------- BLOQUE 7: huecos sin banco — cuando + subjuntivo/indicativo ---------------- */
+buildFillBlock("s7", "Bloque 7 · Huecos sin banco — cuando + subjuntivo (futuro) o indicativo (habitual)", "medio-alto", "mid", [
+  {stem:"Cuando ___ a casa esta noche, llámame. (llegar, tú)", answers:["llegues"]},
+  {stem:"Cuando ___ a casa normalmente, ceno enseguida. (llegar, yo)", answers:["llego"]},
+  {stem:"Te lo explicaré cuando ___ más tiempo. (tener, nosotros)", answers:["tengamos"]},
+  {stem:"Cuando era pequeño, ___ en la calle todas las tardes. (jugar, yo)", answers:["jugaba"]},
+  {stem:"Cuando ___ los deberes, podrás salir. (terminar, tú)", answers:["termines"]},
+  {stem:"Cuando hace calor, siempre ___ las ventanas. (abrir, nosotros)", answers:["abrimos"]}
+]);
+
+/* ---------------- BLOQUE 8: cuando + subjuntivo/indicativo (radio) ---------------- */
+buildRadioBlock("s8", "Bloque 8 · Cuando — elige indicativo o subjuntivo", "alto", "hard", [
+  {q:"Cuando ___ tiempo libre, leo novelas.", opts:["tengo","tenga"], answer:0},
+  {q:"Cuando ___ tiempo libre mañana, te llamaré.", opts:["tengo","tenga"], answer:1},
+  {q:"Cuando ___ niña, vivía en el campo.", opts:["era","fuera"], answer:0},
+  {q:"Avísame cuando ___ al aeropuerto.", opts:["llegas","llegues"], answer:1},
+  {q:"Siempre me saluda cuando nos ___ por la calle.", opts:["vemos","veamos"], answer:0},
+  {q:"Cuando ___ este proyecto, me tomaré vacaciones.", opts:["termino","termine"], answer:1}
+]);
+
+/* ---------------- BLOQUE 9: quizás/tal vez/puede que/a lo mejor (radio) ---------------- */
+buildRadioBlock("s9", "Bloque 9 · Quizás, tal vez, puede que, a lo mejor", "alto", "hard", [
+  {q:"Puede que ___ esta tarde.", opts:["llueva","llueve"], answer:0},
+  {q:"A lo mejor ___ esta tarde.", opts:["llueve","llueva"], answer:0},
+  {q:"Tal vez ___ esta tarde — es solo una posibilidad, no estoy nada seguro.", opts:["llueve","llueva"], answer:1},
+  {q:"Quizás ella ___ razón, aunque lo dudo bastante.", opts:["tiene","tenga"], answer:1},
+  {q:"Puede que ellos ya ___ la noticia.", opts:["saben","sepan"], answer:1},
+  {q:"A lo mejor ellos ya ___ la noticia.", opts:["saben","sepan"], answer:0}
+]);
+
+/* ---------------- BLOQUE 10: relacionar — expresión y modo que exige (select) ---------------- */
+(function(){
+  var b = {id:"s10",
+    words:["querer que","me alegra que","puede que","a lo mejor","no creo que","para + infinitivo (mismo sujeto)"],
+    defs:[
+      "siempre subjuntivo — expresa deseo dirigido a otra persona",
+      "siempre subjuntivo — expresa emoción o valoración",
+      "siempre subjuntivo — expresa probabilidad",
+      "siempre indicativo — expresa probabilidad (nunca subjuntivo)",
+      "siempre subjuntivo — opinión negada, se presenta como dudosa",
+      "no lleva «que» ni subjuntivo — el sujeto de las dos acciones es el mismo"
+    ],
+    answers:["a","b","c","d","e","f"]
+  };
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 10 · Relaciona cada expresión con el modo que exige","alto","hard"));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Expresión</th><th>Modo que exige</th></tr>";
+  b.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e","f"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = b.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.words.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.words.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.words.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 11: huecos sin banco — mezcla de disparadores ---------------- */
+buildFillBlock("s11", "Bloque 11 · Huecos sin banco — mezcla de todas las reglas", "alto", "hard", [
+  {stem:"Ojalá ___ buen tiempo el sábado. (hacer)", answers:["haga"]},
+  {stem:"No creo que ella ___ en casa ahora. (estar)", answers:["esté"]},
+  {stem:"Te sugiero que ___ con el profesor. (hablar, tú)", answers:["hables"]},
+  {stem:"Puede que ___ a llover pronto. (empezar)", answers:["empiece"]},
+  {stem:"Es posible que no ___ terminar hoy. (poder, nosotros)", answers:["podamos"]},
+  {stem:"Cuando ___ un momento, revisa mi correo. (tener, tú)", answers:["tengas"]}
+]);
+
+/* ---------------- BLOQUE 12: creo/no creo que — set más difícil (radio) ---------------- */
+buildRadioBlock("s12", "Bloque 12 · Creo que / no creo que — segunda vuelta", "alto", "hard", [
+  {q:"Creo que ustedes ___ razón.", opts:["tienen","tengan"], answer:0},
+  {q:"No creo que ustedes ___ razón.", opts:["tienen","tengan"], answer:1},
+  {q:"Mi madre piensa que yo ___ demasiado.", opts:["trabajo","trabaje"], answer:0},
+  {q:"Mi madre no piensa que yo ___ lo suficiente.", opts:["trabajo","trabaje"], answer:1},
+  {q:"Creemos que el proyecto ___ muy bien.", opts:["va","vaya"], answer:0},
+  {q:"No creemos que el proyecto ___ muy bien.", opts:["va","vaya"], answer:1}
+]);
+
+/* ---------------- helper: bloque abierto de traducción/transformación ---------------- */
+function buildOpenBlock(id, title, tag, tagClass, items, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(hintText){
+    wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>';
+  }
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> <i style="color:var(--muted);">«'+it.ru+'»</i></div>'+
+      '<textarea class="q-answer" id="'+id+'-'+idx+'" style="min-height:44px;" placeholder="Tu traducción..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="'+id+'-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById(id+"-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE 13: traducción — deseo y ruego ---------------- */
+buildOpenBlock("s13", "Bloque 13 · Traduce — deseo y ruego", "difícil", "hard", [
+  {ru:"Хочу, чтобы ты пришёл на мой день рождения.", model:"Quiero que vengas a mi cumpleaños."},
+  {ru:"Прошу тебя, чтобы ты меня выслушал.", model:"Te pido que me escuches."},
+  {ru:"Вот бы у нас было больше времени!", model:"¡Ojalá tuviéramos más tiempo!"},
+  {ru:"Советую тебе прочитать этот контракт перед подписанием.", model:"Te recomiendo que leas este contrato antes de firmarlo."}
+], "Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).");
+
+/* ---------------- BLOQUE 14: traducción — opinión y emoción ---------------- */
+buildOpenBlock("s14", "Bloque 14 · Traduce — opinión y emoción", "difícil", "hard", [
+  {ru:"Я не думаю, что это хорошая идея.", model:"No creo que sea una buena idea."},
+  {ru:"Меня радует, что ты здесь.", model:"Me alegra que estés aquí."},
+  {ru:"Жаль, что ты не можешь приехать.", model:"Es una pena que no puedas venir."},
+  {ru:"Возможно, завтра будет дождь (я не уверен).", model:"Puede que llueva mañana. / Quizás llueva mañana."}
+], "Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).");
+
+/* ---------------- BLOQUE 15: traducción — mezcla final ---------------- */
+buildOpenBlock("s15", "Bloque 15 · Traduce — mezcla final (cuando, para que, probabilidad)", "el más difícil", "hard", [
+  {ru:"Когда придёшь домой, позвони мне.", model:"Cuando llegues a casa, llámame."},
+  {ru:"Открываю окно, чтобы вошёл свежий воздух.", model:"Abro la ventana para que entre el aire fresco."},
+  {ru:"Возможно, он прав, хотя я сомневаюсь.", model:"Quizás tenga razón, aunque lo dudo. / Tal vez tenga razón, aunque lo dudo."},
+  {ru:"Наверное, он уже дома (я почти уверен).", model:"A lo mejor ya está en casa."}
+], "Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).");
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

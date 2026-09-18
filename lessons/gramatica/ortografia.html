@@ -1,0 +1,734 @@
+<!doctype html>
+<title>Ortografía</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Ortografía</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>Ortografía: tildes diacríticas y cambios al conjugar</h1>
+  <p class="subtitle">Reglas claras + quince bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> tres focos de la ortografía española que suelen dar problemas: las <b>tildes diacríticas</b> que distinguen palabras (tú/tu, él/el, sí/si…), los <b>cambios ortográficos</b> al conjugar ciertos verbos para mantener el sonido (coger→cojo, buscar→busqué, llegar→llegué…), y la <b>acentuación</b> cuando se añaden pronombres enclíticos a un verbo (dámelo, siéntate, explicándoselo).
+  </div>
+  <p class="series-note">📚 Tema de la serie <b>Gramática</b> del sitio. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — ortografía</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada caso.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>Tildes diacríticas — invisibles al hablar, esenciales al escribir</h3>
+    <ul>
+      <li>Estas palabras suenan exactamente igual al hablar, pero se escriben de forma diferente según su función: <b>tú</b> (pronombre) / <b>tu</b> (posesivo); <b>él</b> (pronombre) / <b>el</b> (artículo); <b>sí</b> (afirmación/reflexivo) / <b>si</b> (condicional); <b>más</b> (cantidad) / <b>mas</b> (pero, literario); <b>qué</b> (interrogativo/exclamativo) / <b>que</b> (relativo/conjunción); <b>mí</b> (pronombre) / <b>mi</b> (posesivo); <b>sé</b> (saber/ser, imperativo) / <b>se</b> (pronombre); <b>dé</b> (dar, subjuntivo/imperativo) / <b>de</b> (preposición).</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> так как в устной речи разница не слышна, легко забыть тильду на письме. Запомни пары по функции: <b>tú</b> lees (ты читаешь) vs. <b>tu</b> libro (твоя книга); <b>él</b> vino (он пришёл) vs. <b>el</b> libro (артикль); <b>sí</b>, quiero (да, хочу) vs. <b>si</b> quieres (если хочешь).</div>
+  </div>
+
+  <div class="contrast-box">
+    <h3>Cambios ortográficos al conjugar (para mantener el sonido)</h3>
+    <ul>
+      <li><b>-ger/-gir → j ante a/o</b>: coger → cojo, cojas, coja (si se escribiera «cogo», sonaría distinto).</li>
+      <li><b>-car → qu ante e</b>: buscar → busqué, busques.</li>
+      <li><b>-gar → gu ante e</b>: llegar → llegué, llegues.</li>
+      <li><b>-guir → g ante a/o</b>: seguir → sigo, sigan.</li>
+      <li><b>-zar → c ante e</b>: empezar → empecé, empieces.</li>
+    </ul>
+  </div>
+
+  <div class="contrast-box">
+    <h3>Acentuación con pronombres enclíticos (dámelo, siéntate, explicándoselo)</h3>
+    <ul>
+      <li>Cuando se añaden pronombres al final de un gerundio, un infinitivo o un imperativo afirmativo, la palabra puede volverse esdrújula o sobresdrújula — y entonces <b>necesita tilde</b>, aunque el verbo original no la llevara.</li>
+      <li><i>da</i> (sin tilde) → <i>dámelo</i> (esdrújula, con tilde); <i>explicando</i> (sin tilde) → <i>explicándoselo</i> (esdrújula, con tilde); <i>sienta</i> → <i>siéntate</i> (esdrújula, con tilde).</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> при добавлении местоимений к герундию или утвердительному императиву легко забыть добавить тильду — слово меняет ударный слог по правилам, но многие пишут «damelo», «explicandoselo» без тильды. Всегда проверяй, не стало ли слово esdrújula/sobresdrújula.</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Quince bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+/* Comparación EXACTA para pares diacríticos (aquí SÍ importa la tilde) */
+function normKeepAccents(s){
+  return (s||"").toString().trim().toLowerCase()
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatchExact(value, accepted){
+  var v = normKeepAccents(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return normKeepAccents(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"tú / tu", pos:"pronombre / posesivo",
+   quote:"<mark>Tú</mark> lees mucho. Dame <mark>tu</mark> libro.",
+   trans:"ты (местоимение) / твой (притяжательное)",
+   mean:"«Tú» con tilde es el pronombre personal sujeto; «tu» sin tilde es el posesivo.",
+   ex:"¿Tú tienes tu pasaporte? — У тебя с собой твой паспорт?"},
+  {term:"él / el", pos:"pronombre / artículo",
+   quote:"<mark>Él</mark> vino ayer. <mark>El</mark> libro está aquí.",
+   trans:"он (местоимение) / артикль «the»",
+   mean:"«Él» con tilde es el pronombre personal; «el» sin tilde es el artículo determinado masculino.",
+   ex:"El profesor dice que él tiene razón. — Учитель говорит, что он прав."},
+  {term:"sí / si", pos:"afirmación,reflexivo / condicional",
+   quote:"Dijo que <mark>sí</mark>. <mark>Si</mark> llueve, no salimos.",
+   trans:"да / если",
+   mean:"«Sí» con tilde es la afirmación o el pronombre reflexivo tónico (para sí mismo); «si» sin tilde introduce condicionales.",
+   ex:"Si quieres, te ayudo, y creo que sí lo haré. — Если хочешь, я тебе помогу, и думаю, что да, помогу."},
+  {term:"más / mas", pos:"cantidad / «pero» (literario)",
+   quote:"Quiero <mark>más</mark> café. <mark>Mas</mark> no pudo venir.",
+   trans:"больше / но (устаревшее, литературное)",
+   mean:"«Más» con tilde expresa cantidad o comparación; «mas» sin tilde es un sinónimo literario poco frecuente de «pero».",
+   ex:"Quería ir, mas no tenía tiempo. — Он хотел пойти, но у него не было времени."},
+  {term:"qué / que", pos:"interrogativo-exclamativo / relativo-conjunción",
+   quote:"¿<mark>Qué</mark> quieres? El libro <mark>que</mark> leí.",
+   trans:"что/какой (вопрос., воскл.) / который, что (союз)",
+   mean:"«Qué» con tilde se usa en preguntas y exclamaciones (directas e indirectas); «que» sin tilde es relativo o conjunción.",
+   ex:"No sé qué quieres, pero sé que puedo ayudarte. — Не знаю, что ты хочешь, но знаю, что могу помочь."},
+  {term:"mí / mi", pos:"pronombre / posesivo",
+   quote:"Es para <mark>mí</mark>. Es <mark>mi</mark> casa.",
+   trans:"мне/меня (местоимение) / мой (притяжательное)",
+   mean:"«Mí» con tilde es el pronombre tónico tras preposición; «mi» sin tilde es el posesivo.",
+   ex:"A mí me encanta mi trabajo. — Мне очень нравится моя работа."},
+  {term:"sé / se", pos:"saber/ser / pronombre",
+   quote:"No <mark>sé</mark> nada. <mark>Se</mark> lo dije ayer.",
+   trans:"я знаю / будь (imperativo) / местоимение «se»",
+   mean:"«Sé» con tilde es una forma de «saber» (yo sé) o de «ser» en imperativo (sé bueno); «se» sin tilde es el pronombre reflexivo/impersonal.",
+   ex:"Sé que se lo dijiste. — Я знаю, что ты ему это сказал."},
+  {term:"dé / de", pos:"dar (subj./imperat.) / preposición",
+   quote:"Espero que me lo <mark>dé</mark>. Vengo <mark>de</mark> Madrid.",
+   trans:"пусть даст (глагол dar) / предлог «из/от»",
+   mean:"«Dé» con tilde es una forma del verbo «dar» (subjuntivo o imperativo); «de» sin tilde es la preposición.",
+   ex:"Quiero que el jefe me dé el día libre. — Хочу, чтобы начальник дал мне выходной."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+function makeRadioBlock(id, title, tag, tagClass, items){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeFillBlock(id, title, tag, tagClass, items, bank, hintText, exact){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(bank){
+    wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+bank+'</div>';
+  }
+  if(hintText){
+    wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>';
+  }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = exact ? anyMatchExact(input.value, it.answers) : anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeMatchBlock(id, title, tag, tagClass, leftLabel, rightLabel, words, defs, answers){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  var table = document.createElement("table"); table.className = "match-table";
+  var letters = defs.map(function(d,i){ return String.fromCharCode(97+i); });
+  var rows = "<tr><th>"+leftLabel+"</th><th>"+rightLabel+"</th></tr>";
+  words.forEach(function(w, idx){
+    var opts = letters.map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = defs.map(function(d,i){ return letters[i]+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+words.length+"</b>";
+    blockScores[id] = {correct:correct, total:words.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:words.length};
+  exList.appendChild(wrap);
+}
+
+function makeTranslateBlock(id, title, tag, tagClass, items, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="'+id+'-'+idx+'" style="min-height:44px;" placeholder="Tu respuesta..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="'+id+'-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById(id+"-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE 1: tú/tu, él/el — elige la forma correcta en contexto (fácil) ---------------- */
+makeRadioBlock("o1","Bloque 1 · Elige la palabra correcta según el contexto","fácil","easy",[
+  {q:"___ eres muy simpático. (pronombre)", opts:["Tú","Tu"], answer:0},
+  {q:"Dame ___ número de teléfono. (posesivo)", opts:["tú","tu"], answer:1},
+  {q:"___ no vino a la reunión. (pronombre, sobre él)", opts:["Él","El"], answer:0},
+  {q:"___ coche está aparcado enfrente. (artículo)", opts:["Él","El"], answer:1},
+  {q:"¿___ tienes hambre? (pronombre)", opts:["Tú","Tu"], answer:0},
+  {q:"Vi a ___ profesor en la calle. (artículo)", opts:["él","el"], answer:1}
+]);
+
+/* ---------------- BLOQUE 2: sí/si, más/mas — con banco ---------------- */
+makeFillBlock("o2","Bloque 2 · Completa con la palabra correcta (con tilde donde corresponda)","fácil","easy",[
+  {stem:"___ quieres, puedes venir con nosotros. (condicional)", answers:["si"]},
+  {stem:"Le pregunté y me dijo que ___. (afirmación)", answers:["sí"]},
+  {stem:"Quiero ___ tiempo para terminar el proyecto. (cantidad)", answers:["más"]},
+  {stem:"___ llueve mañana, no saldremos.", answers:["si"]},
+  {stem:"Creo que ___, aunque no estoy segura. (afirmación)", answers:["sí"]}
+], "sí · si · más", null, true);
+
+/* ---------------- BLOQUE 3: qué/que, mí/mi, sé/se, dé/de — sin banco ---------------- */
+makeFillBlock("o3","Bloque 3 · Completa con la palabra correcta","medio","mid",[
+  {stem:"No sé ___ hora es. (interrogativo)", answers:["qué"]},
+  {stem:"El libro ___ leí era muy bueno. (relativo)", answers:["que"]},
+  {stem:"Este regalo es para ___. (pronombre)", answers:["mí"]},
+  {stem:"Es ___ casa, no la de mi hermano. (posesivo)", answers:["mi"]},
+  {stem:"No ___ nada de este tema. (verbo saber)", answers:["sé"]},
+  {stem:"___ lo dije ayer a mi madre. (pronombre)", answers:["se"]},
+  {stem:"Espero que me ___ una respuesta pronto. (verbo dar)", answers:["dé"]},
+  {stem:"Vengo ___ la biblioteca. (preposición)", answers:["de"]}
+], null, null, true);
+
+/* ---------------- BLOQUE 4: coger/buscar/llegar/seguir/empezar — conjuga (sin banco) ---------------- */
+makeFillBlock("o4","Bloque 4 · Conjuga manteniendo el sonido (cambios ortográficos)","medio","mid",[
+  {stem:"Yo siempre ___ el autobús para ir al trabajo. (coger, presente)", answers:["cojo"]},
+  {stem:"Ayer ___ un libro nuevo en la librería. (buscar, pretérito indefinido, yo)", answers:["busqué"]},
+  {stem:"Anoche ___ tarde a casa. (llegar, pretérito indefinido, yo)", answers:["llegué"]},
+  {stem:"Yo ___ las instrucciones al pie de la letra. (seguir, presente)", answers:["sigo"]},
+  {stem:"___ a estudiar español el año pasado. (empezar, pretérito indefinido, yo)", answers:["empecé"]}
+]);
+
+/* ---------------- BLOQUE 5: más verbos de la familia coger/buscar/llegar/seguir/empezar, con banco ---------------- */
+makeFillBlock("o5","Bloque 5 · Elige la forma correcta del banco","medio","mid",[
+  {stem:"Espero que ___ pronto, tenemos prisa. (llegar, subjuntivo, tú)", answers:["llegues"]},
+  {stem:"Quiero que ___ este libro para mañana. (buscar, subjuntivo, tú)", answers:["busques"]},
+  {stem:"No quiero que ___ frío esta noche. (coger, subjuntivo, tú)", answers:["cojas"]},
+  {stem:"Espero que no ___ demasiado tarde. (empezar, subjuntivo, ellos)", answers:["empiecen"]},
+  {stem:"Prefiero que ___ vosotros el camino. (seguir, subjuntivo)", answers:["sigáis"]}
+], "llegues · busques · cojas · empiecen · sigáis");
+
+/* ---------------- BLOQUE 6: acentuación con pronombres enclíticos (radio) ---------------- */
+makeRadioBlock("o6","Bloque 6 · ¿Cuál lleva tilde correctamente?","alto","hard",[
+  {q:"Imperativo de 'dar' + me + lo:", opts:["dámelo","damelo"], answer:0},
+  {q:"Gerundio de 'explicar' + se + lo:", opts:["explicandoselo","explicándoselo"], answer:1},
+  {q:"Imperativo de 'sentarse', tú:", opts:["sientate","siéntate"], answer:1},
+  {q:"Imperativo de 'decir' + me + lo:", opts:["dímelo","dimelo"], answer:0},
+  {q:"Gerundio de 'leer' + le (sin pronombre no lleva tilde: 'leyendo'):", opts:["leyéndole","leyendole"], answer:0}
+]);
+
+/* ---------------- BLOQUE 7: añade el pronombre y escribe la forma correctamente acentuada ---------------- */
+makeFillBlock("o7","Bloque 7 · Añade el pronombre y acentúa correctamente","alto","hard",[
+  {stem:"da + me + lo → ___", answers:["dámelo"]},
+  {stem:"explicando + se + lo → ___", answers:["explicándoselo"]},
+  {stem:"sienta (tú) + te → ___", answers:["siéntate"]},
+  {stem:"di + me + lo → ___", answers:["dímelo"]},
+  {stem:"comprando + lo → ___", answers:["comprándolo"]}
+], null, null, true);
+
+/* ---------------- BLOQUE 8: relacionar tipo de cambio con ejemplo ---------------- */
+makeMatchBlock("o8","Bloque 8 · Relaciona el tipo de cambio ortográfico con su ejemplo","medio","mid","Cambio","Ejemplo",
+  ["g → j ante a/o","c → qu ante e","g → gu ante e","gu → g ante a/o","z → c ante e"],
+  ["llegué","cojo","sigan","empecé","busqué"],
+  ["c","a","d","e","b"]
+);
+
+/* ---------------- BLOQUE 9: pares diacríticos en contexto — repaso combinado ---------------- */
+makeFillBlock("o9","Bloque 9 · Repaso — elige la palabra correcta en cada frase","alto","hard",[
+  {stem:"___ no sabía que ___ hermano vivía aquí. (él / su, en este caso posesivo 'tu')", answers:["él"]},
+  {stem:"Creo que ___ tienes razón esta vez. (tú)", answers:["tú"]},
+  {stem:"No sé ___ decirte, la verdad. (qué)", answers:["qué"]},
+  {stem:"El chico ___ conociste ayer es mi primo. (que)", answers:["que"]},
+  {stem:"A ___ me encanta el chocolate. (mí)", answers:["mí"]},
+  {stem:"Quiero que me ___ tu opinión sincera. (dé)", answers:["dé"]}
+], null, null, true);
+
+/* ---------------- BLOQUE 10: repaso final de conjugación con cambio ortográfico ---------------- */
+makeFillBlock("o10","Bloque 10 · Repaso final — conjuga correctamente","el más difícil","hard",[
+  {stem:"Ella siempre ___ el paraguas cuando llueve. (coger, presente)", answers:["coge"]},
+  {stem:"Nosotros ___ toda la tarde ese documento. (buscar, pretérito indefinido)", answers:["buscamos"]},
+  {stem:"Cuando yo ___ a Madrid, te llamaré. (llegar, futuro)", answers:["llegue"]},
+  {stem:"Es importante que ___ las normas. (seguir, subjuntivo, vosotros)", answers:["sigáis"]},
+  {stem:"En cuanto ___ la reunión, te aviso. (empezar, subjuntivo)", answers:["empiece"]}
+]);
+
+/* ---------------- BLOQUE 11: repaso combinado de tildes diacríticas y enclíticos (radio) ---------------- */
+makeRadioBlock("o11","Bloque 11 · Repaso combinado","alto","hard",[
+  {q:"Frase: 'Espero que ___ (dar) una buena noticia.'", opts:["de","dé"], answer:1},
+  {q:"Frase: 'No sé ___ (que/qué) hacer ahora mismo.'", opts:["que","qué"], answer:1},
+  {q:"Orden: '¡___ (comprar-lo) ya, no esperes más!'", opts:["cómpralo","compralo"], answer:0},
+  {q:"Frase: '___ (Tú/Tu) hermana llamó esta mañana.'", opts:["Tú","Tu"], answer:1},
+  {q:"Frase: 'No ___ (se/sé) si podré ir mañana.'", opts:["sé","se"], answer:0}
+]);
+
+/* ---------------- BLOQUE 12: transformación abierta 1 — añade pronombres y acentúa ---------------- */
+makeTranslateBlock("o12","Bloque 12 · Transforma: añade el pronombre y escribe la forma correctamente acentuada","alto","hard",[
+  {stem:"Verbo 'contar' (imperativo, tú) + me + lo — cuéntame algo interesante.", model:"cuéntamelo"},
+  {stem:"Verbo 'poner' (gerundio) + se + los (zapatos) — está haciéndolo ahora mismo.", model:"poniéndoselos"},
+  {stem:"Verbo 'callar' (imperativo, tú) + te — orden de guardar silencio.", model:"cállate"},
+  {stem:"Verbo 'traer' (imperativo, tú) + me + los — pide que te los traiga.", model:"tráemelos"}
+], "Respuestas abiertas — escribe la forma con pronombre(s) y compárala con el modelo.");
+
+/* ---------------- BLOQUE 13: transformación abierta 2 — frases con pares diacríticos ---------------- */
+makeTranslateBlock("o13","Bloque 13 · Traduce (usa correctamente las tildes diacríticas)","el más difícil","hard",[
+  {stem:"«Если ты хочешь, я дам тебе свою книгу.» (usa si/sí, tú/tu, dé/de)", model:"Si quieres, te doy mi libro."},
+  {stem:"«Я не знаю, что он сказал мне вчера.» (usa qué/que, mí/mi)", model:"No sé qué me dijo ayer."},
+  {stem:"«Дай мне это, пожалуйста!» (imperativo + pronombres: dar + me + lo)", model:"¡Dámelo, por favor!"},
+  {stem:"«Он пришёл из Мадрида вчера вечером.» (usa de, no confundir con dé)", model:"Él vino de Madrid anoche."}
+], "Respuestas abiertas — compara tu traducción con el modelo (puede haber más de una forma correcta).");
+
+/* ---------------- BLOQUE 14: fill final — elige entre pares diacríticos con banco mixto ---------------- */
+makeFillBlock("o14","Bloque 14 · Repaso mixto final","el más difícil","hard",[
+  {stem:"___ hermano vive con ___ hermana en Sevilla. (mi = posesivo)", answers:["mi"]},
+  {stem:"No creo que ___ tengas razón en esto. (tú = pronombre)", answers:["tú"]},
+  {stem:"Prefiero quedarme en casa, ___ tú puedes ir si quieres. (mas = «pero», literario)", answers:["mas"]},
+  {stem:"Necesito ___ información antes de decidir. (más = cantidad)", answers:["más"]},
+  {stem:"¿___ vienes a la fiesta el sábado? (tú)", answers:["tú"]}
+], null, null, true);
+
+/* ---------------- BLOQUE 15: repaso general — cambios ortográficos y tildes juntos ---------------- */
+makeRadioBlock("o15","Bloque 15 · Repaso general — elige la opción correcta","el más difícil","hard",[
+  {q:"Presente de 'seguir', yo: ", opts:["sigo","siguo"], answer:0},
+  {q:"Pretérito indefinido de 'buscar', yo: ", opts:["busqué","busqé"], answer:0},
+  {q:"'Espero que me ___ la razón.' (dar, subjuntivo)", opts:["de","dé"], answer:1},
+  {q:"Imperativo 'sentarse' + te, con tilde correcta: ", opts:["sientate","siéntate"], answer:1},
+  {q:"'___ no sabía nada de esto.' (Él, pronombre)", opts:["Él","El"], answer:0}
+]);
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

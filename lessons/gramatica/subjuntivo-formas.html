@@ -1,0 +1,1065 @@
+<!doctype html>
+<title>Subjuntivo: formas</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Subjuntivo: formas</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>El subjuntivo — las formas</h1>
+  <p class="subtitle">Reglas claras + quince bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> esta página es la <b>parte 1 de 3</b> del bloque de subjuntivo. Aquí trabajamos exclusivamente <b>las formas</b>: cómo se conjugan el presente, el pretérito perfecto, el pretérito imperfecto y el pretérito pluscuamperfecto de subjuntivo (regulares, con cambio de raíz e irregulares). Todavía no explicamos <i>cuándo</i> se usa el subjuntivo — por eso, delante de cada frase encontrarás un disparador ya dado (<i>«Espero que…», «Quiero que…»</i>) sin más explicación: el «cuándo» llega en las dos páginas siguientes.
+  </div>
+  <p class="series-note">📚 Serie <b>Subjuntivo</b> — parte 1 de 3: <b>formas</b> (esta página) → <b>«Subjuntivo: usos básicos»</b> → <b>«Subjuntivo: usos avanzados»</b>. Forma parte del bloque <b>Gramática</b> del sitio. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — las cuatro formas del subjuntivo</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver una frase con cada forma.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>Los irregulares más «temidos» del presente de subjuntivo — chuleta rápida</h3>
+    <ul>
+      <li><b>Totalmente irregulares (memorizar):</b> sea, esté, vaya, sepa, haya, dé — y todas sus personas: seas/seamos/seáis/sean, estés/estemos/estéis/estén, vayas/vayamos/vayáis/vayan…</li>
+      <li><b>Cambio o→ue:</b> pueda (poder), vuelva (volver), cuente (contar), encuentre (encontrar) — pero <i>podamos/podáis</i>, sin diptongo.</li>
+      <li><b>Cambio e→ie:</b> quiera (querer), piense (pensar), cierre (cerrar), entienda (entender) — pero <i>pensemos/penséis</i>, sin diptongo.</li>
+      <li><b>Cambio e→i (solo verbos en -ir, en TODAS las personas):</b> pida (pedir), sirva (servir), repita (repetir) — también <i>pidamos, pidáis</i>.</li>
+    </ul>
+    <div class="error-box"><b>Ошибка типичная для русскоговорящих:</b> «регуляризация» неправильных форм по аналогии с обычными глаголами — говорят <s>pode</s> вместо правильного <b>pueda</b>, или <s>teno</s> вместо правильного <b>tenga</b> (по образцу regular -ar/-er/-ir глаголов). Эти формы нужно просто запомнить — вывести их по общему правилу не получится.</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Quince bloques centrados solo en la <b>forma</b> (conjugación) — el disparador («Espero que…», «Quiero que…», «Quería que…») ya está dado, no hace falta decidir si hace falta subjuntivo. Cada bloque tiene su propio botón «Comprobar».</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Subjuntivo (1/3: formas) · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (las cuatro formas) ---------------- */
+var rules = [
+  {term:"Presente de subjuntivo — verbos regulares", pos:"-ar → e/es/e/emos/éis/en · -er/-ir → a/as/a/amos/áis/an",
+   quote:"habl<mark>ar</mark> → hable, hables, hable, hablemos, habléis, hablen &nbsp;|&nbsp; com<mark>er</mark> → coma, comas, coma, comamos, comáis, coman &nbsp;|&nbsp; viv<mark>ir</mark> → viva, vivas, viva, vivamos, viváis, vivan",
+   trans:"окончания -ar меняются на e-, а окончания -er/-ir — на a-",
+   mean:"Se forma a partir de la raíz del verbo (quitando -ar/-er/-ir) y añadiendo las terminaciones «opuestas»: los verbos en -ar toman terminaciones con e, y los verbos en -er/-ir toman terminaciones con a. Los verbos en -er e -ir comparten las mismas terminaciones.",
+   ex:"Espero que hables más despacio. — Надеюсь, ты будешь говорить помедленнее."},
+  {term:"Presente de subjuntivo — cambios de raíz e irregularidad de la 1.ª persona", pos:"e→ie, o→ue, e→i (solo -ir) · la raíz irregular del «yo» se mantiene en todas las personas",
+   quote:"quer<mark>er</mark> (e→ie) → quiera &nbsp;|&nbsp; pod<mark>er</mark> (o→ue) → pueda &nbsp;|&nbsp; ped<mark>ir</mark> (e→i) → pida &nbsp;|&nbsp; tener→tenga, poner→ponga, decir→diga, hacer→haga, venir→venga, salir→salga, conocer→conozca",
+   trans:"меняется гласная корня (e→ie, o→ue, e→i) или сохраняется неправильная основа формы «yo»",
+   mean:"Los verbos con diptongación en presente de indicativo (e→ie, o→ue) mantienen ese mismo cambio en subjuntivo, excepto en nosotros/vosotros. Los verbos en -ir con cambio e→i (como pedir) mantienen el cambio en TODAS las personas, incluidos nosotros/vosotros. Los verbos cuya forma «yo» del indicativo es irregular (tengo, pongo, digo, hago, vengo, salgo, conozco) usan esa misma raíz irregular en TODO el subjuntivo: tenga, tengas, tenga, tengamos, tengáis, tengan.",
+   ex:"Quiero que pidas la cuenta cuando termines. — Хочу, чтобы ты попросил счёт, когда закончишь."},
+  {term:"Presente de subjuntivo — verbos totalmente irregulares", pos:"un grupo cerrado de 6 verbos: ser, estar, ir, saber, haber, dar",
+   quote:"ser→sea &nbsp;|&nbsp; estar→esté &nbsp;|&nbsp; ir→vaya &nbsp;|&nbsp; saber→sepa &nbsp;|&nbsp; haber→haya &nbsp;|&nbsp; dar→dé",
+   trans:"эти 6 форм не выводятся ни по какому правилу — только заучивание наизусть",
+   mean:"Un grupo pequeño pero muy frecuente de verbos con raíces completamente irregulares en subjuntivo. Hay que memorizarlos entero: sea/seas/sea/seamos/seáis/sean; esté/estés/esté/estemos/estéis/estén; vaya/vayas/vaya/vayamos/vayáis/vayan; sepa/sepas/sepa/sepamos/sepáis/sepan; haya/hayas/haya/hayamos/hayáis/hayan; dé/des/dé/demos/deis/den.",
+   ex:"Ojalá que todo vaya bien mañana. — Дай бог, чтобы завтра всё прошло хорошо."},
+  {term:"Pretérito perfecto de subjuntivo", pos:"presente de subjuntivo de haber + participio",
+   quote:"haya/hayas/haya/hayamos/hayáis/hayan + hablado / comido / vivido / hecho / escrito",
+   trans:"«(чтобы) я сделал / уже успел сделать» — действие, законченное к моменту речи",
+   mean:"Se forma con el presente de subjuntivo del verbo haber (haya, hayas, haya, hayamos, hayáis, hayan) más el participio del verbo principal. Expresa una acción ya terminada, vista desde el presente.",
+   ex:"No creo que haya terminado el informe todavía. — Не думаю, что он уже закончил отчёт."},
+  {term:"Pretérito imperfecto de subjuntivo (-ra / -se)", pos:"3.ª persona del plural del pretérito indefinido, menos «-ron», + -ra/-se",
+   quote:"hablaron → habla<mark>ra</mark>/habla<mark>se</mark> &nbsp;|&nbsp; comieron → comie<mark>ra</mark>/comie<mark>se</mark> &nbsp;|&nbsp; vivieron → vivie<mark>ra</mark>/vivie<mark>se</mark>",
+   trans:"dos formas equivalentes; en España, en el habla, -ra es mucho más frecuente que -se",
+   mean:"Se toma la forma «ellos» del pretérito indefinido (con todas sus irregularidades: tuvieron, fueron, dijeron…), se quita «-ron» y se añaden las terminaciones -ra/-ras/-ra/-ramos/-rais/-ran o -se/-ses/-se/-semos/-seis/-sen. Las dos formas son gramaticalmente correctas y significan lo mismo, pero en el español de España la forma en -ra es muchísimo más frecuente en el habla cotidiana; la forma en -se suena algo más formal o literaria.",
+   ex:"Quería que me llamaras (= llamases) antes de las ocho. — Я хотел, чтобы ты позвонил мне до восьми."},
+  {term:"Pretérito pluscuamperfecto de subjuntivo", pos:"imperfecto de subjuntivo de haber + participio",
+   quote:"hubiera/hubieras/hubiera/hubiéramos/hubierais/hubieran (o hubiese…) + hablado / comido / vivido",
+   trans:"«(чтобы) я сделал бы» — действие, предшествующее другому моменту в прошлом",
+   mean:"Se forma con el imperfecto de subjuntivo del verbo haber (hubiera/hubiese, ambas variantes son correctas) más el participio del verbo principal. Expresa una acción anterior a otro punto del pasado, y es la forma que aparece en la parte «si…» de muchas oraciones condicionales irreales del pasado.",
+   ex:"Si hubieras estudiado más, habrías aprobado. — Если бы ты больше учился, ты бы сдал экзамен."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Formación:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Explicación:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass, ruleHtml){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+/* ---------------- BLOQUE 1: reconocimiento (radio) — presente, verbos regulares ---------------- */
+(function(){
+  var b = {id:"p1", items:[
+    {q:"Espero que (tú) ___ (hablar) más despacio.", opts:["hablas","hables","hablo"], answer:1},
+    {q:"Quiero que (ella) ___ (comer) más verduras.", opts:["come","coma","comes"], answer:1},
+    {q:"Espero que (vosotros) ___ (vivir) felices.", opts:["vivís","viváis","vive"], answer:1},
+    {q:"Quiero que (yo) ___ (trabajar) menos este año — ¡ojalá!", opts:["trabajo","trabaje","trabajas"], answer:1},
+    {q:"Espero que (ellos) ___ (aprender) rápido.", opts:["aprenden","aprendan","aprende"], answer:1},
+    {q:"Quiero que (nosotros) ___ (escribir) la carta juntos.", opts:["escribimos","escribamos","escribís"], answer:1}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 1 · Reconocimiento — presente de subjuntivo, verbos regulares","fácil","easy"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="p1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="p1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 2: huecos con banco — presente, verbos regulares ---------------- */
+(function(){
+  var b = {id:"p2", bank:"cocines · beba · abramos · estudiéis · reciban · llame", items:[
+    {stem:"Espero que (tú) ___ (cocinar) para la fiesta.", answers:["cocines"]},
+    {stem:"Quiero que (él) ___ (beber) menos café.", answers:["beba"]},
+    {stem:"Espero que (nosotros) ___ (abrir) la tienda a tiempo.", answers:["abramos"]},
+    {stem:"Quiero que (vosotros) ___ (estudiar) para el examen.", answers:["estudiéis"]},
+    {stem:"Espero que (ellos) ___ (recibir) buenas noticias.", answers:["reciban"]},
+    {stem:"Quiero que (usted) ___ (llamar) al médico.", answers:["llame"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 2 · Huecos con banco de palabras — presente, regulares","fácil","easy"));
+  wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+b.bank+'</div>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 3: reconocimiento (radio) — raíz irregular / cambio vocálico ---------------- */
+(function(){
+  var b = {id:"p3", items:[
+    {q:"Espero que (tú) ___ (tener) paciencia.", opts:["tienes","tenas","tengas"], answer:2},
+    {q:"Quiero que (él) ___ (poder) venir mañana.", opts:["puede","pueda","podas"], answer:1},
+    {q:"Espero que (ella) ___ (pedir) ayuda.", opts:["pide","pida","pedas"], answer:1},
+    {q:"Quiero que (yo) ___ (decir) la verdad.", opts:["digo","diga","dice"], answer:1},
+    {q:"Espero que (nosotros) ___ (salir) temprano.", opts:["salimos","salgamos","salemos"], answer:1},
+    {q:"Quiero que (ellos) ___ (conocer) la ciudad.", opts:["conocen","conozcan","conocan"], answer:1}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 3 · Reconocimiento — raíz irregular y cambio vocálico","medio","mid"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="p3-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="p3-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 4: huecos sin banco — cambio e→ie ---------------- */
+(function(){
+  var b = {id:"p4", items:[
+    {stem:"Espero que (tú) ___ (querer) ayudarme.", answers:["quieras"]},
+    {stem:"Quiero que (él) ___ (pensar) antes de hablar.", answers:["piense"]},
+    {stem:"Espero que (vosotros) ___ (cerrar) la puerta con llave.", answers:["cerréis"]},
+    {stem:"Quiero que (nosotros) ___ (entender) el problema.", answers:["entendamos"]},
+    {stem:"Espero que (ellos) ___ (querer) venir a la fiesta.", answers:["quieran"]},
+    {stem:"Quiero que (yo) ___ (pensar) bien la respuesta — ¡eso espero!", answers:["piense"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 4 · Huecos sin banco — cambio e→ie","medio","mid"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Sin pistas — recuerda: e→ie en todas las personas menos nosotros/vosotros.</p>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 5: huecos sin banco — cambio o→ue y e→i ---------------- */
+(function(){
+  var b = {id:"p5", items:[
+    {stem:"Espero que (tú) ___ (poder) terminar hoy.", answers:["puedas"]},
+    {stem:"Quiero que (ella) ___ (volver) pronto a casa.", answers:["vuelva"]},
+    {stem:"Espero que (nosotros) ___ (contar) con tu ayuda.", answers:["contemos"]},
+    {stem:"Quiero que (tú) ___ (pedir) el menú del día.", answers:["pidas"]},
+    {stem:"Espero que (vosotros) ___ (servir) la cena a las nueve.", answers:["sirváis"]},
+    {stem:"Quiero que (ellos) ___ (repetir) el ejercicio.", answers:["repitan"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 5 · Huecos sin banco — cambio o→ue y e→i","medio","mid"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Recuerda: los verbos en -ir con e→i (pedir, servir…) cambian en TODAS las personas.</p>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 6: huecos sin banco — raíz irregular de "yo" mantenida ---------------- */
+(function(){
+  var b = {id:"p6", items:[
+    {stem:"Espero que (él) ___ (poner) la mesa.", answers:["ponga"]},
+    {stem:"Quiero que (tú) ___ (hacer) los deberes.", answers:["hagas"]},
+    {stem:"Espero que (nosotros) ___ (venir) a la reunión.", answers:["vengamos"]},
+    {stem:"Quiero que (vosotros) ___ (salir) antes de las diez.", answers:["salgáis"]},
+    {stem:"Espero que (ellos) ___ (decir) la verdad siempre.", answers:["digan"]},
+    {stem:"Quiero que (yo) ___ (tener) más tiempo libre — ¡ojalá!", answers:["tenga"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 6 · Huecos sin banco — raíz irregular del «yo»","medio","mid"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">tengo→tenga, pongo→ponga, digo→diga, hago→haga, vengo→venga, salgo→salga: la misma raíz en todas las personas.</p>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 7: huecos — los 6 verbos totalmente irregulares ---------------- */
+(function(){
+  var b = {id:"p7", items:[
+    {stem:"Espero que (tú) ___ (ser) feliz.", answers:["seas"]},
+    {stem:"Quiero que (ella) ___ (estar) tranquila.", answers:["esté"]},
+    {stem:"Espero que (nosotros) ___ (ir) juntos al concierto.", answers:["vayamos"]},
+    {stem:"Quiero que (vosotros) ___ (saber) la verdad.", answers:["sepáis"]},
+    {stem:"Quiero que (tú) me ___ (dar) tu opinión.", answers:["des"]},
+    {stem:"Espero que ___ (haber — impersonal: hay → haya) suficiente comida para todos.", answers:["haya"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 7 · Los 6 verbos totalmente irregulares — sea, esté, vaya, sepa, dé, haya","difícil","hard"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 8: relacionar — infinitivo ↔ forma "yo" del presente de subjuntivo ---------------- */
+(function(){
+  var b = {id:"p8",
+    words:["hablar","tener","ir","dormir","pedir","saber"],
+    defs:["hable","tenga","vaya","duerma","pida","sepa"],
+    answers:["a","b","c","d","e","f"]
+  };
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 8 · Relaciona el infinitivo con la forma «yo» del presente de subjuntivo","medio","mid"));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Infinitivo</th><th>Forma «yo»</th></tr>";
+  b.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e","f"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = b.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.words.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.words.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.words.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 9: huecos — pretérito perfecto de subjuntivo ---------------- */
+(function(){
+  var b = {id:"p9", items:[
+    {stem:"Espero que (tú) ya ___ (terminar) los deberes.", answers:["hayas terminado"]},
+    {stem:"Quiero que (él) ___ (llegar) a tiempo.", answers:["haya llegado"]},
+    {stem:"Espero que (nosotros) ___ (hacer) bien el examen.", answers:["hayamos hecho"]},
+    {stem:"Quiero que (vosotros) ___ (ver) la película antes de la clase.", answers:["hayáis visto"]},
+    {stem:"Espero que (ellos) ___ (escribir) la carta.", answers:["hayan escrito"]},
+    {stem:"Quiero que (yo) ___ (comer) algo antes de salir — ¡eso espero!", answers:["haya comido"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 9 · Pretérito perfecto de subjuntivo — haya + participio","difícil","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Escribe las dos palabras: haya/hayas… + el participio (regular o irregular).</p>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off" style="min-width:170px;">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 10: huecos — pretérito imperfecto de subjuntivo, forma -ra ---------------- */
+(function(){
+  var b = {id:"p10", items:[
+    {stem:"Quería que (tú) me ___ (llamar) antes de las ocho.", answers:["llamaras"]},
+    {stem:"Esperaba que (él) ___ (comer) algo antes de salir.", answers:["comiera"]},
+    {stem:"Quería que (nosotros) ___ (tener) más paciencia.", answers:["tuviéramos"]},
+    {stem:"Esperaba que (vosotros) ___ (estar) listos a tiempo.", answers:["estuvierais"]},
+    {stem:"Quería que (ellos) ___ (decir) la verdad.", answers:["dijeran"]},
+    {stem:"Esperaba que (yo) ___ (poder) ayudar más — ¡eso quería!", answers:["pudiera"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 10 · Pretérito imperfecto de subjuntivo — forma -ra","difícil","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Parte de la 3.ª persona del plural del pretérito indefinido (tuvieron, estuvieron, dijeron…).</p>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 11: huecos — imperfecto de subjuntivo, -ra o -se (las dos válidas) ---------------- */
+(function(){
+  var b = {id:"p11", items:[
+    {stem:"Quería que (tú) ___ (hablar) conmigo.", answers:["hablaras","hablases"]},
+    {stem:"Esperaba que (ella) ___ (vivir) más cerca.", answers:["viviera","viviese"]},
+    {stem:"Quería que (nosotros) ___ (venir) a la boda.", answers:["viniéramos","viniésemos"]},
+    {stem:"Esperaba que (vosotros) ___ (saber) la respuesta.", answers:["supierais","supieseis"]},
+    {stem:"Quería que (ellos) ___ (ir) con nosotros.", answers:["fueran","fuesen"]},
+    {stem:"Esperaba que (yo) ___ (ser) más paciente — ¡eso quería!", answers:["fuera","fuese"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 11 · Imperfecto de subjuntivo — practica también la forma -se","difícil","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Aquí se acepta CUALQUIERA de las dos formas: -ra o -se (por ejemplo, hablaras o hablases). Elige la que prefieras.</p>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+' / '+it.answers[1]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 12: huecos — pretérito pluscuamperfecto de subjuntivo ---------------- */
+(function(){
+  var b = {id:"p12", items:[
+    {stem:"Si (tú) ___ (estudiar) más, habrías aprobado.", answers:["hubieras estudiado","hubieses estudiado"]},
+    {stem:"Ojalá (él) ___ (llegar) a tiempo — pero no llegó.", answers:["hubiera llegado","hubiese llegado"]},
+    {stem:"Si (nosotros) ___ (saber) la verdad antes, habríamos actuado distinto.", answers:["hubiéramos sabido","hubiésemos sabido"]},
+    {stem:"Ojalá (vosotros) ___ (ver) esa película — os habría encantado.", answers:["hubierais visto","hubieseis visto"]},
+    {stem:"Si (ellos) ___ (hacer) los deberes, no habrían suspendido.", answers:["hubieran hecho","hubiesen hecho"]},
+    {stem:"Ojalá (yo) ___ (decir) la verdad desde el principio.", answers:["hubiera dicho","hubiese dicho"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 12 · Pretérito pluscuamperfecto de subjuntivo — hubiera/hubiese + participio","difícil","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Se acepta hubiera o hubiese + el participio correspondiente.</p>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off" style="min-width:170px;">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+' / '+it.answers[1]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 13: reconocimiento (radio) — evita los errores típicos de regularización ---------------- */
+(function(){
+  var b = {id:"p13", items:[
+    {q:"Espero que (tú) ___ (poder) venir.", opts:["podas","puedas","podes"], answer:1},
+    {q:"Quiero que (él) ___ (tener) suerte.", opts:["tenga","tene","tenía"], answer:0},
+    {q:"Espero que (nosotros) ___ (ir) a tiempo.", opts:["vamos","vayamos","vaigamos"], answer:1},
+    {q:"Quiero que (ella) ___ (saber) la verdad.", opts:["sabe","sepa","sabia"], answer:1},
+    {q:"Espero que (vosotros) ___ (estar) bien.", opts:["estáis","estén","estéis"], answer:2},
+    {q:"Quiero que (yo) ___ (dar) mi opinión.", opts:["doy","dé","de"], answer:1}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 13 · Reconocimiento — cuidado con los errores típicos de regularización","difícil","hard"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="p13-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="p13-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 14: abierto — conjuga 5 verbos en las 4 formas vistas ---------------- */
+(function(){
+  var items = [
+    {stem:"Conjuga <b>hablar</b> en las 4 formas de subjuntivo que has visto, en la persona <b>tú</b>: presente · pretérito perfecto · pretérito imperfecto (-ra o -se) · pretérito pluscuamperfecto.", model:"hables · hayas hablado · hablaras (o hablases) · hubieras hablado (o hubieses hablado)"},
+    {stem:"Conjuga <b>tener</b> en las 4 formas, en la persona <b>ella</b>.", model:"tenga · haya tenido · tuviera (o tuviese) · hubiera tenido (o hubiese tenido)"},
+    {stem:"Conjuga <b>ir</b> en las 4 formas, en la persona <b>nosotros</b>.", model:"vayamos · hayamos ido · fuéramos (o fuésemos) · hubiéramos ido (o hubiésemos ido)"},
+    {stem:"Conjuga <b>pedir</b> en las 4 formas, en la persona <b>vosotros</b>.", model:"pidáis · hayáis pedido · pidierais (o pidieseis) · hubierais pedido (o hubieseis pedido)"},
+    {stem:"Conjuga <b>dar</b> en las 4 formas, en la persona <b>yo</b>.", model:"dé · haya dado · diera (o diese) · hubiera dado (o hubiese dado)"}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 14 · Abierto — conjuga 5 verbos en las 4 formas de subjuntivo","el más difícil","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe las 4 formas separadas por «·» y compáralas con el modelo.</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="p14-'+idx+'" style="min-height:44px;" placeholder="presente · perfecto · imperfecto · pluscuamperfecto"></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="p14-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("p14-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 15: abierto — traduce usando el disparador dado ---------------- */
+(function(){
+  var items = [
+    {stem:"Traduce usando «Espero que…»: «Надеюсь, что ты поговоришь с ней».", model:"Espero que hables con ella."},
+    {stem:"Traduce usando «Quiero que…»: «Хочу, чтобы вы (мн.) пришли вовремя».", model:"Quiero que vengáis a tiempo."},
+    {stem:"Traduce usando «Quería que…»: «Я хотел, чтобы она знала правду».", model:"Quería que supiera (o supiese) la verdad."},
+    {stem:"Traduce usando «Espero que…» + pretérito perfecto: «Надеюсь, что они уже поели».", model:"Espero que ya hayan comido."},
+    {stem:"Traduce usando «Si…» + pluscuamperfecto: «Если бы я это знал раньше…».", model:"Si lo hubiera (o hubiese) sabido antes…"}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 15 · Abierto — traduce con el disparador ya dado","el más difícil","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">El disparador ya está dado — céntrate solo en conjugar bien la forma de subjuntivo.</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="p15-'+idx+'" style="min-height:44px;" placeholder="Tu traducción..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="p15-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("p15-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

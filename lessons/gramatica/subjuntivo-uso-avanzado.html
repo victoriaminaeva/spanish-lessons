@@ -1,0 +1,1109 @@
+<!doctype html>
+<title>Subjuntivo: usos avanzados</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Subjuntivo: usos avanzados</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B2</p>
+  <h1>El subjuntivo — usos avanzados</h1>
+  <p class="subtitle">Reglas + dieciséis bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> esta es la <b>tercera y última parte</b> de la miniserie sobre el subjuntivo. En «Subjuntivo: formas» vimos la conjugación, y en «Subjuntivo: usos básicos» repasamos los usos principales (deseo, duda, influencia, emoción...). Aquí llegamos a los usos más difíciles de nivel B2: antecedente desconocido, conjunciones temporales de futuro, concesión con <i>aunque</i>, verbos que cambian de significado según el modo, <i>como si</i>, <i>el hecho de que</i> y expresiones fijas.
+  </div>
+  <p class="series-note">📚 Parte 3/3 de la serie <b>Subjuntivo</b> (tras «Subjuntivo: formas» y «Subjuntivo: usos básicos»). <a href="../../index.html#gramatica">Ver toda la serie de Gramática</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — los usos más difíciles</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada regla.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>Aunque — el contraste más difícil para hablantes de ruso</h3>
+    <ul>
+      <li><b>AUNQUE + INDICATIVO</b> = hecho real, conocido o confirmado por el hablante: <i>aunque hace frío, salgo</i> (sé que hace frío).</li>
+      <li><b>AUNQUE + SUBJUNTIVO</b> = hecho hipotético, no confirmado, o algo que al hablante no le importa si es verdad: <i>aunque haga frío, salgo</i> (no sé qué tiempo hará).</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> в русском «хотя» никогда не меняет наклонение глагола, поэтому русскоговорящие часто ставят indicativo всегда. Но в испанском переключение <b>aunque + subjuntivo</b> передаёт другой смысл («даже если», а не просто «хотя»), а не просто стилистический вариант — это разные высказывания.</div>
+  </div>
+
+  <div class="contrast-box">
+    <h3>Decir, sentir, parecer — el modo cambia el significado</h3>
+    <ul>
+      <li><b>decir que</b> + indicativo = informar (сообщаю факт) · <b>decir que</b> + subjuntivo = mandar/pedir (прошу, приказываю).</li>
+      <li><b>sentir que</b> + indicativo = percibir/notar físicamente (ощущаю) · <b>sentir que</b> + subjuntivo = lamentar (сожалею).</li>
+      <li><b>parece que</b> + indicativo = opinión, certeza (мне кажется) · <b>no parece que</b> + subjuntivo = duda, incredulidad (не похоже, что...).</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> в русском нет отдельной грамматической формы для этого различия — оба смысла передаются одинаково («говорю, что...», «чувствую, что...»). В испанском единственный сигнал, какое значение имеется в виду, — это наклонение глагола, поэтому его нельзя пропустить или выбрать «на слух».</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Dieciséis bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Subjuntivo · Parte 3/3 · Nivel B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS ---------------- */
+var rules = [
+  {term:"antecedente desconocido", pos:"oraciones relativas · subjuntivo",
+   quote:"Busco a alguien que <mark>sepa</mark> ruso y español. No hay nadie que <mark>pueda</mark> ayudarte hoy.",
+   trans:"кто-то, кто... / никто, кто... — антецедент неизвестен или не существует",
+   mean:"Cuando el antecedente de una oración relativa es desconocido, indefinido o inexistente (con «nadie», «ninguno», «alguien que...»), el verbo va en subjuntivo. Si el antecedente es una persona o cosa concreta y conocida por el hablante, se usa indicativo.",
+   ex:"Tengo un amigo que sabe ruso y español. (antecedente conocido → indicativo) — У меня есть друг, который знает русский и испанский."},
+  {term:"conjunciones temporales de futuro", pos:"en cuanto · hasta que · antes de que...",
+   quote:"Te llamaré en cuanto <mark>llegue</mark> a casa. Iré antes de que <mark>empiece</mark> la reunión.",
+   trans:"как только, пока не, прежде чем + subjuntivo (если речь о будущем)",
+   mean:"«En cuanto», «hasta que» y «después de que» exigen subjuntivo cuando la acción todavía no ha ocurrido (se refiere al futuro). Si hablan de un hecho habitual o ya pasado, van con indicativo. «Antes de que» es una excepción: siempre lleva subjuntivo, sea futuro o pasado.",
+   ex:"Antes de que llegaras, ya habíamos terminado. — Прежде чем ты пришёл, мы уже закончили. (subjuntivo aunque es pasado)"},
+  {term:"mientras / después de que", pos:"conjunciones temporales · depende del contexto",
+   quote:"Mientras <mark>vivas</mark> aquí, sigue las normas. Mientras <mark>vivo</mark> aquí, disfruto del barrio.",
+   trans:"пока — реальная одновременность = indicativo; гипотетическое будущее = subjuntivo",
+   mean:"«Mientras» lleva indicativo si describe una simultaneidad real o habitual, y subjuntivo si es una condición hipotética orientada al futuro. Lo mismo pasa con «después de que»: indicativo para hechos ya realizados, subjuntivo para el futuro.",
+   ex:"Después de que terminó la clase, salimos a comer. (indicativo, pasado real) / Saldremos después de que termine la clase. (subjuntivo, futuro) — Мы выйдем после того как закончится урок."},
+  {term:"aunque", pos:"concesión · indicativo o subjuntivo",
+   quote:"Aunque <mark>llueve</mark>, vamos a salir. Aunque <mark>llueva</mark>, vamos a salir.",
+   trans:"хотя (факт известен = indicativo) / даже если (не уверен, гипотеза = subjuntivo)",
+   mean:"«Aunque + indicativo» presenta un hecho real, conocido o confirmado por el hablante. «Aunque + subjuntivo» presenta un hecho hipotético, no confirmado, o que al hablante no le importa si es verdad. Ver el cuadro de contraste más abajo.",
+   ex:"Aunque es caro, lo voy a comprar. (sé que es caro) / Aunque sea caro, lo voy a comprar. (no sé el precio, no me importa) — Даже если это дорого, я всё равно куплю."},
+  {term:"por mucho que / por más que", pos:"concesión reforzada · siempre subjuntivo",
+   quote:"Por mucho que <mark>estudies</mark>, no vas a aprenderlo todo en un día.",
+   trans:"сколько бы ни..., как бы ни... + subjuntivo",
+   mean:"Estas expresiones de concesión intensificada van siempre con subjuntivo, igual que «por muy + adjetivo/adverbio + que». No admiten indicativo en ningún caso.",
+   ex:"Por muy cansado que esté, siempre hace ejercicio. — Как бы он ни устал, он всегда занимается спортом."},
+  {term:"decir / sentir / parecer", pos:"verbos que cambian de significado con el modo",
+   quote:"Te digo que <mark>vienes</mark> mañana (te informo). Te digo que <mark>vengas</mark> mañana (te lo ordeno).",
+   trans:"говорю, что.../ говорю, чтобы... — смысл меняется вместе с наклонением",
+   mean:"Con «decir», el indicativo informa de un hecho y el subjuntivo da una orden o petición. Con «sentir», el indicativo significa percibir/notar y el subjuntivo significa lamentar. Con «parecer», el indicativo expresa una opinión y «no parecer» + subjuntivo introduce duda. Ver el cuadro de contraste más abajo.",
+   ex:"Siento que la casa tiembla. (percibo, indicativo) / Siento que no puedas venir. (lo lamento, subjuntivo) — Жаль, что ты не можешь прийти."},
+  {term:"el hecho de que", pos:"sustantivación · casi siempre subjuntivo",
+   quote:"El hecho de que <mark>llegues</mark> tarde todos los días es un problema.",
+   trans:"тот факт, что... + subjuntivo (почти всегда)",
+   mean:"Esta construcción convierte una oración en sujeto o complemento de otra y va casi siempre con subjuntivo, independientemente de si el hecho es real o no: lo que se destaca es la reacción del hablante, no la veracidad del hecho.",
+   ex:"El hecho de que no me llamaras me dolió mucho. — Тот факт, что ты мне не позвонил, меня сильно задел."},
+  {term:"como si", pos:"comparación irreal · siempre subjuntivo",
+   quote:"Habla como si <mark>fuera</mark> el jefe. Me miró como si no me <mark>hubiera</mark> visto nunca.",
+   trans:"как будто... + imperfecto/pluscuamperfecto de subjuntivo",
+   mean:"«Como si» compara con una situación irreal y siempre exige subjuntivo, nunca indicativo: imperfecto de subjuntivo para algo simultáneo a la acción principal, pluscuamperfecto de subjuntivo para algo anterior a ella.",
+   ex:"Gasta dinero como si fuera millonario. (simultáneo) / Habla del tema como si lo hubiera vivido. (anterior) — Он говорит об этом, как будто пережил это сам."},
+  {term:"expresiones fijas concesivas", pos:"subjuntivo lexicalizado",
+   quote:"Digas lo que <mark>digas</mark>, no voy a cambiar de opinión. Pase lo que <mark>pase</mark>, estaré contigo.",
+   trans:"что бы ты ни говорил / будь что будет / что бы ни случилось",
+   mean:"Son expresiones fijas de valor concesivo o de duda que siempre llevan subjuntivo: «digas lo que digas», «sea como sea», «pase lo que pase», «venga lo que venga». «Que yo sepa» expresa conocimiento limitado, y «ni que fueras...» expresa incredulidad o reproche.",
+   ex:"Ni que fueras el dueño del edificio, para hablar así. — Можно подумать, ты владелец здания, раз так разговариваешь."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass, ruleHtml){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+/* helper: builds a radio-choice item-row where options are plain words */
+function buildRadioRow(name, idx, stemHtml, opts){
+  var row = document.createElement("div");
+  row.className = "item-row"; row.setAttribute("data-idx", idx);
+  var choices = opts.map(function(o, oi){
+    return '<label class="choice-label"><input type="radio" name="'+name+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+  }).join("");
+  row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+stemHtml+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+  return row;
+}
+
+/* ---------------- BLOQUE 1: antecedente conocido/desconocido (radio) ---------------- */
+(function(){
+  var b = {id:"p1", items:[
+    {q:"Busco un empleado que ___ hablar inglés.", opts:["habla","hable"], answer:1},
+    {q:"Conozco a un empleado que ___ hablar inglés perfectamente.", opts:["habla","hable"], answer:0},
+    {q:"No hay nadie en la oficina que ___ resolver este problema.", opts:["puede","pueda"], answer:1},
+    {q:"Tengo una amiga que ___ vivido en Rusia.", opts:["ha","haya"], answer:0},
+    {q:"¿Hay alguien aquí que ___ ruso?", opts:["habla","hable"], answer:1},
+    {q:"Necesito el libro que me ___ recomendaste ayer.", opts:["recomendaste","recomendaras"], answer:0}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 1 · Antecedente conocido o desconocido — elige la forma correcta","fácil","easy"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){ list.appendChild(buildRadioRow("p1", idx, it.q, it.opts)); });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="p1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 2: conjunciones temporales — huecos con banco ---------------- */
+(function(){
+  var b = {id:"p2", bank:"en cuanto · hasta que · antes de que · después de que · mientras", items:[
+    {stem:"Vamos a esperar aquí ___ deje de llover.", answers:["hasta que"]},
+    {stem:"___ te vayas, quiero decirte una cosa.", answers:["antes de que"]},
+    {stem:"Recogeremos la mesa ___ se marchen los invitados.", answers:["después de que"]},
+    {stem:"___ tengas tiempo libre este verano, ven a visitarnos.", answers:["mientras"]},
+    {stem:"Avísame ___ llegues a casa.", answers:["en cuanto"]},
+    {stem:"___ vivía en Madrid, iba al mismo café cada mañana.", answers:["mientras"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 2 · Conjunciones temporales — huecos con banco de palabras","fácil","easy"));
+  wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+b.bank+'</div>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off" style="min-width:160px;">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 3: ¿indicativo o subjuntivo? (concepto, radio) ---------------- */
+(function(){
+  var b = {id:"p3", items:[
+    {q:"Tengo un amigo que ___ (hablar) coreano.", opts:["indicativo","subjuntivo"], answer:0},
+    {q:"Busco un piso que ___ (tener) balcón.", opts:["indicativo","subjuntivo"], answer:1},
+    {q:"Aunque ___ (llover) mañana — no lo sabemos —, iremos de excursión.", opts:["indicativo","subjuntivo"], answer:1},
+    {q:"Me trata como si no me ___ (conocer) de nada.", opts:["indicativo","subjuntivo"], answer:1},
+    {q:"Aunque ___ (hacer) frío ahora mismo — lo siento yo mismo —, salgo a correr.", opts:["indicativo","subjuntivo"], answer:0},
+    {q:"El hecho de que ___ (llegar) tarde otra vez no me sorprende.", opts:["indicativo","subjuntivo"], answer:1}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 3 · ¿Indicativo o subjuntivo? — reconoce el modo","medio","mid"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">No conjugues el verbo: solo indica qué modo pide la frase.</p>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){ list.appendChild(buildRadioRow("p3", idx, it.q, it.opts)); });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="p3-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 4: expresiones fijas — relacionar (select) ---------------- */
+(function(){
+  var b = {id:"p4",
+    words:["digas lo que digas","sea como sea","pase lo que pase","que yo sepa","ni que fueras el dueño"],
+    defs:["no importa lo que digas, no cambiaré de opinión — что бы ты ни говорил",
+          "de cualquier manera que sea, sin importar cómo — как бы то ни было",
+          "ocurra lo que ocurra — что бы ни случилось, во что бы то ни стало",
+          "hasta donde yo tengo información — насколько мне известно",
+          "expresa incredulidad o reproche, como si fueras algo que no eres — можно подумать, будто ты..."],
+    answers:["a","b","c","d","e"]
+  };
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 4 · Relaciona cada expresión fija con su significado","medio","mid"));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Expresión</th><th>Significado</th></tr>";
+  b.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = b.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.words.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.words.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.words.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 5: aunque — huecos sin banco (conjuga) ---------------- */
+(function(){
+  var b = {id:"p5", items:[
+    {stem:"Aunque (hacer) ___ frío, salimos a pasear. <i>(Sabemos que hace frío: es un hecho.)</i>", answers:["hace"]},
+    {stem:"Aunque (hacer) ___ frío mañana, saldremos a pasear igualmente. <i>(No sabemos qué tiempo hará.)</i>", answers:["haga"]},
+    {stem:"Aunque (ser) ___ muy inteligente, no aprobó el examen. <i>(Es un hecho conocido: ella es inteligente.)</i>", answers:["es"]},
+    {stem:"Aunque (ser) ___ muy difícil el examen, no me preocupa. <i>(No sé si será difícil o no.)</i>", answers:["sea"]},
+    {stem:"Aunque no (tener) ___ mucho dinero, siempre invita a sus amigos. <i>(Hecho real y conocido.)</i>", answers:["tiene"]},
+    {stem:"Aunque (llover) ___ mañana, el partido se jugará igualmente. <i>(No lo sabemos todavía.)</i>", answers:["llueva"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 5 · Aunque — conjuga según el contexto","medio","mid"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">El contexto entre paréntesis te dice si el hablante conoce el hecho (indicativo) o no (subjuntivo).</p>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 6: decir/sentir/parecer — elige la traducción correcta ---------------- */
+(function(){
+  var b = {id:"p6", items:[
+    {ru:"Говорю тебе, что уже наступила весна (сообщаю факт).", opts:["Te digo que ya llega la primavera.","Te digo que ya llegue la primavera."], answer:0},
+    {ru:"Говорю тебе, чтобы ты пришёл вовремя (прошу/приказываю).", opts:["Te digo que vienes a tiempo.","Te digo que vengas a tiempo."], answer:1},
+    {ru:"Чувствую, что дом дрожит (ощущаю физически).", opts:["Siento que la casa tiembla.","Siento que la casa tiemble."], answer:0},
+    {ru:"Жаль, что ты не можешь прийти (сожалею).", opts:["Siento que no puedes venir.","Siento que no puedas venir."], answer:1},
+    {ru:"Кажется, что он прав (моё мнение, я уверен).", opts:["Parece que tiene razón.","Parece que tenga razón."], answer:0},
+    {ru:"Не похоже, чтобы он был прав (сомнение).", opts:["No parece que tiene razón.","No parece que tenga razón."], answer:1}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 6 · Decir / sentir / parecer — elige la traducción correcta","medio","mid"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var stemHtml = '<i style="color:var(--muted);">«'+it.ru+'»</i>';
+    list.appendChild(buildRadioRow("p6", idx, stemHtml, it.opts));
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="p6-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 7: como si — huecos sin banco ---------------- */
+(function(){
+  var b = {id:"p7", items:[
+    {stem:"Me habla como si no (entender) ___ nada de lo que digo. <i>(ahora mismo, simultáneo)</i>", answers:["entendiera","entendiese"]},
+    {stem:"Se comporta como si (ser) ___ el dueño de la empresa. <i>(simultáneo)</i>", answers:["fuera","fuese"]},
+    {stem:"Me miró como si nunca me (ver) ___ antes. <i>(acción anterior a «miró»)</i>", answers:["hubiera visto","hubiese visto"]},
+    {stem:"Habla del accidente como si lo (vivir) ___ en primera persona. <i>(acción anterior)</i>", answers:["hubiera vivido","hubiese vivido"]},
+    {stem:"Gasta dinero como si (tener) ___ una fortuna. <i>(simultáneo)</i>", answers:["tuviera","tuviese"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 7 · Como si — imperfecto o pluscuamperfecto de subjuntivo","medio-alto","mid"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">«Como si» siempre lleva subjuntivo: decide si la acción es simultánea (imperfecto) o anterior (pluscuamperfecto).</p>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off" style="min-width:160px;">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 8: el hecho de que — huecos sin banco ---------------- */
+(function(){
+  var b = {id:"p8", items:[
+    {stem:"El hecho de que no me (llamar) ___ ayer me pareció muy raro.", answers:["llamaras","llamases"]},
+    {stem:"El hecho de que (haber) ___ tantos errores en el informe preocupa al jefe.", answers:["haya"]},
+    {stem:"El hecho de que ellos no (estar) ___ de acuerdo no cambia nada.", answers:["estén"]},
+    {stem:"El hecho de que la reunión se (cancelar) ___ complicó todos nuestros planes.", answers:["cancelara","cancelase"]},
+    {stem:"El hecho de que tú (saber) ___ la verdad no significa que debas contarla.", answers:["sepas"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 8 · El hecho de que — siempre subjuntivo","alto","hard"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 9: mientras / después de que — huecos sin banco ---------------- */
+(function(){
+  var b = {id:"p9", items:[
+    {stem:"Mientras tú (dormir) ___, yo prepararé la cena. <i>(acción futura, aún no ocurre)</i>", answers:["duermas"]},
+    {stem:"Mientras (dormir) ___ él, sonó el teléfono y lo despertó. <i>(pasado real)</i>", answers:["dormía"]},
+    {stem:"Después de que (terminar) ___ la película, todos aplaudieron. <i>(hecho pasado real)</i>", answers:["terminó"]},
+    {stem:"Te avisaré después de que (llegar) ___ el paquete. <i>(futuro, todavía no ha llegado)</i>", answers:["llegue"]},
+    {stem:"Mientras (poder) ___ nosotros evitarlo, no usaremos ese proveedor. <i>(condición hipotética abierta al futuro)</i>", answers:["podamos"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 9 · Mientras / después de que — indicativo o subjuntivo","alto","hard"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 10: por mucho que / por más que (radio) ---------------- */
+(function(){
+  var b = {id:"p10", items:[
+    {q:"Por mucho que lo ___, no consigo entenderlo.", opts:["intento","intente"], answer:1},
+    {q:"Por más dinero que ___, nunca está satisfecho.", opts:["gana","gane"], answer:1},
+    {q:"Por muy tarde que ___, siempre te esperaré.", opts:["es","sea"], answer:1},
+    {q:"Por mucho que me lo ___, no voy a cambiar de opinión.", opts:["repites","repitas"], answer:1},
+    {q:"Por más que ___, el jefe nunca lo reconoce.", opts:["trabaja","trabaje"], answer:1}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 10 · Por mucho que / por más que","alto","hard"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){ list.appendChild(buildRadioRow("p10", idx, it.q, it.opts)); });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="p10-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 11: antecedente conocido/desconocido — ronda 2 (huecos sin banco) ---------------- */
+(function(){
+  var b = {id:"p11", items:[
+    {stem:"No conozco a nadie que (hablar) ___ tantos idiomas como ella.", answers:["hable"]},
+    {stem:"Aquí hay una persona que (poder) ___ ayudarte — es mi vecino Pedro.", answers:["puede"]},
+    {stem:"Necesitamos un candidato que (tener) ___ experiencia en marketing digital.", answers:["tenga"]},
+    {stem:"El coche que (comprar) ___ yo el año pasado sigue funcionando perfectamente.", answers:["compré"]},
+    {stem:"¿Conoces a alguien que (saber) ___ arreglar ordenadores?", answers:["sepa"]},
+    {stem:"No hay ningún restaurante por aquí que (servir) ___ comida rusa.", answers:["sirva"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 11 · Antecedente conocido o desconocido — ronda 2","alto","hard"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 12: expresiones fijas — huecos con banco (traducción) ---------------- */
+(function(){
+  var b = {id:"p12", bank:"digas lo que digas · sea como sea · pase lo que pase · que yo sepa · ni que fueras el dueño", items:[
+    {ru:"Насколько мне известно, он ещё не приехал.", stem:"___, todavía no ha llegado.", answers:["que yo sepa"]},
+    {ru:"Что бы ты ни говорил, не изменю решения.", stem:"___, no voy a cambiar de decisión.", answers:["digas lo que digas"]},
+    {ru:"Будь что будет, я иду с тобой.", stem:"___, voy contigo.", answers:["sea como sea"]},
+    {ru:"Что бы ни случилось, мы останемся друзьями.", stem:"___, seguiremos siendo amigos.", answers:["pase lo que pase"]},
+    {ru:"Можно подумать, ты тут хозяин, чтобы отдавать приказы.", stem:"___, para dar órdenes así.", answers:["ni que fueras el dueño"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 12 · Expresiones fijas — traduce y completa","alto","hard"));
+  wrap.innerHTML += '<div class="wordbank"><b>Banco de expresiones:</b> '+b.bank+'</div>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem"><i style="color:var(--muted);">«'+it.ru+'»</i><br>'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off" style="min-width:220px;">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 13: aunque — ronda 2 con contexto en ruso (radio) ---------------- */
+(function(){
+  var b = {id:"p13", items:[
+    {ru:"Хотя (я знаю, что) билет дорогой, куплю его.", q:"Aunque el billete ___ caro, lo voy a comprar.", opts:["es","sea"], answer:0},
+    {ru:"Даже если билет окажется дорогим (не знаю цену), куплю его.", q:"Aunque el billete ___ caro, lo voy a comprar.", opts:["es","sea"], answer:1},
+    {ru:"Хотя идёт дождь (вижу в окно), пойдём гулять.", q:"Aunque ___ lloviendo, vamos a salir a pasear.", opts:["está","esté"], answer:0},
+    {ru:"Даже если завтра пойдёт дождь (не знаю прогноза), пойдём гулять.", q:"Aunque mañana ___ lloviendo, vamos a salir a pasear.", opts:["está","esté"], answer:1},
+    {ru:"Хотя он не согласен (это известно всем), продолжаем с планом.", q:"Aunque él no ___ de acuerdo, seguimos con el plan.", opts:["está","esté"], answer:0},
+    {ru:"Даже если он не согласится (ещё не знаем его мнения), продолжим с планом.", q:"Aunque él no ___ de acuerdo, seguiremos con el plan.", opts:["está","esté"], answer:1}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 13 · Aunque — ronda 2 (con contexto)","muy alto","hard"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var stemHtml = '<i style="color:var(--muted);">«'+it.ru+'»</i><br>'+it.q;
+    list.appendChild(buildRadioRow("p13", idx, stemHtml, it.opts));
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="p13-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 14: repaso mixto — huecos sin banco ---------------- */
+(function(){
+  var b = {id:"p14", items:[
+    {stem:"Aunque no (conocer) ___ a nadie que hable checo todavía, seguro que en la conferencia encontraré a alguien.", answers:["conozco"]},
+    {stem:"El hecho de que no haya nadie en la oficina que (saber) ___ usar este programa es un problema serio.", answers:["sepa"]},
+    {stem:"Como si no (saber) ___ nada, me preguntó otra vez cuál era mi nombre — ¡se lo había dicho ya tres veces!", answers:["hubiera sabido","hubiese sabido"]},
+    {stem:"Te digo que (venir) ___ a la reunión a las nueve en punto — no es una sugerencia.", answers:["vengas"]},
+    {stem:"Por mucho que me (explicar) ___ ellos la situación, sigo sin entenderla del todo.", answers:["expliquen"]},
+    {stem:"No hay nada que me (sorprender) ___ ya después de tantos años trabajando aquí.", answers:["sorprenda"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 14 · Repaso mixto — combina varias reglas","muy alto","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Cada frase combina dos estructuras de esta página; fíjate bien en el contexto antes de conjugar.</p>';
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 15: transformación/traducción — respuesta modelo (1) ---------------- */
+(function(){
+  var items = [
+    {stem:"Traduce: «Ищу человека, который сможет мне помочь, что бы ни случилось».", model:"Busco a alguien que pueda ayudarme, pase lo que pase."},
+    {stem:"Traduce: «Хотя я знаю, что это дорого, куплю этот дом, как только у меня будут деньги».", model:"Aunque sé que es caro, compraré esta casa en cuanto tenga el dinero."},
+    {stem:"Transforma usando «como si»: habla del tema con mucha seguridad, pero en realidad no sabe nada.", model:"Habla del tema como si lo supiera todo. / Habla del tema como si fuera un experto."},
+    {stem:"Traduce: «Жаль, что ты не сможешь прийти, но, насколько мне известно, вечеринку перенесли на субботу».", model:"Siento que no puedas venir, pero que yo sepa, la fiesta se ha aplazado al sábado."}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 15 · Transformación y traducción (1)","el más difícil","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="p15-'+idx+'" style="min-height:44px;" placeholder="Tu traducción/transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="p15-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("p15-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE 16: transformación/traducción — respuesta modelo (2) ---------------- */
+(function(){
+  var items = [
+    {stem:"Traduce: «Не знаю никого, кто говорил бы по-японски, хотя, может быть, кто-то из новых студентов и знает».", model:"No conozco a nadie que hable japonés, aunque puede que algún estudiante nuevo lo sepa."},
+    {stem:"Traduce: «Тот факт, что он не позвонил, не значит, что он забыл — вероятно, у него просто не было времени».", model:"El hecho de que no llamara no significa que se haya olvidado — probablemente no tuvo tiempo."},
+    {stem:"Transforma usando una expresión fija concesiva: «Ya sabes que voy a hacerlo, no importa lo que digas».", model:"Ya sabes que voy a hacerlo, digas lo que digas."},
+    {stem:"Traduce: «Как бы сильно она ни старалась, начальник вёл себя так, будто ничего не замечал».", model:"Por mucho que ella se esforzara, el jefe se comportaba como si no notara nada."}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 16 · Transformación y traducción (2)","el más difícil","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Frases más largas, combinan varias estructuras de esta página. Compara tu respuesta con el modelo.</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="p16-'+idx+'" style="min-height:54px;" placeholder="Tu traducción/transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="p16-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("p16-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

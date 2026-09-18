@@ -1,0 +1,703 @@
+<!doctype html>
+<title>Estilo indirecto</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Estilo indirecto</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>El estilo (discurso) indirecto</h1>
+  <p class="subtitle">Reglas claras + diecisiete bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> cómo transmitir lo que ha dicho, preguntado o pedido otra persona sin citarla textualmente: cuándo cambian los tiempos verbales (<i>dijo que...</i>), cómo cambian los pronombres y las palabras de tiempo/lugar, y cómo se transmiten preguntas y órdenes.
+  </div>
+  <p class="series-note">📚 Tema de la serie <b>Gramática</b> del sitio. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — del discurso directo al indirecto</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada regla.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>La tabla de cambio de tiempos (con verbo introductorio en pasado)</h3>
+    <table class="match-table">
+      <tr><th>Estilo directo</th><th>Estilo indirecto (dijo que...)</th></tr>
+      <tr><td>presente — «Estudio»</td><td>imperfecto — dijo que estudiaba</td></tr>
+      <tr><td>pretérito perfecto/indefinido — «He estudiado / Estudié»</td><td>pluscuamperfecto — dijo que había estudiado</td></tr>
+      <tr><td>futuro simple — «Estudiaré»</td><td>condicional simple — dijo que estudiaría</td></tr>
+      <tr><td>presente de subjuntivo — «Quiero que estudies»</td><td>imperfecto de subjuntivo — dijo que quería que estudiara</td></tr>
+    </table>
+    <div class="error-box"><b>Основная трудность:</b> сдвиг времён (según la tabla) применяется только когда глагол введения стоит в прошедшем (<i>dijo, comentó, explicó, preguntó...</i>). Если он в настоящем (<i>dice que...</i>), времена НЕ меняются: «Dice que estudia» (без изменений). Кроме сдвига времён, вторая по частоте ошибка — забыть поменять <b>местоимения и слова времени/места</b> (yo→él, hoy→ese día, aquí→allí): фраза «dijo que <s>voy a venir mañana</s>» неверна, нужно «dijo que <b>iría</b> al día siguiente».</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Diecisiete bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"presente → presente", pos:"verbo introductorio en presente: sin cambios",
+   quote:"«Estudio español» → Dice que <mark>estudia</mark> español.",
+   trans:"настоящее → настоящее (без изменений, если «dice que»)",
+   mean:"Cuando el verbo introductorio está en presente (dice, dicen, comenta), el tiempo del verbo citado NO cambia al pasar al estilo indirecto.",
+   ex:"«No tengo hambre» → Dice que no tiene hambre. — Он говорит, что не голоден."},
+  {term:"cambio de tiempos (dijo que...)", pos:"verbo introductorio en pasado: sí cambian los tiempos",
+   quote:"«Vivo en Madrid» → Dijo que <mark>vivía</mark> en Madrid. «Iré mañana» → Dijo que <mark>iría</mark> al día siguiente.",
+   trans:"сдвиг времён (если «dijo que»): наст.→имперфект, буд.→condicional...",
+   mean:"Si el verbo introductorio está en pasado (dijo, contó, explicó...): presente→imperfecto, pretérito perfecto/indefinido→pluscuamperfecto, futuro→condicional simple, presente de subjuntivo→imperfecto de subjuntivo. Ver la tabla completa más abajo.",
+   ex:"«He terminado el informe» → Dijo que había terminado el informe. — Он сказал, что закончил отчёт."},
+  {term:"cambio de pronombres y de tiempo/lugar", pos:"yo→él, mi→su, hoy→aquel día, aquí→allí...",
+   quote:"«Mi hermano llega hoy» → Dijo que <mark>su</mark> hermano llegaba <mark>ese día</mark>.",
+   trans:"смена местоимений и слов времени/места при передаче чужой речи",
+   mean:"Al transmitir lo dicho por otra persona cambian los pronombres personales y posesivos (yo→él/ella, mi→su) y las palabras de tiempo y lugar: hoy→aquel/ese día, ayer→el día anterior, mañana→al día siguiente, aquí→allí, este→aquel.",
+   ex:"«Ayer estuve aquí» → Dijo que el día anterior había estado allí. — Он сказал, что был там накануне."},
+  {term:"preguntas indirectas", pos:"me preguntó si... / me preguntó qué, dónde, cuándo...",
+   quote:"«¿Vienes?» → Me preguntó <mark>si</mark> venía. «¿Dónde vives?» → Me preguntó <mark>dónde</mark> vivía.",
+   trans:"косвенные вопросы: «спросил, ли...» / «спросил, что/где/когда...»",
+   mean:"Las preguntas de sí/no se transmiten con «si»; las preguntas parciales conservan la palabra interrogativa (qué, dónde, cuándo, cómo, por qué...). En ambos casos desaparecen los signos de interrogación y el orden es el de una oración afirmativa.",
+   ex:"«¿Cuándo llegas?» → Me preguntó cuándo llegaba. — Он спросил, когда я приеду."},
+  {term:"órdenes y peticiones", pos:"verbo de mandato + que + imperfecto de subjuntivo",
+   quote:"«¡Ven aquí!» → Me dijo que <mark>viniera</mark>. «Ayúdame, por favor» → Me pidió que la <mark>ayudara</mark>.",
+   trans:"передача приказов/просьб: глагол приказа + que + imperfecto de subjuntivo",
+   mean:"Las órdenes e imperativos se transmiten con un verbo de mandato (decir, pedir, ordenar, rogar) + que + imperfecto de subjuntivo, nunca con el imperativo original.",
+   ex:"«No fumes aquí» → Me dijo que no fumara allí. — Он сказал мне, чтобы я там не курил."}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+function makeRadioBlock(id, title, tag, tagClass, items){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeFillBlock(id, title, tag, tagClass, items, bank, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(bank){ wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+bank+'</div>'; }
+  if(hintText){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>'; }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var pre = it.direct ? '<i style="color:var(--muted);">Directo: «'+it.direct+'»</i><br>' : "";
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+pre+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeMatchBlock(id, title, tag, tagClass, colHead, words, defs, answers){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  var table = document.createElement("table"); table.className = "match-table";
+  var letters = defs.map(function(d,i){ return String.fromCharCode(97+i); });
+  var rows = "<tr><th>"+colHead+"</th><th>Equivalente indirecto</th></tr>";
+  words.forEach(function(w, idx){
+    var opts = letters.map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = defs.map(function(d,i){ return letters[i]+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+words.length+"</b>";
+    blockScores[id] = {correct:correct, total:words.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:words.length};
+  exList.appendChild(wrap);
+}
+
+function makeOpenBlock(id, title, tag, tagClass, items, hintText){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(hintText){ wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">'+hintText+'</p>'; }
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="'+id+'-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="'+id+'-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById(id+"-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE 1: radio — qué tiempo usar (fácil) ---------------- */
+makeRadioBlock("i1", "Bloque 1 · Elige el tiempo verbal correcto en el estilo indirecto", "fácil", "easy", [
+  {q:"«Trabajo en un banco.» → Dijo que ___ en un banco.", opts:["trabaja","trabajaba","trabajará"], answer:1},
+  {q:"«He comido ya.» → Dijo que ya ___.", opts:["ha comido","había comido","comía"], answer:1},
+  {q:"«Vendré el lunes.» → Dijo que ___ el lunes.", opts:["vendrá","vendría","viene"], answer:1},
+  {q:"«Estudio español.» → Dice que ___ español.", opts:["estudia","estudiaba","estudió"], answer:0},
+  {q:"«Quiero que me ayudes.» → Dijo que quería que le ___.", opts:["ayudes","ayudara","ayudarías"], answer:1},
+  {q:"«Viví en Roma dos años.» → Dijo que ___ en Roma dos años.", opts:["vivió","había vivido","vivía"], answer:1}
+]);
+
+/* ---------------- BLOQUE 2: huecos CON banco — afirmaciones, verbo intro en pasado (fácil) ---------------- */
+makeFillBlock("i2", "Bloque 2 · Convierte a estilo indirecto (verbo introductorio en pasado)", "fácil", "easy", [
+  {direct:"Estoy muy cansado.", stem:"Dijo que ___ muy cansado.", answers:["estaba"]},
+  {direct:"He terminado el proyecto.", stem:"Dijo que ___ terminado el proyecto.", answers:["había"]},
+  {direct:"Llegaré tarde.", stem:"Dijo que ___ tarde.", answers:["llegaría"]},
+  {direct:"No tengo dinero.", stem:"Dijo que no ___ dinero.", answers:["tenía"]},
+  {direct:"Compré una casa nueva.", stem:"Dijo que ___ comprado una casa nueva.", answers:["había"]},
+  {direct:"Iré a la fiesta.", stem:"Dijo que ___ a la fiesta.", answers:["iría"]}
+], "estaba · había · llegaría · tenía · iría");
+
+/* ---------------- BLOQUE 3: huecos SIN banco — pronombres y palabras de tiempo/lugar (medio) ---------------- */
+makeFillBlock("i3", "Bloque 3 · Pronombres y palabras de tiempo/lugar", "medio", "mid", [
+  {direct:"Mi coche está aquí.", stem:"Dijo que ___ coche estaba allí.", answers:["su"]},
+  {direct:"Te veo mañana.", stem:"Dijo que ___ veía al día siguiente.", answers:["me","le"]},
+  {direct:"Ayer estuve en tu casa.", stem:"Dijo que ___ había estado en mi casa.", answers:["el día anterior"]},
+  {direct:"Este libro es mío.", stem:"Dijo que ___ libro era suyo.", answers:["aquel","ese"]},
+  {direct:"Hoy no tengo clase.", stem:"Dijo que ___ no tenía clase.", answers:["ese día","aquel día"]},
+  {direct:"Vivo aquí desde hace años.", stem:"Dijo que vivía ___ desde hacía años.", answers:["allí"]}
+], null, "Sin banco de palabras — piensa en cómo cambia cada palabra al pasar al estilo indirecto.");
+
+/* ---------------- BLOQUE 4: preguntas de sí/no (medio) ---------------- */
+makeFillBlock("i4", "Bloque 4 · Preguntas indirectas de sí/no", "medio", "mid", [
+  {direct:"¿Vienes a la fiesta?", stem:"Me preguntó ___ iba a la fiesta.", answers:["si"]},
+  {direct:"¿Has terminado los deberes?", stem:"Me preguntó ___ había terminado los deberes.", answers:["si"]},
+  {direct:"¿Te gusta el cine español?", stem:"Me preguntó ___ me gustaba el cine español.", answers:["si"]},
+  {direct:"¿Vas a llamarme?", stem:"Me preguntó ___ iba a llamarla.", answers:["si"]}
+], null, "Todas las preguntas de sí/no se transmiten con la misma palabra — sin signos de interrogación.");
+
+/* ---------------- BLOQUE 5: preguntas parciales (qué/dónde/cuándo...) (medio) ---------------- */
+makeFillBlock("i5", "Bloque 5 · Preguntas indirectas parciales", "medio", "mid", [
+  {direct:"¿Dónde vives?", stem:"Me preguntó ___ vivía.", answers:["dónde"]},
+  {direct:"¿Cuándo llegas?", stem:"Me preguntó ___ llegaba.", answers:["cuándo"]},
+  {direct:"¿Qué haces los fines de semana?", stem:"Me preguntó ___ hacía los fines de semana.", answers:["qué"]},
+  {direct:"¿Por qué no me llamaste?", stem:"Me preguntó ___ no la había llamado.", answers:["por qué"]},
+  {direct:"¿Cómo se llama tu perro?", stem:"Me preguntó ___ se llamaba mi perro.", answers:["cómo"]}
+], null, "Se conserva la palabra interrogativa, pero sin signos de interrogación.");
+
+/* ---------------- BLOQUE 6: relacionar palabra directa ↔ indirecta (medio) ---------------- */
+makeMatchBlock("i6", "Bloque 6 · Relaciona cada palabra directa con su equivalente indirecto", "medio", "mid", "Estilo directo",
+  ["hoy","ayer","mañana","aquí","este/esta"],
+  ["al día siguiente","aquel día / ese día","allí","el día anterior","aquel/aquella"],
+  ["b","d","a","c","e"]
+);
+
+/* ---------------- BLOQUE 7: órdenes y peticiones, radio (alto) ---------------- */
+makeRadioBlock("i7", "Bloque 7 · Órdenes y peticiones — elige la forma correcta", "alto", "hard", [
+  {q:"«¡Ven aquí!» → Me dijo que ___.", opts:["viniera","venía","vendría"], answer:0},
+  {q:"«Ayúdame, por favor.» → Me pidió que la ___.", opts:["ayudo","ayudara","ayudaría"], answer:1},
+  {q:"«No fumes en casa.» → Me dijo que no ___ en casa.", opts:["fumara","fumaba","fumaría"], answer:0},
+  {q:"«Cierra la puerta.» → Me ordenó que ___ la puerta.", opts:["cerrara","cerraba","cierre"], answer:0},
+  {q:"«Estudiad más.» → Nos dijo que ___ más.", opts:["estudiábamos","estudiáramos","estudiaríamos"], answer:1}
+]);
+
+/* ---------------- BLOQUE 8: huecos SIN banco — órdenes y peticiones (alto) ---------------- */
+makeFillBlock("i8", "Bloque 8 · Transmite la orden con «que + imperfecto de subjuntivo»", "alto", "hard", [
+  {direct:"¡Siéntate!", stem:"Me dijo que ___ (sentarse).", answers:["me sentara"]},
+  {direct:"No llegues tarde.", stem:"Me pidió que no ___ (llegar) tarde.", answers:["llegara"]},
+  {direct:"Terminad el ejercicio.", stem:"Nos ordenó que ___ (terminar) el ejercicio.", answers:["termináramos"]},
+  {direct:"Escríbeme cuando llegues.", stem:"Me pidió que le ___ (escribir) cuando llegara.", answers:["escribiera"]},
+  {direct:"No te preocupes.", stem:"Me dijo que no me ___ (preocuparse).", answers:["preocupara"]}
+], null, "Sin banco de palabras — conjuga el verbo entre paréntesis en imperfecto de subjuntivo.");
+
+/* ---------------- BLOQUE 9: radio, mezcla — tiempos + pronombres (alto) ---------------- */
+makeRadioBlock("i9", "Bloque 9 · Mezcla — tiempos verbales y pronombres", "alto", "hard", [
+  {q:"«Mi jefe me ha despedido.» → Dijo que ___ jefe la había despedido.", opts:["mi","su","tu"], answer:1},
+  {q:"«Te llamaré mañana.» → Dijo que la ___ al día siguiente.", opts:["llamará","llamaría","llama"], answer:1},
+  {q:"«Estoy aquí desde ayer.» → Dijo que estaba ___ desde el día anterior.", opts:["aquí","allí","allá"], answer:1},
+  {q:"«Quiero que vengas conmigo.» → Dijo que quería que ___ con ella.", opts:["viniera","venía","vendría"], answer:0},
+  {q:"«No he visto esta película.» → Dijo que no ___ visto esa película.", opts:["ha","había","habría"], answer:1}
+]);
+
+/* ---------------- BLOQUE 10: pregunta directa → pregunta indirecta completa, SIN banco (alto) ---------------- */
+makeFillBlock("i10", "Bloque 10 · Reescribe la pregunta completa en estilo indirecto", "alto", "hard", [
+  {direct:"¿Tienes hambre?", stem:"Me preguntó ___ tenía hambre.", answers:["si"]},
+  {direct:"¿A qué hora empieza la reunión?", stem:"Preguntó ___ empezaba la reunión.", answers:["a qué hora"]},
+  {direct:"¿Cuánto cuesta el billete?", stem:"Preguntó ___ costaba el billete.", answers:["cuánto"]},
+  {direct:"¿Habéis reservado ya el hotel?", stem:"Preguntó ___ habíamos reservado ya el hotel.", answers:["si"]},
+  {direct:"¿Con quién vives?", stem:"Me preguntó ___ vivía.", answers:["con quién"]}
+], null, "Sin banco de palabras.");
+
+/* ---------------- BLOQUE 11: radio — verbo introductorio en presente vs pasado (alto) ---------------- */
+makeRadioBlock("i11", "Bloque 11 · Presente o pasado — ¿cambia el tiempo?", "alto", "hard", [
+  {q:"«Estoy libre el sábado.» + Dice que... → Dice que ___ libre el sábado.", opts:["está","estaba"], answer:0},
+  {q:"«Estoy libre el sábado.» + Dijo que... → Dijo que ___ libre el sábado.", opts:["está","estaba"], answer:1},
+  {q:"«He leído el libro.» + Comenta que... → Comenta que ___ leído el libro.", opts:["ha","había"], answer:0},
+  {q:"«He leído el libro.» + Comentó que... → Comentó que ___ leído el libro.", opts:["ha","había"], answer:1},
+  {q:"«Vendré pronto.» + Asegura que... → Asegura que ___ pronto.", opts:["vendrá","vendría"], answer:0},
+  {q:"«Vendré pronto.» + Aseguró que... → Aseguró que ___ pronto.", opts:["vendrá","vendría"], answer:1}
+]);
+
+/* ---------------- BLOQUE 12: relacionar tipo de oración directa ↔ estructura indirecta (medio-alto) ---------------- */
+makeMatchBlock("i12", "Bloque 12 · Relaciona el tipo de oración directa con su estructura indirecta", "medio-alto", "mid", "Tipo de oración directa",
+  ["pregunta de sí/no («¿Vienes?»)","pregunta parcial («¿Dónde vives?»)","orden («¡Ven aquí!»)","afirmación en pasado («He comido»)","afirmación en futuro («Vendré»)"],
+  ["me dijo que viniera","dijo que vendría","me preguntó dónde vivía","me preguntó si venía","dijo que había comido"],
+  ["d","c","a","e","b"]
+);
+
+/* ---------------- BLOQUE 13: traduce — completa solo la palabra clave (alto) ---------------- */
+makeFillBlock("i13", "Bloque 13 · Traduce — completa solo la palabra que falta", "alto", "hard", [
+  {ru:"Он спросил, приду ли я.", stem:"Me preguntó ___ iba a venir.", answers:["si"]},
+  {ru:"Он сказал, что придёт завтра.", direct:null, stem:"Dijo que vendría ___.", answers:["al día siguiente"]},
+  {ru:"Она попросила меня, чтобы я подождал.", stem:"Me pidió que ___ (esperar).", answers:["esperara"]},
+  {ru:"Он объяснил, что живёт там уже пять лет.", stem:"Explicó que vivía ___ desde hacía cinco años.", answers:["allí"]},
+  {ru:"Она спросила, где находится вокзал.", stem:"Preguntó ___ estaba la estación.", answers:["dónde"]}
+]);
+
+/* ---------------- BLOQUE 14: repaso general, radio (el más difícil) ---------------- */
+makeRadioBlock("i14", "Bloque 14 · Repaso general — el estilo indirecto completo", "el más difícil", "hard", [
+  {q:"«No puedo ir a tu fiesta mañana.» → Dijo que no ___ ir a mi fiesta al día siguiente.", opts:["puede","podía","podría"], answer:1},
+  {q:"«¿Habéis visto mi cartera?» → Preguntó ___ habíamos visto su cartera.", opts:["si","qué","dónde"], answer:0},
+  {q:"«Llama a tu madre.» → Me dijo que ___ a mi madre.", opts:["llamara","llamaba","llamaría"], answer:0},
+  {q:"«Nací en 1990.» → Dijo que ___ en 1990.", opts:["nació","había nacido","nacía"], answer:1},
+  {q:"«¿Cuándo os casáis?» → Preguntó ___ nos casábamos.", opts:["si","cuándo","por qué"], answer:1},
+  {q:"«Te quiero mucho.» → Le dijo que la ___ mucho.", opts:["quiere","quería","querría"], answer:1}
+]);
+
+/* ---------------- BLOQUE 15: transformación abierta 1 — diálogo a estilo indirecto (respuesta modelo) ---------------- */
+makeOpenBlock("i15", "Bloque 15 · Convierte el diálogo a estilo indirecto (1)", "el más difícil", "hard", [
+  {stem:"Ana dijo: «Estoy muy contenta, he encontrado un trabajo nuevo y empiezo el lunes.» Cuéntalo en estilo indirecto.", model:"Ana dijo que estaba muy contenta, que había encontrado un trabajo nuevo y que empezaba el lunes (al día siguiente, según el contexto)."},
+  {stem:"Pablo preguntó: «¿Dónde habéis estado? ¿Por qué no me llamasteis?» Cuéntalo en estilo indirecto.", model:"Pablo preguntó dónde habíamos estado y por qué no lo habíamos llamado."},
+  {stem:"La profesora dijo: «Terminad el ejercicio y entregádmelo mañana.» Cuéntalo en estilo indirecto.", model:"La profesora nos dijo que termináramos el ejercicio y que se lo entregáramos al día siguiente."}
+], "Respuestas abiertas — escribe tu transformación y compárala con el modelo (puede haber más de una forma correcta).");
+
+/* ---------------- BLOQUE 16: transformación abierta 2 — diálogo a estilo indirecto (respuesta modelo) ---------------- */
+makeOpenBlock("i16", "Bloque 16 · Convierte el diálogo a estilo indirecto (2)", "el más difícil", "hard", [
+  {stem:"Marta dijo: «Ayer estuve aquí, pero mañana me voy a Sevilla.» Cuéntalo en estilo indirecto.", model:"Marta dijo que el día anterior había estado allí, pero que al día siguiente se iba a Sevilla."},
+  {stem:"El médico me dijo: «No comas nada antes de la prueba y ven en ayunas.» Cuéntalo en estilo indirecto.", model:"El médico me dijo que no comiera nada antes de la prueba y que fuera en ayunas."},
+  {stem:"Luis preguntó: «¿Cuánto tiempo lleváis viviendo aquí?» Cuéntalo en estilo indirecto.", model:"Luis preguntó cuánto tiempo llevábamos viviendo allí."}
+], "Respuestas abiertas — escribe tu transformación y compárala con el modelo.");
+
+/* ---------------- BLOQUE 17: huecos SIN banco — repaso final (el más difícil) ---------------- */
+makeFillBlock("i17", "Bloque 17 · Repaso final — huecos sin banco", "el más difícil", "hard", [
+  {direct:"Estoy escribiendo un libro.", stem:"Dijo que ___ escribiendo un libro.", answers:["estaba"]},
+  {direct:"¿Cuándo te vas de vacaciones?", stem:"Me preguntó ___ me iba de vacaciones.", answers:["cuándo"]},
+  {direct:"No vuelvas a llamarme a esta hora.", stem:"Me pidió que no ___ a llamarla a esa hora.", answers:["volviera"]},
+  {direct:"He perdido las llaves de mi casa.", stem:"Dijo que ___ perdido las llaves de ___ casa.", answers:["había"]},
+  {direct:"Mañana te doy la respuesta.", stem:"Dijo que al día siguiente me ___ la respuesta.", answers:["daría"]}
+], null, "Repaso final combinando todo lo aprendido en la lección.");
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

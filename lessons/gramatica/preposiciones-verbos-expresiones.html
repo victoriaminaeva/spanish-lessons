@@ -1,0 +1,855 @@
+<!doctype html>
+<title>Preposiciones: verbos y expresiones</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+.series-note{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  border:1px dashed var(--border); border-radius:8px; padding:8px 12px; margin-top:14px;
+}
+.series-note a{font-weight:600;}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+.diff-tag{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+.diff-tag.easy{background:var(--good-bg); color:var(--good);}
+.diff-tag.mid{background:var(--surface-2); color:var(--gold);}
+.diff-tag.hard{background:var(--bad-bg); color:var(--bad);}
+
+/* ---- rule cards (reglas) ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.contrast-box{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:16px 18px; margin-top:14px;
+}
+.contrast-box h3{font-size:16px; margin:0 0 8px; color:var(--accent);}
+.contrast-box ul{margin:6px 0; padding-left:20px; font-size:14px;}
+.contrast-box li{margin:4px 0;}
+.error-box{
+  background:var(--bad-bg); border-left:3px solid var(--bad); border-radius:8px;
+  padding:10px 12px; font-size:13.5px; margin-top:10px;
+}
+.error-box b{color:var(--bad);}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:120px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+footer a{color:var(--muted);}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+  table.match-table{font-size:12.5px;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gramática · Preposiciones (verbos y expresiones)</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Gramática · Nivel B1–B2</p>
+  <h1>Verbos con preposición fija y expresiones preposicionales</h1>
+  <p class="subtitle">Reglas + quince bloques de ejercicios de dificultad creciente, con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <div class="summary">
+    <b>De qué trata:</b> esta página continúa el tema <a href="preposiciones.html">«Preposiciones»</a> (nivel A2–B1), donde vimos los usos básicos de a/de/en/con/por/para/desde/hasta/hacia/sobre/entre. Aquí NO repetimos esos significados básicos, sino que profundizamos en dos fenómenos de nivel B1–B2: los <b>verbos que exigen una preposición fija</b> (pensar EN, soñar CON, depender DE…) y las <b>locuciones o expresiones preposicionales</b> (a pesar de, en vez de, debido a…).
+  </div>
+  <p class="series-note">📚 Continuación de la serie <b>Gramática</b> del sitio — antes de este tema conviene repasar <a href="preposiciones.html">Preposiciones (A2–B1)</a>. <a href="../../index.html#gramatica">Ver toda la serie</a>.</p>
+</header>
+
+<section id="reglas">
+  <div class="section-head"><span class="section-num">01</span><h2>Reglas — verbos con preposición fija</h2></div>
+  <p class="hint">Pulsa «Mostrar ejemplo» para ver un uso adicional de cada verbo.</p>
+  <div class="vocab-grid" id="rulesGrid"></div>
+
+  <div class="contrast-box">
+    <h3>Locuciones preposicionales (frases fijas)</h3>
+    <ul>
+      <li><b>a pesar de</b> (несмотря на): <i>A pesar de la lluvia, salimos a pasear.</i></li>
+      <li><b>en vez de</b> (вместо): <i>En vez de quejarte, busca una solución.</i></li>
+      <li><b>a través de</b> (через, посредством): <i>Nos enteramos de la noticia a través de un amigo.</i></li>
+      <li><b>en cuanto a</b> (что касается): <i>En cuanto al presupuesto, lo discutiremos mañana.</i></li>
+      <li><b>debido a</b> (из-за, вследствие): <i>El vuelo se canceló debido al mal tiempo.</i></li>
+      <li><b>a partir de</b> (начиная с): <i>A partir de mañana, el horario cambia.</i></li>
+      <li><b>de acuerdo con</b> (в соответствии с, согласно): <i>De acuerdo con el contrato, el pago es mensual.</i></li>
+    </ul>
+  </div>
+
+  <div class="contrast-box">
+    <h3>El error más frecuente: verbos rusos sin preposición</h3>
+    <ul>
+      <li>«думать <b>о</b> чём-то» → в испанском не «pensar de/sobre», а <b>pensar EN</b>.</li>
+      <li>«мечтать <b>о</b> чём-то» → не «soñar de», а <b>soñar CON</b>.</li>
+      <li>«влюбиться <b>в</b> кого-то» → не «enamorarse en», а <b>enamorarse DE</b>.</li>
+      <li>«жениться <b>на</b> ком-то» → не «casarse a/en», а <b>casarse CON</b>.</li>
+    </ul>
+    <div class="error-box"><b>Ошибка:</b> во многих из этих глаголов русский эквивалент вообще не требует предлога («обратить внимание» не подсказывает «на что»), а испанский — требует его всегда. Поэтому каждый такой глагол нужно запоминать сразу вместе с «его» предлогом, как единый блок — <i>pensar EN</i>, <i>soñar CON</i>, <i>depender DE</i> — а не отдельно глагол и отдельно предлог.</div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head"><span class="section-num">02</span><h2>Ejercicios — de fácil a difícil</h2></div>
+  <p class="hint">Quince bloques, cada uno con su propio botón «Comprobar». La dificultad y el tipo de tarea van cambiando en cada bloque.</p>
+  <div id="exList"></div>
+</section>
+
+<footer>Serie Gramática · Nivel B1–B2 · Corrección automática integrada en la página · <a href="../../index.html">Volver al inicio</a></footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- REGLAS (chuleta) ---------------- */
+var rules = [
+  {term:"pensar en", pos:"algo/alguien",
+   quote:"Siempre <mark>pienso en</mark> ti antes de dormir.",
+   trans:"думать о (ком-то/чём-то)",
+   mean:"«Pensar» exige siempre «en» cuando dirige el pensamiento hacia algo/alguien. En ruso «думать О» usa otra preposición — por eso es tan fácil decir por error «pienso de/sobre ti».",
+   ex:"¿En qué piensas? Piensa en su familia. — О чём ты думаешь? Он думает о своей семье."},
+  {term:"soñar con", pos:"algo/alguien",
+   quote:"De pequeña <mark>soñaba con</mark> ser astronauta.",
+   trans:"мечтать о; видеть во сне (кого-то/что-то)",
+   mean:"«Soñar» va siempre con «con», tanto para «мечтать о» como para «видеть во сне кого-то». En ruso es «мечтать О», así que la preposición cambia por completo.",
+   ex:"Anoche soñé con mi abuela. — Прошлой ночью мне приснилась бабушка."},
+  {term:"depender de", pos:"algo/alguien",
+   quote:"Todo <mark>depende de</mark> el tiempo que tengamos.",
+   trans:"зависеть от",
+   mean:"«Depender» exige «de». Es de los pocos casos donde el ruso también usa una preposición («зависеть ОТ»), pero cuidado: nunca es «depender en/por».",
+   ex:"El resultado depende de ti. — Результат зависит от тебя."},
+  {term:"tratar de + infinitivo", pos:"стараться, пытаться",
+   quote:"<mark>Trato de</mark> llegar a tiempo siempre.",
+   trans:"стараться / пытаться (сделать algo)",
+   mean:"«Tratar de» + infinitivo = «стараться, пытаться (hacer algo)». No confundir con «tratarse de» (ver más abajo): «tratar de» tiene sujeto personal.",
+   ex:"Trato de hablar español todos los días. — Я стараюсь говорить по-испански каждый день."},
+  {term:"tratarse de + sustantivo", pos:"impersonal",
+   quote:"En esta novela <mark>se trata de</mark> un amor imposible.",
+   trans:"речь идёт о, дело в (безличная конструкция)",
+   mean:"«Tratarse de» es siempre impersonal — solo existe en 3ª persona «se trata de» — y significa «речь идёт о». No tiene sujeto personal: nunca digas «yo me trato de».",
+   ex:"No se trata de dinero, se trata de respeto. — Дело не в деньгах, дело в уважении."},
+  {term:"acordarse de", pos:"algo/alguien",
+   quote:"¿Te <mark>acuerdas de</mark> aquel verano en Valencia?",
+   trans:"помнить о, вспоминать (кого-то/что-то)",
+   mean:"Verbo reflexivo + «de». Alternativa sin preposición: «recordar algo» (recuerdo aquel verano, sin «de»).",
+   ex:"No me acuerdo de su nombre. — Я не помню его имени."},
+  {term:"contar con", pos:"alguien/algo",
+   quote:"Siempre puedes <mark>contar con</mark> nosotros.",
+   trans:"рассчитывать на, располагать (кем-то/чем-то)",
+   mean:"«Contar con» = confiar en la ayuda o presencia de alguien/algo. En ruso «рассчитывать НА» — otra preposición distinta.",
+   ex:"Contamos con tu ayuda mañana. — Мы рассчитываем на твою помощь завтра."},
+  {term:"fijarse en", pos:"algo/alguien",
+   quote:"Nunca te <mark>fijas en</mark> los detalles.",
+   trans:"обращать внимание на, замечать",
+   mean:"Verbo reflexivo + «en». En ruso «обращать внимание НА» usa otra preposición — hay que memorizar «fijarse EN» como un único bloque.",
+   ex:"Fíjate en cómo lo hace ella. — Обрати внимание, как это делает она."},
+  {term:"enamorarse de", pos:"alguien",
+   quote:"Se <mark>enamoró de</mark> ella a primera vista.",
+   trans:"влюбиться в",
+   mean:"Reflexivo + «de». Cuidado: en ruso es «влюбиться В» (dirección), pero en español es siempre «de», nunca «en».",
+   ex:"Me enamoré de este país. — Я влюбился в эту страну."},
+  {term:"casarse con", pos:"alguien",
+   quote:"Se <mark>casó con</mark> su mejor amigo de la infancia.",
+   trans:"жениться на / выйти замуж за",
+   mean:"Reflexivo + «con», nunca «a» ni «en». En ruso «жениться НА» usa otra preposición.",
+   ex:"Mi hermana se casa con un músico. — Моя сестра выходит замуж за музыканта."},
+  {term:"consistir en", pos:"algo",
+   quote:"El truco <mark>consiste en</mark> no ponerse nervioso.",
+   trans:"заключаться в, состоять в",
+   mean:"«Consistir» va siempre con «en» + sustantivo o infinitivo.",
+   ex:"El examen consiste en tres partes. — Экзамен состоит из трёх частей."},
+  {term:"quedar en + infinitivo", pos:"acordar algo",
+   quote:"<mark>Quedamos en</mark> vernos a las ocho.",
+   trans:"договориться (сделать algo)",
+   mean:"«Quedar en» + infinitivo/que = acordar una acción concreta. Es distinto de «quedar con alguien» (ver la tarjeta siguiente).",
+   ex:"Quedamos en llamarnos el domingo. — Мы договорились созвониться в воскресенье."},
+  {term:"quedar con", pos:"alguien · citarse",
+   quote:"He <mark>quedado con</mark> Marta para tomar un café.",
+   trans:"договориться о встрече с, встретиться с",
+   mean:"«Quedar con alguien» = citarse, fijar un encuentro con esa persona. No confundir con «quedar en» + acción (tarjeta anterior).",
+   ex:"¿Has quedado con alguien esta noche? — У тебя назначена встреча с кем-то сегодня вечером?"},
+  {term:"darse cuenta de", pos:"algo",
+   quote:"No me <mark>di cuenta de</mark> mi error hasta el final.",
+   trans:"осознавать, замечать, отдавать себе отчёт в",
+   mean:"Expresión fija reflexiva + «cuenta de» + sustantivo/infinitivo/que. Muy frecuente; no confundir con el falso amigo «realizar» (realize ≠ realizar en español).",
+   ex:"¿Te has dado cuenta de que ya es tarde? — Ты заметил, что уже поздно?"}
+];
+
+var rulesGrid = document.getElementById("rulesGrid");
+rules.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">'+v.quote+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="rule-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  rulesGrid.appendChild(card);
+});
+rulesGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("rule-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var exList = document.getElementById("exList");
+
+function blockHeader(title, tag, tagClass){
+  var head = document.createElement("div");
+  head.className = "ex-head";
+  head.innerHTML = '<span class="ex-title">'+title+'</span><span class="diff-tag '+tagClass+'">'+tag+'</span>';
+  return head;
+}
+
+function makeRadioBlock(id, title, tag, tagClass, items){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="'+id+'-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="'+id+'-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+function makeFillBlock(id, title, tag, tagClass, items, bank){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader(title, tag, tagClass));
+  if(bank){ wrap.innerHTML += '<div class="wordbank"><b>Banco de palabras:</b> '+bank+'</div>'; }
+  var list = document.createElement("div");
+  items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem">'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+items.length+"</b>";
+    blockScores[id] = {correct:correct, total:items.length};
+    updateGlobalScore();
+  });
+  blockScores[id] = {correct:0, total:items.length};
+  exList.appendChild(wrap);
+}
+
+/* ---------------- BLOQUE v1: reconocimiento (radio) ---------------- */
+makeRadioBlock("v1","Bloque 1 · Elige la preposición fija correcta","fácil","easy",[
+  {q:"Pienso mucho ___ el examen de mañana.", opts:["de","en","con"], answer:1},
+  {q:"Sueño ___ un futuro mejor para todos.", opts:["de","en","con"], answer:2},
+  {q:"Todo depende ___ los resultados de hoy.", opts:["de","en","por"], answer:0},
+  {q:"Siempre cuento ___ mis amigos en los momentos difíciles.", opts:["en","de","con"], answer:2},
+  {q:"Nunca te fijas ___ los pequeños detalles.", opts:["en","de","con"], answer:0},
+  {q:"Se enamoró ___ ella nada más conocerla.", opts:["con","de","en"], answer:1}
+]);
+
+/* ---------------- BLOQUE v2: huecos con banco ---------------- */
+makeFillBlock("v2","Bloque 2 · Huecos con banco de palabras","fácil","easy",[
+  {stem:"Me acuerdo ___ aquel viaje perfectamente.", answers:["de"]},
+  {stem:"El plan consiste ___ tres fases muy claras.", answers:["en"]},
+  {stem:"Se casó ___ un compañero de universidad.", answers:["con"]},
+  {stem:"No me di cuenta ___ mi error hasta el final.", answers:["de"]},
+  {stem:"Piensa mucho ___ su futuro profesional.", answers:["en"]},
+  {stem:"Podéis contar ___ nosotros para lo que sea.", answers:["con"]}
+], "de · en · con");
+
+/* ---------------- BLOQUE v3: relacionar verbo ↔ preposición ---------------- */
+(function(){
+  var b = {id:"v3",
+    words:["pensar","soñar","depender","contar","enamorarse","consistir"],
+    defs:[
+      "EN — dirigir el pensamiento hacia algo/alguien",
+      "CON — imaginar algo mientras duermes, o desear algo con ilusión",
+      "DE — estar condicionado por algo",
+      "CON — confiar en la ayuda o presencia de alguien",
+      "DE — sentir amor romántico por alguien",
+      "EN — estar compuesto por, basarse en"
+    ],
+    answers:["a","b","c","d","e","f"]
+  };
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 3 · Relaciona el verbo con su preposición fija","medio","mid"));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Verbo</th><th>Preposición / uso</th></tr>";
+  b.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e","f"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = b.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.words.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.words.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.words.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE v4: huecos sin banco ---------------- */
+makeFillBlock("v4","Bloque 4 · Huecos sin banco de palabras","medio","mid",[
+  {stem:"Hemos quedado ___ vernos a las siete en la plaza.", answers:["en"]},
+  {stem:"He quedado ___ Laura para ir al cine.", answers:["con"]},
+  {stem:"¿Te das cuenta ___ lo tarde que es?", answers:["de"]},
+  {stem:"Nunca se fija ___ cómo se sienten los demás.", answers:["en"]},
+  {stem:"¿Te acuerdas ___ el nombre de aquel pueblo?", answers:["de"]},
+  {stem:"Mi primo se casó ___ una chica italiana.", answers:["con"]}
+]);
+
+/* ---------------- BLOQUE v5: reconocimiento (radio), segunda ronda ---------------- */
+makeRadioBlock("v5","Bloque 5 · Elige la preposición fija correcta (2)","medio","mid",[
+  {q:"No me acuerdo ___ su apellido.", opts:["de","en","con"], answer:0},
+  {q:"Nos dimos cuenta ___ el problema demasiado tarde.", opts:["de","en","con"], answer:0},
+  {q:"Fíjate bien ___ lo que digo.", opts:["en","de","con"], answer:0},
+  {q:"Quedamos ___ terminar el proyecto antes del viernes.", opts:["con","de","en"], answer:2},
+  {q:"Se casó ___ su novio de toda la vida.", opts:["de","en","con"], answer:2},
+  {q:"El examen consiste ___ dos partes: oral y escrita.", opts:["de","con","en"], answer:2}
+]);
+
+/* ---------------- BLOQUE v6: tratar de vs tratarse de ---------------- */
+makeRadioBlock("v6","Bloque 6 · «Tratar de» vs. «Tratarse de»","medio-alto","mid",[
+  {q:"Ana siempre ___ llegar puntual a las reuniones.", opts:["trata de","se trata de"], answer:0},
+  {q:"En este documental, ___ la vida salvaje de la Patagonia.", opts:["trata de","se trata de"], answer:1},
+  {q:"Mi jefe ___ escuchar a todo el equipo antes de decidir.", opts:["trata de","se trata de"], answer:0},
+  {q:"No ___ dinero, sino de principios.", opts:["trata de","se trata de"], answer:1},
+  {q:"El profesor ___ explicar todo con ejemplos sencillos.", opts:["trata de","se trata de"], answer:0},
+  {q:"En esta reunión ___ el futuro de la empresa.", opts:["trata de","se trata de"], answer:1}
+]);
+
+/* ---------------- BLOQUE v7: quedar en vs quedar con ---------------- */
+makeRadioBlock("v7","Bloque 7 · «Quedar en» vs. «Quedar con»","alto","hard",[
+  {q:"___ llamarte en cuanto llegue a casa.", opts:["He quedado en","He quedado con"], answer:0},
+  {q:"___ Pedro para cenar el viernes.", opts:["He quedado en","He quedado con"], answer:1},
+  {q:"___ estudiar juntos este fin de semana.", opts:["He quedado en","He quedado con"], answer:0},
+  {q:"___ mi profesora para resolver dudas.", opts:["He quedado en","He quedado con"], answer:1},
+  {q:"___ enviar el informe antes del lunes.", opts:["He quedado en","He quedado con"], answer:0},
+  {q:"___ mis compañeros de piso para hablar del alquiler.", opts:["He quedado en","He quedado con"], answer:1}
+]);
+
+/* ---------------- BLOQUE v8: locuciones — huecos con banco ---------------- */
+makeFillBlock("v8","Bloque 8 · Locuciones preposicionales — huecos con banco","medio","mid",[
+  {stem:"___ la lluvia, decidimos salir a pasear.", answers:["a pesar de"]},
+  {stem:"___ mañana, el horario de la tienda cambia.", answers:["a partir de"]},
+  {stem:"Nos enteramos de la noticia ___ un amigo común.", answers:["a través de"]},
+  {stem:"El vuelo se canceló ___ el mal tiempo.", answers:["debido a"]},
+  {stem:"___ quejarte, podrías buscar una solución.", answers:["en vez de"]},
+  {stem:"___ el contrato, el pago se hace cada mes.", answers:["de acuerdo con"]}
+], "a pesar de · en vez de · a través de · debido a · a partir de · de acuerdo con");
+
+/* ---------------- BLOQUE v9: locuciones (radio) ---------------- */
+makeRadioBlock("v9","Bloque 9 · Locuciones preposicionales — elige la correcta","medio-alto","mid",[
+  {q:"___ el tráfico, llegamos a tiempo.", opts:["A pesar de","En cuanto a","A partir de"], answer:0},
+  {q:"___ la economía, la situación ha mejorado este año.", opts:["En cuanto a","Debido a","En vez de"], answer:0},
+  {q:"El accidente ocurrió ___ un fallo mecánico.", opts:["a través de","debido a","en vez de"], answer:1},
+  {q:"Prefiero tomar té ___ café por la noche.", opts:["en vez de","a pesar de","de acuerdo con"], answer:0},
+  {q:"___ los datos oficiales, el paro ha bajado.", opts:["De acuerdo con","A través de","En vez de"], answer:0},
+  {q:"Nos comunicamos ___ una aplicación de mensajería.", opts:["a través de","debido a","a partir de"], answer:0}
+]);
+
+/* ---------------- BLOQUE v10: relacionar locución ↔ significado ---------------- */
+(function(){
+  var b = {id:"v10",
+    words:["a pesar de","en vez de","a través de","en cuanto a","debido a","a partir de","de acuerdo con"],
+    defs:[
+      "несмотря на",
+      "вместо",
+      "через, посредством",
+      "что касается",
+      "из-за, вследствие",
+      "начиная с",
+      "в соответствии с, согласно"
+    ],
+    answers:["a","b","c","d","e","f","g"]
+  };
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 10 · Relaciona la locución con su significado","medio","mid"));
+  var table = document.createElement("table"); table.className = "match-table";
+  var rows = "<tr><th>Locución</th><th>Significado</th></tr>";
+  b.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e","f","g"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div"); defList.className = "def-list";
+  defList.innerHTML = b.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad"); tr.classList.add(ok?"marked-ok":"marked-bad");
+      tr.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.words.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.words.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.words.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE v11: huecos sin banco (verbos, difícil) ---------------- */
+makeFillBlock("v11","Bloque 11 · Huecos sin banco — verbos","alto","hard",[
+  {stem:"No te fijas ___ nada de lo que pasa a tu alrededor.", answers:["en"]},
+  {stem:"Sueño ___ vivir un año en Argentina.", answers:["con"]},
+  {stem:"El éxito del proyecto depende ___ todo el equipo.", answers:["de"]},
+  {stem:"Nos dimos cuenta ___ que habíamos tomado el tren equivocado.", answers:["de"]},
+  {stem:"Ella siempre piensa ___ los demás antes que en sí misma.", answers:["en"]},
+  {stem:"El curso consiste ___ ocho módulos online.", answers:["en"]}
+]);
+
+/* ---------------- BLOQUE v12: huecos sin banco (verbos + locuciones, difícil) ---------------- */
+makeFillBlock("v12","Bloque 12 · Huecos sin banco — verbos y locuciones mezclados","el más difícil","hard",[
+  {stem:"___ el mal tiempo, el vuelo salió puntual.", answers:["a pesar de"]},
+  {stem:"Se enamoró perdidamente ___ un compañero de trabajo.", answers:["de"]},
+  {stem:"___ estudiar por la mañana, ella prefiere hacerlo por la noche.", answers:["en vez de"]},
+  {stem:"Trato ___ no perder la paciencia con los niños.", answers:["de"]},
+  {stem:"___ el informe, hay que revisar tres puntos clave.", answers:["de acuerdo con"]},
+  {stem:"Nos enteramos del cambio de horario ___ el correo del director.", answers:["a través de"]}
+]);
+
+/* ---------------- BLOQUE v13: traducción (solo la preposición) ---------------- */
+(function(){
+  var b = {id:"v13", items:[
+    {ru:"Я мечтаю жить в Испании.", stem:"Sueño ___ vivir en España.", answers:["con"]},
+    {ru:"Всё зависит от погоды.", stem:"Todo depende ___ el tiempo.", answers:["de"]},
+    {ru:"Речь идёт о нашем будущем.", stem:"Se trata ___ nuestro futuro.", answers:["de"]},
+    {ru:"Мы договорились встретиться в субботу.", stem:"Hemos quedado ___ vernos el sábado.", answers:["en"]},
+    {ru:"Она влюбилась в этот город.", stem:"Se enamoró ___ esta ciudad.", answers:["de"]}
+  ]};
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 13 · Traduce — completa solo con la preposición","alto","hard"));
+  var list = document.createElement("div");
+  b.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row"; row.setAttribute("data-idx", idx);
+    row.innerHTML = '<span class="item-idx">'+(idx+1)+'.</span><span class="stem"><i style="color:var(--muted);">«'+it.ru+'»</i><br>'+it.stem.replace("___",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off" style="min-width:70px;">')+'</span><span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad"); row.classList.add(ok?"marked-ok":"marked-bad");
+      row.querySelector(".fb-slot").innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b.items.length+"</b>";
+    blockScores[b.id] = {correct:correct, total:b.items.length};
+    updateGlobalScore();
+  });
+  blockScores[b.id] = {correct:0, total:b.items.length};
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE v14: traducción abierta (respuesta modelo) 1 ---------------- */
+(function(){
+  var items = [
+    {stem:"Traduce: «Я стараюсь не думать об этом слишком много».", model:"Trato de no pensar demasiado en eso."},
+    {stem:"Traduce: «Мы рассчитываем на вашу поддержку в этом проекте».", model:"Contamos con vuestro apoyo en este proyecto."},
+    {stem:"Traduce: «Несмотря на трудности, мы договорились закончить работу вовремя».", model:"A pesar de las dificultades, hemos quedado en terminar el trabajo a tiempo."},
+    {stem:"Traduce: «Она не осознавала, что влюбилась в своего лучшего друга».", model:"No se daba cuenta de que se había enamorado de su mejor amigo."}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 14 · Traducción abierta (verbos + preposición)","el más difícil","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="v14-'+idx+'" style="min-height:44px;" placeholder="Tu traducción..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="v14-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("v14-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+/* ---------------- BLOQUE v15: traducción abierta (respuesta modelo) 2 ---------------- */
+(function(){
+  var items = [
+    {stem:"Traduce: «Дело не в деньгах, а в том, что тебе можно доверять».", model:"No se trata de dinero, sino de que se puede confiar en ti."},
+    {stem:"Traduce: «Что касается расписания, оно изменится начиная с понедельника».", model:"En cuanto al horario, cambiará a partir del lunes."},
+    {stem:"Traduce: «Вместо того чтобы жаловаться, обрати внимание на решения».", model:"En vez de quejarte, fíjate en las soluciones."},
+    {stem:"Traduce: «Согласно договору, экзамен состоит из двух частей».", model:"De acuerdo con el contrato, el examen consiste en dos partes."}
+  ];
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.appendChild(blockHeader("Bloque 15 · Traducción abierta (locuciones + verbos)","el más difícil","hard"));
+  wrap.innerHTML += '<p class="hint" style="margin:0 0 10px;">Respuestas abiertas — escribe la tuya y compárala con el modelo (puede haber más de una forma correcta).</p>';
+  items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="v15-'+idx+'" style="min-height:44px;" placeholder="Tu traducción..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="v15-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("v15-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  exList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
