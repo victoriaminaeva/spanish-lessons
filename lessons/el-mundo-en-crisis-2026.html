@@ -1,0 +1,870 @@
+<!doctype html>
+<title>El Mundo en Crisis</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#35494c;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#35494c;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.meta ul{margin:6px 0 0; padding-left:18px;}
+.meta li{margin-bottom:3px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.vocab-source{font-size:11.5px; color:var(--gold); margin-top:2px;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> El Mundo en Crisis · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>2026: el mundo en crisis</h1>
+  <p class="subtitle">Globalización, multilateralismo y conflictos internacionales — vocabulario, debate, gramática y test con corrección automática. Pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuentes (5 artículos de opinión y análisis, 2026):</b>
+    <ul>
+      <li>Listín Diario — «2026: cuando el desorden mundial muestra su verdadero rostro» (18/07/2026)</li>
+      <li>Infobae — «La crisis del multilateralismo» (17/03/2026)</li>
+      <li>Real Instituto Elcano — «La reconfiguración de la gobernanza climática en 2026» (05/03/2026)</li>
+      <li>Aduana News — «Davos 2026: los riesgos globales que marcan el inicio del año» (15/01/2026)</li>
+      <li>El Orden Mundial — «El mundo en 2026: todos los conflictos que hay que vigilar» (11/01/2026)</li>
+    </ul>
+  </p>
+  <div class="summary">
+    <b>De qué tratan:</b> cinco textos que describen el mismo fenómeno desde ángulos distintos: las instituciones internacionales (ONU, OMC, acuerdos climáticos) pierden fuerza; el comercio y la tecnología se usan como armas políticas; y el mundo se prepara para un año, 2026, marcado por la desconfianza, los conflictos armados y la competencia entre grandes potencias.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones de los cinco artículos, útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">04</span><h2>Test — El mundo en crisis</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "mundoencrisis_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {};
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+var vocab = [
+  {term:"socavar (algo)", pos:"verbo transitivo",
+   quote:"...la prioridad de la Casa Blanca para Europa es <mark>socavar</mark> a la Unión Europea e impulsar a las fuerzas de extrema derecha en el continente.",
+   src:"El Orden Mundial",
+   trans:"подрывать (авторитет, институт, доверие)",
+   mean:"Debilitar algo poco a poco, desde dentro, hasta hacerlo caer; muy usado con instituciones, autoridad o confianza.",
+   ex:"La corrupción socava la confianza de los ciudadanos en el gobierno. — Коррупция подрывает доверие граждан к правительству."},
+  {term:"advertir (que)", pos:"verbo transitivo",
+   quote:"Como <mark>advirtió</mark> el Fondo Monetario Internacional, «tras varias décadas de creciente integración económica global, el mundo enfrenta el riesgo de una fragmentación geoeconómica...».",
+   src:"Listín Diario",
+   trans:"предупреждать (о чём-либо)",
+   mean:"Avisar de un peligro o problema antes de que ocurra; muy frecuente en el lenguaje de informes y análisis.",
+   ex:"Los científicos advierten que el nivel del mar seguirá subiendo. — Учёные предупреждают, что уровень моря продолжит подниматься."},
+  {term:"la desconfianza", pos:"sustantivo, f.",
+   quote:"La nueva geopolítica está marcada por la <mark>desconfianza</mark> estratégica y el regreso de la fuerza como lenguaje dominante.",
+   src:"Listín Diario",
+   trans:"недоверие",
+   mean:"Falta de confianza entre personas, países o instituciones; opuesto de «confianza».",
+   ex:"La desconfianza entre los dos países dificulta cualquier acuerdo. — Недоверие между двумя странами затрудняет любое соглашение."},
+  {term:"estar al borde de (algo)", pos:"locución + sustantivo",
+   quote:"Los enfrentamientos armados entre algunos de sus miembros... pone a dichas entidades <mark>al borde de la</mark> irrelevancia.",
+   src:"Infobae",
+   trans:"быть на грани (чего-либо)",
+   mean:"Estar muy cerca de una situación extrema, generalmente negativa (el colapso, la ruptura, la irrelevancia).",
+   ex:"La empresa está al borde de la quiebra. — Компания на грани банкротства."},
+  {term:"dejar de formar parte de (algo)", pos:"perífrasis verbal",
+   quote:"Al tiempo que EEUU <mark>deja de formar parte</mark> (esperemos que temporalmente) de la arquitectura climática internacional, China... reafirma su apoyo al multilateralismo.",
+   src:"Real Instituto Elcano",
+   trans:"перестать быть частью (чего-либо), выйти из состава",
+   mean:"Abandonar un grupo, organización o sistema del que antes se era miembro.",
+   ex:"El Reino Unido dejó de formar parte de la Unión Europea en 2020. — Великобритания перестала быть частью Евросоюза в 2020 году."},
+  {term:"amenazar (algo/a alguien)", pos:"verbo transitivo",
+   quote:"...señala a la polarización social y la desigualdad como riesgos estructurales que <mark>amenazan</mark> la cohesión interna de los países.",
+   src:"Aduana News",
+   trans:"угрожать (чему-либо/кому-либо)",
+   mean:"Representar un peligro real para algo o alguien; también se usa para anunciar un daño.",
+   ex:"El cambio climático amenaza la seguridad alimentaria mundial. — Изменение климата угрожает мировой продовольственной безопасности."},
+  {term:"emerger como (algo)", pos:"verbo + preposición",
+   quote:"...la «confrontación geoeconómica» <mark>emerge como</mark> el principal riesgo global en el corto plazo, seguida por los conflictos armados entre Estados.",
+   src:"Aduana News",
+   trans:"появляться / выдвигаться в качестве (чего-либо)",
+   mean:"Surgir con fuerza y hacerse visible como la opción, el problema o el líder más importante en un contexto.",
+   ex:"La energía solar emerge como la alternativa más barata. — Солнечная энергия выдвигается в качестве самой дешёвой альтернативы."},
+  {term:"el vacío de poder", pos:"sustantivo, m.",
+   quote:"Otro efecto de ese <mark>vacío</mark> dejado por Estados Unidos es el divorcio entre Arabia Saudí y Emiratos Árabes Unidos.",
+   src:"El Orden Mundial (eco en Real Instituto Elcano: «deja un vacío de liderazgo en favor de rivales geopolíticos»)",
+   trans:"вакуум власти / лидерства",
+   mean:"Situación en la que ninguna potencia o líder controla claramente una región o un proceso, lo que otros actores aprovechan.",
+   ex:"La dimisión del ministro dejó un vacío de poder en el partido. — Отставка министра оставила вакуум власти в партии."},
+  {term:"impulsar (algo)", pos:"verbo transitivo",
+   quote:"...la Administración Trump <mark>impulsó</mark> el mayor giro unilateral de EEUU en décadas mediante una orden presidencial...",
+   src:"Real Instituto Elcano",
+   trans:"продвигать, инициировать, давать импульс",
+   mean:"Dar fuerza o dirección a una acción, política o cambio para que avance.",
+   ex:"El nuevo ministro impulsó una reforma educativa. — Новый министр инициировал реформу образования."},
+  {term:"convulso/a", pos:"adjetivo",
+   quote:"El mundo en 2026: todos los conflictos que hay que vigilar en este año <mark>convulso</mark>.",
+   src:"El Orden Mundial",
+   trans:"неспокойный, потрясаемый (событиями)",
+   mean:"Que sufre agitación, cambios violentos o gran inestabilidad política y social.",
+   ex:"El país vive un momento político muy convulso. — Страна переживает очень неспокойный политический момент."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-source">— '+v.src+'</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+var debate = [
+  {q:"¿Sientes que vivimos en un mundo más inseguro que hace diez años? ¿Por qué?", hint:"Útil: «Para mí...», «Creo que sí/no porque...»"},
+  {q:"¿Has visto en las noticias de tu país ejemplos de desconfianza entre gobiernos o entre bloques de países? ¿Cuáles?", hint:"Útil: «En mi país...», «Por ejemplo, hace poco...»"},
+  {q:"¿Crees que organizaciones como la ONU todavía sirven para algo, o ya no funcionan bien? Un artículo compara la política mundial con «un partido de rugby sin árbitro»: ¿te parece una buena comparación?", hint:"Útil: «Por un lado..., por otro lado...», «Estoy de acuerdo/en desacuerdo con esta idea porque...»"},
+  {q:"Varios textos dicen que los países prefieren depender menos unos de otros (más «autonomía estratégica»). ¿Es esto bueno o malo para el mundo, en tu opinión?", hint:"Útil: «A favor de esta idea...», «En contra...»"},
+  {q:"Si tú fueras líder de un país pequeño, ¿qué harías para proteger a tu país en un mundo con tanta desconfianza y tantos vacíos de poder?", hint:"Útil: «Yo, si fuera líder, haría...», «Buscaría alianzas con...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+var gram = [
+  {id:"g1", title:"3.1 Presente de indicativo",
+   quote:"<mark>Vivimos</mark> un cambio de era geopolítica.",
+   rule:"Verbos regulares en -ar/-er/-ir. Se usa para describir situaciones actuales o verdades generales — muy típico en textos de análisis.",
+   items:[
+     {stem:"El mundo ______ (atravesar) una etapa de gran incertidumbre.", answers:["atraviesa"]},
+     {stem:"Muchos países ______ (buscar) más autonomía económica.", answers:["buscan"]},
+     {stem:"La ONU ______ (tener) dificultades para actuar en los conflictos actuales.", answers:["tiene"]},
+     {stem:"Los expertos ______ (advertir) sobre nuevos riesgos cada año.", answers:["advierten"]},
+     {stem:"China ______ (invertir) mucho dinero en energías renovables.", answers:["invierte"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito perfecto compuesto",
+   quote:"El multilateralismo no <mark>ha desaparecido</mark>, pero <mark>ha perdido</mark> autoridad.",
+   rule:"Presente de <i>haber</i> + participio (-ado/-ido). Acción pasada que tiene relevancia o efecto en el presente.",
+   items:[
+     {stem:"Este año, Estados Unidos ______ (retirarse) de varias instituciones internacionales.", answers:["se ha retirado"]},
+     {stem:"La confianza entre los países ______ (disminuir) mucho en los últimos años.", answers:["ha disminuido"]},
+     {stem:"¿______ (leer, tú) alguna noticia sobre la guerra en Ucrania esta semana?", answers:["has leído"]},
+     {stem:"Los líderes mundiales todavía no ______ (encontrar) una solución para el clima.", answers:["han encontrado"]},
+     {stem:"La polarización social ______ (aumentar) en muchos países recientemente.", answers:["ha aumentado"]}
+   ]},
+  {id:"g3", title:"3.3 Futuro simple",
+   quote:"Europa <mark>prestará</mark> enorme atención a su seguridad este año.",
+   rule:"Infinitivo completo + -é,-ás,-á,-emos,-éis,-án. Expresa predicciones y planes futuros — muy común en artículos que anticipan el año que viene.",
+   items:[
+     {stem:"En los próximos años, muchos países ______ (invertir) más en defensa.", answers:["invertirán"]},
+     {stem:"La COP31 ______ (celebrarse) en Turquía.", answers:["se celebrará"]},
+     {stem:"Nadie sabe si Estados Unidos ______ (tener) elecciones justas en noviembre.", answers:["tendrá"]},
+     {stem:"Los expertos creen que la economía mundial ______ (desacelerarse).", answers:["se desacelerará"]},
+     {stem:"¿Qué ______ (pasar) si un país abandona un tratado internacional?", answers:["pasará"]}
+   ]},
+  {id:"g4", title:"3.4 Condicional simple",
+   quote:"<mark>Debería</mark> sucederle una mujer, pero lo que marcará la elección será la tensión entre potencias.",
+   rule:"Infinitivo completo + terminaciones de imperfecto (-ía,-ías,-ía...). Expresa hipótesis, consejos o un «futuro visto desde el pasado». Ojo: no confundir con el futuro simple por el parecido de la terminación.",
+   items:[
+     {stem:"Si los países cooperaran más, el mundo ______ (ser) más estable.", answers:["sería"]},
+     {stem:"Yo, en su lugar, ______ (buscar) otras alianzas comerciales.", answers:["buscaría"]},
+     {stem:"Los expertos dicen que ______ (deber) reformarse la ONU.", answers:["debería"]},
+     {stem:"Sin conflictos, la economía mundial ______ (crecer) más rápido.", answers:["crecería"]},
+     {stem:"¿Qué ______ (hacer) tú para reducir la desconfianza entre países?", answers:["harías"]}
+   ]},
+  {id:"g5", title:"3.5 Presente de subjuntivo (tras expresiones de posibilidad)",
+   quote:"No es descartable que Estados Unidos <mark>bombardee</mark> las infraestructuras del narco en el país.",
+   rule:"Raíz de la 1ª persona del presente + vocal cambiada (-e/-emos/-en para verbos en -ar). Expresiones como «es posible que», «no es descartable que», «es probable que» exigen subjuntivo porque hablan de algo dudoso, no de un hecho seguro.",
+   items:[
+     {stem:"Es posible que la guerra ______ (terminar) este año.", answers:["termine"]},
+     {stem:"No es descartable que otro país ______ (salir) de un acuerdo climático.", answers:["salga"]},
+     {stem:"Es probable que los precios ______ (subir) por la inflación.", answers:["suban"]},
+     {stem:"Puede que las elecciones no ______ (ser) justas.", answers:["sean"]},
+     {stem:"Es dudoso que las instituciones internacionales ______ (recuperar) su autoridad pronto.", answers:["recuperen"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+var testList = document.getElementById("testList");
+
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"Según el Listín Diario, ¿qué representan hoy las cadenas globales de suministro?", opts:["Un símbolo de cooperación perfecta","Una fuente de vulnerabilidad","Un problema ya resuelto","Algo que no preocupa a los gobiernos"], answer:1},
+    {q:"Según «La crisis del multilateralismo» (Infobae), ¿qué puede hacer un país con derecho a veto en el Consejo de Seguridad de la ONU?", opts:["Nada, no tiene poder especial","Bloquear resoluciones obligatorias","Expulsar a otros países de la ONU","Cambiar la sede de la ONU"], answer:1},
+    {q:"Según el análisis del Real Instituto Elcano, ¿qué hizo Estados Unidos en enero de 2026?", opts:["Aumentó su ayuda económica al clima","Se retiró de instituciones climáticas clave, como la UNFCCC","Organizó la COP31","Prohibió el uso de combustibles fósiles"], answer:1},
+    {q:"Según el Global Risks Report 2026 (Davos), ¿cuál es el riesgo global principal a corto plazo?", opts:["El cambio climático","La confrontación geoeconómica","Las enfermedades globales","La falta de tecnología"], answer:1},
+    {q:"Según «El mundo en 2026» (El Orden Mundial), ¿qué país considera el artículo «el mayor riesgo geopolítico del momento»?", opts:["China","Rusia","Estados Unidos","Irán"], answer:2},
+    {q:"Según el mismo artículo, ¿qué amenaza territorial menciona sobre Groenlandia?", opts:["Un tratado comercial","Una posible anexión por parte de Estados Unidos","Una alianza militar nueva","Un festival cultural"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"fragmentación · resiliencia · veto · retirada · confrontación · incertidumbre · cooperación · estabilidad",
+  items:[
+    {stem:"El FMI advirtió que el mundo enfrenta el riesgo de una ______ geoeconómica.", answers:["fragmentación"]},
+    {stem:"Los países buscan ______ y autonomía estratégica sobre sectores esenciales.", answers:["resiliencia"]},
+    {stem:"Un país con derecho a ______ puede bloquear una resolución del Consejo de Seguridad.", answers:["veto"]},
+    {stem:"En enero de 2026 se produjo la ______ de Estados Unidos de varias instituciones climáticas.", answers:["retirada"]},
+    {stem:"Según el informe de Davos, la ______ geoeconómica es el principal riesgo global.", answers:["confrontación"]},
+    {stem:"El año 2026 está marcado por la ______ sobre el futuro de la gobernanza climática.", answers:["incertidumbre"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada organismo con su descripción",
+  words:["El Consejo de Seguridad de la ONU","El Foro Económico Mundial","La COP31","La OMC"],
+  defs:["puede ser bloqueado por un país con derecho a veto","publica cada año el Global Risks Report","se celebrará en Turquía, pero Australia dirigirá las negociaciones","su sistema de solución de diferencias está cada vez más marginado"],
+  answers:["a","b","c","d"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Organismo</th><th>Descripción</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena los hechos de 2026 según su fecha",
+  events:[
+    {text:"Estados Unidos se retira de instituciones climáticas internacionales.", answer:1},
+    {text:"El Foro Económico Mundial presenta el Global Risks Report 2026.", answer:2},
+    {text:"Turquía y Australia organizan juntos la conferencia climática COP31.", answer:3},
+    {text:"Estados Unidos celebra las elecciones de medio mandato.", answer:4}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Cambia de presente a pretérito perfecto: «Vivimos un cambio de era geopolítica.»", model:"Hemos vivido un cambio de era geopolítica."},
+    {stem:"Convierte a estilo indirecto: Guterres dijo: «No podemos crear un futuro adecuado para nuestros nietos con un sistema construido por nuestros abuelos.»", model:"Guterres dijo que no podían crear un futuro adecuado para sus nietos con un sistema construido por sus abuelos."},
+    {stem:"Transforma en negación: «El multilateralismo ha perdido autoridad.»", model:"El multilateralismo no ha perdido autoridad."},
+    {stem:"Cambia del futuro al condicional: «Europa prestará enorme atención a su seguridad.»", model:"Europa prestaría enorme atención a su seguridad (si fuera necesario)."},
+    {stem:"Sustituye la palabra en negrita por un sinónimo de la lista de vocabulario: «Las nuevas políticas van a <b>debilitar</b> la confianza entre los países.»", model:"Las nuevas políticas van a socavar la confianza entre los países."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «socavar»:", opts:["fortalecer","debilitar","construir","ignorar"], answer:1},
+    {q:"Antónimo de «confianza»:", opts:["desconfianza","seguridad","amistad","paz"], answer:0},
+    {q:"Marca la palabra intrusa (no pertenece al grupo):", opts:["fragmentación","confrontación","cooperación","desconfianza"], answer:2},
+    {q:"Completa la colocación: «estar al ______ de la irrelevancia»:", opts:["lado","borde","centro","final"], answer:1},
+    {q:"«El vacío de poder» significa:", opts:["mucho poder concentrado en un líder","ausencia de un liderazgo claro en una región","un edificio vacío del gobierno","elecciones sin candidatos"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
