@@ -229,6 +229,16 @@ table.match-table tr:nth-child(even) td{background:var(--surface-2);}
   margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
 }
 
+.audio-controls{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:14px;}
+.play-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--surface-2); color:var(--accent); border:1px solid var(--border); border-radius:999px;
+  padding:8px 16px; cursor:pointer; display:inline-flex; align-items:center; gap:6px;
+}
+.play-btn:hover{border-color:var(--accent);}
+.play-btn.slow{font-size:12px; color:var(--muted);}
+.audio-note{font-size:12.5px; color:var(--muted); font-style:italic;}
+
 footer{
   margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
   font-size:12.5px; color:var(--muted); text-align:center;
@@ -254,7 +264,7 @@ footer{
 <header class="hero">
   <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
   <h1>Masificación turística y migratoria</h1>
-  <p class="subtitle">Vocabulario, debate, gramática y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="subtitle">Vocabulario, debate, gramática, audición y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
   <p class="meta"><b>Fuente:</b> Última Hora (Palma), Julio Martínez — «Masificación turística y migratoria», Opinión/Tribuna, 09/09/2026</p>
   <div class="summary">
     <b>De qué trata:</b> el autor compara dos debates muy polarizados en España: la masificación turística (protestas en Barcelona, Palma y otras ciudades) y la masificación migratoria (el caso de Ceuta). Defiende que se puede reconocer los beneficios del turismo y de la inmigración para la economía de Baleares y, al mismo tiempo, pedir una mejor gestión de ambos fenómenos, sin recurrir a etiquetas como "turismofóbico" o "racista".
@@ -279,8 +289,14 @@ footer{
   <div id="gramList"></div>
 </section>
 
+<section id="audicion">
+  <div class="section-head"><span class="section-num">04</span><h2>Audición</h2></div>
+  <p class="hint">Pulsa «Escuchar» (o «Más despacio» si lo necesitas) antes de responder. Si tu navegador no tiene voz en español, se mostrará la transcripción.</p>
+  <div id="audioList"></div>
+</section>
+
 <section id="test">
-  <div class="section-head"><span class="section-num">04</span><h2>Test — Masificación turística</h2></div>
+  <div class="section-head"><span class="section-num">05</span><h2>Test — Masificación turística</h2></div>
   <div id="testList"></div>
 </section>
 
@@ -541,6 +557,157 @@ function buildExerciseBlock(block, isGrammar){
 
 var gramList = document.getElementById("gramList");
 gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+var ttsSupported = ("speechSynthesis" in window);
+var esVoice = null;
+function loadEsVoice(){
+  if(!ttsSupported) return;
+  var voices = window.speechSynthesis.getVoices();
+  esVoice = voices.filter(function(v){ return /^es/i.test(v.lang); })[0] || null;
+}
+if(ttsSupported){
+  loadEsVoice();
+  window.speechSynthesis.onvoiceschanged = loadEsVoice;
+}
+function speak(text, rate){
+  if(!ttsSupported) return;
+  window.speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(text);
+  u.lang = "es-ES";
+  u.rate = rate || 1;
+  if(esVoice) u.voice = esVoice;
+  window.speechSynthesis.speak(u);
+}
+function buildAudioControls(text){
+  var wrap = document.createElement("div");
+  if(!ttsSupported){
+    wrap.innerHTML = '<p class="audio-note">Tu navegador no soporta la síntesis de voz — aquí tienes el texto para leer:</p>'+
+      '<div class="model-answer">'+text+'</div>';
+    return wrap;
+  }
+  wrap.className = "audio-controls";
+  wrap.innerHTML =
+    '<button class="play-btn" type="button">&#128266; Escuchar</button>'+
+    '<button class="play-btn slow" type="button">&#128034; Más despacio</button>';
+  var btns = wrap.querySelectorAll(".play-btn");
+  btns[0].addEventListener("click", function(){ speak(text, 1); });
+  btns[1].addEventListener("click", function(){ speak(text, 0.7); });
+  return wrap;
+}
+
+var audioList = document.getElementById("audioList");
+
+var audioText1 = "En toda Europa existe una creciente preocupación social por algunos de los retos asociados a la inmigración. Esta tendencia se ha reflejado en un aumento del apoyo a formaciones políticas que denuncian la masificación migratoria. En paralelo, han surgido movimientos de contestación al modelo de turismo de masas en destinos tan diversos como Barcelona, Ámsterdam, Venecia, Lisboa y Palma. La cuestión no debería ser si Mallorca necesita turismo o no, sino cómo gestionar su intensidad y sus efectos para maximizar los beneficios y minimizar las externalidades negativas.";
+
+var aud1 = {
+  id:"aud1", title:"Audición 1 · Escucha y responde",
+  items:[
+    {q:"¿Qué preocupación social ha crecido en toda Europa, según el audio?", opts:["el desempleo juvenil","los retos asociados a la inmigración","el cambio climático","la subida de precios"], answer:1},
+    {q:"¿A qué ha aumentado el apoyo, según el audio?", opts:["a ONGs medioambientales","a formaciones políticas que denuncian la masificación migratoria","a sindicatos de hostelería","a partidos ecologistas"], answer:1},
+    {q:"¿En qué ciudades han surgido movimientos de contestación al turismo de masas?", opts:["Madrid, Sevilla y Bilbao","Barcelona, Ámsterdam, Venecia, Lisboa y Palma","París, Roma y Londres","Nueva York y Miami"], answer:1},
+    {q:"Según el audio, ¿cuál debería ser la verdadera pregunta sobre el turismo en Mallorca?", opts:["si hay que prohibirlo por completo","cómo gestionar su intensidad y sus efectos","cuánto dinero genera cada turista","cuántos turistas llegan al año"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud1.title+'</span></div>';
+  wrap.appendChild(buildAudioControls(audioText1));
+  var list = document.createElement("div");
+  aud1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="aud1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="aud1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud1.items.length+"</b>";
+    blockScores["aud1"] = {correct:correct, total:aud1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud1"] = {correct:0, total:aud1.items.length};
+  audioList.appendChild(wrap);
+})();
+
+var audioText2 = "Han surgido movimientos de contestación al modelo de turismo de masas en destinos tan diversos como Barcelona, Ámsterdam, Venecia, Lisboa y Palma.";
+
+var aud2 = {
+  id:"aud2", title:"Audición 2 · Dictado — escucha y completa los huecos",
+  bank:"contestación · Barcelona · Venecia · Palma",
+  items:[
+    {stem:"Han surgido movimientos de ______ al modelo de turismo de masas...", answers:["contestación"]},
+    {stem:"...en destinos tan diversos como ______, Ámsterdam...", answers:["Barcelona"]},
+    {stem:"...Ámsterdam, ______, Lisboa...", answers:["Venecia"]},
+    {stem:"...Lisboa y ______.", answers:["Palma"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud2.title+'</span></div>';
+  wrap.appendChild(buildAudioControls(audioText2));
+  var bankDiv = document.createElement("div");
+  bankDiv.className = "wordbank";
+  bankDiv.innerHTML = "<b>Banco de palabras:</b> "+aud2.bank;
+  wrap.appendChild(bankDiv);
+  var list = document.createElement("div");
+  aud2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud2.items.length+"</b>";
+    blockScores["aud2"] = {correct:correct, total:aud2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud2"] = {correct:0, total:aud2.items.length};
+  audioList.appendChild(wrap);
+})();
 
 var testList = document.getElementById("testList");
 
@@ -841,6 +1008,7 @@ var b5 = {
 updateGlobalScore();
 
 document.getElementById("resetBtn").addEventListener("click", function(){
+  if(ttsSupported){ window.speechSynthesis.cancel(); }
   document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
   document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
   document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
