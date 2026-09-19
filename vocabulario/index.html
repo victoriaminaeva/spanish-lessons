@@ -136,6 +136,18 @@ h1{font-size:clamp(24px,5vw,32px); margin:0 0 6px;}
   margin-top:14px; font-size:12px; color:var(--pop); text-align:center;
 }
 footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); font-size:13px; color:var(--muted); text-align:center;}
+
+.modules{display:flex; gap:6px; flex-wrap:wrap; margin-top:16px;}
+.mod-chip{
+  flex:1; min-width:78px; display:flex; flex-direction:column; align-items:center; gap:1px;
+  font-family:"Public Sans", system-ui, sans-serif; font-size:13px; font-weight:600;
+  padding:8px 6px; border-radius:12px; border:1px solid var(--border);
+  background:var(--surface); color:var(--ink); cursor:pointer;
+}
+.mod-chip small{font-family:"Space Mono", monospace; font-size:10.5px; font-weight:400; color:var(--muted);}
+.mod-chip.active{background:var(--accent); color:var(--accent-ink); border-color:var(--accent);}
+.mod-chip.active small{color:var(--accent-ink); opacity:.85;}
+.mod-note{font-size:11.5px; color:var(--muted); margin:6px 0 0;}
 </style>
 </head>
 <body>
@@ -158,6 +170,8 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); fo
   <p class="lead">Desliza a la derecha si ya sabes la palabra, a la izquierda si necesitas repasarla. Toca la tarjeta para ver la traducción.</p>
 </header>
 
+<div id="modulePicker"></div>
+
 <div class="stage" id="stage"></div>
 
 <div class="controls" id="controls" hidden>
@@ -178,6 +192,7 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); fo
 <script src="shared.js"></script>
 <script>
 let cards = [];
+let moduleChoice = 1;
 let progress = {};
 let queue = [];
 let showAll = false;
@@ -186,8 +201,16 @@ function renderOfflineNote(){
   document.getElementById("offlineNote").hidden = vocabOnline;
 }
 
+function scoped(){ return cardsForChoice(cards, moduleChoice); }
+
+function onModuleChange(choice){
+  moduleChoice = choice;
+  buildQueue();
+  renderStage();
+}
+
 function buildQueue(){
-  queue = cards
+  queue = scoped()
     .filter(c => showAll || isDue(c, progress))
     .sort((a,b) => {
       const da = Date.parse((progress[a.id]||{due:new Date(0).toISOString()}).due);
@@ -197,10 +220,12 @@ function buildQueue(){
 }
 
 function renderStats(){
-  const dueCount = cards.filter(c => isDue(c, progress)).length;
-  const mastered = cards.filter(c => (progress[c.id]||{}).box === MAX_BOX).length;
+  const inModule = scoped();
+  const dueCount = inModule.filter(c => isDue(c, progress)).length;
+  const mastered = inModule.filter(c => (progress[c.id]||{}).box === MAX_BOX).length;
   document.getElementById("stats").innerHTML =
-    `<span>hoy: <b>${dueCount}</b></span><span>dominadas: <b>${mastered}</b></span><span>total: <b>${cards.length}</b></span>`;
+    `<span>hoy: <b>${dueCount}</b></span><span>dominadas: <b>${mastered}</b></span><span>total: <b>${inModule.length}</b></span>`;
+  renderModulePicker(document.getElementById("modulePicker"), cards, progress, moduleChoice, onModuleChange);
 }
 
 function renderStage(){
@@ -311,6 +336,7 @@ document.getElementById("toggleAll").addEventListener("change", (e) => {
 
 (async function init(){
   [cards, progress] = await Promise.all([loadCards(), loadProgress()]);
+  moduleChoice = loadModuleChoice(cards);
   renderOfflineNote();
   buildQueue();
   renderStage();

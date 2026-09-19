@@ -7,6 +7,8 @@ const AUTH_TOKEN = "eddda14e7e143b917b3939a830f1babf1c8c1ce5a5a7ef3159bed85d6aa3
 const BOX_INTERVAL_DAYS = [1, 2, 4, 8, 16, 30];
 const MAX_BOX = BOX_INTERVAL_DAYS.length - 1;
 const FALLBACK_KEY = "vocabProgressFallback";
+const MODULE_SIZE = 100;
+const MODULE_KEY = "vocabModule";
 
 let vocabOnline = false;
 
@@ -14,8 +16,56 @@ async function loadCards(){
   try{
     const res = await fetch("data.json", {cache:"no-store"});
     if(!res.ok) return [];
-    return await res.json();
+    return assignModules(await res.json());
   }catch(e){ return []; }
+}
+
+// Los módulos se calculan por el orden de data.json: 1–100, 101–200, …
+// Las palabras nuevas se añaden al final, así que llenan el último módulo
+// antes de abrir uno nuevo, y el resto no cambia de módulo.
+function assignModules(cards){
+  return cards.map((c, i) => ({...c, module: Math.floor(i / MODULE_SIZE) + 1}));
+}
+
+function moduleCount(cards){
+  return Math.ceil(cards.length / MODULE_SIZE);
+}
+
+// La elección (número de módulo o "all") se comparte entre las cuatro vistas.
+function loadModuleChoice(cards){
+  let saved = null;
+  try{ saved = localStorage.getItem(MODULE_KEY); }catch(e){}
+  if(saved === "all") return "all";
+  const n = parseInt(saved, 10);
+  return n >= 1 && n <= moduleCount(cards) ? n : 1;
+}
+
+function saveModuleChoice(choice){
+  try{ localStorage.setItem(MODULE_KEY, String(choice)); }catch(e){}
+}
+
+function cardsForChoice(cards, choice){
+  return choice === "all" ? cards : cards.filter(c => c.module === choice);
+}
+
+// Botones «Módulo N» con dominadas/total debajo, más «Todas». Con un solo módulo no se muestra.
+function renderModulePicker(el, cards, progress, choice, onChange){
+  if(moduleCount(cards) <= 1){ el.innerHTML = ""; return; }
+  const chip = (value, label, subset) => {
+    const mastered = subset.filter(c => (progress[c.id]||{}).box === MAX_BOX).length;
+    return `<button class="mod-chip${value === choice ? " active" : ""}" data-module="${value}">
+      <span>${label}</span><small>${mastered}/${subset.length}</small></button>`;
+  };
+  const chips = [];
+  for(let m = 1; m <= moduleCount(cards); m++) chips.push(chip(m, `Módulo ${m}`, cardsForChoice(cards, m)));
+  chips.push(chip("all", "Todas", cards));
+  el.innerHTML = `<div class="modules">${chips.join("")}</div>
+    <p class="mod-note">Debajo de cada módulo: palabras dominadas / total.</p>`;
+  el.querySelectorAll(".mod-chip").forEach(btn => btn.addEventListener("click", () => {
+    const value = btn.dataset.module === "all" ? "all" : parseInt(btn.dataset.module, 10);
+    saveModuleChoice(value);
+    onChange(value);
+  }));
 }
 
 async function loadProgress(){
@@ -96,7 +146,9 @@ function shuffle(arr){
 }
 
 // count distractores (front de otras cartas) distintos de la carta correcta.
-function pickDistractors(cards, excludeId, count){
-  const pool = cards.filter(c => c.id !== excludeId);
+// Salen del módulo elegido; si no hay suficientes, se completa con fallbackCards.
+function pickDistractors(cards, excludeId, count, fallbackCards = cards){
+  let pool = cards.filter(c => c.id !== excludeId);
+  if(pool.length < count) pool = fallbackCards.filter(c => c.id !== excludeId);
   return shuffle(pool).slice(0, count).map(c => c.front);
 }

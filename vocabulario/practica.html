@@ -110,6 +110,18 @@ textarea{
 }
 .empty b{color:var(--ink);}
 footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); font-size:13px; color:var(--muted); text-align:center;}
+
+.modules{display:flex; gap:6px; flex-wrap:wrap; margin-top:16px;}
+.mod-chip{
+  flex:1; min-width:78px; display:flex; flex-direction:column; align-items:center; gap:1px;
+  font-family:"Public Sans", system-ui, sans-serif; font-size:13px; font-weight:600;
+  padding:8px 6px; border-radius:12px; border:1px solid var(--border);
+  background:var(--surface); color:var(--ink); cursor:pointer;
+}
+.mod-chip small{font-family:"Space Mono", monospace; font-size:10.5px; font-weight:400; color:var(--muted);}
+.mod-chip.active{background:var(--accent); color:var(--accent-ink); border-color:var(--accent);}
+.mod-chip.active small{color:var(--accent-ink); opacity:.85;}
+.mod-note{font-size:11.5px; color:var(--muted); margin:6px 0 0;}
 </style>
 </head>
 <body>
@@ -132,6 +144,7 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); fo
   <p class="lead">Con las palabras que ya dominas: traduce frases y compón las tuyas desde cero. Sin corrección automática — te autoevalúas comparando con un ejemplo de referencia.</p>
 </header>
 
+<div id="modulePicker"></div>
 <div id="app"></div>
 
 <footer>Vocabulario · práctica libre</footer>
@@ -140,6 +153,7 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); fo
 <script src="shared.js"></script>
 <script>
 let allCards = [];
+let moduleChoice = 1;
 let progress = {};
 let masteredCards = [];
 let pool = [];
@@ -148,13 +162,25 @@ let revealed = false;
 let session = {good:0, needsWork:0};
 
 function renderStats(){
-  const dueCount = allCards.filter(c => isDue(c, progress)).length;
-  const mastered = allCards.filter(c => (progress[c.id]||{}).box === MAX_BOX).length;
+  const cards = scoped();
+  const dueCount = cards.filter(c => isDue(c, progress)).length;
+  const mastered = cards.filter(c => (progress[c.id]||{}).box === MAX_BOX).length;
   document.getElementById("stats").innerHTML =
-    `<span>hoy: <b>${dueCount}</b></span><span>dominadas: <b>${mastered}</b></span><span>total: <b>${allCards.length}</b></span>`;
+    `<span>hoy: <b>${dueCount}</b></span><span>dominadas: <b>${mastered}</b></span><span>total: <b>${cards.length}</b></span>`;
+  renderModulePicker(document.getElementById("modulePicker"), allCards, progress, moduleChoice, onModuleChange);
+}
+
+function scoped(){ return cardsForChoice(allCards, moduleChoice); }
+
+function onModuleChange(choice){
+  moduleChoice = choice;
+  renderStats();
+  renderSetup();
 }
 
 function renderSetup(){
+  masteredCards = scoped().filter(c => (progress[c.id]||{}).box === MAX_BOX);
+  document.getElementById("modulePicker").hidden = false;
   const app = document.getElementById("app");
   if(masteredCards.length === 0){
     app.innerHTML = `<div class="empty">
@@ -180,6 +206,7 @@ function renderSetup(){
 }
 
 function startSession(count){
+  document.getElementById("modulePicker").hidden = true;
   pool = shuffle(masteredCards).slice(0, count).map((c, i) => ({
     card: c,
     type: i % 2 === 0 ? "translate" : "compose"
@@ -298,7 +325,7 @@ function renderComplete(){
 
 (async function init(){
   [allCards, progress] = await Promise.all([loadCards(), loadProgress()]);
-  masteredCards = allCards.filter(c => (progress[c.id]||{}).box === MAX_BOX);
+  moduleChoice = loadModuleChoice(allCards);
   renderStats();
   renderSetup();
 })();

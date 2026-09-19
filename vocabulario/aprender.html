@@ -114,6 +114,18 @@ input[type="number"]{
 }
 .empty b{color:var(--ink);}
 footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); font-size:13px; color:var(--muted); text-align:center;}
+
+.modules{display:flex; gap:6px; flex-wrap:wrap; margin-top:16px;}
+.mod-chip{
+  flex:1; min-width:78px; display:flex; flex-direction:column; align-items:center; gap:1px;
+  font-family:"Public Sans", system-ui, sans-serif; font-size:13px; font-weight:600;
+  padding:8px 6px; border-radius:12px; border:1px solid var(--border);
+  background:var(--surface); color:var(--ink); cursor:pointer;
+}
+.mod-chip small{font-family:"Space Mono", monospace; font-size:10.5px; font-weight:400; color:var(--muted);}
+.mod-chip.active{background:var(--accent); color:var(--accent-ink); border-color:var(--accent);}
+.mod-chip.active small{color:var(--accent-ink); opacity:.85;}
+.mod-note{font-size:11.5px; color:var(--muted); margin:6px 0 0;}
 </style>
 </head>
 <body>
@@ -136,6 +148,7 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); fo
   <p class="lead">Empieza con opciones y, en cuanto aciertes, pasa a escribir la palabra de memoria. Cada palabra debe acertarse dos veces seguidas para superar la sesión.</p>
 </header>
 
+<div id="modulePicker"></div>
 <div id="app"></div>
 
 <footer>Vocabulario · modo aprender</footer>
@@ -144,6 +157,7 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); fo
 <script src="shared.js"></script>
 <script>
 let allCards = [];
+let moduleChoice = 1;
 let progress = {};
 let pool = [];
 let streaks = {};
@@ -154,14 +168,27 @@ let stats = {correct:0, incorrect:0};
 let answered = false;
 
 function renderStats(){
-  const dueCount = allCards.filter(c => isDue(c, progress)).length;
-  const mastered = allCards.filter(c => (progress[c.id]||{}).box === MAX_BOX).length;
+  const cards = scoped();
+  const dueCount = cards.filter(c => isDue(c, progress)).length;
+  const mastered = cards.filter(c => (progress[c.id]||{}).box === MAX_BOX).length;
   document.getElementById("stats").innerHTML =
-    `<span>hoy: <b>${dueCount}</b></span><span>dominadas: <b>${mastered}</b></span><span>total: <b>${allCards.length}</b></span>`;
+    `<span>hoy: <b>${dueCount}</b></span><span>dominadas: <b>${mastered}</b></span><span>total: <b>${cards.length}</b></span>`;
+  renderModulePicker(document.getElementById("modulePicker"), allCards, progress, moduleChoice, onModuleChange);
+}
+
+function scoped(){ return cardsForChoice(allCards, moduleChoice); }
+
+function onModuleChange(choice){
+  moduleChoice = choice;
+  renderStats();
+  renderSetup();
 }
 
 function renderSetup(){
-  const dueCount = allCards.filter(c => isDue(c, progress)).length;
+  const cards = scoped();
+  const dueCount = cards.filter(c => isDue(c, progress)).length;
+  const scopeLabel = moduleChoice === "all" ? "Todas" : "Todo el módulo";
+  document.getElementById("modulePicker").hidden = false;
   const app = document.getElementById("app");
   if(allCards.length === 0){
     app.innerHTML = `<div class="empty">Todavía no hay palabras en el vocabulario. Envía una palabra o expresión en el chat y se añadirá aquí.</div>`;
@@ -173,12 +200,12 @@ function renderSetup(){
         <label>¿Qué palabras quieres estudiar?</label>
         <div class="radiogroup">
           <label><input type="radio" name="source" value="due" ${dueCount>0?"checked":""}> A repasar hoy (${dueCount})</label>
-          <label><input type="radio" name="source" value="all" ${dueCount===0?"checked":""}> Todas (${allCards.length})</label>
+          <label><input type="radio" name="source" value="all" ${dueCount===0?"checked":""}> ${scopeLabel} (${cards.length})</label>
         </div>
       </div>
       <div class="field">
         <label for="count">Cuántas palabras en esta sesión</label>
-        <input type="number" id="count" min="1" max="${allCards.length}" value="${Math.min(20, dueCount>0?dueCount:allCards.length)}">
+        <input type="number" id="count" min="1" max="${cards.length}" value="${Math.min(20, dueCount>0?dueCount:cards.length)}">
       </div>
       <button class="btn-primary" id="btnStart">Comenzar</button>
       <p class="hint-small">Cada respuesta correcta o incorrecta también actualiza el calendario de repaso de las tarjetas.</p>
@@ -186,14 +213,16 @@ function renderSetup(){
   `;
   document.getElementById("btnStart").addEventListener("click", () => {
     const source = document.querySelector('input[name="source"]:checked').value;
-    const count = Math.max(1, Math.min(allCards.length, parseInt(document.getElementById("count").value, 10) || 20));
+    const count = Math.max(1, Math.min(cards.length, parseInt(document.getElementById("count").value, 10) || 20));
     startSession(source, count);
   });
 }
 
 function startSession(source, count){
-  const base = source === "due" ? allCards.filter(c => isDue(c, progress)) : allCards.slice();
-  const chosen = shuffle(base.length ? base : allCards).slice(0, count);
+  const cards = scoped();
+  const base = source === "due" ? cards.filter(c => isDue(c, progress)) : cards.slice();
+  const chosen = shuffle(base.length ? base : cards).slice(0, count);
+  document.getElementById("modulePicker").hidden = true;
   pool = chosen;
   streaks = {};
   pool.forEach(c => streaks[c.id] = 0);
@@ -231,7 +260,7 @@ function renderQuestion(){
   const explainHtml = current.explanation_es ? `<div class="qexplain">${escapeHtml(current.explanation_es)}</div>` : "";
 
   if(currentMode === "choice"){
-    const options = shuffle([current.front, ...pickDistractors(allCards, current.id, 3)]);
+    const options = shuffle([current.front, ...pickDistractors(scoped(), current.id, 3, allCards)]);
     app.innerHTML = `
       ${renderProgress()}
       <div class="qcard">
@@ -322,6 +351,7 @@ function renderComplete(){
 
 (async function init(){
   [allCards, progress] = await Promise.all([loadCards(), loadProgress()]);
+  moduleChoice = loadModuleChoice(allCards);
   renderStats();
   renderSetup();
 })();
