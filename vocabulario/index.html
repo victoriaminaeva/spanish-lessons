@@ -63,6 +63,13 @@ a{color:var(--accent);}
   display:flex; gap:12px; flex-wrap:wrap;
 }
 .stats b{color:var(--ink);}
+.tabs{display:flex; gap:8px; margin-top:12px;}
+.tab{
+  flex:1; text-align:center; text-decoration:none; font-family:"Space Mono", monospace;
+  font-size:12px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  padding:9px 6px; border-radius:10px; border:1px solid var(--border); color:var(--muted);
+}
+.tab.active{background:var(--accent); color:var(--accent-ink); border-color:var(--accent);}
 header{padding-block:20px 8px;}
 h1{font-size:clamp(24px,5vw,32px); margin:0 0 6px;}
 .lead{color:var(--muted); font-size:14.5px; max-width:56ch; margin:0;}
@@ -139,6 +146,12 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); fo
   <div class="stats" id="stats"></div>
 </div>
 
+<div class="tabs">
+  <a class="tab active" href="index.html">Tarjetas</a>
+  <a class="tab" href="aprender.html">Aprender</a>
+  <a class="tab" href="examen.html">Examen</a>
+</div>
+
 <header>
   <h1>Vocabulario</h1>
   <p class="lead">Desliza a la derecha si ya sabes la palabra, a la izquierda si necesitas repasarla. Toca la tarjeta para ver la traducción.</p>
@@ -161,79 +174,32 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); fo
 
 </div>
 
+<script src="shared.js"></script>
 <script>
-const WORKER_URL = "https://spanish-vocabulario-progress.minaevaviktoriia.workers.dev/progress";
-const AUTH_TOKEN = "eddda14e7e143b917b3939a830f1babf1c8c1ce5a5a7ef3159bed85d6aa37a0f";
-
-const BOX_INTERVAL_DAYS = [1, 2, 4, 8, 16, 30];
-const MAX_BOX = BOX_INTERVAL_DAYS.length - 1;
-const FALLBACK_KEY = "vocabProgressFallback";
-
 let cards = [];
 let progress = {};
 let queue = [];
-let online = false;
 let showAll = false;
-let dragState = null;
-
-async function loadCards(){
-  try{
-    const res = await fetch("data.json", {cache:"no-store"});
-    if(!res.ok) return [];
-    return await res.json();
-  }catch(e){ return []; }
-}
-
-async function loadProgress(){
-  try{
-    const res = await fetch(WORKER_URL, {
-      headers: {Authorization: `Bearer ${AUTH_TOKEN}`}
-    });
-    if(!res.ok) throw new Error("bad response");
-    online = true;
-    return await res.json();
-  }catch(e){
-    online = false;
-    try{ return JSON.parse(localStorage.getItem(FALLBACK_KEY) || "{}"); }
-    catch(e2){ return {}; }
-  }
-}
-
-async function saveProgress(id, entry){
-  progress[id] = entry;
-  try{ localStorage.setItem(FALLBACK_KEY, JSON.stringify(progress)); }catch(e){}
-  if(!online) return;
-  try{
-    await fetch(WORKER_URL, {
-      method: "POST",
-      headers: {"Content-Type":"application/json", Authorization: `Bearer ${AUTH_TOKEN}`},
-      body: JSON.stringify({id, ...entry})
-    });
-  }catch(e){ online = false; renderOfflineNote(); }
-}
 
 function renderOfflineNote(){
-  document.getElementById("offlineNote").hidden = online;
+  document.getElementById("offlineNote").hidden = vocabOnline;
 }
 
 function buildQueue(){
-  const now = Date.now();
   queue = cards
-    .map(c => ({card:c, p: progress[c.id] || {box:0, due:new Date(0).toISOString()}}))
-    .filter(x => showAll || Date.parse(x.p.due) <= now)
-    .sort((a,b) => Date.parse(a.p.due) - Date.parse(b.p.due));
+    .filter(c => showAll || isDue(c, progress))
+    .sort((a,b) => {
+      const da = Date.parse((progress[a.id]||{due:new Date(0).toISOString()}).due);
+      const db = Date.parse((progress[b.id]||{due:new Date(0).toISOString()}).due);
+      return da - db;
+    });
 }
 
 function renderStats(){
-  const now = Date.now();
-  const due = cards.filter(c => Date.parse((progress[c.id]||{due:new Date(0).toISOString()}).due) <= now).length;
+  const dueCount = cards.filter(c => isDue(c, progress)).length;
   const mastered = cards.filter(c => (progress[c.id]||{}).box === MAX_BOX).length;
   document.getElementById("stats").innerHTML =
-    `<span>hoy: <b>${due}</b></span><span>dominadas: <b>${mastered}</b></span><span>total: <b>${cards.length}</b></span>`;
-}
-
-function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+    `<span>hoy: <b>${dueCount}</b></span><span>dominadas: <b>${mastered}</b></span><span>total: <b>${cards.length}</b></span>`;
 }
 
 function renderStage(){
@@ -252,8 +218,7 @@ function renderStage(){
   }
 
   controls.hidden = false;
-  const item = queue[0];
-  const c = item.card;
+  const c = queue[0];
   const examples = (c.examples||[]).map(e => `<li>${escapeHtml(e)}</li>`).join("");
 
   stage.innerHTML = `
@@ -329,13 +294,10 @@ function commitSwipe(direction){
     card.style.transform = `translateX(${flyX}px) rotate(${direction === "right" ? 25 : -25}deg)`;
     card.style.opacity = "0";
   }
-  const item = queue.shift();
-  const c = item.card;
+  const c = queue.shift();
   const prevBox = (progress[c.id]||{box:0}).box || 0;
-  const newBox = direction === "right" ? Math.min(prevBox+1, MAX_BOX) : 0;
-  const due = new Date(Date.now() + BOX_INTERVAL_DAYS[newBox]*86400000).toISOString();
-  const entry = {box:newBox, due, learned: newBox === MAX_BOX};
-  saveProgress(c.id, entry);
+  const entry = computeReviewEntry(prevBox, direction === "right");
+  saveProgress(progress, c.id, entry).then(renderOfflineNote);
   setTimeout(renderStage, 180);
 }
 
