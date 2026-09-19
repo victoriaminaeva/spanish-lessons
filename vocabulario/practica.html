@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Práctica — Vocabulario</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Práctica libre con las palabras ya dominadas: traduce frases y compón tus propias frases desde cero, autoevaluándote con ejemplos de referencia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca; --surface:#ffffff; --surface-2:#cde3e8; --ink:#2d120d;
+  --muted:#7a5048; --accent:#6b0b0c; --accent-ink:#fff8ca; --pop:#d9761f;
+  --border:#ecd98a; --good:#2f7d4f; --bad:#b3261e;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d; --surface:#3a1a14; --surface-2:#452019; --ink:#fff8ca;
+    --muted:#d9c58f; --accent:#ef6b52; --accent-ink:#2d120d; --pop:#f2a544;
+    --border:#4a2a1e; --good:#6fcf97; --bad:#f28b82;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d; --surface:#3a1a14; --surface-2:#452019; --ink:#fff8ca;
+  --muted:#d9c58f; --accent:#ef6b52; --accent-ink:#2d120d; --pop:#f2a544; --border:#4a2a1e;
+  --good:#6fcf97; --bad:#f28b82;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Public Sans", system-ui, sans-serif; line-height:1.6;
+  padding-inline:20px; padding-block:0 60px;
+}
+.wrap{max-width:560px; margin:0 auto;}
+h1{font-family:"Fraunces", Georgia, serif; text-wrap:balance;}
+a{color:var(--accent);}
+.topbar{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:10;
+  background:var(--bg); padding-block:14px 10px; margin-bottom:6px;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  border-bottom:1px solid var(--border);
+}
+.topbar a.back{font-size:13px; color:var(--muted); text-decoration:none;}
+.stats{font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); display:flex; gap:12px; flex-wrap:wrap;}
+.stats b{color:var(--ink);}
+.tabs{display:flex; gap:6px; margin-top:12px; flex-wrap:wrap;}
+.tab{
+  flex:1; min-width:70px; text-align:center; text-decoration:none; font-family:"Space Mono", monospace;
+  font-size:11.5px; font-weight:700; letter-spacing:.02em; text-transform:uppercase;
+  padding:9px 4px; border-radius:10px; border:1px solid var(--border); color:var(--muted);
+}
+.tab.active{background:var(--accent); color:var(--accent-ink); border-color:var(--accent);}
+header{padding-block:20px 8px;}
+h1{font-size:clamp(24px,5vw,32px); margin:0 0 6px;}
+.lead{color:var(--muted); font-size:14.5px; max-width:56ch; margin:0;}
+
+.panel{margin-top:22px; padding:22px; border-radius:16px; background:var(--surface); border:1px solid var(--border);}
+.field{margin-bottom:16px;}
+.field label{display:block; font-size:13px; color:var(--muted); margin-bottom:6px;}
+input[type="number"]{
+  width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--border);
+  background:var(--bg); color:var(--ink); font-size:15px;
+}
+.btn-primary{
+  width:100%; padding:13px; border-radius:12px; border:none; margin-top:6px;
+  background:var(--accent); color:var(--accent-ink); font-weight:700; font-size:15px; cursor:pointer;
+}
+.btn-secondary{
+  width:100%; padding:12px; border-radius:12px; border:1px solid var(--border); margin-top:10px;
+  background:var(--surface-2); color:var(--ink); font-weight:600; font-size:14px; cursor:pointer;
+}
+.btn-primary:active, .btn-secondary:active{transform:scale(.99);}
+
+.progressbar{height:6px; border-radius:999px; background:var(--surface-2); margin-top:18px; overflow:hidden;}
+.progressbar > div{height:100%; background:var(--accent); transition:width .25s ease;}
+
+.qcard{
+  margin-top:22px; padding:26px 24px; border-radius:18px; background:var(--surface);
+  border:1px solid var(--border); box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+.qlabel{font-family:"Space Mono", monospace; font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--pop);}
+.qprompt{font-family:"Fraunces", serif; font-weight:600; font-size:clamp(19px,5.5vw,24px); margin:10px 0 4px;}
+.qexplain{font-size:13.5px; color:var(--muted); margin-bottom:4px;}
+.qsource{font-size:14px; color:var(--ink); background:var(--surface-2); border-radius:10px; padding:10px 12px; margin-top:8px;}
+
+textarea{
+  width:100%; min-height:90px; margin-top:16px; padding:12px 14px; border-radius:10px;
+  border:1px solid var(--border); background:var(--bg); color:var(--ink); font-size:15px;
+  font-family:inherit; resize:vertical;
+}
+
+.reveal{
+  margin-top:16px; padding:14px 16px; border-radius:12px; background:var(--surface-2);
+}
+.reveal-label{font-family:"Space Mono", monospace; font-size:11px; font-weight:700; color:var(--pop); text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px;}
+.reveal ul{margin:6px 0 0; padding-left:18px;}
+.reveal li{margin-bottom:4px;}
+
+.self-check{display:flex; gap:12px; margin-top:18px;}
+.self-check button{
+  flex:1; padding:12px; border-radius:12px; font-weight:700; font-size:14px; cursor:pointer; border:1px solid;
+}
+.self-check .no{background:transparent; color:var(--bad); border-color:var(--bad);}
+.self-check .yes{background:transparent; color:var(--good); border-color:var(--good);}
+
+.empty{
+  margin-top:40px; padding:26px 22px; border-radius:14px; background:var(--surface);
+  border:1px solid var(--border); text-align:center; color:var(--muted); font-size:14.5px;
+}
+.empty b{color:var(--ink);}
+footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); font-size:13px; color:var(--muted); text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="topbar">
+  <a class="back" href="../index.html">← Talleres</a>
+  <div class="stats" id="stats"></div>
+</div>
+
+<div class="tabs">
+  <a class="tab" href="index.html">Tarjetas</a>
+  <a class="tab" href="aprender.html">Aprender</a>
+  <a class="tab" href="examen.html">Examen</a>
+  <a class="tab active" href="practica.html">Práctica</a>
+</div>
+
+<header>
+  <h1>Práctica</h1>
+  <p class="lead">Con las palabras que ya dominas: traduce frases y compón las tuyas desde cero. Sin corrección automática — te autoevalúas comparando con un ejemplo de referencia.</p>
+</header>
+
+<div id="app"></div>
+
+<footer>Vocabulario · práctica libre</footer>
+</div>
+
+<script src="shared.js"></script>
+<script>
+let allCards = [];
+let progress = {};
+let masteredCards = [];
+let pool = [];
+let idx = 0;
+let revealed = false;
+let session = {good:0, needsWork:0};
+
+function renderStats(){
+  const dueCount = allCards.filter(c => isDue(c, progress)).length;
+  const mastered = allCards.filter(c => (progress[c.id]||{}).box === MAX_BOX).length;
+  document.getElementById("stats").innerHTML =
+    `<span>hoy: <b>${dueCount}</b></span><span>dominadas: <b>${mastered}</b></span><span>total: <b>${allCards.length}</b></span>`;
+}
+
+function renderSetup(){
+  const app = document.getElementById("app");
+  if(masteredCards.length === 0){
+    app.innerHTML = `<div class="empty">
+      Todavía no hay palabras completamente dominadas.<br>
+      Sigue repasando en <a href="index.html">Tarjetas</a>, <a href="aprender.html">Aprender</a> o
+      <a href="examen.html">Examen</a> hasta que alguna llegue a la última caja de repetición.
+    </div>`;
+    return;
+  }
+  app.innerHTML = `
+    <div class="panel">
+      <div class="field">
+        <label for="count">Cuántas palabras dominadas quieres practicar (de ${masteredCards.length})</label>
+        <input type="number" id="count" min="1" max="${masteredCards.length}" value="${Math.min(10, masteredCards.length)}">
+      </div>
+      <button class="btn-primary" id="btnStart">Comenzar práctica</button>
+    </div>
+  `;
+  document.getElementById("btnStart").addEventListener("click", () => {
+    const count = Math.max(1, Math.min(masteredCards.length, parseInt(document.getElementById("count").value, 10) || 10));
+    startSession(count);
+  });
+}
+
+function startSession(count){
+  pool = shuffle(masteredCards).slice(0, count).map((c, i) => ({
+    card: c,
+    type: i % 2 === 0 ? "translate" : "compose"
+  }));
+  idx = 0;
+  session = {good:0, needsWork:0};
+  renderExercise();
+}
+
+function renderProgress(){
+  return `<div class="progressbar"><div style="width:${pool.length ? (idx/pool.length*100) : 0}%"></div></div>
+    <p style="font-size:12.5px;color:var(--muted);margin-top:6px;">${idx} / ${pool.length}</p>`;
+}
+
+function renderExercise(){
+  revealed = false;
+  const app = document.getElementById("app");
+
+  if(idx >= pool.length){
+    renderComplete();
+    return;
+  }
+
+  const item = pool[idx];
+  const c = item.card;
+  const examples = c.examples || [];
+
+  if(item.type === "translate"){
+    const sourceSentence = examples[Math.floor(Math.random()*examples.length)] || c.front;
+    app.innerHTML = `
+      ${renderProgress()}
+      <div class="qcard">
+        <div class="qlabel">Traduce esta frase al ruso</div>
+        <div class="qsource">${escapeHtml(sourceSentence)}</div>
+        <textarea id="answerInput" placeholder="tu traducción al ruso..."></textarea>
+        <button class="btn-secondary" id="btnReveal">Ver traducción de referencia</button>
+        <div id="revealBox"></div>
+      </div>
+    `;
+    document.getElementById("btnReveal").addEventListener("click", () => {
+      revealed = true;
+      document.getElementById("revealBox").innerHTML = `
+        <div class="reveal">
+          <div class="reveal-label">Traducción / explicación</div>
+          <div>${escapeHtml(c.translation)}</div>
+          <div style="margin-top:6px; color:var(--muted); font-size:13.5px;">${escapeHtml(c.explanation_es||"")}</div>
+        </div>
+        ${renderSelfCheck()}
+      `;
+      attachSelfCheck(c);
+    });
+  } else {
+    app.innerHTML = `
+      ${renderProgress()}
+      <div class="qcard">
+        <div class="qlabel">Escribe tu propia frase con esta palabra</div>
+        <div class="qprompt">${escapeHtml(c.front)}</div>
+        <div class="qexplain">${escapeHtml(c.translation)} — ${escapeHtml(c.explanation_es||"")}</div>
+        <textarea id="answerInput" placeholder="escribe una frase en español..."></textarea>
+        <button class="btn-secondary" id="btnReveal">Ver frases de ejemplo</button>
+        <div id="revealBox"></div>
+      </div>
+    `;
+    document.getElementById("btnReveal").addEventListener("click", () => {
+      revealed = true;
+      document.getElementById("revealBox").innerHTML = `
+        <div class="reveal">
+          <div class="reveal-label">Ejemplos guardados</div>
+          <ul>${examples.map(e => `<li>${escapeHtml(e)}</li>`).join("")}</ul>
+        </div>
+        ${renderSelfCheck()}
+      `;
+      attachSelfCheck(c);
+    });
+  }
+}
+
+function renderSelfCheck(){
+  return `
+    <div class="self-check">
+      <button class="no" id="btnNeedsWork">✕ Necesito practicar más</button>
+      <button class="yes" id="btnGood">✓ Lo hice bien</button>
+    </div>
+  `;
+}
+
+function attachSelfCheck(card){
+  document.getElementById("btnGood").addEventListener("click", () => finishExercise(card, true));
+  document.getElementById("btnNeedsWork").addEventListener("click", () => finishExercise(card, false));
+}
+
+function finishExercise(card, good){
+  if(good){ session.good++; } else { session.needsWork++; }
+  const prevBox = (progress[card.id]||{box:0}).box || 0;
+  const entry = computeReviewEntry(prevBox, good);
+  saveProgress(progress, card.id, entry);
+  idx++;
+  renderExercise();
+}
+
+function renderComplete(){
+  const app = document.getElementById("app");
+  app.innerHTML = `
+    <div class="empty">
+      <b>¡Práctica terminada!</b><br>
+      ${session.good} bien · ${session.needsWork} para seguir practicando.
+    </div>
+    <button class="btn-primary" id="btnAgain" style="margin-top:16px;">Nueva sesión</button>
+  `;
+  document.getElementById("btnAgain").addEventListener("click", () => {
+    renderStats();
+    renderSetup();
+  });
+  renderStats();
+}
+
+(async function init(){
+  [allCards, progress] = await Promise.all([loadCards(), loadProgress()]);
+  masteredCards = allCards.filter(c => (progress[c.id]||{}).box === MAX_BOX);
+  renderStats();
+  renderSetup();
+})();
+</script>
+</body>
+</html>
