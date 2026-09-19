@@ -234,8 +234,7 @@ function renderStage(){
         <div class="face face-back">
           <div class="back-label">Traducción</div>
           <div class="back-translation">${escapeHtml(c.translation||"")}</div>
-          <div class="back-label">Explicación</div>
-          <div class="back-explanation">${escapeHtml(c.explanation_es||"")}</div>
+          ${c.explanation_es ? `<div class="back-label">Explicación</div><div class="back-explanation">${escapeHtml(c.explanation_es)}</div>` : ""}
           ${examples ? `<div class="back-label">Ejemplos</div><ul class="back-examples">${examples}</ul>` : ""}
         </div>
       </div>

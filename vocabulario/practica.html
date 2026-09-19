@@ -225,7 +225,7 @@ function renderExercise(){
         <div class="reveal">
           <div class="reveal-label">Traducción / explicación</div>
           <div>${escapeHtml(c.translation)}</div>
-          <div style="margin-top:6px; color:var(--muted); font-size:13.5px;">${escapeHtml(c.explanation_es||"")}</div>
+          ${c.explanation_es ? `<div style="margin-top:6px; color:var(--muted); font-size:13.5px;">${escapeHtml(c.explanation_es)}</div>` : ""}
         </div>
         ${renderSelfCheck()}
       `;
@@ -237,7 +237,7 @@ function renderExercise(){
       <div class="qcard">
         <div class="qlabel">Escribe tu propia frase con esta palabra</div>
         <div class="qprompt">${escapeHtml(c.front)}</div>
-        <div class="qexplain">${escapeHtml(c.translation)} — ${escapeHtml(c.explanation_es||"")}</div>
+        <div class="qexplain">${escapeHtml(c.translation)}${c.explanation_es ? " — " + escapeHtml(c.explanation_es) : ""}</div>
         <textarea id="answerInput" placeholder="escribe una frase en español..."></textarea>
         <button class="btn-secondary" id="btnReveal">Ver frases de ejemplo</button>
         <div id="revealBox"></div>
