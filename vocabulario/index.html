@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Vocabulario — Talleres de Español</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Repaso de vocabulario con repetición espaciada: desliza las tarjetas a la derecha si ya la sabes, a la izquierda si necesitas repasarla.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --pop:#d9761f;
+  --border:#ecd98a;
+  --good:#2f7d4f;
+  --bad:#b3261e;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --pop:#f2a544;
+    --border:#4a2a1e;
+    --good:#6fcf97;
+    --bad:#f28b82;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d; --surface:#3a1a14; --surface-2:#452019; --ink:#fff8ca;
+  --muted:#d9c58f; --accent:#ef6b52; --accent-ink:#2d120d; --pop:#f2a544; --border:#4a2a1e;
+  --good:#6fcf97; --bad:#f28b82;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Public Sans", system-ui, sans-serif; line-height:1.6;
+  padding-inline:20px; padding-block:0 60px;
+}
+.wrap{max-width:520px; margin:0 auto;}
+h1{font-family:"Fraunces", Georgia, serif; text-wrap:balance;}
+a{color:var(--accent);}
+.topbar{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:10;
+  background:var(--bg); padding-block:14px 10px; margin-bottom:6px;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  border-bottom:1px solid var(--border);
+}
+.topbar a.back{font-size:13px; color:var(--muted); text-decoration:none;}
+.stats{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted);
+  display:flex; gap:12px; flex-wrap:wrap;
+}
+.stats b{color:var(--ink);}
+header{padding-block:20px 8px;}
+h1{font-size:clamp(24px,5vw,32px); margin:0 0 6px;}
+.lead{color:var(--muted); font-size:14.5px; max-width:56ch; margin:0;}
+
+.stage{position:relative; margin-top:22px; min-height:360px;}
+.card{
+  position:relative; width:100%; min-height:340px; border-radius:18px;
+  background:var(--surface); border:1px solid var(--border);
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+  touch-action:none; user-select:none; cursor:grab;
+  perspective:1200px;
+}
+.card-inner{
+  position:relative; width:100%; height:100%; min-height:340px;
+  transition:transform .35s ease; transform-style:preserve-3d;
+}
+.card.flipped .card-inner{transform:rotateY(180deg);}
+.face{
+  position:absolute; inset:0; backface-visibility:hidden;
+  border-radius:18px; padding:26px 24px; display:flex; flex-direction:column;
+  justify-content:center; gap:14px; overflow:auto;
+}
+.face-front{align-items:center; text-align:center;}
+.face-back{transform:rotateY(180deg); align-items:flex-start; text-align:left;}
+.word{font-family:"Fraunces", serif; font-weight:600; font-size:clamp(24px,7vw,32px);}
+.hint{font-size:12.5px; color:var(--muted); font-style:italic;}
+.back-label{
+  font-family:"Space Mono", monospace; font-size:11px; font-weight:700;
+  letter-spacing:.05em; text-transform:uppercase; color:var(--pop);
+}
+.back-translation{font-size:19px; font-weight:600;}
+.back-explanation{font-size:14.5px; color:var(--ink);}
+.back-examples{font-size:14px; color:var(--muted); padding-left:0; margin:0; list-style:none;}
+.back-examples li{margin-bottom:6px; padding-left:14px; border-left:2px solid var(--surface-2);}
+
+.swipe-tag{
+  position:absolute; top:18px; font-family:"Space Mono", monospace; font-weight:700;
+  font-size:13px; letter-spacing:.05em; padding:5px 10px; border-radius:8px;
+  border:2px solid; opacity:0; pointer-events:none;
+}
+.swipe-tag.right{right:18px; color:var(--good); border-color:var(--good); transform:rotate(8deg);}
+.swipe-tag.left{left:18px; color:var(--bad); border-color:var(--bad); transform:rotate(-8deg);}
+
+.controls{display:flex; justify-content:center; gap:16px; margin-top:20px;}
+.btn{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:700;
+  border-radius:999px; padding:12px 20px; border:1px solid var(--border);
+  background:var(--surface); color:var(--ink); cursor:pointer;
+}
+.btn.no{color:var(--bad); border-color:var(--bad);}
+.btn.yes{color:var(--good); border-color:var(--good);}
+.btn:active{transform:scale(.97);}
+
+.toolbar{display:flex; align-items:center; justify-content:space-between; margin-top:26px; font-size:13px; color:var(--muted);}
+.toolbar label{display:flex; align-items:center; gap:6px; cursor:pointer;}
+
+.empty{
+  margin-top:40px; padding:26px 22px; border-radius:14px; background:var(--surface);
+  border:1px solid var(--border); text-align:center; color:var(--muted); font-size:14.5px;
+}
+.empty b{color:var(--ink);}
+
+.offline-note{
+  margin-top:14px; font-size:12px; color:var(--pop); text-align:center;
+}
+footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); font-size:13px; color:var(--muted); text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="topbar">
+  <a class="back" href="../index.html">← Talleres</a>
+  <div class="stats" id="stats"></div>
+</div>
+
+<header>
+  <h1>Vocabulario</h1>
+  <p class="lead">Desliza a la derecha si ya sabes la palabra, a la izquierda si necesitas repasarla. Toca la tarjeta para ver la traducción.</p>
+</header>
+
+<div class="stage" id="stage"></div>
+
+<div class="controls" id="controls" hidden>
+  <button class="btn no" id="btnNo">✕ Aún no</button>
+  <button class="btn yes" id="btnYes">✓ Lo sé</button>
+</div>
+
+<div class="toolbar">
+  <label><input type="checkbox" id="toggleAll"> Repasar todas (aunque no toque)</label>
+</div>
+
+<p class="offline-note" id="offlineNote" hidden>Modo local: el progreso solo se guarda en este navegador (falta configurar el sincronizador).</p>
+
+<footer>Vocabulario · repetición espaciada</footer>
+
+</div>
+
+<script>
+const WORKER_URL = "https://REPLACE-ME.workers.dev/progress";
+const AUTH_TOKEN = "REPLACE_ME";
+
+const BOX_INTERVAL_DAYS = [1, 2, 4, 8, 16, 30];
+const MAX_BOX = BOX_INTERVAL_DAYS.length - 1;
+const FALLBACK_KEY = "vocabProgressFallback";
+
+let cards = [];
+let progress = {};
+let queue = [];
+let online = false;
+let showAll = false;
+let dragState = null;
+
+async function loadCards(){
+  try{
+    const res = await fetch("data.json", {cache:"no-store"});
+    if(!res.ok) return [];
+    return await res.json();
+  }catch(e){ return []; }
+}
+
+async function loadProgress(){
+  try{
+    const res = await fetch(WORKER_URL, {
+      headers: {Authorization: `Bearer ${AUTH_TOKEN}`}
+    });
+    if(!res.ok) throw new Error("bad response");
+    online = true;
+    return await res.json();
+  }catch(e){
+    online = false;
+    try{ return JSON.parse(localStorage.getItem(FALLBACK_KEY) || "{}"); }
+    catch(e2){ return {}; }
+  }
+}
+
+async function saveProgress(id, entry){
+  progress[id] = entry;
+  try{ localStorage.setItem(FALLBACK_KEY, JSON.stringify(progress)); }catch(e){}
+  if(!online) return;
+  try{
+    await fetch(WORKER_URL, {
+      method: "POST",
+      headers: {"Content-Type":"application/json", Authorization: `Bearer ${AUTH_TOKEN}`},
+      body: JSON.stringify({id, ...entry})
+    });
+  }catch(e){ online = false; renderOfflineNote(); }
+}
+
+function renderOfflineNote(){
+  document.getElementById("offlineNote").hidden = online;
+}
+
+function buildQueue(){
+  const now = Date.now();
+  queue = cards
+    .map(c => ({card:c, p: progress[c.id] || {box:0, due:new Date(0).toISOString()}}))
+    .filter(x => showAll || Date.parse(x.p.due) <= now)
+    .sort((a,b) => Date.parse(a.p.due) - Date.parse(b.p.due));
+}
+
+function renderStats(){
+  const now = Date.now();
+  const due = cards.filter(c => Date.parse((progress[c.id]||{due:new Date(0).toISOString()}).due) <= now).length;
+  const mastered = cards.filter(c => (progress[c.id]||{}).box === MAX_BOX).length;
+  document.getElementById("stats").innerHTML =
+    `<span>hoy: <b>${due}</b></span><span>dominadas: <b>${mastered}</b></span><span>total: <b>${cards.length}</b></span>`;
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+}
+
+function renderStage(){
+  const stage = document.getElementById("stage");
+  const controls = document.getElementById("controls");
+  renderStats();
+
+  if(queue.length === 0){
+    controls.hidden = true;
+    stage.innerHTML = `<div class="empty">
+      ${cards.length === 0
+        ? "Todavía no hay palabras. Envía una palabra o expresión en el chat y se añadirá aquí."
+        : "<b>¡Nada que repasar por ahora!</b><br>Vuelve más tarde, o marca «Repasar todas» para practicar de todos modos."}
+    </div>`;
+    return;
+  }
+
+  controls.hidden = false;
+  const item = queue[0];
+  const c = item.card;
+  const examples = (c.examples||[]).map(e => `<li>${escapeHtml(e)}</li>`).join("");
+
+  stage.innerHTML = `
+    <div class="card" id="activeCard">
+      <span class="swipe-tag left">AÚN NO</span>
+      <span class="swipe-tag right">LO SÉ</span>
+      <div class="card-inner">
+        <div class="face face-front">
+          <div class="word">${escapeHtml(c.front)}</div>
+          <div class="hint">Toca para ver la traducción</div>
+        </div>
+        <div class="face face-back">
+          <div class="back-label">Traducción</div>
+          <div class="back-translation">${escapeHtml(c.translation||"")}</div>
+          <div class="back-label">Explicación</div>
+          <div class="back-explanation">${escapeHtml(c.explanation_es||"")}</div>
+          ${examples ? `<div class="back-label">Ejemplos</div><ul class="back-examples">${examples}</ul>` : ""}
+        </div>
+      </div>
+    </div>
+  `;
+  attachCardHandlers();
+}
+
+function attachCardHandlers(){
+  const card = document.getElementById("activeCard");
+  if(!card) return;
+  const tagLeft = card.querySelector(".swipe-tag.left");
+  const tagRight = card.querySelector(".swipe-tag.right");
+
+  let startX = 0, startY = 0, dx = 0, moved = false, dragging = false;
+
+  function onDown(e){
+    dragging = true; moved = false;
+    startX = e.clientX; startY = e.clientY; dx = 0;
+    card.style.transition = "none";
+    card.setPointerCapture && card.setPointerCapture(e.pointerId);
+  }
+  function onMove(e){
+    if(!dragging) return;
+    dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    if(Math.abs(dx) > 6 || Math.abs(dy) > 6) moved = true;
+    card.style.transform = `translateX(${dx}px) rotate(${dx/18}deg)`;
+    const t = Math.min(Math.abs(dx)/80, 1);
+    if(dx > 0){ tagRight.style.opacity = t; tagLeft.style.opacity = 0; }
+    else { tagLeft.style.opacity = t; tagRight.style.opacity = 0; }
+  }
+  function onUp(e){
+    if(!dragging) return;
+    dragging = false;
+    card.style.transition = "transform .25s ease";
+    const threshold = 80;
+    if(Math.abs(dx) > threshold){
+      commitSwipe(dx > 0 ? "right" : "left");
+    } else {
+      card.style.transform = "translateX(0) rotate(0)";
+      tagLeft.style.opacity = 0; tagRight.style.opacity = 0;
+      if(!moved){ card.classList.toggle("flipped"); }
+    }
+  }
+
+  card.addEventListener("pointerdown", onDown);
+  card.addEventListener("pointermove", onMove);
+  card.addEventListener("pointerup", onUp);
+  card.addEventListener("pointercancel", onUp);
+}
+
+function commitSwipe(direction){
+  const card = document.getElementById("activeCard");
+  const flyX = direction === "right" ? 600 : -600;
+  if(card){
+    card.style.transform = `translateX(${flyX}px) rotate(${direction === "right" ? 25 : -25}deg)`;
+    card.style.opacity = "0";
+  }
+  const item = queue.shift();
+  const c = item.card;
+  const prevBox = (progress[c.id]||{box:0}).box || 0;
+  const newBox = direction === "right" ? Math.min(prevBox+1, MAX_BOX) : 0;
+  const due = new Date(Date.now() + BOX_INTERVAL_DAYS[newBox]*86400000).toISOString();
+  const entry = {box:newBox, due, learned: newBox === MAX_BOX};
+  saveProgress(c.id, entry);
+  setTimeout(renderStage, 180);
+}
+
+document.getElementById("btnYes").addEventListener("click", () => commitSwipe("right"));
+document.getElementById("btnNo").addEventListener("click", () => commitSwipe("left"));
+document.getElementById("toggleAll").addEventListener("change", (e) => {
+  showAll = e.target.checked;
+  buildQueue();
+  renderStage();
+});
+
+(async function init(){
+  [cards, progress] = await Promise.all([loadCards(), loadProgress()]);
+  renderOfflineNote();
+  buildQueue();
+  renderStage();
+})();
+</script>
+</body>
+</html>
