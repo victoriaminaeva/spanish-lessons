@@ -3188,5 +3188,2390 @@
       "Estuvo inusualmente callado durante toda la cena."
     ],
     "added": "2026-09-19"
+  },
+  {
+    "id": "parir",
+    "front": "parir",
+    "translation": "рожать (о животных; о человеке — грубовато)",
+    "explanation_es": "Dar a luz una hembra a su cría. Con animales es el verbo normal; con personas suena muy directo o coloquial, y se prefiere «dar a luz».",
+    "examples": [
+      "La yegua parió un potrillo durante la noche.",
+      "Mi gata parió cuatro gatitos debajo de la cama."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "secarse",
+    "front": "secarse",
+    "translation": "сохнуть, высыхать; вытираться",
+    "explanation_es": "Quedarse seco algo que estaba mojado, o quitarse el agua del cuerpo con una toalla. También se usa para plantas o ríos sin agua.",
+    "examples": [
+      "Con este sol, la ropa se seca en una hora.",
+      "Después de la ducha me seco el pelo con la toalla.",
+      "Si no riegas la planta, se va a secar."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "despistarse",
+    "front": "despistarse",
+    "translation": "отвлечься, растеряться, потерять ориентир",
+    "explanation_es": "Distraerse y perder la atención o el camino. Se usa cuando alguien se olvida de algo o se equivoca de lugar por no estar atento.",
+    "examples": [
+      "Me despisté un momento y perdí la parada del autobús.",
+      "Nos despistamos en el centro y acabamos en otra calle."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "llegar-cerca-de",
+    "front": "llegar cerca de",
+    "translation": "подобраться близко к, почти достичь",
+    "explanation_es": "Acercarse mucho a un lugar o a una cantidad sin alcanzarlos del todo.",
+    "examples": [
+      "El niño llegó cerca de la orilla, pero no se metió en el agua.",
+      "La temperatura llegó cerca de los cuarenta grados este verano."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "sin-tener-ni-idea-de",
+    "front": "sin tener ni idea de",
+    "translation": "совершенно не имея понятия о",
+    "explanation_es": "Sin saber absolutamente nada sobre algo. Es una forma coloquial y enfática de decir «sin saber».",
+    "examples": [
+      "Se apuntó al curso sin tener ni idea de programación.",
+      "Llegué a la reunión sin tener ni idea de qué se iba a discutir."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "andar-de-puntillas",
+    "front": "andar de puntillas",
+    "translation": "ходить на цыпочках",
+    "explanation_es": "Caminar apoyando solo la punta de los pies, para no hacer ruido o para parecer más alto. En sentido figurado, tratar un tema con mucho cuidado.",
+    "examples": [
+      "Entré de puntillas para no despertar al bebé.",
+      "En esta oficina todos andan de puntillas cuando el jefe está de mal humor."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "ganga",
+    "front": "ganga",
+    "translation": "выгодная покупка, удачная сделка",
+    "explanation_es": "Algo que se compra muy barato en relación con su valor o calidad. También se dice «es una ganga».",
+    "examples": [
+      "Encontré este abrigo en las rebajas por diez euros: ¡una ganga!",
+      "Ese piso a ese precio es una ganga, no lo dejes escapar."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "fraude",
+    "front": "fraude",
+    "translation": "мошенничество, обман",
+    "explanation_es": "Acción de engañar para conseguir un beneficio, normalmente dinero, de manera ilegal.",
+    "examples": [
+      "La empresa fue investigada por fraude fiscal.",
+      "Recibí un mensaje que parecía del banco, pero era un fraude."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "meter-baza-en",
+    "front": "meter baza en",
+    "translation": "вставить слово, вмешаться в (разговор)",
+    "explanation_es": "Intervenir en una conversación o en un asunto para dar tu opinión, muchas veces sin que te lo pidan. Se usa mucho en negativo: «no dejar meter baza».",
+    "examples": [
+      "Mi cuñado siempre quiere meter baza en las discusiones de familia.",
+      "Hablaban tan rápido que no pude meter baza en toda la cena."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "estar-en-trabajos",
+    "front": "estar en trabajos",
+    "translation": "быть на ремонте, идти работы (о дороге, здании)",
+    "explanation_es": "Estar en obras o en reparación. Se dice de un lugar donde se están haciendo trabajos de construcción o de arreglo.",
+    "examples": [
+      "La carretera está en trabajos y hay que ir por el desvío.",
+      "El hotel está en trabajos y solo abre una parte de las habitaciones."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "hacer-un-destrozo",
+    "front": "hacer un destrozo",
+    "translation": "устроить разгром, нанести серьёзный ущерб",
+    "explanation_es": "Causar mucho daño o estropear algo de forma grave. Se usa con cosas materiales y también en sentido figurado.",
+    "examples": [
+      "Los perros hicieron un destrozo en el salón mientras estábamos fuera.",
+      "La tormenta hizo un destrozo en el jardín."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "molestia",
+    "front": "molestia",
+    "translation": "беспокойство, неудобство; лёгкая боль",
+    "explanation_es": "Cosa que te incomoda o te fastidia. También es un dolor leve o una sensación desagradable en el cuerpo.",
+    "examples": [
+      "Perdone la molestia, ¿podría decirme dónde está la estación?",
+      "Tengo una molestia en la rodilla desde que corrí el domingo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "estar-fatal",
+    "front": "estar fatal",
+    "translation": "чувствовать себя ужасно; быть в плохом состоянии",
+    "explanation_es": "Encontrarse muy mal, de salud o de ánimo, o estar algo en muy mal estado. Es coloquial.",
+    "examples": [
+      "Ayer estuve fatal, con fiebre y dolor de cabeza.",
+      "Mi coche está fatal: no arranca y hace un ruido raro."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "espacio-amplio",
+    "front": "espacio amplio",
+    "translation": "просторное пространство, большая площадь",
+    "explanation_es": "Lugar con mucha superficie libre, donde se puede estar o moverse con comodidad.",
+    "examples": [
+      "Buscamos un espacio amplio para hacer la fiesta de cumpleaños.",
+      "Prefiero una cocina con un espacio amplio para poder cocinar entre varios."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "intervenir",
+    "front": "intervenir",
+    "translation": "вмешаться; участвовать; оперировать",
+    "explanation_es": "Participar en algo que ya está en marcha: en una conversación, en un conflicto o en una operación. En medicina significa operar a un paciente.",
+    "examples": [
+      "La policía tuvo que intervenir para separar a los que discutían.",
+      "Ella intervino en el debate para corregir un dato.",
+      "Al paciente lo intervinieron de urgencia por la noche."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "grifo",
+    "front": "grifo",
+    "translation": "водопроводный кран",
+    "explanation_es": "Aparato que se abre y se cierra para que salga el agua en el lavabo, la cocina o la ducha. En algunos países de América se dice «llave».",
+    "examples": [
+      "No olvides cerrar el grifo mientras te lavas los dientes.",
+      "El grifo de la cocina gotea y no deja dormir."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "extintor",
+    "front": "extintor",
+    "translation": "огнетушитель",
+    "explanation_es": "Aparato con espuma, polvo o gas que se usa para apagar un fuego pequeño. Suele estar en edificios públicos y en los coches.",
+    "examples": [
+      "Hay un extintor en cada planta del edificio.",
+      "Revisa que el extintor de la cocina no esté caducado."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "apagar-el-fuego",
+    "front": "apagar el fuego",
+    "translation": "тушить огонь, гасить пожар",
+    "explanation_es": "Hacer que un fuego deje de arder, con agua, con un extintor o cubriéndolo.",
+    "examples": [
+      "Los bomberos tardaron dos horas en apagar el fuego.",
+      "Antes de irnos del campamento apagamos el fuego con agua."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "estar-alimentado-por",
+    "front": "estar alimentado por",
+    "translation": "питаться от; получать питание от",
+    "explanation_es": "Funcionar gracias a una fuente de energía, o recibir agua, corriente o materiales de algo. También se usa en sentido figurado para ideas y sentimientos.",
+    "examples": [
+      "Este aparato está alimentado por dos pilas.",
+      "El lago está alimentado por varios arroyos de la montaña.",
+      "Su miedo está alimentado por las noticias que ve todos los días."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "cachorro",
+    "front": "cachorro",
+    "translation": "детёныш (щенок, львёнок, волчонок)",
+    "explanation_es": "Cría de un animal mamífero, sobre todo de perro, lobo, león u oso.",
+    "examples": [
+      "Adoptamos un cachorro de labrador el mes pasado.",
+      "La leona protegía a sus cachorros de la hiena."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "pizca-de-sal",
+    "front": "pizca de sal",
+    "translation": "щепотка соли",
+    "explanation_es": "Cantidad muy pequeña de algo, lo que se coge con dos dedos. «Una pizca de» se usa sobre todo con condimentos.",
+    "examples": [
+      "Añade una pizca de sal a la masa.",
+      "El caldo necesita solo una pizca de sal y un poco de pimienta."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "loncha-de-jamon",
+    "front": "loncha de jamón",
+    "translation": "тонкий ломтик ветчины",
+    "explanation_es": "Trozo fino y plano de jamón, queso o embutido, cortado a máquina o a cuchillo.",
+    "examples": [
+      "Me pones cien gramos de jamón en lonchas finas, por favor.",
+      "Preparó un bocadillo con dos lonchas de jamón y queso."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "rodaja-de-tomate",
+    "front": "rodaja de tomate",
+    "translation": "кружок помидора",
+    "explanation_es": "Trozo redondo y plano de un alimento cortado en círculos, como el tomate, el limón o el pepino.",
+    "examples": [
+      "Pon una rodaja de tomate encima de la hamburguesa.",
+      "Sirvieron el agua con una rodaja de limón."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "rebanada-de-pan",
+    "front": "rebanada de pan",
+    "translation": "ломоть хлеба, кусок хлеба",
+    "explanation_es": "Trozo largo y plano de pan, cortado de una barra o de un pan grande.",
+    "examples": [
+      "Desayuno una rebanada de pan con aceite y tomate.",
+      "Corta unas rebanadas de pan para el bocadillo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "angulo",
+    "front": "ángulo",
+    "translation": "угол; ракурс",
+    "explanation_es": "En geometría, la figura que forman dos líneas que se cruzan. En sentido figurado, la manera de mirar o presentar un tema.",
+    "examples": [
+      "Un ángulo recto mide noventa grados.",
+      "El periodista analizó el problema desde un ángulo diferente.",
+      "Saqué la foto desde un ángulo bajo para que el edificio pareciera más alto."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "dejar-un-vacio",
+    "front": "dejar un vacío",
+    "translation": "оставить пустоту, зияющую брешь",
+    "explanation_es": "Provocar una sensación de falta cuando alguien o algo desaparece. Se dice de personas queridas, de un trabajo o de un servicio que ya no existe.",
+    "examples": [
+      "Cuando se jubiló nuestra profesora, dejó un vacío difícil de llenar.",
+      "Su marcha dejó un vacío en el equipo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "debatir-un-tema",
+    "front": "debatir un tema",
+    "translation": "обсуждать тему, вести дебаты",
+    "explanation_es": "Discutir un asunto entre varias personas, con opiniones distintas, de manera organizada.",
+    "examples": [
+      "En la asamblea debatimos el tema del presupuesto durante horas.",
+      "Es un tema complicado y merece la pena debatirlo con calma."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "carencia",
+    "front": "carencia",
+    "translation": "нехватка, недостаток",
+    "explanation_es": "Falta de algo necesario, como un recurso, una vitamina o una cualidad.",
+    "examples": [
+      "La carencia de agua afecta a muchas zonas rurales.",
+      "Tiene una carencia de hierro y por eso siempre está cansada."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "poner-de-manifiesto",
+    "front": "poner de manifiesto",
+    "translation": "выявить, ясно показать",
+    "explanation_es": "Hacer evidente o mostrar claramente algo que estaba oculto o poco claro. Es de registro formal, frecuente en textos y en la prensa.",
+    "examples": [
+      "El informe pone de manifiesto graves errores en la gestión.",
+      "La crisis puso de manifiesto la falta de preparación del sistema."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "servir-de-motor-para",
+    "front": "servir de motor para",
+    "translation": "служить движущей силой для",
+    "explanation_es": "Ser la causa o el impulso que hace avanzar algo, como un proyecto, un cambio o el crecimiento.",
+    "examples": [
+      "Este proyecto puede servir de motor para toda la región.",
+      "Su derrota le sirvió de motor para entrenar más duro."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "inundacion",
+    "front": "inundación",
+    "translation": "наводнение",
+    "explanation_es": "Situación en la que el agua cubre un lugar que normalmente está seco, por lluvias fuertes o por un río que se desborda.",
+    "examples": [
+      "Las lluvias provocaron una inundación en el barrio bajo.",
+      "Más de mil personas fueron evacuadas por la inundación."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "superar-retos",
+    "front": "superar retos",
+    "translation": "преодолевать вызовы, справляться с трудными задачами",
+    "explanation_es": "Conseguir resolver situaciones difíciles o alcanzar metas que parecían muy exigentes.",
+    "examples": [
+      "Trabajar en otro país me enseñó a superar retos que antes me daban miedo.",
+      "El equipo supera retos nuevos en cada proyecto."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "perpetuar",
+    "front": "perpetuar",
+    "translation": "увековечивать, закреплять надолго",
+    "explanation_es": "Hacer que algo dure para siempre o mucho tiempo, sobre todo algo negativo, como una desigualdad o un estereotipo.",
+    "examples": [
+      "Esos anuncios perpetúan los estereotipos sobre las mujeres.",
+      "Un monumento perpetúa la memoria de las víctimas."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "por-razon-de",
+    "front": "por razón de",
+    "translation": "по причине, в силу",
+    "explanation_es": "Expresión formal que indica la causa o el motivo de algo. Se ve mucho en documentos y leyes.",
+    "examples": [
+      "Nadie puede ser discriminado por razón de sexo o de edad.",
+      "Se cerró la oficina por razón de fuerza mayor."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "debilitar-la-confianza",
+    "front": "debilitar la confianza",
+    "translation": "подрывать доверие",
+    "explanation_es": "Hacer que alguien confíe menos en una persona, una institución o una idea.",
+    "examples": [
+      "Tantas mentiras debilitaron la confianza de los votantes.",
+      "Un solo error grave puede debilitar la confianza de un cliente."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "trayecto",
+    "front": "trayecto",
+    "translation": "путь, маршрут, отрезок пути",
+    "explanation_es": "Espacio que se recorre de un lugar a otro, o el viaje mismo. Se usa mucho para el transporte y el camino al trabajo.",
+    "examples": [
+      "El trayecto en tren dura unas dos horas.",
+      "Uso mi trayecto al trabajo para escuchar podcasts."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "huir-de-algo",
+    "front": "huir de algo",
+    "translation": "бежать от чего-то, спасаться от чего-то",
+    "explanation_es": "Escapar de un peligro, de un lugar o de algo desagradable. También se dice de evitar un problema o una responsabilidad.",
+    "examples": [
+      "Miles de familias huyeron de la guerra.",
+      "No puedes huir de tus problemas para siempre."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "destruccion",
+    "front": "destrucción",
+    "translation": "разрушение, уничтожение",
+    "explanation_es": "Acción de destruir algo por completo o de causarle un daño muy grave.",
+    "examples": [
+      "El terremoto causó una destrucción enorme en la ciudad.",
+      "La destrucción de los bosques afecta al clima."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "refugiado",
+    "front": "refugiado",
+    "translation": "беженец",
+    "explanation_es": "Persona que tiene que dejar su país por una guerra, una persecución o un desastre y busca protección en otro lugar.",
+    "examples": [
+      "El país recibió a cientos de refugiados sirios.",
+      "Muchos refugiados viven en campamentos durante años."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "sacar-a-la-luz",
+    "front": "sacar a la luz",
+    "translation": "вывести на свет, обнародовать",
+    "explanation_es": "Hacer público algo que estaba oculto: un secreto, un caso o una información.",
+    "examples": [
+      "El periódico sacó a la luz un caso de corrupción.",
+      "Con los años salieron a la luz muchos detalles de aquella historia."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "agravar-un-problema",
+    "front": "agravar un problema",
+    "translation": "усугубить проблему",
+    "explanation_es": "Hacer que una situación difícil sea todavía peor o más seria.",
+    "examples": [
+      "Esa decisión solo agravó el problema de la falta de vivienda.",
+      "No hacer nada puede agravar el problema."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "detenerse",
+    "front": "detenerse",
+    "translation": "останавливаться",
+    "explanation_es": "Parar de moverse o de hacer algo. También significa pararse a pensar en un detalle.",
+    "examples": [
+      "El tren se detuvo en medio del campo.",
+      "Me detuve un momento a mirar el escaparate.",
+      "No nos detengamos en los detalles y vayamos al punto principal."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "poner-a-prueba",
+    "front": "poner a prueba",
+    "translation": "проверить, испытать",
+    "explanation_es": "Someter a alguien o algo a una situación difícil para ver si funciona bien o cuánto aguanta.",
+    "examples": [
+      "El nuevo trabajo va a poner a prueba tu paciencia.",
+      "Antes de lanzar la aplicación, la pusimos a prueba con cien usuarios."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "caradura",
+    "front": "caradura",
+    "translation": "наглец, нахал",
+    "explanation_es": "Persona que actúa con mucho descaro, sin vergüenza, aprovechándose de los demás. Es coloquial y se usa con «ser».",
+    "examples": [
+      "Es un caradura: pidió que le invitáramos y encima se quejó de la comida.",
+      "¡Qué caradura! Se coló en la cola como si nada."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "entrometido",
+    "front": "entrometido",
+    "translation": "назойливо лезущий не в своё дело",
+    "explanation_es": "Persona que se mete en asuntos que no le importan o que hace preguntas que no debería hacer.",
+    "examples": [
+      "Mi vecina es muy entrometida y quiere saberlo todo.",
+      "No quiero parecer entrometido, pero ¿cuánto pagas de alquiler?"
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "cenudo",
+    "front": "ceñudo",
+    "translation": "хмурый, насупленный",
+    "explanation_es": "Que tiene la cara seria y arruga la frente, por enfado o preocupación.",
+    "examples": [
+      "Entró en la sala con gesto ceñudo y no saludó a nadie.",
+      "El profesor, ceñudo, revisó el examen en silencio."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "romper-una-regla",
+    "front": "romper una regla",
+    "translation": "нарушить правило",
+    "explanation_es": "No cumplir una norma. También se dice «saltarse una regla»; «romper» suena más fuerte, como si fuera algo intencionado.",
+    "examples": [
+      "Rompió una regla básica del club y lo expulsaron.",
+      "A veces hay que romper una regla para cambiar las cosas."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "abusar-de",
+    "front": "abusar de",
+    "translation": "злоупотреблять",
+    "explanation_es": "Usar algo o a alguien en exceso, o de forma injusta, para sacar provecho. Puede ser una sustancia, la confianza o el poder.",
+    "examples": [
+      "No conviene abusar de las bebidas azucaradas.",
+      "Abusó de mi confianza y me pidió dinero otra vez."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "en-linea-recta",
+    "front": "en línea recta",
+    "translation": "по прямой",
+    "explanation_es": "Sin curvas ni desvíos, siguiendo una dirección directa.",
+    "examples": [
+      "Sigue en línea recta hasta el semáforo.",
+      "Desde aquí hasta la playa hay dos kilómetros en línea recta."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "torcer",
+    "front": "torcer",
+    "translation": "сгибать, скручивать; поворачивать",
+    "explanation_es": "Cambiar la forma de algo derecho, haciendo que se curve. En un camino, girar hacia un lado. También se usa con partes del cuerpo: «torcerse el tobillo».",
+    "examples": [
+      "Al llegar a la plaza, tuerce a la izquierda.",
+      "Me torcí el tobillo jugando al fútbol.",
+      "El viento torció las ramas del árbol."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "cojear",
+    "front": "cojear",
+    "translation": "хромать",
+    "explanation_es": "Andar de manera irregular por tener una pierna o un pie con dolor o lesión.",
+    "examples": [
+      "Después del partido cojeaba de la pierna derecha.",
+      "El perro cojeaba porque se había clavado una espina."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "zoquete",
+    "front": "zoquete",
+    "translation": "балбес, тупица; чёрствый кусок хлеба",
+    "explanation_es": "En lenguaje coloquial, persona torpe o poco inteligente. También es un trozo de pan duro.",
+    "examples": [
+      "No seas zoquete, si te lo he explicado tres veces.",
+      "Echa el zoquete de pan a la sopa para aprovecharlo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "hacer-coro",
+    "front": "hacer coro",
+    "translation": "подпевать хором; поддакивать",
+    "explanation_es": "Cantar junto con otros. En sentido figurado, apoyar lo que dice alguien, repitiendo su opinión sin pensar mucho.",
+    "examples": [
+      "Cuando empezó la canción, todo el público hizo coro.",
+      "Varios compañeros hicieron coro a la queja del delegado."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "firme",
+    "front": "firme",
+    "translation": "твёрдый, прочный; непоколебимый",
+    "explanation_es": "Que es sólido y no se mueve, o que no cambia de opinión ni de decisión.",
+    "examples": [
+      "Necesitamos un suelo firme para construir la casa.",
+      "Se mantuvo firme en su decisión, aunque todos le pedían que cambiara.",
+      "Dio un paso firme hacia delante."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "mantener",
+    "front": "mantener",
+    "translation": "поддерживать, сохранять; содержать",
+    "explanation_es": "Hacer que algo siga igual o continúe. También significa pagar los gastos de una persona o una casa, o sostener una opinión.",
+    "examples": [
+      "Mantengo el contacto con mis amigos de la universidad.",
+      "Trabaja mucho para mantener a su familia.",
+      "Mantengo lo que dije ayer."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "mantenerse",
+    "front": "mantenerse",
+    "translation": "оставаться, держаться, сохраняться",
+    "explanation_es": "Continuar en un estado o en una posición sin cambiar. También significa sostenerse o alimentarse de algo.",
+    "examples": [
+      "Los precios se mantienen estables desde hace meses.",
+      "Con este frío es difícil mantenerse despierto en clase.",
+      "Se mantiene a base de ensaladas y fruta."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "silbar",
+    "front": "silbar",
+    "translation": "свистеть",
+    "explanation_es": "Producir un sonido agudo con la boca o con un objeto. Se silba una melodía, para llamar a alguien o para mostrar desaprobación.",
+    "examples": [
+      "Mi abuelo silbaba mientras cocinaba.",
+      "El público silbó al árbitro por su decisión."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "sin-siquera",
+    "front": "sin siquera",
+    "translation": "даже не (без того, чтобы хотя бы)",
+    "explanation_es": "Se usa antes de un verbo en infinitivo para decir que no se hizo ni lo mínimo. Da más fuerza a la negación.",
+    "examples": [
+      "Se fue sin siquera despedirse.",
+      "Firmó el contrato sin siquera leerlo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "maldecir",
+    "front": "maldecir",
+    "translation": "проклинать; ругаться",
+    "explanation_es": "Decir palabras muy negativas contra algo o alguien, por enfado o para desear un mal. También puede significar lamentarse con rabia por algo.",
+    "examples": [
+      "Maldijo su mala suerte al ver que había perdido el tren.",
+      "En el cuento, la bruja maldijo al príncipe."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "marcharse",
+    "front": "marcharse",
+    "translation": "уходить, уезжать",
+    "explanation_es": "Irse de un lugar. Es más marcado que «ir» y suele implicar una salida definitiva o de un sitio donde estabas.",
+    "examples": [
+      "Se marchó de casa a los dieciocho años.",
+      "Ya es tarde, nos marchamos."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "encararse-con-alguien",
+    "front": "encararse con alguien",
+    "translation": "встать лицом к лицу с кем-то, вступить в конфронтацию",
+    "explanation_es": "Enfrentarse directamente a una persona, mirándola y diciéndole lo que piensa, normalmente con enfado o tensión.",
+    "examples": [
+      "El jugador se encaró con el árbitro y le mostraron tarjeta roja.",
+      "Por fin se encaró con su jefe y le dijo lo que pensaba."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "continuo",
+    "front": "continuo",
+    "translation": "непрерывный, постоянный",
+    "explanation_es": "Que no se interrumpe o que se repite sin parar.",
+    "examples": [
+      "Vivo con un ruido continuo de obras en la calle.",
+      "La línea continua en la carretera significa que no se puede adelantar."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "hacer-una-ruta",
+    "front": "hacer una ruta",
+    "translation": "пройти маршрут, совершить поход",
+    "explanation_es": "Recorrer un camino planeado, a pie, en bici o en coche, sobre todo por la naturaleza o por una ciudad.",
+    "examples": [
+      "El domingo hicimos una ruta por la sierra.",
+      "¿Quieres hacer una ruta en bici por la costa?"
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "pedir-un-prestamo",
+    "front": "pedir un préstamo",
+    "translation": "взять кредит, попросить ссуду",
+    "explanation_es": "Solicitar dinero a un banco o a una persona con la obligación de devolverlo, normalmente con intereses.",
+    "examples": [
+      "Pidieron un préstamo al banco para comprar el piso.",
+      "Tuve que pedir un préstamo para pagar la reforma."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "tarjeta-de-felicitacion",
+    "front": "tarjeta de felicitación",
+    "translation": "поздравительная открытка",
+    "explanation_es": "Tarjeta de papel que se regala para felicitar a alguien en su cumpleaños, en Navidad u otra fecha especial.",
+    "examples": [
+      "Le envié una tarjeta de felicitación por su cumpleaños.",
+      "En Navidad recibimos muchas tarjetas de felicitación."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "casero",
+    "front": "casero",
+    "translation": "домашний; хозяин квартиры",
+    "explanation_es": "Como adjetivo, algo hecho en casa, no comprado. Como sustantivo, la persona que alquila una vivienda a otra (el propietario).",
+    "examples": [
+      "Esta tarta es casera, la hizo mi madre.",
+      "El casero nos ha subido el alquiler otra vez.",
+      "Prefiero la comida casera a la de restaurante."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "sacar-de-quicio",
+    "front": "sacar de quicio",
+    "translation": "выводить из себя",
+    "explanation_es": "Molestar tanto a alguien que pierde la paciencia. Es coloquial y se usa mucho con cosas que se repiten.",
+    "examples": [
+      "Ese ruido de la nevera me saca de quicio.",
+      "Tu impuntualidad me saca de quicio."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "alabar",
+    "front": "alabar",
+    "translation": "хвалить, восхвалять",
+    "explanation_es": "Decir cosas muy positivas sobre alguien o algo, a veces con exageración. Es algo más formal o intenso que «elogiar».",
+    "examples": [
+      "Todos alabaron la valentía de los bomberos.",
+      "Los críticos alabaron la nueva novela."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "elogiar",
+    "front": "elogiar",
+    "translation": "хвалить, высоко оценивать",
+    "explanation_es": "Decir de manera pública o directa que algo o alguien es muy bueno. Es el verbo más habitual para «poner por las nubes» con educación.",
+    "examples": [
+      "El director elogió el trabajo del equipo.",
+      "Mi profesora me elogió por mi pronunciación."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "juzgar",
+    "front": "juzgar",
+    "translation": "судить; оценивать",
+    "explanation_es": "Formar una opinión sobre alguien o algo, o decidir en un tribunal si una persona es culpable.",
+    "examples": [
+      "No me gusta juzgar a las personas por su aspecto.",
+      "El tribunal juzgará el caso la próxima semana."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "hacer-de-malo",
+    "front": "hacer de malo",
+    "translation": "играть злодея, изображать плохого",
+    "explanation_es": "Interpretar el papel del villano en una obra, una película o un juego. También se dice de quien tiene que ser el «duro» en una situación real.",
+    "examples": [
+      "En la obra del colegio, mi hijo hizo de malo y le encantó.",
+      "En casa siempre me toca hacer de malo y poner los castigos."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "tener-algo-a-mano",
+    "front": "tener algo a mano",
+    "translation": "иметь что-то под рукой",
+    "explanation_es": "Tener una cosa cerca, para poder usarla enseguida.",
+    "examples": [
+      "Siempre tengo un paraguas a mano por si llueve.",
+      "¿Tienes un bolígrafo a mano?"
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "linterna",
+    "front": "linterna",
+    "translation": "фонарик",
+    "explanation_es": "Aparato pequeño con una luz que funciona con pilas o batería y sirve para ver en la oscuridad.",
+    "examples": [
+      "Se fue la luz y buscamos la linterna en el cajón.",
+      "Necesitas una linterna para entrar en la cueva."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "ajustar-a",
+    "front": "ajustar a",
+    "translation": "подгонять под, приспосабливать к",
+    "explanation_es": "Adaptar una cosa a otra para que encajen o coincidan. También se usa con presupuestos, horarios o medidas.",
+    "examples": [
+      "Tenemos que ajustar los gastos a nuestro presupuesto.",
+      "El sastre ajustó la chaqueta a mi talla.",
+      "Ajusté mi horario al de mis compañeros."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "pegadizo",
+    "front": "pegadizo",
+    "translation": "прилипчивый, «заедающий» (о мелодии)",
+    "explanation_es": "Se dice de una canción o una frase fácil de recordar que se te queda en la cabeza.",
+    "examples": [
+      "Esa canción es tan pegadiza que la llevo cantando todo el día.",
+      "El eslogan es muy pegadizo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "dar-lache",
+    "front": "dar lache",
+    "translation": "вызывать испанский стыд, быть неловко",
+    "explanation_es": "Coloquial de España. Dar vergüenza ajena, sentirse incómodo al ver o escuchar algo ridículo.",
+    "examples": [
+      "Me da lache oír cómo canta en público.",
+      "Qué lache me dio cuando se cayó delante de todos."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "dar-por-terminado",
+    "front": "dar por terminado",
+    "translation": "считать законченным, объявить завершённым",
+    "explanation_es": "Decidir que algo ya está acabado y que no hay que seguir con ello. Es frecuente en contextos formales.",
+    "examples": [
+      "El juez dio por terminada la sesión.",
+      "Demos por terminado este asunto y pasemos al siguiente."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "anteayer",
+    "front": "anteayer",
+    "translation": "позавчера",
+    "explanation_es": "El día anterior a ayer. También se escribe «antes de ayer».",
+    "examples": [
+      "Anteayer fui al médico y hoy ya me siento mejor.",
+      "Anteayer llovió todo el día."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "apanarse",
+    "front": "apañarse",
+    "translation": "справляться, выкручиваться",
+    "explanation_es": "Saber resolver una situación con los medios que se tienen, aunque sea de manera sencilla. Es coloquial.",
+    "examples": [
+      "No te preocupes, me las apaño con lo que tengo.",
+      "Se apañaron para vivir seis meses con muy poco dinero."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "cutre",
+    "front": "cutre",
+    "translation": "убогий, захудалый, дешёвый на вид",
+    "explanation_es": "Coloquial. Se dice de un lugar o una cosa de mala calidad, sucio o de aspecto pobre. También de una persona tacaña.",
+    "examples": [
+      "Nos alojamos en un hotel cutre, con las paredes sucias.",
+      "No seas cutre y paga tú esta vez."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "rebajas",
+    "front": "rebajas",
+    "translation": "распродажа",
+    "explanation_es": "Periodo del año en que las tiendas venden con descuento. En España hay rebajas en verano y en invierno.",
+    "examples": [
+      "Voy a esperar a las rebajas para comprarme el abrigo.",
+      "En las rebajas de enero conseguí unos zapatos a mitad de precio."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "apuntar",
+    "front": "apuntar",
+    "translation": "записать; целиться; указывать",
+    "explanation_es": "Escribir algo brevemente para no olvidarlo; dirigir un arma o un dedo hacia algo; o señalar una idea o una posibilidad.",
+    "examples": [
+      "Apunta mi número por si lo necesitas.",
+      "El cazador apuntó al ciervo con cuidado.",
+      "Todos los datos apuntan a una subida de precios."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "veneno",
+    "front": "veneno",
+    "translation": "яд",
+    "explanation_es": "Sustancia que puede matar o enfermar gravemente a un ser vivo. También se usa en sentido figurado para algo muy dañino.",
+    "examples": [
+      "Este hongo contiene un veneno mortal.",
+      "Las mentiras son un veneno para cualquier relación."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "servir-para",
+    "front": "servir para",
+    "translation": "годиться для, служить для",
+    "explanation_es": "Tener una utilidad o un uso. Se pregunta con «¿Para qué sirve…?»",
+    "examples": [
+      "¿Para qué sirve este botón?",
+      "Un cuchillo no sirve para abrir latas, para eso hay un abrelatas.",
+      "Esta caja me sirve para guardar los cables."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "descaro",
+    "front": "descaro",
+    "translation": "наглость, бесстыдство",
+    "explanation_es": "Falta de vergüenza o de respeto al hacer o decir algo. Suele acompañar a «tener»: «tener el descaro de».",
+    "examples": [
+      "Tuvo el descaro de pedirme dinero otra vez.",
+      "Me miró con descaro y no pidió perdón."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "ingeniarse-para",
+    "front": "ingeniarse para",
+    "translation": "исхитриться, ухитриться (сделать что-то)",
+    "explanation_es": "Encontrar una manera creativa de conseguir algo, aunque sea difícil o haya pocos medios.",
+    "examples": [
+      "Se ingenió para arreglar la bici con un trozo de alambre.",
+      "Siempre me las ingenio para llegar a tiempo, aunque salga tarde."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "derramarse",
+    "front": "derramarse",
+    "translation": "проливаться, разливаться",
+    "explanation_es": "Salirse un líquido de su recipiente, sin querer o por estar demasiado lleno. También se dice «derramar» cuando lo hace una persona.",
+    "examples": [
+      "Se me derramó el café encima del teclado.",
+      "El agua se derramó de la bañera y mojó el suelo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "hacer-agujeros",
+    "front": "hacer agujeros",
+    "translation": "делать дырки, сверлить отверстия",
+    "explanation_es": "Abrir huecos en una superficie con un taladro, un clavo u otra herramienta.",
+    "examples": [
+      "Voy a hacer dos agujeros en la pared para colgar el cuadro.",
+      "Las polillas hicieron agujeros en el jersey."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "de-goma",
+    "front": "de goma",
+    "translation": "резиновый, из резины",
+    "explanation_es": "Hecho de goma, un material elástico. Por extensión, algo flexible o blando.",
+    "examples": [
+      "Necesitas botas de goma para caminar por el barro.",
+      "Los niños jugaban con una pelota de goma."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "imponente",
+    "front": "imponente",
+    "translation": "внушительный, грандиозный",
+    "explanation_es": "Que impresiona por su tamaño, su belleza o su fuerza. Se dice de lugares, edificios, paisajes o personas.",
+    "examples": [
+      "Desde la cima se veía un paisaje imponente.",
+      "La catedral es imponente por dentro y por fuera."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "lamer",
+    "front": "lamer",
+    "translation": "лизать",
+    "explanation_es": "Pasar la lengua por algo. Se usa con helados, platos, heridas o cuando un animal lame a una persona.",
+    "examples": [
+      "El perro me lamió la mano.",
+      "El niño lamía el helado para que no se derritiera."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "feroz",
+    "front": "feroz",
+    "translation": "свирепый, лютый",
+    "explanation_es": "Que es muy agresivo y peligroso, como un animal salvaje. También se usa con «crítica» o «competencia» para decir que son muy duras.",
+    "examples": [
+      "Un lobo feroz apareció entre los árboles.",
+      "La competencia entre las dos empresas es feroz."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "ahuyentar",
+    "front": "ahuyentar",
+    "translation": "отпугивать, прогонять",
+    "explanation_es": "Hacer que un animal o una persona se vaya asustándolo. También se usa con sentimientos: «ahuyentar el miedo».",
+    "examples": [
+      "Puso un espantapájaros para ahuyentar a los pájaros.",
+      "El ruido ahuyentó a los ladrones.",
+      "Cantar me ayuda a ahuyentar los nervios."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "desordenar",
+    "front": "desordenar",
+    "translation": "приводить в беспорядок",
+    "explanation_es": "Poner las cosas fuera de su sitio o en desorden. Es lo contrario de «ordenar».",
+    "examples": [
+      "Los niños desordenaron toda la habitación en cinco minutos.",
+      "No desordenes los papeles, que los acabo de organizar."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "dejar-algo-hecho-un-desastre",
+    "front": "dejar algo hecho un desastre",
+    "translation": "оставить что-то в ужасном состоянии, превратить в бардак",
+    "explanation_es": "Dejar un lugar o una cosa muy sucio, roto o desordenado. Es coloquial: «hecho un desastre» exagera el resultado.",
+    "examples": [
+      "La fiesta dejó la casa hecha un desastre.",
+      "Los niños dejaron la cocina hecha un desastre."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "desmontar",
+    "front": "desmontar",
+    "translation": "разбирать, демонтировать",
+    "explanation_es": "Separar las partes de algo que estaba armado, como un mueble, un aparato o una tienda de campaña.",
+    "examples": [
+      "Desmontamos la cama para llevarla a la nueva casa.",
+      "El técnico desmontó el ordenador para limpiarlo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "averia",
+    "front": "avería",
+    "translation": "поломка, неисправность",
+    "explanation_es": "Daño que impide que una máquina, un coche o un aparato funcione bien.",
+    "examples": [
+      "Llegué tarde porque el coche tuvo una avería.",
+      "Hay una avería en la lavadora y sale agua por debajo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "encontrar-la-causa",
+    "front": "encontrar la causa",
+    "translation": "найти причину",
+    "explanation_es": "Descubrir el motivo por el que ocurre un problema o un hecho.",
+    "examples": [
+      "Los ingenieros no logran encontrar la causa del fallo.",
+      "Para curar la enfermedad primero hay que encontrar la causa."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "averiguar",
+    "front": "averiguar",
+    "translation": "выяснить, разузнать",
+    "explanation_es": "Descubrir la verdad sobre algo investigando o preguntando.",
+    "examples": [
+      "Voy a averiguar a qué hora sale el último tren.",
+      "La policía intenta averiguar cómo entraron los ladrones."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "acurrucarse",
+    "front": "acurrucarse",
+    "translation": "свернуться калачиком, прижаться",
+    "explanation_es": "Encogerse y ponerse cómodo en un sitio, normalmente por frío o para buscar calor y protección.",
+    "examples": [
+      "El gato se acurrucó a mis pies en el sofá.",
+      "Nos acurrucamos bajo la manta para ver la película."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "quedarse-a-cuadros",
+    "front": "quedarse a cuadros",
+    "translation": "остолбенеть, обалдеть от неожиданности",
+    "explanation_es": "Coloquial. Quedarse muy sorprendido o sin saber qué decir por algo inesperado.",
+    "examples": [
+      "Me quedé a cuadros cuando me dijeron que me habían despedido.",
+      "Se quedó a cuadros al ver a su ex en la boda."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "estar-al-loro",
+    "front": "estar al loro",
+    "translation": "быть в курсе, держать руку на пульсе",
+    "explanation_es": "Coloquial de España. Estar atento y bien informado de lo que pasa.",
+    "examples": [
+      "Estoy al loro de todas las novedades del equipo.",
+      "Ponte al loro, que mañana cambian el horario."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "grosero",
+    "front": "grosero",
+    "translation": "грубый, хамоватый",
+    "explanation_es": "Que habla o actúa sin educación ni respeto. Se dice de personas, de palabras y de gestos.",
+    "examples": [
+      "Fue muy grosero con la camarera y ella se enfadó.",
+      "Contestar así a tu madre es una respuesta grosera."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "novato",
+    "front": "novato",
+    "translation": "новичок",
+    "explanation_es": "Persona que acaba de empezar en una actividad o un trabajo y tiene poca experiencia. Puede sonar cariñoso o un poco burlón.",
+    "examples": [
+      "Soy novato en esta empresa y todavía no conozco a todos.",
+      "Los novatos suelen cometer errores en su primera semana."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "agujerear",
+    "front": "agujerear",
+    "translation": "продырявить, сделать дыру",
+    "explanation_es": "Hacer un agujero o varios en algo, con un clavo, una broca o un objeto punzante.",
+    "examples": [
+      "Un clavo agujereó la rueda de la bici.",
+      "Los ratones agujerearon el saco de harina."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "amontonarse",
+    "front": "amontonarse",
+    "translation": "скапливаться, громоздиться; толпиться",
+    "explanation_es": "Juntarse en desorden muchas cosas o personas en un mismo lugar.",
+    "examples": [
+      "Los platos sucios se amontonaban en el fregadero.",
+      "La gente se amontonó en la puerta para entrar al concierto."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "hacer-cosquillas",
+    "front": "hacer cosquillas",
+    "translation": "щекотать",
+    "explanation_es": "Tocar suavemente el cuerpo de alguien para provocarle risa. También se usa cuando algo nos produce esa sensación.",
+    "examples": [
+      "Mi hermano me hacía cosquillas hasta que no podía más.",
+      "La barba de mi padre me hacía cosquillas cuando me besaba."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "a-proposito",
+    "front": "a propósito",
+    "translation": "нарочно; кстати",
+    "explanation_es": "Con intención, no por accidente. También se usa al principio de una frase para introducir un tema relacionado: «a propósito de…».",
+    "examples": [
+      "Rompió el vaso a propósito para llamar la atención.",
+      "A propósito, ¿sabes si Marta viene a la cena?"
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "escabullirse",
+    "front": "escabullirse",
+    "translation": "ускользнуть, улизнуть",
+    "explanation_es": "Irse de un lugar rápido y sin que nadie se dé cuenta, o librarse de algo escapando con habilidad.",
+    "examples": [
+      "Se escabulló de la fiesta sin despedirse.",
+      "El gato se escabulló entre las piernas de la gente."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "detestar",
+    "front": "detestar",
+    "translation": "терпеть не мочь, ненавидеть",
+    "explanation_es": "Sentir un fuerte rechazo por alguien o algo. Es más suave y más frecuente que «odiar» en la conversación diaria.",
+    "examples": [
+      "Detesto madrugar los domingos.",
+      "Detestaba la comida del colegio."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "sonado",
+    "front": "soñado",
+    "translation": "воплощённая мечта, идеальный",
+    "explanation_es": "Que es tal como uno lo deseaba: ideal, perfecto. Se usa antes del sustantivo o después: «casa soñada», «un trabajo soñado».",
+    "examples": [
+      "Encontramos la casa soñada junto al mar.",
+      "Para ella, ese puesto era el trabajo soñado."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "dar-un-chillido",
+    "front": "dar un chillido",
+    "translation": "издать визг, взвизгнуть",
+    "explanation_es": "Emitir un grito agudo y breve, por miedo, sorpresa o dolor.",
+    "examples": [
+      "Dio un chillido cuando vio la araña.",
+      "El niño dio un chillido de alegría al abrir el regalo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "chillar",
+    "front": "chillar",
+    "translation": "визжать, кричать",
+    "explanation_es": "Gritar con voz aguda, o hablar muy alto. También se dice de algunos animales.",
+    "examples": [
+      "Los niños chillaban en el patio.",
+      "No me chilles, te estoy oyendo perfectamente.",
+      "Los ratones chillaban en el desván."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "aguja",
+    "front": "aguja",
+    "translation": "игла, иголка; стрелка",
+    "explanation_es": "Objeto fino y puntiagudo para coser o para poner inyecciones. También, la pieza fina que marca las horas en un reloj.",
+    "examples": [
+      "No encuentro la aguja para coser este botón.",
+      "Me dan miedo las agujas de las inyecciones.",
+      "La aguja del reloj marcaba las doce."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "dar-algo-a-cada-uno",
+    "front": "dar algo a cada uno",
+    "translation": "дать каждому по…, раздать каждому",
+    "explanation_es": "Repartir algo de manera que todos reciban lo suyo, sin dejar a nadie sin nada.",
+    "examples": [
+      "La profesora dio un cuaderno a cada uno.",
+      "En la boda nos dieron un detalle a cada uno."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "tener-un-olor-a",
+    "front": "tener un olor a",
+    "translation": "пахнуть чем-то",
+    "explanation_es": "Desprender un olor característico. Después de «a» va lo que huele: «tiene un olor a quemado».",
+    "examples": [
+      "La habitación tenía un olor a humedad muy fuerte.",
+      "La ropa recién lavada tiene un olor a limpio."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "mostrarse",
+    "front": "mostrarse",
+    "translation": "проявлять себя, выглядеть, вести себя (каким-то образом)",
+    "explanation_es": "Dejarse ver o comportarse de una manera determinada ante los demás. Va con adjetivos: «mostrarse amable».",
+    "examples": [
+      "Se mostró muy amable con todos los invitados.",
+      "El presidente se mostró tranquilo en la rueda de prensa.",
+      "No quiero mostrarme débil delante de mis alumnos."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "estar-atrasado",
+    "front": "estar atrasado",
+    "translation": "отставать, быть в отставании, запаздывать",
+    "explanation_es": "Ir por detrás de lo que estaba previsto, en un trabajo, en los pagos o en un horario. También se dice de un reloj que marca una hora anterior a la real.",
+    "examples": [
+      "Voy atrasado con las clases y tengo que estudiar más.",
+      "Mi reloj está atrasado cinco minutos."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "tetrico",
+    "front": "tétrico",
+    "translation": "мрачный, зловещий",
+    "explanation_es": "Que da miedo o tristeza por ser muy oscuro, silencioso o funerario.",
+    "examples": [
+      "La casa tenía un aspecto tétrico por la noche.",
+      "Me contó una historia tétrica de fantasmas."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "hacer-pensar-en-algo",
+    "front": "hacer pensar en algo",
+    "translation": "наводить на мысль о чём-то, напоминать",
+    "explanation_es": "Provocar que alguien recuerde o imagine algo por asociación.",
+    "examples": [
+      "Esta canción me hace pensar en mi infancia.",
+      "Su forma de hablar me hace pensar en mi abuelo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "tener-el-don-de",
+    "front": "tener el don de",
+    "translation": "обладать даром",
+    "explanation_es": "Tener una habilidad natural especial para algo. Después de «de» va un infinitivo o un sustantivo.",
+    "examples": [
+      "Mi tía tiene el don de hacer reír a todo el mundo.",
+      "Tiene el don de las lenguas: aprende un idioma en pocos meses."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "curvarse",
+    "front": "curvarse",
+    "translation": "изгибаться, искривляться",
+    "explanation_es": "Tomar forma de curva algo que era recto. Se dice de una barra, una tabla o la espalda.",
+    "examples": [
+      "La estantería se curvó por el peso de los libros.",
+      "Con los años, su espalda se ha curvado."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "desternillarse-de-risa",
+    "front": "desternillarse de risa",
+    "translation": "надрываться от смеха, покатываться со смеху",
+    "explanation_es": "Reírse mucho y sin control. Es una expresión fuerte que suena algo más literaria que las otras.",
+    "examples": [
+      "Nos desternillamos de risa con el chiste de Pepe.",
+      "Vimos la comedia y el público se desternillaba de risa."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "morirse-de-risa",
+    "front": "morirse de risa",
+    "translation": "умирать со смеху",
+    "explanation_es": "Reírse muchísimo. Es una expresión coloquial y de uso muy común.",
+    "examples": [
+      "Me morí de risa con su imitación del profesor.",
+      "Me muero de risa cada vez que veo ese vídeo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "partirse-de-risa",
+    "front": "partirse de risa",
+    "translation": "помирать со смеху, лопнуть от смеха",
+    "explanation_es": "Reírse a carcajadas, tanto que parece que uno se rompe. Coloquial, muy frecuente en España.",
+    "examples": [
+      "Nos partimos de risa cuando el gato se cayó de la mesa.",
+      "Se partía de risa contando la anécdota."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "enseguida",
+    "front": "enseguida",
+    "translation": "сразу же, немедленно",
+    "explanation_es": "En muy poco tiempo, sin esperar. También se escribe «en seguida».",
+    "examples": [
+      "Espera un momento, enseguida voy.",
+      "Nos sirvieron la comida enseguida."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "reconfortar",
+    "front": "reconfortar",
+    "translation": "утешать, придавать силы, согревать душу",
+    "explanation_es": "Dar ánimo, consuelo o fuerzas a alguien. También se dice de una comida o una bebida caliente que te hace sentir bien.",
+    "examples": [
+      "Sus palabras me reconfortaron mucho en un día difícil.",
+      "Una sopa caliente reconforta después de un día de frío."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "nuevamente",
+    "front": "nuevamente",
+    "translation": "снова, ещё раз",
+    "explanation_es": "De nuevo, otra vez. Es un poco más formal que «otra vez» o «de nuevo».",
+    "examples": [
+      "La reunión se aplazó nuevamente.",
+      "Le pedimos disculpas nuevamente por el error."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "recreo",
+    "front": "recreo",
+    "translation": "перемена (в школе); отдых, развлечение",
+    "explanation_es": "En un colegio, el tiempo libre entre clases para jugar. También significa diversión o descanso.",
+    "examples": [
+      "Los niños salen al patio a la hora del recreo.",
+      "En el recreo me comí el bocadillo con mis amigos."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "recrear",
+    "front": "recrear",
+    "translation": "воссоздавать; развлекать",
+    "explanation_es": "Crear de nuevo algo que existió, como una escena o una época. También, entretener o divertir.",
+    "examples": [
+      "La película recrea la vida en el siglo XIX.",
+      "La exposición recrea una calle de la Edad Media."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "forzado",
+    "front": "forzado",
+    "translation": "вынужденный, натянутый, неестественный",
+    "explanation_es": "Que se hace sin ganas o sin naturalidad, por obligación. También, algo hecho a la fuerza.",
+    "examples": [
+      "Me saludó con una sonrisa forzada.",
+      "Tuvieron que hacer un aterrizaje forzado por el mal tiempo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "forzar",
+    "front": "forzar",
+    "translation": "принуждать; взламывать",
+    "explanation_es": "Obligar a alguien a hacer algo que no quiere, o usar la fuerza para abrir algo. También, esforzar una parte del cuerpo más de lo debido.",
+    "examples": [
+      "Los ladrones forzaron la puerta del garaje.",
+      "No quiero forzarte a venir si no te apetece.",
+      "Forcé demasiado la voz y ahora estoy ronca."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "vociferar",
+    "front": "vociferar",
+    "translation": "громко кричать, орать",
+    "explanation_es": "Hablar dando grandes voces, con enfado o para hacerse oír. Es más formal y fuerte que «gritar».",
+    "examples": [
+      "El hombre vociferaba en medio de la calle.",
+      "Los aficionados vociferaban contra el árbitro."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "atender-a",
+    "front": "atender a",
+    "translation": "обслуживать; уделять внимание; прислушиваться",
+    "explanation_es": "Ocuparse de una persona, por ejemplo un cliente, o prestar atención a algo. «Atender a razones» es escuchar y aceptar los argumentos de otros.",
+    "examples": [
+      "La camarera atendió a todos los clientes con una sonrisa.",
+      "Atiende a lo que dice la profesora, que es importante.",
+      "No hubo manera de que atendiera a razones."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "llevar-algo",
+    "front": "llevar algo",
+    "translation": "нести, носить; вести (дела)",
+    "explanation_es": "Verbo con muchos usos: transportar algo, tenerlo puesto, o encargarse de gestionarlo, como las cuentas o un proyecto.",
+    "examples": [
+      "Llevo el portátil en la mochila.",
+      "Ella lleva la contabilidad de la empresa.",
+      "Hoy llevas una camisa muy bonita."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "aparentemente",
+    "front": "aparentemente",
+    "translation": "по-видимому, на первый взгляд",
+    "explanation_es": "Según parece o por lo que se ve, aunque quizá no sea así en realidad.",
+    "examples": [
+      "Aparentemente todo está bien, pero algo no me convence.",
+      "El accidente fue, aparentemente, causado por el hielo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "drenar",
+    "front": "drenar",
+    "translation": "осушать, отводить жидкость",
+    "explanation_es": "Quitar el agua o líquidos de un lugar, como un terreno o una herida, mediante un tubo o un canal. También se usa en sentido figurado para agotar recursos.",
+    "examples": [
+      "Hicieron zanjas para drenar el terreno.",
+      "El médico drenó el líquido de la rodilla.",
+      "Los gastos drenaron todos nuestros ahorros."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "ir-ligado-a-con-algo",
+    "front": "ir ligado a / con algo",
+    "translation": "быть связанным с чем-то",
+    "explanation_es": "Estar unido o relacionado con algo, de modo que uno depende de lo otro o aparecen juntos.",
+    "examples": [
+      "El éxito va ligado al esfuerzo.",
+      "Su carrera fue ligada a la del equipo durante años."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "chillon",
+    "front": "chillón",
+    "translation": "крикливый; кричащий (о цвете)",
+    "explanation_es": "Que chilla o tiene una voz muy aguda y fuerte. También, un color demasiado vivo o llamativo.",
+    "examples": [
+      "Su voz chillona me da dolor de cabeza.",
+      "Llevaba una camiseta de un rosa muy chillón."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "meterse-a-traves-de-algo",
+    "front": "meterse a través de algo",
+    "translation": "пробраться, пролезть сквозь что-то",
+    "explanation_es": "Entrar en un sitio pasando por un hueco estrecho o por un lugar difícil. En el uso común se dice más «meterse por».",
+    "examples": [
+      "El gato se metió a través de un agujero de la valla.",
+      "Nos metimos a través del bosque para acortar el camino."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "bandera",
+    "front": "bandera",
+    "translation": "флаг",
+    "explanation_es": "Trozo de tela con colores y símbolos que representa un país, un grupo o una idea.",
+    "examples": [
+      "En el balcón ondeaba la bandera de España.",
+      "Los aficionados llevaban banderas de su equipo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "acabar-mal",
+    "front": "acabar mal",
+    "translation": "плохо кончиться, плохо закончить",
+    "explanation_es": "Tener un final negativo o desagradable. Se dice de una historia, un plan o una persona.",
+    "examples": [
+      "Si sigues así, vas a acabar mal.",
+      "La discusión acabó mal y no volvieron a hablarse."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "padrastro",
+    "front": "padrastro",
+    "translation": "отчим; заусенец",
+    "explanation_es": "Marido de la madre que no es el padre biológico. También, la pequeña piel levantada alrededor de las uñas.",
+    "examples": [
+      "Mi padrastro me enseñó a conducir.",
+      "Tengo un padrastro en el dedo y me duele."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "hacer-senas",
+    "front": "hacer señas",
+    "translation": "подавать знаки, жестикулировать",
+    "explanation_es": "Comunicarse con gestos o movimientos de las manos, para llamar la atención o cuando no se puede hablar.",
+    "examples": [
+      "Le hice señas al camarero para pedir la cuenta.",
+      "Desde el otro lado de la calle me hacía señas para que cruzara."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "tener-probabilidades-de",
+    "front": "tener probabilidades de",
+    "translation": "иметь шансы на",
+    "explanation_es": "Ser posible o probable que algo ocurra. Se usa con infinitivo: «tener probabilidades de ganar».",
+    "examples": [
+      "Nuestro equipo tiene muchas probabilidades de ganar.",
+      "Con este tiempo, hay pocas probabilidades de que salgamos a la calle."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "hazana",
+    "front": "hazaña",
+    "translation": "подвиг",
+    "explanation_es": "Acción heroica o muy difícil, que merece admiración.",
+    "examples": [
+      "Cruzar el océano en velero fue una hazaña.",
+      "Sus hazañas deportivas son conocidas en todo el mundo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "peripecia",
+    "front": "peripecia",
+    "translation": "приключение, перипетия",
+    "explanation_es": "Suceso inesperado o complicado en una historia o en un viaje. Suele usarse en plural.",
+    "examples": [
+      "Nos contó las peripecias de su viaje por Sudamérica.",
+      "La novela cuenta las peripecias de un joven soldado."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "en-absoluto",
+    "front": "en absoluto",
+    "translation": "совсем нет; абсолютно нет",
+    "explanation_es": "Se usa para negar con mucha fuerza. Como respuesta significa «de ninguna manera».",
+    "examples": [
+      "—¿Te molesta que abra la ventana? —En absoluto.",
+      "No estoy en absoluto de acuerdo con esa decisión."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "quitar-algo-a-alguien",
+    "front": "quitar algo a alguien",
+    "translation": "отнять что-то у кого-то",
+    "explanation_es": "Coger algo que es de otra persona, o hacer que deje de tenerlo. Puede ser un objeto o algo abstracto, como el sueño o el miedo.",
+    "examples": [
+      "Le quitaron el móvil en el examen.",
+      "Ese ruido me quita el sueño.",
+      "Me quitó la silla y se sentó él."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "estar-pendiente-de",
+    "front": "estar pendiente de",
+    "translation": "следить за, быть в ожидании, не упускать из виду",
+    "explanation_es": "Prestar atención a algo o esperar que ocurra. También, ocuparse de que una persona o cosa esté bien.",
+    "examples": [
+      "Estoy pendiente de la llamada del médico.",
+      "Mi madre siempre está pendiente de mí.",
+      "Estate pendiente del horno, que no se queme el pan."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "jactarse-de-algo",
+    "front": "jactarse de algo",
+    "translation": "хвастаться чем-то",
+    "explanation_es": "Presumir de algo de manera exagerada, para que los demás lo admiren.",
+    "examples": [
+      "Se jacta de hablar cinco idiomas, pero apenas los usa.",
+      "No te jactes de tus notas delante de los demás."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "jactancioso",
+    "front": "jactancioso",
+    "translation": "хвастливый",
+    "explanation_es": "Que presume mucho de sus cualidades o logros, de manera arrogante.",
+    "examples": [
+      "Es un hombre jactancioso que siempre habla de sus éxitos.",
+      "Su tono jactancioso molestó a todos."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "escapar-de",
+    "front": "escapar de",
+    "translation": "убежать из/от, спастись от",
+    "explanation_es": "Salir de un lugar donde estabas encerrado o librarte de un peligro. También, evitar algo desagradable.",
+    "examples": [
+      "El preso escapó de la cárcel por la noche.",
+      "Escapamos de la lluvia refugiándonos en un café.",
+      "Escapó por poco de un accidente."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "hacer-un-papelon",
+    "front": "hacer un papelón",
+    "translation": "опозориться, выставить себя на посмешище",
+    "explanation_es": "Coloquial, típico de América Latina, sobre todo del Río de la Plata. Comportarse de manera que resulta vergonzosa o ridícula ante los demás.",
+    "examples": [
+      "Hice un papelón en la entrevista: me quedé en blanco.",
+      "El equipo hizo un papelón y perdió por diez goles."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "razonablemente",
+    "front": "razonablemente",
+    "translation": "разумно, в разумных пределах, довольно",
+    "explanation_es": "De manera lógica o sensata. También, en un grado suficiente pero no excelente: «razonablemente bien».",
+    "examples": [
+      "El precio es razonablemente bajo para la calidad que ofrece.",
+      "Se comportó razonablemente, sin perder la calma.",
+      "Salió razonablemente bien en el examen."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "pura-palabreria",
+    "front": "pura palabrería",
+    "translation": "пустая болтовня, одни слова",
+    "explanation_es": "Conjunto de palabras sin contenido real ni compromiso. «Pura» refuerza la crítica.",
+    "examples": [
+      "Todas sus promesas son pura palabrería.",
+      "Ese discurso me pareció pura palabrería, sin ninguna propuesta concreta."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "hacer-el-ridiculo",
+    "front": "hacer el ridículo",
+    "translation": "выставить себя на посмешище",
+    "explanation_es": "Comportarse de manera que los demás se rían de ti o te vean como una persona poco seria.",
+    "examples": [
+      "No quiero hacer el ridículo cantando delante de todos.",
+      "Hizo el ridículo al intentar hablar francés sin saberlo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "de-todos-modos",
+    "front": "de todos modos",
+    "translation": "в любом случае, всё равно",
+    "explanation_es": "Expresión que introduce algo que sigue siendo válido a pesar de lo anterior. Equivale a «de cualquier manera» o «a pesar de todo».",
+    "examples": [
+      "Sé que está cerrado, pero iré de todos modos.",
+      "No me apetece salir; de todos modos, gracias por la invitación."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "arrugado",
+    "front": "arrugado",
+    "translation": "мятый, сморщенный",
+    "explanation_es": "Que tiene arrugas, es decir, pliegues en la superficie. Se dice de la ropa, del papel o de la piel.",
+    "examples": [
+      "La camisa está arrugada; tengo que plancharla.",
+      "El abuelo tiene las manos arrugadas."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "portavoz",
+    "front": "portavoz",
+    "translation": "представитель, пресс-секретарь",
+    "explanation_es": "Persona que habla en nombre de un grupo, un gobierno o una empresa. Es igual para hombres y mujeres: «el portavoz», «la portavoz».",
+    "examples": [
+      "La portavoz del gobierno dio una rueda de prensa.",
+      "El portavoz del club negó los rumores."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "vaciar",
+    "front": "vaciar",
+    "translation": "опустошать, освобождать",
+    "explanation_es": "Dejar un recipiente o un espacio sin lo que contenía. Es lo contrario de «llenar».",
+    "examples": [
+      "Vacía los bolsillos antes de meter los pantalones en la lavadora.",
+      "Vaciamos el trastero para hacer sitio."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "tener-lugar-en",
+    "front": "tener lugar en",
+    "translation": "состояться, проходить (в каком-то месте)",
+    "explanation_es": "Ocurrir o celebrarse en un sitio o momento determinado. Se usa para eventos: reuniones, conciertos, competiciones.",
+    "examples": [
+      "El concierto tendrá lugar en el estadio municipal.",
+      "La reunión tuvo lugar en la sala grande."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "asalto",
+    "front": "asalto",
+    "translation": "нападение, ограбление; раунд (в боксе)",
+    "explanation_es": "Ataque violento contra una persona, un banco o un lugar para robar. En boxeo, cada una de las partes de un combate.",
+    "examples": [
+      "Hubo un asalto a un banco en el centro de la ciudad.",
+      "El boxeador ganó el combate en el tercer asalto."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "asaltar",
+    "front": "asaltar",
+    "translation": "нападать, грабить",
+    "explanation_es": "Atacar a alguien o entrar en un lugar con violencia para robar. En sentido figurado, una duda o una idea que te viene de golpe.",
+    "examples": [
+      "Dos hombres asaltaron una joyería de madrugada.",
+      "Me asaltó una duda a mitad del examen."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "llevar-a-cabo",
+    "front": "llevar a cabo",
+    "translation": "осуществлять, проводить",
+    "explanation_es": "Realizar algo hasta el final, como un plan, un proyecto o una acción. Es un poco formal.",
+    "examples": [
+      "La empresa va a llevar a cabo una reforma completa.",
+      "Pudimos llevar a cabo el experimento sin problemas."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "un-corte-de-luz",
+    "front": "un corte de luz",
+    "translation": "отключение электричества",
+    "explanation_es": "Interrupción temporal del suministro de electricidad.",
+    "examples": [
+      "Hubo un corte de luz en todo el barrio.",
+      "Por el corte de luz, no funcionaba ni el ascensor."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "apagon",
+    "front": "apagón",
+    "translation": "блэкаут, массовое отключение электричества",
+    "explanation_es": "Corte de luz grande que afecta a muchas casas o a una ciudad entera.",
+    "examples": [
+      "El apagón duró seis horas y no funcionaba el metro.",
+      "Con el apagón nos quedamos a oscuras."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "despejado",
+    "front": "despejado",
+    "translation": "ясный (о небе); свободный",
+    "explanation_es": "Sin nubes, si hablamos del cielo. También, un lugar sin obstáculos o una mente clara.",
+    "examples": [
+      "Hoy el cielo está despejado y se ven las montañas.",
+      "Dejad la salida despejada por si hay una emergencia.",
+      "Después de dormir bien, tengo la cabeza más despejada."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "empapado",
+    "front": "empapado",
+    "translation": "промокший до нитки",
+    "explanation_es": "Completamente mojado. Se dice de personas, ropa o cosas: «empapado de sudor», «empapado por la lluvia».",
+    "examples": [
+      "Llegué a casa empapado porque me sorprendió la lluvia.",
+      "La camiseta estaba empapada de sudor."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "por-alguna-razon",
+    "front": "por alguna razón",
+    "translation": "по какой-то причине",
+    "explanation_es": "Se usa cuando existe un motivo, pero no lo conocemos o no lo decimos.",
+    "examples": [
+      "Por alguna razón, el ordenador no se enciende.",
+      "Por alguna razón, siempre me acuerdo de esa canción en verano."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "talar-arboles",
+    "front": "talar árboles",
+    "translation": "валить деревья, рубить лес",
+    "explanation_es": "Cortar árboles por la base con un hacha o una sierra, para conseguir madera o despejar un terreno.",
+    "examples": [
+      "Talaron los árboles del parque para ampliar la carretera.",
+      "Talar árboles sin permiso es ilegal en muchos lugares."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "prender-fuego-a",
+    "front": "prender fuego a",
+    "translation": "поджечь",
+    "explanation_es": "Hacer que algo empiece a arder. Se usa con objetos y edificios, a veces de manera intencionada.",
+    "examples": [
+      "Alguien prendió fuego a un contenedor de basura.",
+      "Prendimos fuego a la leña para calentarnos."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "fastidiar",
+    "front": "fastidiar",
+    "translation": "досаждать; портить",
+    "explanation_es": "Molestar a alguien, o estropear un plan o una cosa. Es coloquial.",
+    "examples": [
+      "Me fastidia mucho que llegues tarde siempre.",
+      "La lluvia nos fastidió el picnic.",
+      "Si me tocas otra vez el brazo, me vas a fastidiar la foto."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "virtud",
+    "front": "virtud",
+    "translation": "добродетель, достоинство",
+    "explanation_es": "Cualidad positiva de una persona, como la paciencia o la honestidad. También, la capacidad de algo para producir un efecto.",
+    "examples": [
+      "La paciencia es una virtud que no todos tienen.",
+      "Su mayor virtud es saber escuchar."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "escaparate",
+    "front": "escaparate",
+    "translation": "витрина",
+    "explanation_es": "Cristal de una tienda a través del cual se ven los productos desde la calle.",
+    "examples": [
+      "Me quedé mirando el escaparate de la librería.",
+      "En el escaparate había un vestido que me encantó."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "asignatura",
+    "front": "asignatura",
+    "translation": "учебный предмет",
+    "explanation_es": "Cada una de las materias que se estudian en un curso, como matemáticas o historia.",
+    "examples": [
+      "Mi asignatura favorita es la historia.",
+      "Tengo que aprobar tres asignaturas para pasar de curso."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "meterse-en-el-papel",
+    "front": "meterse en el papel",
+    "translation": "вжиться в роль",
+    "explanation_es": "Adoptar por completo el papel que se interpreta, o comportarse como si uno fuera otro personaje. También, tomarse muy en serio una situación.",
+    "examples": [
+      "Para la película, el actor se metió tanto en el papel que cambió de voz.",
+      "Los niños se meten en el papel cuando juegan a médicos."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "maligno",
+    "front": "maligno",
+    "translation": "злой, зловредный; злокачественный",
+    "explanation_es": "Que hace daño o tiene malas intenciones. En medicina, se dice de un tumor grave.",
+    "examples": [
+      "El villano tenía una sonrisa maligna.",
+      "El médico dijo que el tumor no era maligno."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "en-un-abrir-y-cerrar-de-ojos",
+    "front": "en un abrir y cerrar de ojos",
+    "translation": "в мгновение ока",
+    "explanation_es": "Muy rápido, en un instante. Se usa para cosas que ocurren o cambian sin darnos cuenta.",
+    "examples": [
+      "En un abrir y cerrar de ojos, el niño ya había crecido.",
+      "La tienda se llenó de gente en un abrir y cerrar de ojos."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "ser-el-ultimo-grito",
+    "front": "ser el último grito",
+    "translation": "быть последним криком моды",
+    "explanation_es": "Ser lo más moderno o lo más nuevo en moda, tecnología o estilo.",
+    "examples": [
+      "Ese móvil era el último grito hace cinco años.",
+      "Los pantalones anchos son el último grito esta temporada."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "valvula-de-escape",
+    "front": "válvula de escape",
+    "translation": "отдушина, способ выпустить пар",
+    "explanation_es": "En sentido literal, pieza que deja salir aire o gas de un recipiente. En sentido figurado, algo que te permite liberar tensión o estrés.",
+    "examples": [
+      "Correr por las tardes es mi válvula de escape.",
+      "Para muchos jóvenes, la música es una válvula de escape."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "escocerse",
+    "front": "escocerse",
+    "translation": "щипать, гореть (о коже); покраснеть и болеть",
+    "explanation_es": "Sentir la piel irritada, con dolor y calor, por el roce, el sol o una herida. En sentido figurado, sentirse dolido.",
+    "examples": [
+      "Se me escoció la herida cuando le puse alcohol.",
+      "Con el roce de la mochila se me escoció la espalda."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "asunto",
+    "front": "asunto",
+    "translation": "дело, вопрос, тема",
+    "explanation_es": "Cosa de la que se trata o que hay que resolver. También, el título de un correo electrónico.",
+    "examples": [
+      "Tenemos que hablar de un asunto importante.",
+      "Escribe un asunto claro en el correo para que lo abran.",
+      "Eso no es asunto tuyo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "desparramar",
+    "front": "desparramar",
+    "translation": "рассыпать, разбрасывать, разлить",
+    "explanation_es": "Extender algo por muchos sitios de manera desordenada. Se dice de líquidos o de cosas pequeñas.",
+    "examples": [
+      "Se me cayó la caja y los tornillos se desparramaron por el suelo.",
+      "No desparrames el agua por toda la mesa."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "centenar-de",
+    "front": "centenar de",
+    "translation": "около сотни, сотня",
+    "explanation_es": "Conjunto de cien unidades, o una cantidad aproximada de cien.",
+    "examples": [
+      "Asistieron un centenar de personas a la conferencia.",
+      "Recibí un centenar de mensajes en un solo día."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "reprochar",
+    "front": "reprochar",
+    "translation": "упрекать, пенять",
+    "explanation_es": "Decirle a alguien que ha hecho algo mal, con crítica o con enfado. Normalmente se refiere a algo del pasado.",
+    "examples": [
+      "Me reprochó que no lo hubiera llamado.",
+      "No te lo reprocho, hiciste lo que pudiste."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "sugerir",
+    "front": "sugerir",
+    "translation": "предлагать, подсказывать; намекать",
+    "explanation_es": "Proponer una idea sin imponerla, o dar a entender algo de manera indirecta.",
+    "examples": [
+      "Te sugiero que pruebes el arroz, está buenísimo.",
+      "Sus palabras sugerían que estaba enfadado."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "darle-reposteo",
+    "front": "darle reposteo",
+    "translation": "репостнуть, поделиться ещё раз",
+    "explanation_es": "Coloquial, de las redes sociales en Latinoamérica. Compartir de nuevo una publicación de otra persona en tu perfil.",
+    "examples": [
+      "Me encantó tu foto, le doy reposteo ahora mismo.",
+      "Si le das reposteo, más gente verá la noticia."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "escrolear",
+    "front": "escrolear",
+    "translation": "скроллить, листать ленту",
+    "explanation_es": "Coloquial, adaptación del inglés «to scroll». Mover el contenido de una pantalla hacia arriba o abajo con el dedo o el ratón, sobre todo en las redes sociales.",
+    "examples": [
+      "Me pasé una hora escroleando en el móvil antes de dormir.",
+      "Estoy escroleando en Instagram sin ver nada en concreto."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "cagada",
+    "front": "cagada",
+    "translation": "косяк, провал; (вульг.) дерьмо",
+    "explanation_es": "Vulgar. Un error grave o algo que sale muy mal. Solo se usa con confianza, no en situaciones formales.",
+    "examples": [
+      "Fue una cagada enviar el mensaje al grupo equivocado.",
+      "¡Qué cagada! Se me olvidó el pasaporte en casa."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "tremendo",
+    "front": "tremendo",
+    "translation": "огромный, ужасный, потрясающий (по силе)",
+    "explanation_es": "Muy grande o muy intenso, para bien o para mal. También puede significar «terrible».",
+    "examples": [
+      "Tuvimos un susto tremendo cuando se fue la luz.",
+      "Hace un frío tremendo esta mañana.",
+      "Es un artista tremendo."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "explicar-el-motivo",
+    "front": "explicar el motivo",
+    "translation": "объяснить причину",
+    "explanation_es": "Decir por qué se hizo algo o por qué ocurrió.",
+    "examples": [
+      "Explícame el motivo de tu decisión.",
+      "No explicó el motivo de su ausencia."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "incumplir-los-plazos",
+    "front": "incumplir los plazos",
+    "translation": "нарушить сроки",
+    "explanation_es": "No entregar algo o no hacer algo en la fecha acordada. Se usa mucho en el trabajo y en los contratos.",
+    "examples": [
+      "La empresa incumplió los plazos de entrega.",
+      "Si incumples los plazos, tendrás que pagar una multa."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "retrasarse",
+    "front": "retrasarse",
+    "translation": "задерживаться, опаздывать",
+    "explanation_es": "Llegar más tarde de lo previsto, o ir más lento de lo que se esperaba. También, un reloj que marca menos hora de la real.",
+    "examples": [
+      "El vuelo se retrasó dos horas por la niebla.",
+      "Me he retrasado con el trabajo y no sé si acabaré hoy."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "multar",
+    "front": "multar",
+    "translation": "штрафовать",
+    "explanation_es": "Obligar a alguien a pagar una cantidad de dinero por no cumplir una norma o una ley.",
+    "examples": [
+      "La policía me multó por aparcar en doble fila.",
+      "Nos multaron por hacer ruido de noche."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "imponer-una-multa-a-alguien",
+    "front": "imponer una multa a alguien",
+    "translation": "наложить штраф на кого-то",
+    "explanation_es": "Poner oficialmente un castigo económico a una persona o una empresa. Es más formal que «multar».",
+    "examples": [
+      "El ayuntamiento impuso una multa a la empresa por contaminar.",
+      "Le impusieron una multa de trescientos euros."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "observar-una-mejora-en",
+    "front": "observar una mejora en",
+    "translation": "наблюдать улучшение в",
+    "explanation_es": "Ver o notar que algo va mejor. Es de registro formal, típico de informes y textos científicos.",
+    "examples": [
+      "Los médicos observaron una mejora en la salud del paciente.",
+      "Se observa una mejora en los resultados del último trimestre."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "validar-una-hipotesis",
+    "front": "validar una hipótesis",
+    "translation": "подтвердить гипотезу",
+    "explanation_es": "Comprobar con datos o experimentos que una idea o suposición es correcta. Se usa en ciencia y en el trabajo con datos.",
+    "examples": [
+      "El experimento sirvió para validar nuestra hipótesis.",
+      "Necesitamos más datos para validar la hipótesis."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "entristecer",
+    "front": "entristecer",
+    "translation": "огорчать, печалить",
+    "explanation_es": "Poner triste a alguien. También se usa de manera reflexiva: «entristecerse».",
+    "examples": [
+      "La noticia nos entristeció a todos.",
+      "Me entristece ver a mi hermano tan callado."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "decepcionar",
+    "front": "decepcionar",
+    "translation": "разочаровывать",
+    "explanation_es": "No cumplir lo que alguien esperaba, y causarle tristeza o desilusión.",
+    "examples": [
+      "La película me decepcionó, esperaba mucho más.",
+      "No quiero decepcionar a mis padres."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "pasar-de-moda",
+    "front": "pasar de moda",
+    "translation": "выйти из моды",
+    "explanation_es": "Dejar de ser popular o actual, como una prenda o una costumbre.",
+    "examples": [
+      "Esos pantalones pasaron de moda hace años.",
+      "Algunos clásicos nunca pasan de moda."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "quedarse-obsoleto",
+    "front": "quedarse obsoleto",
+    "translation": "устареть",
+    "explanation_es": "Perder utilidad o dejar de servir por ser antiguo, sobre todo tecnologías o métodos.",
+    "examples": [
+      "Con las nuevas versiones, el programa se quedó obsoleto.",
+      "Si no te formas, tus conocimientos se quedarán obsoletos."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "ganarse-algo",
+    "front": "ganarse algo",
+    "translation": "заслужить что-то, добиться чего-то",
+    "explanation_es": "Conseguir algo gracias a tu esfuerzo o tu comportamiento. Se usa con la confianza, un premio o un castigo.",
+    "examples": [
+      "Se ganó el respeto de todos con su trabajo.",
+      "Con esa actitud te vas a ganar una regañina."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "codicia",
+    "front": "codicia",
+    "translation": "алчность, жадность",
+    "explanation_es": "Deseo excesivo de riquezas o de poder, sin importar los demás.",
+    "examples": [
+      "La codicia lo llevó a perderlo todo.",
+      "Los dueños actuaron con codicia y explotaron a sus trabajadores."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "alzarse",
+    "front": "alzarse",
+    "translation": "подниматься; восставать",
+    "explanation_es": "Levantarse o ponerse en una posición más alta. También, rebelarse contra una autoridad.",
+    "examples": [
+      "Las montañas se alzan al fondo del valle.",
+      "El pueblo se alzó contra el gobierno.",
+      "Se alzó de la silla para saludar."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "tambalearse",
+    "front": "tambalearse",
+    "translation": "шататься, пошатнуться",
+    "explanation_es": "Moverse de un lado a otro, sin equilibrio. En sentido figurado, estar a punto de fallar o caer, como un negocio o un gobierno.",
+    "examples": [
+      "El borracho se tambaleaba al caminar.",
+      "Con la crisis, la empresa se tambaleó."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "drogueria",
+    "front": "droguería",
+    "translation": "хозяйственный магазин (бытовая химия)",
+    "explanation_es": "Tienda donde se venden productos de limpieza, pinturas y artículos para el hogar. No es lo mismo que una farmacia.",
+    "examples": [
+      "Compra detergente en la droguería de la esquina.",
+      "En la droguería encontré pintura blanca para la pared."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "asentir-negar-con-la-cabeza",
+    "front": "asentir / negar con la cabeza",
+    "translation": "кивать / качать головой в знак отрицания",
+    "explanation_es": "Decir «sí» o «no» moviendo la cabeza, sin hablar. Se usa mucho al describir una reacción.",
+    "examples": [
+      "Asintió con la cabeza y siguió leyendo.",
+      "Le pregunté si quería más café y negó con la cabeza."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "regordeto",
+    "front": "regordeto",
+    "translation": "пухленький, полненький",
+    "explanation_es": "Ligeramente gordo, de manera simpática. Se usa sobre todo con niños, bebés o manos.",
+    "examples": [
+      "El bebé tiene unas mejillas regordetas.",
+      "Un niño regordete corría por el jardín."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "rotulo",
+    "front": "rótulo",
+    "translation": "вывеска, надпись",
+    "explanation_es": "Letrero o texto escrito que indica el nombre de una tienda, una calle o un lugar.",
+    "examples": [
+      "El rótulo de la tienda se ve desde lejos.",
+      "Cambiaron el rótulo del bar por uno luminoso."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "retorcerse",
+    "front": "retorcerse",
+    "translation": "корчиться, извиваться",
+    "explanation_es": "Doblar el cuerpo con fuerza hacia un lado y otro, por dolor o por risa. También, torcerse algo sobre sí mismo.",
+    "examples": [
+      "Se retorcía de dolor en el suelo.",
+      "El gusano se retorcía sobre la hoja.",
+      "Nos retorcíamos de risa con sus chistes."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "acaparar",
+    "front": "acaparar",
+    "translation": "скупать; монополизировать, захватывать себе",
+    "explanation_es": "Coger o comprar mucho de algo para tenerlo solo uno mismo. También, ocupar toda la atención o el tiempo.",
+    "examples": [
+      "Los comerciantes acapararon el pan durante la crisis.",
+      "El nuevo cantante acaparó todas las miradas."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "hierbajo",
+    "front": "hierbajo",
+    "translation": "сорняк",
+    "explanation_es": "Hierba mala que crece sin haberla plantado, sobre todo en un jardín o en un cultivo.",
+    "examples": [
+      "Tengo que quitar los hierbajos del jardín.",
+      "Los hierbajos crecen rápido con la lluvia."
+    ],
+    "added": "2026-09-19"
+  },
+  {
+    "id": "cubo-de-basura",
+    "front": "cubo de basura",
+    "translation": "мусорное ведро",
+    "explanation_es": "Recipiente donde se tira la basura. En la calle suele ser un contenedor, y en casa, un cubo.",
+    "examples": [
+      "Saca el cubo de basura antes de acostarte.",
+      "Tiré el papel al cubo de basura."
+    ],
+    "added": "2026-09-19"
   }
 ]
