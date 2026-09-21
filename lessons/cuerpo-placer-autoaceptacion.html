@@ -1,0 +1,1004 @@
+<!doctype html>
+<title>Cuerpo, Placer y Autoaceptación</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+/* ---- vocab cards ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+/* ---- discussion ---- */
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+.player-wrap{margin-bottom:16px;}
+.player-caption{font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Cuerpo, Placer y Autoaceptación · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Cuerpo, placer y autoaceptación</h1>
+  <p class="subtitle">Vocabulario, debate, gramática, audición y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> podcast <i>Se Regalan Dudas</i> — episodio «Sexóloga responde las dudas que nunca nos atrevíamos», con la doctora Laura Salazar, médica y sexóloga educativa (transcripción proporcionada por la estudiante)</p>
+  <div class="summary">
+    <b>De qué trata:</b> la doctora Laura Salazar habla de la desconexión entre cuerpo y placer, de los mensajes de represión y culpa que muchas personas reciben desde la infancia (a menudo por motivos religiosos), y de su propio proceso de autoaceptación como mujer lesbiana en una familia muy católica. También se habla del papel de la pornografía y las redes sociales en nuestras expectativas sobre el placer, y de algunas nociones básicas de salud sexual. <i>Nota: este taller se centra en los pasajes sobre autoaceptación, conexión corporal y alfabetización mediática; el episodio original incluye además una sección técnica sobre sexo anal que no se trabaja aquí.</i>
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="audicion">
+  <div class="section-head"><span class="section-num">04</span><h2>Audición</h2></div>
+  <p class="hint">Escucha el primer tercio del episodio real, donde Laura Salazar cuenta por qué estudió sexología y su proceso de autoaceptación, antes de responder.</p>
+  <div id="audioList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">05</span><h2>Test — Cuerpo, placer y autoaceptación</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "cuerpoplacerautoaceptacion_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- VOCABULARIO ---------------- */
+var vocab = [
+  {term:"reprimir(se)", pos:"verbo transitivo/pronominal",
+   quote:"El problema de <mark>reprimir</mark> tanto es que llega el momento en el que se te olvida cómo eras.",
+   trans:"подавлять (себя, желания, эмоции)",
+   mean:"Не давать проявиться желанию, эмоции или импульсу, часто из страха или чувства вины. В тексте — ключевая тема: подавление собственного тела и желаний из-за воспитания.",
+   ex:"Durante años reprimió sus ganas de cambiar de carrera por miedo a decepcionar a su familia. — Годами он подавлял желание сменить профессию из страха разочаровать семью."},
+  {term:"el placer", pos:"sustantivo, m.",
+   quote:"Nadie nos enseñó a nombrar el <mark>placer</mark>.",
+   trans:"удовольствие, наслаждение",
+   mean:"Общее слово для приятного ощущения — физического или эмоционального. В тексте противопоставляется чувству вины и стыда.",
+   ex:"Encontró mucho placer en volver a pintar después de tantos años. — Он нашёл огромное удовольствие в том, чтобы снова начать рисовать спустя столько лет."},
+  {term:"la vergüenza", pos:"sustantivo, f.",
+   quote:"Ahí me di cuenta de dónde venía tanta culpa, tanta <mark>vergüenza</mark>, tanto asco, tanto miedo también.",
+   trans:"стыд",
+   mean:"Неприятное чувство из-за того, что о тебе подумают другие, или из-за несоответствия ожиданиям. Часто в паре со словом «culpa» (вина), но это разные вещи: vergüenza — что подумают другие, culpa — «я сделал что-то плохое».",
+   ex:"Sintió mucha vergüenza cuando se dio cuenta de que todos la habían escuchado cantar. — Ей стало очень стыдно, когда она поняла, что все слышали, как она поёт."},
+  {term:"el desprecio (hacia uno mismo)", pos:"sustantivo, m.",
+   quote:"Empecé con esto de un <mark>desprecio</mark> hacia mí misma, pero durísimo.",
+   trans:"презрение (к самому себе)",
+   mean:"Сильное негативное чувство по отношению к кому-то (или к себе), сильнее, чем просто «no gustar». В контексте self-acceptance — распространённый этап при непринятии себя.",
+   ex:"Le costó años superar el desprecio hacia sí mismo que sentía por haber fracasado en ese proyecto. — Ему понадобились годы, чтобы преодолеть презрение к себе за провал того проекта."},
+  {term:"salir del clóset", pos:"locución verbal",
+   quote:"Después empezó el rechazo de parte de mi familia ya cuando <mark>salí del clóset</mark> y eso me tumbó.",
+   trans:"совершить каминг-аут, «выйти из шкафа»",
+   mean:"Калька с английского «come out of the closet» — открыто заявить о своей сексуальной ориентации или гендерной идентичности. Широко используется во всём испаноязычном мире.",
+   ex:"Salió del clóset con su familia a los veinte años y, aunque fue difícil al principio, ahora la apoyan por completo. — Он совершил каминг-аут перед семьёй в двадцать лет, и хотя поначалу было трудно, теперь они его полностью поддерживают."},
+  {term:"aceptarse (radicalmente)", pos:"verbo pronominal",
+   quote:"Pero no te habías aceptado <mark>radicalmente</mark>.",
+   trans:"полностью, безоговорочно принять себя",
+   mean:"«Radicalmente» здесь означает «до самого корня», то есть не частично или формально, а полностью, без внутреннего сопротивления. Отличается от простого «aceptarse», которое может быть более поверхностным.",
+   ex:"Aceptarse radicalmente no significa que ya no tengas miedos, sino que dejas de pelear contigo mismo/a. — Полностью принять себя — не значит перестать бояться, а значит перестать бороться с самим собой."},
+  {term:"encajar (en algo)", pos:"verbo intransitivo",
+   quote:"Todo esto se trata de <mark>encajar</mark> en tu sociedad.",
+   trans:"вписываться, подходить (в группу, коллектив)",
+   mean:"Быть принятым группой, соответствовать её ожиданиям и нормам. Противоположность — «ser excluido/a» или «no encajar».",
+   ex:"En el colegio nuevo le costó mucho encajar los primeros meses. — В новой школе ему было очень трудно вписаться в коллектив первые месяцы."},
+  {term:"desconectarse de (algo)", pos:"verbo pronominal",
+   quote:"Estamos tan <mark>desconectadas</mark> de nuestro cuerpo que llegan preguntas como, doctora, ¿es normal que en el sexo esté sufriendo?",
+   trans:"потерять связь, отключиться (от чего-то)",
+   mean:"Утратить контакт или осознанность в отношении чего-то — в тексте речь о потере контакта со своим телом. Противоположность — «conectarse con» / «escuchar».",
+   ex:"Con tanto trabajo, me desconecté completamente de mis propias necesidades. — Из-за такой большой загрузки на работе я полностью потеряла связь со своими собственными потребностями."},
+  {term:"el mandato (social)", pos:"sustantivo, m.",
+   quote:"Y luego creo que viene este <mark>mandato</mark> social.",
+   trans:"(общественное) предписание, установка, негласное правило",
+   mean:"Неписаное правило или ожидание, которое общество навязывает людям (как себя вести, кем быть). Часто используется в критическом контексте — как что-то, что стоит подвергнуть сомнению.",
+   ex:"El mandato de \"siempre estar disponible\" en el trabajo nos está agotando a todos. — Установка «всегда быть на связи» на работе изматывает всех нас."},
+  {term:"resignificar (algo)", pos:"verbo transitivo",
+   quote:"Puedes hacer de <mark>resignificar</mark> lo que la sociedad te enseñó para vivirlo a mi gusto.",
+   trans:"переосмыслить, придать новый смысл (чему-то)",
+   mean:"Дать чему-то новое значение, отличное от того, что было навязано изначально — часто в терапевтическом или личностном контексте.",
+   ex:"Después de terapia, logró resignificar su relación con la comida. — После терапии ей удалось переосмыслить своё отношение к еде."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+/* ---------------- DEBATE ---------------- */
+var debate = [
+  {q:"¿Alguna vez sentiste que tenías que reprimir una parte de ti misma/o para encajar en tu familia o tu comunidad? Cuéntanos qué pasó.", hint:"Útil: «Tuve que reprimir...», «Sentía que no encajaba porque...»"},
+  {q:"¿Qué mensajes sobre el cuerpo o el placer recibiste de niña/o, en tu familia o en la escuela?", hint:"Útil: «De niña/o me decían que...», «Nadie me habló de...»"},
+  {q:"En tu cultura, ¿se habla abiertamente del cuerpo y de la sexualidad, o sigue siendo un tema tabú? Compáralo con lo que cuenta Laura sobre México.", hint:"Útil: «En mi cultura...», «A diferencia de..., en mi país...»"},
+  {q:"Laura compara la pornografía con los filtros de Instagram: ambos \"te hacen creer que es real\". ¿Estás de acuerdo con esta comparación? ¿Por qué?", hint:"Útil: «Estoy de acuerdo/en desacuerdo porque...», «Por un lado..., por otro lado...»"},
+  {q:"Si una amiga tuya te contara que está pasando por un proceso de autoaceptación difícil, como el que describe Laura, ¿qué le dirías?", hint:"Útil: «Le diría que...», «Lo primero que haría sería...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+/* ---------------- GRAMÁTICA ---------------- */
+var gram = [
+  {id:"g1", title:"3.1 Presente continuo (estar + gerundio)",
+   quote:"<mark>Estás prestando atención</mark> a tu disfrute, a tu capacidad de moverte, a tu capacidad de sentir placer o a todo lo externo.",
+   rule:"Estar (conjugado) + gerundio (-ando/-iendo). Se usa para acciones en pleno desarrollo en el momento presente. <b>Ошибка:</b> русскоговорящие часто используют только простой presente там, где по-испански естественнее прозвучит estar + gerundio, подчёркивающий, что действие происходит прямо сейчас.",
+   items:[
+     {stem:"Ahora mismo (tú/escuchar) ______ un podcast sobre el cuerpo y la sexualidad.", answers:["estás escuchando"]},
+     {stem:"Ella (aprender) ______ a escuchar las señales de su cuerpo.", answers:["está aprendiendo"]},
+     {stem:"Nosotros (hablar) ______ de temas que antes eran tabú.", answers:["estamos hablando"]},
+     {stem:"¿Por qué (tú/pensar) ______ en lo que piensan los demás en vez de en lo que sientes tú?", answers:["estás pensando"]},
+     {stem:"Yo (trabajar) ______ en aceptarme tal y como soy.", answers:["estoy trabajando"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito imperfecto (descripción de un estado pasado)",
+   quote:"Yo no <mark>tenía</mark> referencias de mujeres lesbianas. Yo no <mark>conocía</mark> ese mundo, no tenía amigas lesbianas, no sabía nada.",
+   rule:"Raíz + -aba/-ía... Describe estados, hábitos y circunstancias pasadas, sin foco en cuándo terminaron. <b>Ошибка:</b> использовать indefinido для фонового описания состояния «тогда» — здесь нужен именно imperfecto.",
+   items:[
+     {stem:"Antes de aceptarse, Laura no (tener) ______ ninguna referencia de mujeres lesbianas.", answers:["tenía"]},
+     {stem:"De niña, ella (ir) ______ a misa todos los días.", answers:["iba"]},
+     {stem:"Yo (creer) ______ que el placer (ser) ______ un pecado.", answers:["creía", "era"]},
+     {stem:"Mis padres me (decir) ______ que tuviera cuidado con lo que mi cuerpo sentía.", answers:["decían"]},
+     {stem:"Antes yo no (saber) ______ nombrar lo que me gustaba.", answers:["sabía"]}
+   ]},
+  {id:"g3", title:"3.3 Pretérito indefinido (acción puntual en el pasado)",
+   quote:"Entonces <mark>intenté</mark> acabar con mi vida y eso me <mark>llevó</mark> a terapia.",
+   rule:"Raíz + -é/-aste/-ó... (o formas irregulares). Se usa para acciones puntuales y terminadas en el pasado, con un momento concreto. Contrasta con el imperfecto, que describe estados o hábitos. <b>Ошибка:</b> путать с imperfecto, когда речь идёт о конкретном, законченном событии, а не о фоне/привычке.",
+   items:[
+     {stem:"Laura (intentar) ______ acabar con su vida y eso la (llevar) ______ a terapia.", answers:["intentó", "llevó"]},
+     {stem:"El año pasado, ella (darse cuenta) ______ de que no sabía nombrar el placer.", answers:["se dio cuenta"]},
+     {stem:"Cuando (salir, ella) ______ del clóset, su familia la (rechazar) ______.", answers:["salió", "rechazó"]},
+     {stem:"Empezó a hacer ejercicio y (descubrir) ______ una nueva relación con su cuerpo.", answers:["descubrió"]},
+     {stem:"¿Qué (sentir, tú) ______ la primera vez que hablaste abiertamente de este tema?", answers:["sentiste"]}
+   ]},
+  {id:"g4", title:"3.4 Pretérito perfecto compuesto",
+   quote:"Neta no le contesté porque, señora, <mark>he ido</mark> a mucha terapia.",
+   rule:"Presente de haber (he, has, ha, hemos, habéis, han) + participio (-ado/-ido). Acciones pasadas conectadas con el presente o dentro de un periodo no terminado. <b>Ошибка:</b> путать с indefinido, когда период времени ещё не закончился или результат важен именно сейчас.",
+   items:[
+     {stem:"Señora, yo (ir) ______ a mucha terapia.", answers:["he ido"]},
+     {stem:"En los últimos años, muchas mujeres (empezar) ______ a hablar más abiertamente de su cuerpo.", answers:["han empezado"]},
+     {stem:"¿(Tú/pensar) ______ alguna vez en cómo te educaron sobre tu cuerpo?", answers:["has pensado"]},
+     {stem:"Nosotras (aprender) ______ mucho escuchando este podcast.", answers:["hemos aprendido"]},
+     {stem:"La sociedad (poner) ______ demasiadas expectativas sobre el placer femenino.", answers:["ha puesto"]}
+   ]},
+  {id:"g5", title:"3.5 Imperativo negativo (tú) — presente de subjuntivo",
+   quote:"No <mark>vayas</mark> a caer en la gula, no vayas a caer en la lujuria, no vayas a caer.",
+   rule:"El imperativo negativo de tú se forma con el presente de subjuntivo: no + subjuntivo (no vayas, no tengas, no caigas). Se usa para prohibir o desaconsejar algo directamente. <b>Ошибка:</b> использовать обычный императив (ven, ten, cae) в отрицательной форме — в испанском отрицательный императив всегда требует subjuntivo.",
+   items:[
+     {stem:"No (caer, tú) ______ en la culpa por sentir placer.", answers:["caigas"]},
+     {stem:"No (tener, tú) ______ miedo de escuchar a tu cuerpo.", answers:["tengas"]},
+     {stem:"No (tener, tú) ______ vergüenza de tus deseos.", answers:["tengas"]},
+     {stem:"No te (comparar) ______ con lo que ves en redes sociales.", answers:["compares"]},
+     {stem:"No (dejar, tú) ______ que otros decidan quién eres.", answers:["dejes"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var stemHtml = it.stem;
+    var count = 0;
+    stemHtml = stemHtml.replace(/______/g, function(){
+      var inputHtml = '<input type="text" class="ans-input" data-idx="'+idx+'" data-sub="'+count+'" autocomplete="off">';
+      count++;
+      return inputHtml;
+    });
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+stemHtml+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var inputs = row.querySelectorAll(".ans-input");
+      var ok = true;
+      inputs.forEach(function(inp, subIdx){
+        var expected = it.answers[subIdx] !== undefined ? it.answers[subIdx] : it.answers[0];
+        if(!anyMatch(inp.value, [expected])) ok = false;
+      });
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers.join(" / ")+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+/* ---------------- AUDICIÓN ---------------- */
+var audioList = document.getElementById("audioList");
+
+var playerWrap = document.createElement("div");
+playerWrap.className = "player-wrap";
+playerWrap.innerHTML =
+  '<iframe src="https://embed.podcasts.apple.com/ru/podcast/sex%C3%B3loga-responde-las-dudas-que-nunca-nos-atrev%C3%ADamos/id1416903369?i=1000787120055&theme=auto" ' +
+  'height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" frameborder="0" ' +
+  'sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" ' +
+  'allow="autoplay *; encrypted-media *; clipboard-write"></iframe>' +
+  '<p class="player-caption">Episodio real de Apple Podcasts (Se Regalan Dudas) — escucha el primer tercio del episodio, cuando Laura Salazar cuenta por qué estudió sexología y su proceso de autoaceptación, antes de responder.</p>';
+audioList.appendChild(playerWrap);
+
+var aud1 = {
+  id:"aud1", title:"Audición 1 · Escucha y responde",
+  items:[
+    {q:"¿Qué carrera estudió primero Laura Salazar?", opts:["Psicología","Medicina","Enfermería","Derecho"], answer:1},
+    {q:"¿Cuál era el \"sueño\" o la visión que tenía Laura antes de darse cuenta de que era lesbiana?", opts:["Ser una doctora famosa","Viajar por el mundo","Casarse, tener hijos y ejercer como médica","Dejar la medicina y dedicarse al arte"], answer:2},
+    {q:"¿Cómo describe Laura a la familia en la que creció?", opts:["Muy liberal","Muy católica y religiosa","Sin ninguna religión","Muy distante emocionalmente"], answer:1},
+    {q:"¿Qué sintió Laura cuando aceptó que era lesbiana y que ya \"estaba en pecado\"?", opts:["Más miedo que antes","Indiferencia","Alivio, porque ya no tenía que ir a misa","Enojo con su familia"], answer:2}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud1.title+'</span></div>';
+  var list = document.createElement("div");
+  aud1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="aud1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="aud1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud1.items.length+"</b>";
+    blockScores["aud1"] = {correct:correct, total:aud1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud1"] = {correct:0, total:aud1.items.length};
+  audioList.appendChild(wrap);
+})();
+
+var aud2 = {
+  id:"aud2", title:"Audición 2 · Dictado — completa el consejo de Laura",
+  bank:"compañero · siempre · sabio · enemigo · nunca",
+  items:[
+    {stem:"Tu cuerpo es tu ______ de vida para siempre.", answers:["compañero"]},
+    {stem:"Tu cuerpo es tu compañero de vida para ______.", answers:["siempre"]},
+    {stem:"Y aparte tu cuerpo es ______.", answers:["sabio"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud2.title+'</span></div>'+
+    '<p class="hint" style="margin-top:0;">Es parte del consejo final que Laura da sobre la relación con el propio cuerpo.</p>';
+  var bankDiv = document.createElement("div");
+  bankDiv.className = "wordbank";
+  bankDiv.innerHTML = "<b>Banco de palabras:</b> "+aud2.bank;
+  wrap.appendChild(bankDiv);
+  var list = document.createElement("div");
+  aud2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud2.items.length+"</b>";
+    blockScores["aud2"] = {correct:correct, total:aud2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud2"] = {correct:0, total:aud2.items.length};
+  audioList.appendChild(wrap);
+})();
+
+/* ---------------- TEST ---------------- */
+var testList = document.getElementById("testList");
+
+/* Bloque 1: comprensión (radio) */
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"¿Por qué decidió Laura Salazar estudiar sexología?", opts:["Porque siempre quiso ser sexóloga desde niña","Porque al darse cuenta de que era lesbiana, sintió mucha culpa y vergüenza y buscó entender ese proceso","Porque su familia se lo pidió","Porque quería dejar la medicina para siempre"], answer:1},
+    {q:"Según Laura, ¿qué es la \"imitación forzada\"?", opts:["Un tipo de terapia","Cuando los niños solo imitan a los animales","Cuando los adultos no solo muestran cómo comportarse, sino que además ordenan cómo debe ser el niño","Una técnica de meditación"], answer:2},
+    {q:"Según el episodio, ¿qué relación hay entre el \"estado de alerta\" y el placer?", opts:["Ninguna relación","El estado de alerta ayuda a sentir más placer","Es muy difícil sentir placer plenamente cuando la mente está en alerta, porque el placer necesita relajación","El estado de alerta solo afecta el sueño"], answer:2},
+    {q:"¿Qué comparación hace Laura entre la pornografía y los filtros de redes sociales?", opts:["No tienen ninguna relación","Ambos muestran una versión editada o poco realista que se presenta como si fuera la realidad","Los filtros son peores que la pornografía","La pornografía es más educativa que las redes sociales"], answer:1},
+    {q:"Según Laura, ¿qué porcentaje de mujeres necesita estimulación del clítoris para llegar al orgasmo?", opts:["El 20%","El 50%","El 80%","El 100%"], answer:2},
+    {q:"¿Qué le pasó a Laura después de aceptar que era lesbiana y que \"ya estaba en pecado\"?", opts:["Empezó a ir a misa todos los días","Sintió alivio porque ya no tenía que ir a misa","Dejó la medicina","Se mudó de ciudad"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 2: huecos */
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"placer · eras · clóset · auténtico · corporal · quitando · reprimir · vergüenza",
+  items:[
+    {stem:"Nadie nos enseñó a nombrar el ______.", answers:["placer"]},
+    {stem:"El problema de reprimir tanto es que llega el momento en el que se te olvida cómo ______.", answers:["eras"]},
+    {stem:"Cuando salí del ______, mi familia me rechazó.", answers:["clóset"]},
+    {stem:"El cuerpo ya sabe ser cuerpo y ya sabe ser ______.", answers:["auténtico"]},
+    {stem:"Hay que regresarle esa herramienta que tenemos ______ para poder expresarnos.", answers:["corporal"]},
+    {stem:"Todas esas ideas que nos metieron de niñas nos las fueron ______.", answers:["quitando"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3a: relacionar (select) */
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su significado",
+  words:["reprimir","encajar","desconectarse (de algo)","el mandato","resignificar"],
+  defs:["dar un nuevo sentido o significado a algo","contener o no expresar un deseo o emoción","perder la conexión con algo, por ejemplo con el propio cuerpo","una orden o norma social que se espera que cumplas","adaptarse a un grupo, cumplir con lo que se espera para pertenecer"],
+  answers:["b","e","c","d","a"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Significado</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3b: orden (select) */
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena la historia de Laura, según se cuenta en el episodio",
+  events:[
+    {text:"Laura tenía toda su vida planeada: quería casarse, tener hijos y ejercer como médica.", answer:1},
+    {text:"En el último año de la carrera de medicina, se dio cuenta de que le gustaban las mujeres.", answer:2},
+    {text:"Sintió mucho rechazo hacia sí misma, y su familia también la rechazó al salir del clóset.", answer:3},
+    {text:"Empezó terapia y, poco después, decidió estudiar sexología para entender su proceso.", answer:4},
+    {text:"Estudiar sexología le ayudó a aceptarse y a compartir lo que había aprendido con otras personas.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 4: transformación (respuesta modelo, no autocorregible) */
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Cambia de presente a pretérito imperfecto: «No tengo referencias de mujeres lesbianas, no conozco ese mundo.»", model:"No tenía referencias de mujeres lesbianas, no conocía ese mundo."},
+    {stem:"Convierte a estilo indirecto: Laura dijo: «Intenté acabar con mi vida y eso me llevó a terapia.»", model:"Laura dijo que había intentado acabar con su vida y que eso la había llevado a terapia."},
+    {stem:"Transforma en imperativo negativo (tú): «Tienes miedo de escuchar a tu cuerpo.»", model:"No tengas miedo de escuchar a tu cuerpo."},
+    {stem:"Cambia a pretérito perfecto compuesto: «Fui a mucha terapia este año.»", model:"He ido a mucha terapia este año."},
+    {stem:"Reescribe usando «estar + gerundio» (presente continuo): «Ella aprende a escuchar su cuerpo poco a poco.»", model:"Ella está aprendiendo a escuchar su cuerpo poco a poco."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 5: léxico (radio) */
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «reprimir(se)»:", opts:["expresar","contener, controlar","celebrar","ignorar"], answer:1},
+    {q:"Antónimo de «encajar (en un grupo)»:", opts:["pertenecer","integrarse","excluirse","adaptarse"], answer:2},
+    {q:"Encuentra la palabra intrusa (todas menos una son emociones asociadas a la represión en el episodio):", opts:["vergüenza","culpa","alegría","asco"], answer:2},
+    {q:"¿Qué palabra completa la colocación «salir del ______»?", opts:["clóset","cuarto","trabajo","país"], answer:0},
+    {q:"Sinónimo de «el mandato» (social):", opts:["la norma o exigencia impuesta","el regalo","la pregunta","el error"], answer:0}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
