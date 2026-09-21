@@ -1,0 +1,1006 @@
+<!doctype html>
+<title>El Tabú del Dinero</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+/* ---- vocab cards ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+/* ---- discussion ---- */
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+.player-wrap{margin-bottom:16px;}
+.player-frame{position:relative; width:100%; max-width:640px; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:var(--surface-2);}
+.player-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+.player-caption{font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> El Tabú del Dinero · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1 · Español rioplatense (Uruguay)</p>
+  <h1>El tabú del dinero</h1>
+  <p class="subtitle">Vocabulario, debate, gramática (¡con voseo!), audición y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> vídeo de YouTube «Maneja tu dinero sin miedo» (serie <i>Nos Pasan Cosas</i>, canal Tu Terapia), con el educador financiero uruguayo conocido como Finanzas Gastón (transcripción proporcionada por la estudiante)</p>
+  <div class="summary">
+    <b>De qué trata:</b> el invitado explica por qué el dinero es hoy un tema tan tabú como el sexo, la diferencia entre libertad financiera, tranquilidad financiera y estabilidad económica, por qué registrar los gastos es el primer paso para ordenar las finanzas, cómo definir objetivos financieros, cómo reconocer estafas y esquemas piramidales, y por qué compararnos con los demás (la "inflación del estilo de vida") nos puede meter en problemas. <i>Nota: la entrevista usa voseo rioplatense (vos tenés, vos podés) en vez de tú — el bloque de gramática trabaja justo esta diferencia.</i>
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="audicion">
+  <div class="section-head"><span class="section-num">04</span><h2>Audición</h2></div>
+  <p class="hint">Mira el vídeo real (los primeros minutos, donde se explican los tres conceptos: libertad, tranquilidad y estabilidad financiera) antes de responder.</p>
+  <div id="audioList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">05</span><h2>Test — El tabú del dinero</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "eltabudeldinero_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- VOCABULARIO ---------------- */
+var vocab = [
+  {term:"la plata", pos:"sustantivo, f. (coloquial, Río de la Plata)",
+   quote:"El banco usa esta <mark>plata</mark> para prestarla, para invertirla, para muchas cosas, a nosotros no nos llega nada de esa rentabilidad.",
+   trans:"деньги (разговорное слово в Аргентине, Уругвае)",
+   mean:"Обычное разговорное слово для «el dinero» в странах региона Рио-де-ла-Плата (Аргентина, Уругвай). В нейтральном/письменном испанском лучше использовать «el dinero».",
+   ex:"No tengo plata para salir este fin de semana. — У меня нет денег, чтобы пойти куда-то в эти выходные."},
+  {term:"fingir demencia", pos:"locución verbal (idiomática)",
+   quote:"Porque venís <mark>fingiendo demencia</mark> también en cómo estás gastando tu plata.",
+   trans:"«притворяться дурачком», сознательно не замечать проблему",
+   mean:"Буквально «притворяться слабоумным» — идиома о том, чтобы сознательно избегать неприятной правды, делать вид, что не знаешь о проблеме.",
+   ex:"Sabe que tiene que hablar con su jefe, pero prefiere fingir demencia y no hacer nada. — Он знает, что должен поговорить с начальником, но предпочитает делать вид, что ничего не происходит."},
+  {term:"el colchón (de ahorro)", pos:"sustantivo, m. (metáfora)",
+   quote:"Yo creo que tener ese <mark>colchoncito de ahorro</mark> nos genera bastante tranquilidad financiera.",
+   trans:"финансовая «подушка безопасности» (сбережения)",
+   mean:"Буквально «матрас» — метафора для суммы отложенных денег, которая защищает от непредвиденных ситуаций. Часто в уменьшительной форме «colchoncito» — с оттенком теплоты/заботы.",
+   ex:"Antes de invertir en algo arriesgado, hay que tener un colchón de ahorro para emergencias. — Прежде чем вкладывать деньги во что-то рискованное, нужно иметь финансовую подушку на случай непредвиденных ситуаций."},
+  {term:"estar endeudado/a", pos:"construcción verbal (estar + participio)",
+   quote:"Y no sabe que Carlitos, capaz <mark>estaba endeudado</mark> mal, pero como no se sabe...",
+   trans:"быть в долгах, быть закредитованным",
+   mean:"Описывает состояние человека, у которого есть непогашенные долги (кредиты, задолженности по картам и т.д.). От глагола «endeudarse» — влезать в долги.",
+   ex:"Después de comprar el auto a crédito, quedó muy endeudado. — Купив машину в кредит, он оказался сильно закредитован."},
+  {term:"la inflación del estilo de vida", pos:"expresión (término financiero)",
+   quote:"Hay un concepto que está muy bueno que se llama la <mark>inflación del estilo de vida</mark>.",
+   trans:"«инфляция образа жизни» — рост расходов вслед за ростом доходов",
+   mean:"Финансовый термин: тенденция тратить всё больше по мере роста дохода, не увеличивая при этом сбережения — из-за чего финансовое положение фактически не улучшается.",
+   ex:"Con cada aumento de sueldo, la inflación del estilo de vida hacía que nunca lograra ahorrar más. — С каждым повышением зарплаты рост расходов не давал ему откладывать больше."},
+  {term:"el costo de oportunidad", pos:"sustantivo, m. (término financiero)",
+   quote:"El segundo punto por el que perdemos dinero es por el concepto de <mark>costo de oportunidad</mark>, que es básicamente lo que no ganaste por no haberlo invertido.",
+   trans:"упущенная выгода, альтернативные издержки",
+   mean:"То, что ты не заработал, выбрав один вариант вместо другого — например, деньги, которые могли бы «работать», если бы их инвестировали, а не просто хранили.",
+   ex:"Dejar la plata sin invertir tiene un costo de oportunidad alto a largo plazo. — Держать деньги без инвестирования в долгосрочной перспективе означает высокую упущенную выгоду."},
+  {term:"desconfiar (de algo/alguien)", pos:"verbo intransitivo",
+   quote:"Cuando te prometen que al mes siguiente te van a dar una rentabilidad altísima... ahí sí. 100%. <mark>Desconfiamos</mark>.",
+   trans:"не доверять, относиться с подозрением",
+   mean:"Противоположность «confiar». Используется, когда что-то кажется подозрительным или слишком хорошим, чтобы быть правдой.",
+   ex:"Hay que desconfiar de las inversiones que prometen ganancias garantizadas. — Стоит с подозрением относиться к инвестициям, обещающим гарантированную прибыль."},
+  {term:"las creencias limitantes", pos:"expresión (sustantivo + adjetivo)",
+   quote:"Todas esas creencias que tenemos en la cabeza... son justamente <mark>creencias limitantes</mark> o cosas que tenemos en la cabeza que no son reales.",
+   trans:"ограничивающие убеждения",
+   mean:"Термин из психологии/коучинга: убеждения (часто неверные), которые мешают человеку действовать — например, «я плохо разбираюсь в цифрах».",
+   ex:"\"No sirvo para las matemáticas\" es una creencia limitante muy común. — «Я не способен к математике» — очень распространённое ограничивающее убеждение."},
+  {term:"embargar (a alguien)", pos:"verbo transitivo",
+   quote:"O le <mark>embargan</mark> no sé qué o una operación.",
+   trans:"накладывать арест на имущество, конфисковывать за долги",
+   mean:"Юридический термин: когда государство или кредитор законно забирает имущество или деньги должника в счёт погашения долга.",
+   ex:"Si no pagas tus deudas, te pueden embargar la cuenta bancaria. — Если не платить долги, могут наложить арест на банковский счёт."},
+  {term:"la jubilación", pos:"sustantivo, f.",
+   quote:"El tema de la <mark>jubilación</mark>, que es otro objetivo de muy largo plazo, pero podemos tener varios al mismo tiempo.",
+   trans:"выход на пенсию, пенсия",
+   mean:"Момент прекращения трудовой деятельности по возрасту, а также сама пенсионная выплата. Глагол — «jubilarse» (выходить на пенсию).",
+   ex:"Mucha gente no ahorra pensando en la jubilación porque parece algo muy lejano. — Многие не откладывают деньги на пенсию, потому что это кажется чем-то очень далёким."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+/* ---------------- DEBATE ---------------- */
+var debate = [
+  {q:"¿Sueles registrar tus gastos, o prefieres \"fingir demencia\" con tus finanzas, como dice el invitado? ¿Por qué?", hint:"Útil: «Suelo registrar mis gastos cuando...», «Prefiero no mirar porque...»"},
+  {q:"¿Alguna vez sentiste que tenías que gastar en algo solo para \"no ser menos\" que un amigo o un familiar? Cuéntanos qué pasó.", hint:"Útil: «Una vez me compré... porque...», «Sentí presión de...»"},
+  {q:"En tu país, ¿es normal hablar abiertamente de dinero (sueldos, deudas, ahorros) entre amigos, o sigue siendo un tema tabú como en Uruguay? Compáralo con lo que cuenta el invitado.", hint:"Útil: «En mi país...», «A diferencia de..., aquí...»"},
+  {q:"El invitado dice que no es obligatorio comprar una casa cuanto antes, siempre que tengas un \"plan B\". ¿Estás de acuerdo? ¿Por qué?", hint:"Útil: «Estoy de acuerdo/en desacuerdo porque...», «Por un lado..., por otro lado...»"},
+  {q:"Si un amigo tuyo te contara que alguien le está prometiendo un 15% de rentabilidad mensual en una inversión, ¿qué le dirías, usando lo que aprendiste en este episodio?", hint:"Útil: «Le diría que desconfíe de...», «Lo primero que le preguntaría sería...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+/* ---------------- GRAMÁTICA ---------------- */
+var gram = [
+  {id:"g1", title:"3.1 Presente de indicativo con voseo (vos en vez de tú)",
+   quote:"Si <mark>estás</mark> viviendo en el día a día y con lo que <mark>ganás</mark>, te lo <mark>gastás</mark> todo a fin de mes.",
+   rule:"En el voseo rioplatense (Argentina, Uruguay), el presente de vos se acentúa en la última sílaba y no tiene diptongo: tú tienes → vos tenés; tú puedes → vos podés; tú eres → vos sos; tú quieres → vos querés. <b>Ошибка:</b> смешивать формы tú и vos в одном тексте — в Уругвае/Аргентине используется только voseo, а не tú.",
+   items:[
+     {stem:"tú gastas → vos ______", answers:["gastás"]},
+     {stem:"tú puedes → vos ______", answers:["podés"]},
+     {stem:"tú tienes → vos ______", answers:["tenés"]},
+     {stem:"tú eres → vos ______", answers:["sos"]},
+     {stem:"tú quieres → vos ______", answers:["querés"]}
+   ]},
+  {id:"g2", title:"3.2 Futuro perifrástico (ir a + infinitivo)",
+   quote:"De acá a 15 a 20 años <mark>te van a dar</mark> este 8% anual.",
+   rule:"Ir (conjugado) + a + infinitivo. Se usa mucho en el español hablado para hablar de planes y predicciones futuras, más que el futuro simple. <b>Ошибка:</b> забывать предлог «a» между глаголом ir и инфинитивом.",
+   items:[
+     {stem:"Esta inversión no te (hacer) ______ rico de la noche a la mañana.", answers:["va a hacer"]},
+     {stem:"Si seguís ahorrando así, (tú/lograr) ______ tu objetivo en un año.", answers:["vas a lograr"]},
+     {stem:"De acá a 20 años, esta inversión te (dar) ______ un buen capital.", answers:["va a dar"]},
+     {stem:"Si no registrás tus gastos, no (saber, tú) ______ en qué se te va la plata.", answers:["vas a saber"]},
+     {stem:"Ellos (perder) ______ todo si es una pirámide financiera.", answers:["van a perder"]}
+   ]},
+  {id:"g3", title:"3.3 Presente de subjuntivo tras «cuando» (acción futura)",
+   quote:"Todos sabemos que vamos a ganar menos <mark>cuando nos jubilemos</mark>.",
+   rule:"Cuando + presente de subjuntivo se usa para hablar de una acción futura o todavía no realizada. Si la acción ya es habitual o pasada, se usa el indicativo. <b>Ошибка:</b> использовать indicativo («cuando nos jubilamos») там, где речь о будущем, ещё не наступившем событии.",
+   items:[
+     {stem:"Vamos a ganar menos cuando nos (jubilar) ______.", answers:["jubilemos"]},
+     {stem:"Vas a estar más tranquilo cuando (tener, tú) ______ un colchón de ahorro.", answers:["tengas"]},
+     {stem:"Cuando (llegar, tú) ______ a fin de mes con plata de sobra, vas a poder invertir.", answers:["llegues"]},
+     {stem:"Va a ser más fácil cuando (entender, nosotros) ______ los conceptos básicos.", answers:["entendamos"]},
+     {stem:"Cuando (empezar, ellos) ______ a registrar sus gastos, van a ver patrones que no conocían.", answers:["empiecen"]}
+   ]},
+  {id:"g4", title:"3.4 Pretérito imperfecto (descripción de un estado o hábito pasado)",
+   quote:"Mis padres a mi edad ya <mark>tenían</mark> cuatro pibes, dos casas, dos autos y laburantes.",
+   rule:"Raíz + -aba/-ía... Describe estados, hábitos y circunstancias pasadas, sin foco en cuándo terminaron. <b>Ошибка:</b> использовать indefinido для описания фонового состояния или повторяющегося действия в прошлом — здесь нужен именно imperfecto.",
+   items:[
+     {stem:"Mis padres a mi edad ya (tener) ______ cuatro hijos y dos casas.", answers:["tenían"]},
+     {stem:"Antes yo no (saber) ______ nada de inversiones.", answers:["sabía"]},
+     {stem:"De joven, ella (gastar) ______ todo lo que ganaba sin pensarlo.", answers:["gastaba"]},
+     {stem:"Nosotros (creer) ______ que invertir era solo para gente rica.", answers:["creíamos"]},
+     {stem:"Vos antes no (registrar) ______ tus gastos, ¿no?", answers:["registrabas"]}
+   ]},
+  {id:"g5", title:"3.5 Condicional simple",
+   quote:"Yo <mark>podría</mark> intentar meterme ese chip en la cabeza de que hoy vivo bien.",
+   rule:"Infinitivo completo + -ía, -ías, -ía, -íamos, -íais, -ían (mismas raíces irregulares que el futuro: podría, sería, haría...). Se usa para hipótesis, consejos suaves y cortesía. <b>Ошибка:</b> путать с imperfecto по звучанию — condicional всегда образуется от полного инфинитива + окончание -ía.",
+   items:[
+     {stem:"Yo (poder) ______ intentar meterme ese chip en la cabeza de que hoy vivo bien.", answers:["podría"]},
+     {stem:"La idea (ser) ______ no tener que trabajar más y vivir de tus inversiones.", answers:["sería"]},
+     {stem:"¿Qué (hacer, tú) ______ si un amigo te ofreciera invertir en una pirámide financiera?", answers:["harías"]},
+     {stem:"Nosotros (deber) ______ informarnos antes de invertir en cualquier cosa.", answers:["deberíamos"]},
+     {stem:"Ellos (ganar) ______ más si invirtieran a largo plazo.", answers:["ganarían"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var stemHtml = it.stem;
+    var count = 0;
+    stemHtml = stemHtml.replace(/______/g, function(){
+      var inputHtml = '<input type="text" class="ans-input" data-idx="'+idx+'" data-sub="'+count+'" autocomplete="off">';
+      count++;
+      return inputHtml;
+    });
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+stemHtml+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var inputs = row.querySelectorAll(".ans-input");
+      var ok = true;
+      inputs.forEach(function(inp, subIdx){
+        var expected = it.answers[subIdx] !== undefined ? it.answers[subIdx] : it.answers[0];
+        if(!anyMatch(inp.value, [expected])) ok = false;
+      });
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers.join(" / ")+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+/* ---------------- AUDICIÓN ---------------- */
+var audioList = document.getElementById("audioList");
+
+var playerWrap = document.createElement("div");
+playerWrap.className = "player-wrap";
+playerWrap.innerHTML =
+  '<div class="player-frame"><iframe src="https://www.youtube.com/embed/6nQP_ePgB38" ' +
+  'title="Maneja tu dinero sin miedo | Nos Pasan Cosas - Finanzas Gastón" ' +
+  'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+  'allowfullscreen></iframe></div>' +
+  '<p class="player-caption">Vídeo real de YouTube — mira los primeros minutos, donde se explican libertad financiera, tranquilidad financiera y estabilidad económica, antes de responder.</p>';
+audioList.appendChild(playerWrap);
+
+var aud1 = {
+  id:"aud1", title:"Audición 1 · Mira y responde",
+  items:[
+    {q:"Según el invitado, ¿qué es la \"libertad financiera\"?", opts:["Tener un trabajo que te gusta","Tener un número grande en inversiones que te permite vivir sin trabajar más","No tener ninguna deuda","Ganar más de lo que gastas"], answer:1},
+    {q:"¿Qué es la \"tranquilidad financiera\" o \"paz financiera\"?", opts:["Lo mismo que la libertad financiera","No depender 100% de las inversiones, pero tenerlas como un buen complemento","No tener nunca que trabajar","Ganar la lotería"], answer:1},
+    {q:"Según su definición, ¿cuándo tenés \"estabilidad económica\"?", opts:["Cuando ganás mucho dinero","Cuando podés cubrir tus gastos sin necesitar préstamos ni tarjeta de crédito por necesidad","Cuando tenés una casa propia","Cuando no gastás nada"], answer:1},
+    {q:"¿Cuál es el primer paso que recomienda para alguien que recién empieza a organizar sus finanzas?", opts:["Empezar a invertir de inmediato","Pedir un préstamo","Registrar sus gastos, sin cambiar nada todavía","Dejar de usar la tarjeta de crédito"], answer:2}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud1.title+'</span></div>';
+  var list = document.createElement("div");
+  aud1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="aud1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="aud1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud1.items.length+"</b>";
+    blockScores["aud1"] = {correct:correct, total:aud1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud1"] = {correct:0, total:aud1.items.length};
+  audioList.appendChild(wrap);
+})();
+
+var aud2 = {
+  id:"aud2", title:"Audición 2 · Dictado — completa la frase",
+  bank:"colchoncito · ahorro · tranquilidad · deuda · préstamo",
+  items:[
+    {stem:"Yo creo que tener ese ______ de ahorro nos genera bastante tranquilidad financiera.", answers:["colchoncito"]},
+    {stem:"Yo creo que tener ese colchoncito de ______ nos genera bastante tranquilidad financiera.", answers:["ahorro"]},
+    {stem:"Yo creo que tener ese colchoncito de ahorro nos genera bastante ______ financiera.", answers:["tranquilidad"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud2.title+'</span></div>'+
+    '<p class="hint" style="margin-top:0;">Es una de las primeras recomendaciones que da el invitado.</p>';
+  var bankDiv = document.createElement("div");
+  bankDiv.className = "wordbank";
+  bankDiv.innerHTML = "<b>Banco de palabras:</b> "+aud2.bank;
+  wrap.appendChild(bankDiv);
+  var list = document.createElement("div");
+  aud2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud2.items.length+"</b>";
+    blockScores["aud2"] = {correct:correct, total:aud2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud2"] = {correct:0, total:aud2.items.length};
+  audioList.appendChild(wrap);
+})();
+
+/* ---------------- TEST ---------------- */
+var testList = document.getElementById("testList");
+
+/* Bloque 1: comprensión (radio) */
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"Según el invitado, ¿qué tema es hoy más tabú que el sexo?", opts:["El dinero","La política","La religión","La salud"], answer:0},
+    {q:"¿Qué es la \"inflación del estilo de vida\"?", opts:["Cuando los precios suben cada año","Gastar cada vez más a medida que ganamos más, sin aumentar el ahorro","Cuando el gobierno sube los impuestos","Comprar solo cosas caras"], answer:1},
+    {q:"Según el invitado, ¿por qué perdemos dinero si lo dejamos solo \"parado\" en la cuenta del banco?", opts:["Por la inflación y el costo de oportunidad","Porque el banco cobra comisiones altas","Porque el dinero se puede perder físicamente","No perdemos dinero, es mejor dejarlo ahí"], answer:0},
+    {q:"¿Qué recomienda el invitado como primer paso para organizar las finanzas personales?", opts:["Comprar acciones de inmediato","Pedir un préstamo","Registrar los gastos, sin cambiar nada todavía","Dejar de usar la tarjeta de crédito"], answer:2},
+    {q:"Según el episodio, ¿qué caracteriza a los esquemas piramidales o \"ponzi\"?", opts:["Pagan la rentabilidad con el dinero de las nuevas personas que van entrando al sistema","Son inversiones garantizadas por el gobierno","Siempre son fáciles de reconocer a simple vista","Solo afectan a gente sin estudios"], answer:0},
+    {q:"¿Cuál es la opinión del invitado sobre comprar una casa?", opts:["Es obligatorio para tener estabilidad financiera","No es obligatorio comprarla cuanto antes; hay otros planes de vida válidos, pero hay que tener un plan","Nunca es una buena inversión","Solo se debe comprar con dinero en efectivo"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 2: huecos */
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"tabú · ahorro · registro · desinformación · limitantes · oportunidad · jubilación · plata",
+  items:[
+    {stem:"Para mí ahora es más ______ el dinero que el sexo.", answers:["tabú"]},
+    {stem:"Yo creo que tener ese colchoncito de ______ nos genera bastante tranquilidad financiera.", answers:["ahorro"]},
+    {stem:"Antes de tocar nada, primero hay que hacer un ______ de gastos.", answers:["registro"]},
+    {stem:"Muchas veces la gente termina en una estafa por ______.", answers:["desinformación"]},
+    {stem:"Hay que sacar esas creencias ______ que tenemos en la cabeza.", answers:["limitantes"]},
+    {stem:"El segundo motivo por el que perdemos dinero es el costo de ______.", answers:["oportunidad"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3a: relacionar (select) */
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su significado",
+  words:["la plata","fingir demencia","el colchón (de ahorro)","estar endeudado/a","embargar"],
+  defs:["tener deudas que no podés pagar","hacer como que no sabés o no ves algo, para evitar enfrentarlo","quitarle legalmente a alguien sus bienes o dinero para cobrar una deuda","dinero (palabra coloquial rioplatense)","un ahorro guardado para tener seguridad económica"],
+  answers:["d","b","e","a","c"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Significado</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3b: orden (select) */
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena los temas según se van tratando en el episodio",
+  events:[
+    {text:"La diferencia entre libertad financiera, tranquilidad financiera y estabilidad económica.", answer:1},
+    {text:"La importancia de registrar los gastos antes de cambiar nada.", answer:2},
+    {text:"Cómo definir objetivos financieros con un monto y una fecha.", answer:3},
+    {text:"Cómo reconocer estafas y esquemas piramidales.", answer:4},
+    {text:"La inflación del estilo de vida y la comparación social.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 4: transformación (respuesta modelo, no autocorregible) */
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Cambia de tú a vos: «Tienes que registrar tus gastos si quieres organizar tus finanzas.»", model:"Tenés que registrar tus gastos si querés organizar tus finanzas."},
+    {stem:"Convierte a estilo indirecto: El invitado dijo: «La gente no sabe en qué gasta su dinero.»", model:"El invitado dijo que la gente no sabía en qué gastaba su dinero."},
+    {stem:"Une con «cuando» + subjuntivo: «Vamos a ganar menos. Nos vamos a jubilar.»", model:"Vamos a ganar menos cuando nos jubilemos."},
+    {stem:"Cambia a condicional simple: «¿Qué haces si un amigo te ofrece invertir en una pirámide financiera?»", model:"¿Qué harías si un amigo te ofreciera invertir en una pirámide financiera?"},
+    {stem:"Reescribe usando «ir a + infinitivo» (futuro perifrástico): «Esta inversión te da un buen capital en 20 años.»", model:"Esta inversión te va a dar un buen capital en 20 años."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 5: léxico (radio) */
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «la plata» (rioplatense):", opts:["el dinero","el trabajo","la deuda","el banco"], answer:0},
+    {q:"Antónimo de «ahorrar»:", opts:["invertir","gastar","ganar","registrar"], answer:1},
+    {q:"Encuentra la palabra intrusa:", opts:["estafa","pirámide financiera","inversión conservadora","esquema ponzi"], answer:2},
+    {q:"¿Qué palabra completa «fingir ______» (no querer ver la realidad de tus finanzas)?", opts:["demencia","alegría","trabajo","plata"], answer:0},
+    {q:"Sinónimo de «estar endeudado/a»:", opts:["estar ahorrado","tener deudas","estar jubilado","tener inversiones"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
