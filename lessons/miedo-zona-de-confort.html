@@ -1,0 +1,1006 @@
+<!doctype html>
+<title>Miedo tras Salir de la Zona de Confort</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+/* ---- vocab cards ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+/* ---- discussion ---- */
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+.player-wrap{margin-bottom:16px;}
+.player-frame{position:relative; width:100%; max-width:640px; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:var(--surface-2);}
+.player-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+.player-caption{font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Miedo tras Salir de la Zona de Confort · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Miedo tras salir de la zona de confort</h1>
+  <p class="subtitle">Vocabulario, debate, gramática, audición y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> vídeo de YouTube «Miedo tras salir de la zona de confort» (podcast <i>Entiende Tu Mente</i>, episodio 418), con Molo Cebrián, Luis Muiño y Esther Pérez (transcripción proporcionada por la estudiante)</p>
+  <div class="summary">
+    <b>De qué trata:</b> a partir de la pregunta de Ana, que dejó su empleo de muchos años y ahora vive una etapa de miedo e inseguridad, el psicólogo Luis Muiño cuestiona el "optimismo naif" de quienes animan a salir de la zona de confort sin mencionar que muchas veces tienen "paracaídas invisibles" (estabilidad económica, redes de apoyo). Explica por qué el miedo no significa que te hayas equivocado, cómo revisar tus decisiones desde la autocompasión y no desde el resultado, y propone una idea final: en vez de quedarte "en el aire", busca una "zona de reconfort" — un hábito o lugar al que volver mientras llega la nueva estabilidad.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="audicion">
+  <div class="section-head"><span class="section-num">04</span><h2>Audición</h2></div>
+  <p class="hint">Escucha el mensaje original de Ana al principio del episodio, antes de responder.</p>
+  <div id="audioList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">05</span><h2>Test — Miedo tras salir de la zona de confort</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "miedozonadeconfort_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- VOCABULARIO ---------------- */
+var vocab = [
+  {term:"salir de la zona de confort", pos:"locución verbal",
+   quote:"¿Cómo es afrontar la etapa de miedo, que es esa que se presenta después de que se <mark>sale de la zona de confort</mark>?",
+   trans:"выходить из зоны комфорта",
+   mean:"Dejar la situación segura y conocida (trabajo, relación, ciudad) para enfrentar algo nuevo e incierto. Expresión muy usada en psicología popular.",
+   ex:"Aceptar ese trabajo en otro país fue salir completamente de mi zona de confort. — Согласиться на ту работу в другой стране означало полностью выйти из зоны комфорта."},
+  {term:"el paracaídas invisible", pos:"expresión (metáfora)",
+   quote:"Los que no tenemos esos <mark>paracaídas invisibles</mark> que tienen ellos.",
+   trans:"«невидимый парашют» — скрытая подстраховка/привилегия",
+   mean:"Метафора Луиса Муиньо: скрытая финансовая или социальная поддержка (семья, сбережения, связи), которая делает риск гораздо менее опасным для одних людей, чем для других, даже если это не афишируется.",
+   ex:"Mucha gente que \"lo dejó todo para viajar\" tenía un paracaídas invisible: los ahorros de su familia. — У многих людей, которые «бросили всё, чтобы путешествовать», был невидимый парашют: семейные сбережения."},
+  {term:"el duelo", pos:"sustantivo, m.",
+   quote:"Ahorita estoy viviendo una especie de <mark>duelo</mark> que está llena de inseguridades.",
+   trans:"скорбь, переживание утраты",
+   mean:"Эмоциональный процесс переживания важной потери — не только смерти, но и потери работы, отношений или образа жизни, к которому привык человек.",
+   ex:"Dejar su ciudad natal le provocó un duelo que le costó meses superar. — Отъезд из родного города вызвал у неё переживание утраты, на преодоление которого ушли месяцы."},
+  {term:"el vacío", pos:"sustantivo, m.",
+   quote:"Siente un gran, gran <mark>vacío</mark>.",
+   trans:"пустота",
+   mean:"Ощущение отсутствия чего-то важного — смысла, цели, привычной структуры жизни. Часто используется в психологическом контексте.",
+   ex:"Después de jubilarse, sintió un vacío enorme sin saber cómo llenarlo. — Выйдя на пенсию, он почувствовал огромную пустоту, не зная, чем её заполнить."},
+  {term:"atemorizar", pos:"verbo transitivo",
+   quote:"Ese es el tipo de cosa que nos resulta difícil y que nos <mark>atemoriza</mark>.",
+   trans:"пугать, устрашать",
+   mean:"Causar miedo intenso a alguien. Более формальное слово, чем «asustar», часто используется в письменной речи или в психологии.",
+   ex:"La idea de hablar en público la atemorizaba desde niña. — Мысль о публичном выступлении пугала её с детства."},
+  {term:"retrotraerse (a algo)", pos:"verbo pronominal",
+   quote:"Trata de <mark>retrotraerte</mark> a ese yo de antes.",
+   trans:"мысленно возвращаться (к прошлому моменту/состоянию)",
+   mean:"Volver mentalmente a un momento, estado o punto de vista anterior — часто используется, чтобы понять решение, принятое в другой ситуации.",
+   ex:"Para entender esa decisión, tienes que retrotraerte al momento en que la tomaste. — Чтобы понять то решение, нужно мысленно вернуться к моменту, когда ты его принял."},
+  {term:"el arrepentimiento", pos:"sustantivo, m.",
+   quote:"Sí, sí llegó el <mark>arrepentimiento</mark>.",
+   trans:"сожаление, раскаяние",
+   mean:"Чувство сожаления о принятом решении или сделанном поступке. От глагола «arrepentirse» — сожалеть, раскаиваться.",
+   ex:"El arrepentimiento la visitaba cada vez que pensaba en su antiguo trabajo. — Чувство сожаления накатывало на неё каждый раз, когда она думала о прежней работе."},
+  {term:"baruntar", pos:"verbo transitivo (coloquial, poco común)",
+   quote:"O lo está pensando, lo está <mark>baruntando</mark>.",
+   trans:"предчувствовать, догадываться (о чём-то грядущем)",
+   mean:"Разговорный, не очень распространённый глагол — предчувствовать или подозревать, что что-то произойдёт, ещё до того, как это станет очевидным.",
+   ex:"Ya baruntaba que la reunión iba a traer malas noticias. — Он уже предчувствовал, что встреча принесёт плохие новости."},
+  {term:"el vértigo", pos:"sustantivo, m.",
+   quote:"El salto da un <mark>vértigo</mark> siempre tremendo.",
+   trans:"головокружение (в переносном смысле — паническое, дезориентирующее чувство)",
+   mean:"Буквально — головокружение от высоты, в переносном смысле — сильное, дезориентирующее чувство перед большим изменением в жизни.",
+   ex:"Solo de pensar en dejar mi trabajo estable, me entra vértigo. — Стоит мне только подумать об уходе со стабильной работы, у меня начинается головокружение."},
+  {term:"el impasse", pos:"sustantivo, m. (galicismo)",
+   quote:"Que a lo mejor esté justo en ese <mark>impasse</mark>.",
+   trans:"тупик, пауза, состояние неопределённости",
+   mean:"Заимствование из французского — момент застоя или паузы, когда ситуация временно не движется вперёд, часто перед важным решением.",
+   ex:"Está en un impasse: ya decidió irse, pero todavía no sabe cuándo. — Он находится в состоянии неопределённости: уже решил уйти, но ещё не знает когда."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+/* ---------------- DEBATE ---------------- */
+var debate = [
+  {q:"¿Alguna vez saliste de tu \"zona de confort\" (cambiaste de trabajo, de ciudad, de relación)? Cuéntanos qué pasó.", hint:"Útil: «Salí de mi zona de confort cuando...», «Lo más difícil fue...»"},
+  {q:"Según Luis, la gente que anima a \"salir de la zona de confort\" a veces tiene \"paracaídas invisibles\" que otros no tienen. ¿Qué crees que quiere decir con esto?", hint:"Útil: «Creo que se refiere a...», «Por ejemplo...»"},
+  {q:"Luis dice que \"el miedo no significa que te hayas equivocado\". ¿Alguna vez confundiste el miedo con la certeza de haberte equivocado? Cuéntanos.", hint:"Útil: «Una vez pensé que me había equivocado, pero...», «Ahora entiendo que...»"},
+  {q:"¿Qué opinas de la idea de \"buscar una zona de reconfort\" en vez de simplemente \"saltar al vacío\"? ¿Tienes tú alguna zona de reconfort personal (una rutina, un hábito, un lugar)?", hint:"Útil: «Mi zona de reconfort es...», «Me parece una buena idea porque...»"},
+  {q:"Si un amigo tuyo estuviera pasando por el \"duelo\" de haber dejado un trabajo o una relación segura, ¿qué le dirías después de escuchar este episodio?", hint:"Útil: «Le diría que...», «Le recordaría que...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+/* ---------------- GRAMÁTICA ---------------- */
+var gram = [
+  {id:"g1", title:"3.1 Pretérito indefinido + imperfecto (anécdota personal, contraste)",
+   quote:"Me <mark>tuve que</mark> ir a casa de mis padres a vivir, porque mi casa ya no la <mark>podía</mark> pagar.",
+   rule:"El indefinido marca el hecho puntual que cambió la situación (tuve que irme); el imperfecto describe la circunstancia de fondo que lo explica (ya no podía pagarla). <b>Ошибка:</b> использовать одно и то же время для обеих частей — тогда теряется различие между конкретным событием и объясняющим его фоновым состоянием.",
+   items:[
+     {stem:"Molo (tener que) ______ irse a casa de sus padres porque su casa ya no la (poder) ______ pagar.", answers:["tuvo que", "podía"]},
+     {stem:"Cuando Ana (dejar) ______ su trabajo, no (saber) ______ qué iba a pasar después.", answers:["dejó", "sabía"]},
+     {stem:"Ese día, Luis (recordar) ______ que antes (trabajar) ______ en la radio.", answers:["recordó", "trabajaba"]},
+     {stem:"Ana (empezar) ______ a sentir miedo porque antes (tener) ______ mucha seguridad.", answers:["empezó", "tenía"]},
+     {stem:"Nosotros (decidir) ______ el cambio porque ya no (aguantar) ______ la situación.", answers:["decidimos", "aguantábamos"]}
+   ]},
+  {id:"g2", title:"3.2 «Aunque» + presente de subjuntivo (concesión)",
+   quote:"En ese no hay problema, porque ya están realmente en la zona de confort, <mark>aunque dejen</mark> su trabajo de toda la vida.",
+   rule:"«Aunque» va seguido de subjuntivo cuando el hecho es hipotético, generalizable o no se presenta como un dato confirmado. Con indicativo, en cambio, se afirma el hecho como cierto. <b>Ошибка:</b> всегда использовать indicativo после aunque — если речь о предположении или обобщении, нужен subjuntivo.",
+   items:[
+     {stem:"Aunque (dejar, ellos) ______ su trabajo de toda la vida, siguen teniendo otras redes de apoyo.", answers:["dejen"]},
+     {stem:"Aunque (tener, tú) ______ miedo, eso no significa que te hayas equivocado.", answers:["tengas"]},
+     {stem:"Aunque no (saber, nosotros) ______ cómo va a salir, es normal sentir incertidumbre.", answers:["sepamos"]},
+     {stem:"Aunque ella (sentir) ______ un gran vacío, con el tiempo eso puede cambiar.", answers:["sienta"]},
+     {stem:"Aunque (parecer) ______ fácil salir de la zona de confort, casi nunca lo es.", answers:["parezca"]}
+   ]},
+  {id:"g3", title:"3.3 Imperativo negativo (tú)",
+   quote:"Hazte amigo de ese miedo. <mark>No luches</mark> contra él.",
+   rule:"El imperativo negativo de tú se forma con no + presente de subjuntivo. <b>Ошибка:</b> использовать форму обычного (утвердительного) императива в отрицании — в испанском отрицательный императив всегда строится через subjuntivo, а не как *no lucha*.",
+   items:[
+     {stem:"Hazte amigo de ese miedo. No (luchar) ______ contra él.", answers:["luches"]},
+     {stem:"No (creer) ______ que el miedo significa que te has equivocado.", answers:["creas"]},
+     {stem:"No (compararte) ______ con la gente que tiene paracaídas invisibles.", answers:["te compares"]},
+     {stem:"No (olvidarse) ______ de que salir de la zona de confort también es perder cosas.", answers:["te olvides"]},
+     {stem:"No (juzgarse) ______ por sentir miedo o incertidumbre.", answers:["te juzgues"]}
+   ]},
+  {id:"g4", title:"3.4 Negación de causa: no + ser + porque + subjuntivo",
+   quote:"Si hoy tienes miedo, no es porque te <mark>hayas equivocado</mark>.",
+   rule:"Cuando se niega la causa de algo con «no es porque», la cláusula que sigue va en subjuntivo, porque se está rechazando esa causa como real. <b>Ошибка:</b> использовать indicativo после «no es porque» — при отрицании причины в испанском требуется subjuntivo.",
+   items:[
+     {stem:"Si hoy tienes miedo, no es porque (tú/equivocarte) ______.", answers:["te hayas equivocado"]},
+     {stem:"Si Ana siente ese vacío, no es porque (ella/fallar) ______.", answers:["haya fallado"]},
+     {stem:"Si estás triste, no es porque (tú/hacer) ______ algo mal.", answers:["hayas hecho"]},
+     {stem:"Si tenemos incertidumbre, no es porque el cambio (ser) ______ un error.", answers:["sea"]},
+     {stem:"Si sientes nostalgia, no es porque (tú/tomar) ______ la decisión equivocada.", answers:["hayas tomado"]}
+   ]},
+  {id:"g5", title:"3.5 Perífrasis: acabar por + infinitivo",
+   quote:"Acaba por convertirse en certeza de me he equivocado.",
+   rule:"Acabar por + infinitivo expresa el resultado final de un proceso, algo a lo que se llega tras un tiempo o una serie de pasos. <b>Ошибка:</b> путать с «acabar de + infinitivo» (означает «только что сделать что-то») — это разные, не связанные конструкции.",
+   items:[
+     {stem:"La incertidumbre (acabar / convertirse) ______ en la certeza de que te has equivocado.", answers:["acaba por convertirse"]},
+     {stem:"Si no cuidas ese miedo, (acabar / paralizarte) ______.", answers:["acaba por paralizarte"]},
+     {stem:"Ana (acabar / sentir) ______ que había perdido demasiado.", answers:["acabó por sentir"]},
+     {stem:"Nosotros (acabar / entender) ______ que el miedo es normal.", answers:["acabamos por entender"]},
+     {stem:"Tú (acabar / encontrar) ______ tu nueva zona de reconfort.", answers:["acabaste por encontrar"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var stemHtml = it.stem;
+    var count = 0;
+    stemHtml = stemHtml.replace(/______/g, function(){
+      var inputHtml = '<input type="text" class="ans-input" data-idx="'+idx+'" data-sub="'+count+'" autocomplete="off">';
+      count++;
+      return inputHtml;
+    });
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+stemHtml+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var inputs = row.querySelectorAll(".ans-input");
+      var ok = true;
+      inputs.forEach(function(inp, subIdx){
+        var expected = it.answers[subIdx] !== undefined ? it.answers[subIdx] : it.answers[0];
+        if(!anyMatch(inp.value, [expected])) ok = false;
+      });
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers.join(" / ")+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+/* ---------------- AUDICIÓN ---------------- */
+var audioList = document.getElementById("audioList");
+
+var playerWrap = document.createElement("div");
+playerWrap.className = "player-wrap";
+playerWrap.innerHTML =
+  '<div class="player-frame"><iframe src="https://www.youtube.com/embed/UeLkocMc6LQ" ' +
+  'title="MIEDO TRAS SALIR DE LA ZONA DE CONFORT | Entiende Tu Mente | 418" ' +
+  'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+  'allowfullscreen></iframe></div>' +
+  '<p class="player-caption">Vídeo real de YouTube (Entiende Tu Mente) — escucha el mensaje original de Ana al principio del episodio, antes de responder.</p>';
+audioList.appendChild(playerWrap);
+
+var aud1 = {
+  id:"aud1", title:"Audición 1 · Escucha y responde",
+  items:[
+    {q:"¿Desde qué país escribe Ana?", opts:["España","México","Colombia","Argentina"], answer:1},
+    {q:"¿Qué decidió hacer Ana hace un par de meses?", opts:["Mudarse de casa","Renunciar a su empleo de muchos años","Empezar una relación","Adoptar un perro"], answer:1},
+    {q:"¿Qué sensación describe Ana estar viviendo?", opts:["Una gran alegría","Una especie de duelo lleno de inseguridades","Mucho aburrimiento","Una sensación de éxito total"], answer:1},
+    {q:"¿Qué tema le gustaría que trataran en el episodio?", opts:["Cómo encontrar trabajo","Cómo afrontar la etapa de miedo después de salir de la zona de confort","Cómo cuidar mascotas","Cómo diseñar productos"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud1.title+'</span></div>';
+  var list = document.createElement("div");
+  aud1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="aud1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="aud1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud1.items.length+"</b>";
+    blockScores["aud1"] = {correct:correct, total:aud1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud1"] = {correct:0, total:aud1.items.length};
+  audioList.appendChild(wrap);
+})();
+
+var aud2 = {
+  id:"aud2", title:"Audición 2 · Dictado — completa las palabras de Ana",
+  bank:"afrontar · etapa · miedo · alegría · éxito",
+  items:[
+    {stem:"Quisiera ver si pueden hablar de cómo es ______ la etapa de miedo.", answers:["afrontar"]},
+    {stem:"Quisiera ver si pueden hablar de cómo es afrontar la ______ de miedo.", answers:["etapa"]},
+    {stem:"Quisiera ver si pueden hablar de cómo es afrontar la etapa de ______.", answers:["miedo"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud2.title+'</span></div>'+
+    '<p class="hint" style="margin-top:0;">Es la frase con la que Ana presenta el tema del episodio.</p>';
+  var bankDiv = document.createElement("div");
+  bankDiv.className = "wordbank";
+  bankDiv.innerHTML = "<b>Banco de palabras:</b> "+aud2.bank;
+  wrap.appendChild(bankDiv);
+  var list = document.createElement("div");
+  aud2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud2.items.length+"</b>";
+    blockScores["aud2"] = {correct:correct, total:aud2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud2"] = {correct:0, total:aud2.items.length};
+  audioList.appendChild(wrap);
+})();
+
+/* ---------------- TEST ---------------- */
+var testList = document.getElementById("testList");
+
+/* Bloque 1: comprensión (radio) */
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"Según Ana, ¿qué decidió hacer hace un par de meses?", opts:["Cambiar de casa","Renunciar a su empleo de muchos años","Empezar una relación","Mudarse a otro país"], answer:1},
+    {q:"Según Luis, ¿qué tienen las personas del \"optimismo luminoso\" que muchas veces no se menciona?", opts:["Que no tienen miedo nunca","Que suelen tener \"paracaídas invisibles\": estabilidad económica, redes de apoyo o una segunda oportunidad asegurada","Que son todos ricos","Que nunca han trabajado"], answer:1},
+    {q:"Según Luis, ¿qué NO significa sentir miedo después de salir de la zona de confort?", opts:["Que te hayas equivocado","Que estás dejando atrás hábitos y automatismos","Que es normal tener incertidumbre","Que el resultado todavía no se conoce"], answer:0},
+    {q:"¿Qué pensamientos destructivos empezó a tener Ana después de dejar su trabajo?", opts:["Que no vale lo que dice, que no es suficientemente buena, que le va a costar mucho encontrar otro empleo","Que todo le va a ir perfecto","Que nunca debió haber trabajado en esa empresa","Que sus perros la necesitan más"], answer:0},
+    {q:"Según Luis, ¿desde qué actitud recomienda revisar la historia de por qué tomamos una decisión importante?", opts:["Desde el juicio y la autocrítica","Desde la autocompasión, entendiendo las circunstancias de ese momento","Desde el resultado final, sea bueno o malo","Desde la comparación con otras personas"], answer:1},
+    {q:"¿Qué es una \"zona de reconfort\", según la última idea de Luis?", opts:["Lo mismo que la zona de confort original","Un hábito, lugar o momento al que puedes volver para sentirte seguro mientras llega la nueva estabilidad","Un lugar físico obligatorio, como una casa nueva","Algo que hay que evitar a toda costa"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 2: huecos */
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"paracaídas · duelo · vacío · atemoriza · retrotraerte · vértigo · arrepentimiento · impasse",
+  items:[
+    {stem:"Los que no tenemos esos ______ invisibles que tienen ellos.", answers:["paracaídas"]},
+    {stem:"Ahorita estoy viviendo una especie de ______ que está llena de inseguridades.", answers:["duelo"]},
+    {stem:"Siente un gran, gran ______.", answers:["vacío"]},
+    {stem:"Ese es el tipo de cosa que nos resulta difícil y que nos ______.", answers:["atemoriza"]},
+    {stem:"Trata de ______ a ese yo de antes.", answers:["retrotraerte"]},
+    {stem:"El salto da un ______ siempre tremendo.", answers:["vértigo"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3a: relacionar (select) */
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su significado",
+  words:["el duelo","atemorizar","retrotraerse (a algo)","el arrepentimiento","baruntar"],
+  defs:["sentir pesar o tristeza por haber hecho o no hecho algo","el proceso emocional de asimilar una pérdida importante","sentir o intuir que algo está por suceder (coloquial)","volver mentalmente a un momento o estado anterior","causar miedo o terror a alguien"],
+  answers:["b","e","d","a","c"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Significado</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3b: orden (select) */
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena los temas según se van tratando en el episodio",
+  events:[
+    {text:"Ana cuenta que dejó su trabajo y ahora vive una especie de duelo lleno de inseguridades.", answer:1},
+    {text:"Luis explica que la gente que anima a \"saltar\" muchas veces tiene paracaídas invisibles que no mencionan.", answer:2},
+    {text:"Ana cuenta que empezó a tener pensamientos destructivos sobre su propio valor.", answer:3},
+    {text:"Ana cuenta que sintió la certeza de haberse equivocado, aunque eso sea irracional.", answer:4},
+    {text:"Luis da la última idea: buscar una \"zona de reconfort\" en vez de quedarte \"en el aire\".", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 4: transformación (respuesta modelo, no autocorregible) */
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Completa con indefinido + imperfecto: «Molo (tener que) irse a casa de sus padres porque ya no (poder) pagar su casa.»", model:"Molo tuvo que irse a casa de sus padres porque ya no podía pagar su casa."},
+    {stem:"Completa con «aunque» + subjuntivo: «Aunque (tener, tú) miedo, eso no significa que te hayas equivocado.»", model:"Aunque tengas miedo, eso no significa que te hayas equivocado."},
+    {stem:"Transforma en imperativo negativo (tú): «Luchas contra tu miedo.»", model:"No luches contra tu miedo."},
+    {stem:"Completa la negación de causa: «Si hoy tienes miedo, no es porque (tú/equivocarte).»", model:"Si hoy tienes miedo, no es porque te hayas equivocado."},
+    {stem:"Reescribe usando «acabar por + infinitivo»: «Al final, ella entendió que el miedo era normal.»", model:"Ella acabó por entender que el miedo era normal."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 5: léxico (radio) */
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «atemorizar»:", opts:["asustar","calmar","alegrar","aburrir"], answer:0},
+    {q:"Antónimo de «el arrepentimiento»:", opts:["la satisfacción","la tristeza","la duda","el miedo"], answer:0},
+    {q:"Encuentra la palabra intrusa (todas menos una describen sensaciones propias mencionadas tras salir de la zona de confort):", opts:["el vacío","el vértigo","el paracaídas invisible","el arrepentimiento"], answer:2},
+    {q:"¿Qué palabra completa «una especie de ______» (proceso emocional de asimilar una pérdida)?", opts:["duelo","vértigo","impasse","paracaídas"], answer:0},
+    {q:"Sinónimo de «retrotraerse (a algo)»:", opts:["volver mentalmente a un momento anterior","avanzar hacia el futuro","olvidar por completo","ignorar"], answer:0}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
