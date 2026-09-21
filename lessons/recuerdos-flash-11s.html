@@ -1,0 +1,1006 @@
+<!doctype html>
+<title>Recuerdos Flash y el 11-S</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+/* ---- vocab cards ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+/* ---- discussion ---- */
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+.player-wrap{margin-bottom:16px;}
+.player-frame{position:relative; width:100%; max-width:640px; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:var(--surface-2);}
+.player-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+.player-caption{font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Recuerdos Flash y el 11-S · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Recuerdos flash: la memoria del 11-S</h1>
+  <p class="subtitle">Vocabulario, debate, gramática, audición y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> vídeo de YouTube «Cómo el 11-S cambió lo que sabemos sobre los recuerdos» (BBC Mundo) (transcripción proporcionada por la estudiante)</p>
+  <div class="summary">
+    <b>De qué trata:</b> el vídeo explica qué son los "recuerdos flash" — esos recuerdos tan vívidos y detallados de cómo nos enteramos de un acontecimiento impactante, como los atentados del 11 de septiembre — y cómo funciona la memoria en general. Con investigadoras como las profesoras Phelps y Talarico, se explica por qué estos recuerdos cambian con el tiempo aunque nos sintamos muy seguros de ellos, se analiza el caso del recuerdo equivocado de George W. Bush, y se reflexiona sobre si los recuerdos colectivos como el del 11-S serán cada vez menos frecuentes en un mundo de información fragmentada.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="audicion">
+  <div class="section-head"><span class="section-num">04</span><h2>Audición</h2></div>
+  <p class="hint">Mira los primeros minutos del vídeo, donde se explica qué son los recuerdos flash y cómo funciona la memoria, antes de responder.</p>
+  <div id="audioList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">05</span><h2>Test — Recuerdos flash y el 11-S</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "recuerdosflash11s_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- VOCABULARIO ---------------- */
+var vocab = [
+  {term:"dejar huella", pos:"locución verbal",
+   quote:"Vivimos rodeados de noticias todo el tiempo y aún así hay algunas que <mark>dejan huella</mark>.",
+   trans:"оставлять след, оставлять неизгладимое впечатление",
+   mean:"Оставить сильное, длительное впечатление в памяти или в жизни кого-то. Часто говорится о событиях, людях или опыте.",
+   ex:"Ese viaje a solas por Sudamérica le dejó huella para toda la vida. — Та поездка в одиночку по Южной Америке оставила след на всю жизнь."},
+  {term:"enterarse (de algo)", pos:"verbo pronominal",
+   quote:"Recordamos con todo detalle cómo nos <mark>enteramos</mark> de lo ocurrido.",
+   trans:"узнавать (о чём-то), получать информацию",
+   mean:"Узнать новость или информацию, часто внезапно или впервые. Отличается от «saber» — здесь акцент на моменте получения информации.",
+   ex:"Me enteré de la noticia por un mensaje de mi amiga. — Я узнал новость из сообщения от подруги."},
+  {term:"almacenar", pos:"verbo transitivo",
+   quote:"Una estructura llamada hipocampo procesa los recuerdos y los archiva para <mark>almacenarlos</mark>.",
+   trans:"хранить, накапливать",
+   mean:"Сохранять что-то (информацию, вещи, данные) для использования в будущем. Используется как в буквальном смысле (склад, память компьютера), так и метафорически (память мозга).",
+   ex:"El cerebro almacena información constantemente, incluso mientras dormimos. — Мозг постоянно хранит информацию, даже пока мы спим."},
+  {term:"recurrir a (algo/alguien)", pos:"verbo intransitivo",
+   quote:"Cuando nos encontramos ante una situación nueva, <mark>recurrimos a</mark> experiencias pasadas para orientarnos.",
+   trans:"прибегать к (чему-то), обращаться за помощью (к кому-то)",
+   mean:"Использовать что-то или обратиться к кому-то как к ресурсу или решению в трудной ситуации.",
+   ex:"Cuando no sé cómo resolver un problema, recurro a mis compañeros de trabajo. — Когда я не знаю, как решить проблему, я обращаюсь к своим коллегам."},
+  {term:"vívido/a", pos:"adjetivo",
+   quote:"Algunos recuerdos son tan <mark>vívidos</mark> que parece que ocurrieron ayer.",
+   trans:"яркий, живой (о воспоминании, описании)",
+   mean:"Очень ясный, детальный и реалистичный — обычно о воспоминаниях, снах или описаниях.",
+   ex:"Todavía tengo un recuerdo muy vívido de mi primer día de escuela. — У меня до сих пор очень яркое воспоминание о первом дне в школе."},
+  {term:"el acontecimiento", pos:"sustantivo, m.",
+   quote:"No solo recordamos el <mark>acontecimiento</mark>, sino también cómo nos enteramos de él.",
+   trans:"событие, происшествие",
+   mean:"Синоним «evento» или «suceso» — что-то важное, что произошло. Часто используется для значимых, часто исторических событий.",
+   ex:"La caída del Muro de Berlín fue un acontecimiento histórico. — Падение Берлинской стены было историческим событием."},
+  {term:"congelar (una imagen)", pos:"verbo transitivo (uso metafórico)",
+   quote:"Parece como si una cámara hubiera disparado un flash y <mark>congelado</mark> una imagen llena de detalles.",
+   trans:"«замораживать» (образ, момент) — метафорически: зафиксировать неподвижно",
+   mean:"Буквально «замораживать» (лёд, еду), но также используется метафорически о моменте или образе, который остаётся неизменным в памяти, как стоп-кадр.",
+   ex:"Ese instante quedó congelado en su memoria para siempre. — Тот момент навсегда «застыл» в его памяти."},
+  {term:"confundir", pos:"verbo transitivo",
+   quote:"Pudo hacer que Bush <mark>confundiera</mark> el orden de los hechos.",
+   trans:"путать, перепутывать",
+   mean:"Ошибочно смешивать две вещи, не различать их правильно — например, порядок событий, людей или даты.",
+   ex:"Siempre confundo los nombres de sus hermanos gemelos. — Я всегда путаю имена его братьев-близнецов."},
+  {term:"el sentido de pertenencia", pos:"expresión (sustantivo)",
+   quote:"El sentido de pertenencia a un grupo influye en que ciertos acontecimientos se conviertan en recuerdos flash o no.",
+   trans:"чувство принадлежности (к группе)",
+   mean:"Ощущение того, что ты часть какой-то группы, сообщества или культуры — важный психологический фактор идентичности.",
+   ex:"Participar en el equipo le dio un fuerte sentido de pertenencia. — Участие в команде дало ему сильное чувство принадлежности."},
+  {term:"el flujo (de información)", pos:"sustantivo, m.",
+   quote:"Hoy vivimos expuestos a un <mark>flujo</mark> constante de información de diferentes fuentes.",
+   trans:"поток (информации)",
+   mean:"Непрерывное течение чего-то — в данном контексте, информации, новостей. Метафора, основанная на образе течения воды.",
+   ex:"El flujo constante de noticias en el celular puede generar mucha ansiedad. — Постоянный поток новостей в телефоне может вызывать сильную тревогу."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+/* ---------------- DEBATE ---------------- */
+var debate = [
+  {q:"¿Recuerdas dónde estabas y qué hacías cuando te enteraste de alguna noticia importante? Cuéntanos ese recuerdo con detalle.", hint:"Útil: «Me acuerdo de que estaba...», «Me enteré cuando...»"},
+  {q:"¿Confías en que tus recuerdos más vívidos son exactamente como ocurrieron, o crees que pueden haber cambiado con el tiempo?", hint:"Útil: «Confío/no confío en...», «Creo que mi recuerdo ha cambiado porque...»"},
+  {q:"El vídeo dice que nuestros grupos sociales son cada vez más pequeños y que consumimos noticias de fuentes muy distintas. ¿Crees que esto hace más difícil tener \"recuerdos colectivos\" compartidos por toda una generación? ¿Por qué?", hint:"Útil: «Estoy de acuerdo/en desacuerdo porque...», «Por un lado..., por otro lado...»"},
+  {q:"¿Por qué crees que incluso el expresidente George W. Bush recordaba mal el orden de los hechos del 11-S? ¿Qué nos dice esto sobre la memoria humana?", hint:"Útil: «Creo que esto pasó porque...», «Esto demuestra que...»"},
+  {q:"Si supieras con certeza que uno de tus recuerdos más importantes está equivocado en algún detalle, ¿cambiaría eso la forma en que confías en tu memoria en general?", hint:"Útil: «Si supiera eso, yo...», «Probablemente seguiría confiando/desconfiaría porque...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+/* ---------------- GRAMÁTICA ---------------- */
+var gram = [
+  {id:"g1", title:"3.1 Presente de indicativo (verdades generales y definiciones científicas)",
+   quote:"Una estructura llamada hipocampo <mark>procesa</mark> los recuerdos y los <mark>archiva</mark> para almacenarlos.",
+   rule:"El presente de indicativo se usa, además de para el momento actual, para hablar de hechos generales, verdades científicas y definiciones que son siempre así, no solo en este momento. <b>Ошибка:</b> использовать другое время (например futuro) там, где по-испански для научных фактов естественнее звучит presente.",
+   items:[
+     {stem:"El hipocampo (procesar) ______ los recuerdos y los (archivar) ______ para almacenarlos.", answers:["procesa", "archiva"]},
+     {stem:"La amígdala (intervenir) ______ en los recuerdos cargados de emoción.", answers:["interviene"]},
+     {stem:"Nuestro cerebro (reconstruir) ______ el pasado cada vez que evocamos un recuerdo.", answers:["reconstruye"]},
+     {stem:"La memoria nos (ayudar) ______ a afrontar el futuro.", answers:["ayuda"]},
+     {stem:"Los recuerdos flash (implicar) ______ tanto las áreas emocionales como las de reacción al peligro.", answers:["implican"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito imperfecto + pretérito indefinido (acción interrumpida)",
+   quote:"George W. Bush <mark>estaba visitando</mark> una escuela en Florida cuando <mark>se enteró</mark> de que un segundo avión había impactado.",
+   rule:"El imperfecto (o estar + gerundio en imperfecto) describe una acción en desarrollo en el pasado; el indefinido marca la acción puntual que la interrumpe. <b>Ошибка:</b> использовать imperfecto для обоих глаголов — тогда теряется ощущение, что одно действие прервало другое.",
+   items:[
+     {stem:"Bush (visitar) ______ una escuela cuando (enterarse) ______ del segundo avión.", answers:["estaba visitando", "se enteró"]},
+     {stem:"Mientras yo (ver) ______ las noticias, mi hermano me (llamar) ______ por teléfono.", answers:["veía", "llamó"]},
+     {stem:"La profesora Phelps (investigar) ______ estos recuerdos cuando (descubrir) ______ que el 40% de los detalles cambiaba.", answers:["investigaba", "descubrió"]},
+     {stem:"Yo no (saber) ______ nada del 11-S hasta que mi profesor nos lo (explicar) ______ en clase.", answers:["sabía", "explicó"]},
+     {stem:"Nosotros (hablar) ______ de otra cosa cuando (empezar) ______ las noticias en la televisión.", answers:["hablábamos", "empezaron"]}
+   ]},
+  {id:"g3", title:"3.3 Como si + pluscuamperfecto de subjuntivo",
+   quote:"Los llamaron recuerdos flash, porque parece <mark>como si</mark> una cámara <mark>hubiera disparado</mark> un flash y congelado una imagen.",
+   rule:"«Como si» siempre va seguido de subjuntivo (nunca indicativo), porque introduce una comparación hipotética o irreal. Con pluscuamperfecto de subjuntivo (hubiera/hubiese + participio) se compara con algo anterior o que no ocurrió realmente. <b>Ошибка:</b> использовать indicativo после «como si» — в испанском это всегда subjuntivo.",
+   items:[
+     {stem:"Lo llamaron recuerdo flash, como si una cámara (disparar) ______ un flash.", answers:["hubiera disparado"]},
+     {stem:"Ella hablaba del 11-S como si lo (vivir) ______ en persona.", answers:["hubiera vivido"]},
+     {stem:"Bush recordaba la escena como si (ver) ______ el avión antes de entrar al aula.", answers:["hubiera visto"]},
+     {stem:"Reaccionaron como si nunca (escuchar) ______ esa noticia antes.", answers:["hubieran escuchado"]},
+     {stem:"Me contó la historia como si (estar) ______ allí ese día.", answers:["hubiera estado"]}
+   ]},
+  {id:"g4", title:"3.4 Pretérito indefinido (hechos puntuales del pasado)",
+   quote:"Con el tiempo, Bush <mark>corrigió</mark> esta versión de los hechos.",
+   rule:"Raíz + -é/-aste/-ó... (o formas irregulares). Se usa para acciones puntuales y terminadas en el pasado, típico al narrar hechos históricos o de investigación. <b>Ошибка:</b> путать с imperfecto, когда речь о конкретном, законченном событии, а не о фоне.",
+   items:[
+     {stem:"Los psicólogos (empezar) ______ a estudiar los recuerdos flash en los años 70.", answers:["empezaron"]},
+     {stem:"Con el tiempo, Bush (corregir) ______ esta versión de los hechos.", answers:["corrigió"]},
+     {stem:"El equipo (analizar) ______ cómo había reaccionado la gente a varios asesinatos históricos.", answers:["analizó"]},
+     {stem:"La profesora Talarico (comparar) ______ los recuerdos flash con los recuerdos cotidianos.", answers:["comparó"]},
+     {stem:"Un segundo avión (impactar) ______ contra el World Trade Center.", answers:["impactó"]}
+   ]},
+  {id:"g5", title:"3.5 Condicional simple (hipótesis y probabilidad)",
+   quote:"Algunos expertos creen que recuerdos colectivos tan potentes como los que dejó el 11-S <mark>podrían</mark> ser cada vez menos frecuentes.",
+   rule:"Infinitivo completo + -ía, -ías, -ía, -íamos, -íais, -ían. Se usa para hipótesis, probabilidad y especulación sobre el presente o el futuro. <b>Ошибка:</b> использовать futuro simple там, где речь именно о гипотезе/предположении, а не о твёрдом факте будущего.",
+   items:[
+     {stem:"Algunos expertos creen que los recuerdos colectivos tan potentes (poder) ______ ser cada vez menos frecuentes.", answers:["podrían"]},
+     {stem:"Sin el hipocampo, no (nosotros/poder) ______ almacenar nuevos recuerdos.", answers:["podríamos"]},
+     {stem:"¿Qué (hacer, tú) ______ si te dieras cuenta de que un recuerdo importante estaba equivocado?", answers:["harías"]},
+     {stem:"Yo (decir) ______ que la confianza en un recuerdo no siempre significa que sea correcto.", answers:["diría"]},
+     {stem:"Sin tantas fuentes de noticias distintas, (haber) ______ más recuerdos colectivos compartidos.", answers:["habría"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var stemHtml = it.stem;
+    var count = 0;
+    stemHtml = stemHtml.replace(/______/g, function(){
+      var inputHtml = '<input type="text" class="ans-input" data-idx="'+idx+'" data-sub="'+count+'" autocomplete="off">';
+      count++;
+      return inputHtml;
+    });
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+stemHtml+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var inputs = row.querySelectorAll(".ans-input");
+      var ok = true;
+      inputs.forEach(function(inp, subIdx){
+        var expected = it.answers[subIdx] !== undefined ? it.answers[subIdx] : it.answers[0];
+        if(!anyMatch(inp.value, [expected])) ok = false;
+      });
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers.join(" / ")+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+/* ---------------- AUDICIÓN ---------------- */
+var audioList = document.getElementById("audioList");
+
+var playerWrap = document.createElement("div");
+playerWrap.className = "player-wrap";
+playerWrap.innerHTML =
+  '<div class="player-frame"><iframe src="https://www.youtube.com/embed/uDHBb7xAwkk" ' +
+  'title="Cómo el 11-S cambió lo que sabemos sobre los recuerdos | BBC Mundo" ' +
+  'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+  'allowfullscreen></iframe></div>' +
+  '<p class="player-caption">Vídeo real de YouTube (BBC Mundo) — mira los primeros minutos, donde se explica qué son los recuerdos flash y cómo funciona la memoria, antes de responder.</p>';
+audioList.appendChild(playerWrap);
+
+var aud1 = {
+  id:"aud1", title:"Audición 1 · Mira y responde",
+  items:[
+    {q:"¿Qué acontecimiento se pone como ejemplo principal de \"recuerdo flash\" al inicio del vídeo?", opts:["La caída del Muro de Berlín","Los atentados del 11 de septiembre","La muerte del Papa Juan Pablo II","El asesinato de John F. Kennedy"], answer:1},
+    {q:"¿Qué estructura del cerebro procesa y archiva los recuerdos, según el vídeo?", opts:["La amígdala","El hipocampo","El cerebelo","El lóbulo frontal"], answer:1},
+    {q:"Según el vídeo, ¿qué le pasa a un recuerdo cada vez que lo evocamos?", opts:["No cambia nunca","Se recupera, se puede modificar con nuevos detalles y se guarda de nuevo","Desaparece por completo","Se convierte automáticamente en un recuerdo flash"], answer:1},
+    {q:"¿En qué década empezaron los psicólogos a estudiar los recuerdos flash?", opts:["En los años 50","En los años 70","En los años 90","En los años 2000"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud1.title+'</span></div>';
+  var list = document.createElement("div");
+  aud1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="aud1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="aud1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud1.items.length+"</b>";
+    blockScores["aud1"] = {correct:correct, total:aud1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud1"] = {correct:0, total:aud1.items.length};
+  audioList.appendChild(wrap);
+})();
+
+var aud2 = {
+  id:"aud2", title:"Audición 2 · Dictado — completa la frase de apertura",
+  bank:"rodeados · noticias · huella · recuerdos · detalle",
+  items:[
+    {stem:"Vivimos ______ de noticias todo el tiempo y aún así hay algunas que dejan huella.", answers:["rodeados"]},
+    {stem:"Vivimos rodeados de ______ todo el tiempo y aún así hay algunas que dejan huella.", answers:["noticias"]},
+    {stem:"Vivimos rodeados de noticias todo el tiempo y aún así hay algunas que dejan ______.", answers:["huella"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud2.title+'</span></div>'+
+    '<p class="hint" style="margin-top:0;">Es la primera frase del vídeo.</p>';
+  var bankDiv = document.createElement("div");
+  bankDiv.className = "wordbank";
+  bankDiv.innerHTML = "<b>Banco de palabras:</b> "+aud2.bank;
+  wrap.appendChild(bankDiv);
+  var list = document.createElement("div");
+  aud2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud2.items.length+"</b>";
+    blockScores["aud2"] = {correct:correct, total:aud2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud2"] = {correct:0, total:aud2.items.length};
+  audioList.appendChild(wrap);
+})();
+
+/* ---------------- TEST ---------------- */
+var testList = document.getElementById("testList");
+
+/* Bloque 1: comprensión (radio) */
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"¿Qué es un \"recuerdo flash\"?", opts:["Un recuerdo de la infancia","Un recuerdo muy detallado y vívido de cómo nos enteramos de un acontecimiento impactante","Un recuerdo inventado por el cerebro","Un tipo de sueño"], answer:1},
+    {q:"¿Qué estructura del cerebro procesa y almacena los recuerdos?", opts:["La amígdala","El hipocampo","El cerebelo","El lóbulo frontal"], answer:1},
+    {q:"Según la profesora Phelps, ¿qué pasó con los detalles de los recuerdos del 11-S entre las dos semanas y el año posteriores?", opts:["No cambió nada","Cambiaron absolutamente todos los detalles","Cambió aproximadamente el 40% de los detalles","La gente olvidó por completo el suceso"], answer:2},
+    {q:"¿Qué diferencia clave encontró la profesora Talarico entre los recuerdos flash y los recuerdos cotidianos?", opts:["Los recuerdos flash tienen más detalles reales y precisos","No hay diferencia real en cuanto a errores, pero la gente se siente mucho más segura de sus recuerdos flash","Los recuerdos cotidianos son siempre más precisos","Los recuerdos flash desaparecen mucho más rápido"], answer:1},
+    {q:"¿Qué recordaba mal el expresidente George W. Bush sobre el 11-S?", opts:["Decía que había visto el impacto del primer avión antes de entrar al aula, algo que no pudo ocurrir así","No recordaba en qué país estaba","Pensaba que el atentado había sido en otro año","No recordaba el nombre del World Trade Center"], answer:0},
+    {q:"Según el vídeo, ¿por qué algunos expertos creen que los recuerdos colectivos como los del 11-S podrían ser menos frecuentes en el futuro?", opts:["Porque la gente ya no ve las noticias","Porque consumimos información de fuentes muy distintas y nuestros grupos sociales son más pequeños","Porque el cerebro humano ha cambiado","Porque ya no ocurren sucesos importantes"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 2: huecos */
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"huella · almacenarlos · orientarnos · vívidos · acontecimiento · flujo · confundir · congelar",
+  items:[
+    {stem:"Vivimos rodeados de noticias todo el tiempo y aún así hay algunas que dejan ______.", answers:["huella"]},
+    {stem:"Una estructura llamada hipocampo procesa los recuerdos y los archiva para ______.", answers:["almacenarlos"]},
+    {stem:"Cuando nos encontramos ante una situación nueva, recurrimos a experiencias pasadas para ______.", answers:["orientarnos"]},
+    {stem:"Algunos recuerdos son tan ______ que parece que ocurrieron ayer.", answers:["vívidos"]},
+    {stem:"La conexión que sentimos con un ______ también importa.", answers:["acontecimiento"]},
+    {stem:"Hoy vivimos expuestos a un ______ constante de información de diferentes fuentes.", answers:["flujo"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3a: relacionar (select) */
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su significado",
+  words:["dejar huella","enterarse (de algo)","recurrir a (algo)","confundir","el sentido de pertenencia"],
+  defs:["mezclar o equivocar dos cosas, no distinguirlas bien","sentirse parte de un grupo","dejar una marca o impresión duradera","recibir información sobre algo que ha pasado","usar algo o a alguien como recurso o ayuda para resolver una situación"],
+  answers:["c","d","e","a","b"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Significado</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3b: orden (select) */
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena los temas según se van tratando en el vídeo",
+  events:[
+    {text:"Se explica qué son los recuerdos flash y por qué el 11-S es uno de los más estudiados.", answer:1},
+    {text:"Se explica cómo funciona la memoria en general, con el papel del hipocampo.", answer:2},
+    {text:"La profesora Phelps explica cómo cambian los detalles de los recuerdos con el tiempo.", answer:3},
+    {text:"La profesora Talarico compara los recuerdos flash con los recuerdos cotidianos.", answer:4},
+    {text:"Se cuenta el caso del recuerdo equivocado de George W. Bush.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 4: transformación (respuesta modelo, no autocorregible) */
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Cambia a pretérito imperfecto + indefinido: «Bush visita una escuela cuando se entera del segundo avión.»", model:"Bush estaba visitando una escuela cuando se enteró del segundo avión."},
+    {stem:"Convierte a estilo indirecto: El investigador dijo: «Los recuerdos flash se almacenan de una forma distinta.»", model:"El investigador dijo que los recuerdos flash se almacenaban de una forma distinta."},
+    {stem:"Completa con «como si» + pluscuamperfecto de subjuntivo: «Habló del 11-S. Lo vivió en persona (pero no es cierto).»", model:"Habló del 11-S como si lo hubiera vivido en persona."},
+    {stem:"Cambia a pretérito indefinido: «Los psicólogos empiezan a estudiar estos recuerdos en los años 70.»", model:"Los psicólogos empezaron a estudiar estos recuerdos en los años 70."},
+    {stem:"Reescribe usando el condicional simple para expresar probabilidad: «Es posible que haya menos recuerdos colectivos en el futuro.»", model:"Habría menos recuerdos colectivos en el futuro. (o: Podría haber menos recuerdos colectivos en el futuro.)"}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 5: léxico (radio) */
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «almacenar»:", opts:["guardar","olvidar","borrar","inventar"], answer:0},
+    {q:"Antónimo de «recordar»:", opts:["evocar","olvidar","almacenar","reconstruir"], answer:1},
+    {q:"Encuentra la palabra intrusa (todas menos una son partes del cerebro mencionadas en el vídeo):", opts:["el hipocampo","la amígdala","el lóbulo frontal","el flujo"], answer:3},
+    {q:"¿Qué palabra completa «dejar ______» (causar una impresión duradera)?", opts:["huella","memoria","recuerdo","flujo"], answer:0},
+    {q:"Sinónimo de «vívido/a» (para un recuerdo):", opts:["borroso","intenso, muy claro","falso","aburrido"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
