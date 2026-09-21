@@ -1,0 +1,1003 @@
+<!doctype html>
+<title>Ansiedad y Sobrepensamiento</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+/* ---- vocab cards ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+/* ---- discussion ---- */
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+.player-wrap{margin-bottom:16px;}
+.player-caption{font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Ansiedad y Sobrepensamiento · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Ansiedad y sobrepensamiento: cómo calmar tu mente</h1>
+  <p class="subtitle">Vocabulario, debate, gramática, audición y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> podcast <i>Se Regalan Dudas</i> — episodio recopilatorio «Ansiedad y sobrepensamiento: cómo calmar tu mente» (transcripción proporcionada por la estudiante)</p>
+  <div class="summary">
+    <b>De qué trata:</b> este episodio reúne fragmentos de varias entrevistas del podcast sobre la ansiedad y el sobrepensamiento. Ash y Sara explican qué es la ansiedad y en qué se diferencia del estrés; Nicole Lecár describe cómo funciona el sistema nervioso autónomo y la neurocepción; Jacqueline Lapidus y Cindy Fonseca hablan de por qué se forman los pensamientos automáticos y catastróficos; Adali López propone la autocompasión para romper ese ciclo; y, para cerrar, Marina Mamoliti guía un ejercicio de respiración para salir de un ataque de pánico.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="audicion">
+  <div class="section-head"><span class="section-num">04</span><h2>Audición</h2></div>
+  <p class="hint">Escucha el episodio real y responde. Los dos ejercicios se centran en el bloque final, cuando se explican los primeros auxilios para un ataque de pánico y se guía el ejercicio de respiración de Marina Mamoliti.</p>
+  <div id="audioList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">05</span><h2>Test — Ansiedad y sobrepensamiento</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "ansiedadsobrepensamiento_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- VOCABULARIO ---------------- */
+var vocab = [
+  {term:"sobrepensar", pos:"verbo intransitivo",
+   quote:"Hola comunidad, si tu mente no para de <mark>sobrepensar</mark> y te está agotando...",
+   trans:"слишком много думать, «пережёвывать» мысли",
+   mean:"Думать о чём-то намного больше, чем нужно, крутить одну и ту же мысль по кругу. В испанском это относительно новое разговорное слово (калька с англ. overthink), понятное всем на слух.",
+   ex:"Deja de sobrepensar cada mensaje que te manda tu jefe. — Перестань так много думать над каждым сообщением от начальника."},
+  {term:"agotar(se)", pos:"verbo transitivo/pronominal",
+   quote:"...si tu mente no para de sobrepensar y te está <mark>agotando</mark>...",
+   trans:"изматывать, истощать; agotarse — изматываться, выбиваться из сил",
+   mean:"Не только про физическую усталость — часто об эмоциональном истощении. Отличается от «cansar» интенсивностью: agotar — довести до полного изнеможения.",
+   ex:"Esta semana de exámenes me ha agotado por completo. — Эта экзаменационная неделя меня полностью вымотала."},
+  {term:"dar lugar a (algo)", pos:"locución verbal",
+   quote:"Y esa emoción nos <mark>da lugar a</mark> una respuesta física, una respuesta fisiológica, que puede ser ansiedad.",
+   trans:"порождать, приводить к (чему-то)",
+   mean:"Показывает причинно-следственную связь: одно явление вызывает или делает возможным другое. Более формально, чем «causar».",
+   ex:"Un mal comentario puede dar lugar a un conflicto enorme. — Одно неудачное замечание может привести к огромному конфликту."},
+  {term:"desembocar en (algo)", pos:"verbo intransitivo + preposición",
+   quote:"El miedo real es el que <mark>desemboca en</mark> una actuación que me ayuda a ponerme a salvo.",
+   trans:"выливаться во что-то, заканчиваться чем-то (о процессе)",
+   mean:"Буквально «впадать» (как река в море), в переносном смысле — о процессе, который приходит к определённому итогу. Похоже на «dar lugar a», но подчёркивает финальную точку пути.",
+   ex:"La discusión desembocó en una pelea que duró horas. — Спор вылился в ссору, которая длилась часами."},
+  {term:"la incertidumbre", pos:"sustantivo, f.",
+   quote:"Nuestro cerebro no está cableado para la <mark>incertidumbre</mark>. Buscamos certeza.",
+   trans:"неопределённость, неизвестность",
+   mean:"Состояние, когда неизвестно, что произойдёт дальше. Противоположность — «certeza» (уверенность, определённость).",
+   ex:"La incertidumbre sobre el futuro del trabajo le generaba mucha ansiedad. — Неопределённость по поводу будущего на работе вызывала у него сильную тревогу."},
+  {term:"paralizar(se)", pos:"verbo transitivo/pronominal",
+   quote:"El problema es cuando esa ansiedad te <mark>paraliza</mark> y no te permite hacer lo próximo que te corresponde.",
+   trans:"парализовать; paralizarse — цепенеть, застывать без движения",
+   mean:"Как в физическом, так и в переносном смысле: лишать возможности действовать. Часто используется об эмоциях или страхе, которые мешают принимать решения.",
+   ex:"El miedo a equivocarme me paraliza cada vez que tengo que hablar en público. — Страх ошибиться парализует меня каждый раз, когда нужно выступать публично."},
+  {term:"darse cuenta de (algo)", pos:"locución verbal pronominal",
+   quote:"...esos pensamientos negativos automáticos se fueron formando desde hace años sin que ni cuenta te <mark>dieras</mark>.",
+   trans:"понимать, осознавать (что-то), замечать",
+   mean:"Подчёркивает момент осознания чего-то, часто внезапного или запоздалого. Не путать с «saber» (просто знать) — здесь важен именно момент, когда что-то доходит до сознания.",
+   ex:"No me di cuenta de que estaba repitiendo el mismo error hasta que mi amiga me lo señaló. — Я не осознавала, что повторяю одну и ту же ошибку, пока подруга мне на это не указала."},
+  {term:"estar cableado/a para (algo)", pos:"expresión (participio + preposición)",
+   quote:"<mark>Nuestro cerebro no está cableado</mark> para la incertidumbre. Buscamos certeza.",
+   trans:"быть «настроенным», предрасположенным к чему-то от природы",
+   mean:"Разговорная метафора (буквально «быть подключённым проводами») о врождённой, почти автоматической склонности мозга или организма к чему-либо.",
+   ex:"Los seres humanos estamos cableados para buscar conexión con otras personas. — Мы, люди, «запрограммированы» искать связь с другими людьми."},
+  {term:"bancarse (algo)", pos:"verbo pronominal, coloquial (Argentina)",
+   quote:"...la posibilidad de enfrentar o de <mark>bancarme</mark> los síntomas incómodos de la ansiedad le muestran a mi cerebro, ah, para, no me morí.",
+   trans:"терпеть, выдерживать, мириться с чем-то неприятным",
+   mean:"Разговорное слово, характерное для Аргентины и других стран Южного конуса; синоним «aguantar» или «soportar», но более неформальное.",
+   ex:"No sé cómo te bancás tantas horas de tráfico todos los días. — Не знаю, как ты выдерживаешь столько часов в пробках каждый день."},
+  {term:"sobreidentificarse con (algo)", pos:"verbo pronominal",
+   quote:"No voy a ignorarlo, no voy a intentar destruirlo o fingir que no está ahí, porque sí está ahí, pero no me voy a <mark>sobreidentificar</mark> con ese pensamiento.",
+   trans:"чрезмерно отождествлять себя с чем-то, «слипаться» с мыслью или ролью",
+   mean:"Означает воспринимать мысль, эмоцию или роль как часть себя настолько сильно, что теряется дистанция и объективность. Ключевое понятие в терапевтических подходах на основе осознанности (mindfulness).",
+   ex:"Es fácil sobreidentificarse con el papel de \"la persona fuerte de la familia\" y olvidarse de pedir ayuda. — Легко чрезмерно отождествить себя с ролью «сильного человека в семье» и забыть просить о помощи."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+/* ---------------- DEBATE ---------------- */
+var debate = [
+  {q:"¿Sueles sobrepensar las cosas, sobre todo antes de dormir? ¿Qué tipo de pensamientos aparecen más?", hint:"Útil: «Suelo sobrepensar cuando...», «Los pensamientos que más se repiten son...»"},
+  {q:"¿Qué haces normalmente para calmarte cuando sientes ansiedad? ¿Conocías alguna de las técnicas mencionadas en el episodio (agua fría, anclaje de los sentidos, respiración)?", hint:"Útil: «Para calmarme, yo...», «Ya conocía / no conocía esta técnica...»"},
+  {q:"En tu país o en tu familia, ¿se habla abiertamente de la ansiedad y de ir a terapia, o todavía es un tema tabú? Compáralo con lo que cuentan en el podcast.", hint:"Útil: «En mi cultura...», «A diferencia de..., en mi país...»"},
+  {q:"Ash dice que \"no huir\" de las situaciones que dan miedo es la clave para vencer la ansiedad a largo plazo. ¿Estás de acuerdo? ¿Por qué?", hint:"Útil: «Estoy de acuerdo/en desacuerdo porque...», «Por un lado..., por otro lado...»"},
+  {q:"Si un amigo tuyo tuviera un ataque de pánico delante de ti, ¿qué harías paso a paso para ayudarlo, usando lo que has aprendido en este episodio?", hint:"Útil: «Lo primero que haría sería...», «Después le diría que...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+/* ---------------- GRAMÁTICA ---------------- */
+var gram = [
+  {id:"g1", title:"3.1 Presente continuo (estar + gerundio)",
+   quote:"La mente está en constante movimiento. Siempre nos <mark>está dando</mark> mensajes, todo el tiempo, nunca se calla.",
+   rule:"Estar (conjugado) + gerundio (-ando/-iendo). Se usa para acciones en pleno desarrollo en el momento presente. <b>Ошибка:</b> русскоговорящие часто используют только простой presente там, где по-испански естественнее прозвучит estar + gerundio, подчёркивающий, что действие происходит прямо сейчас.",
+   items:[
+     {stem:"Ahora mismo mi mente no para de (pensar) ______ en el examen de mañana.", answers:["está pensando"]},
+     {stem:"¿Por qué (tú/respirar) ______ tan rápido? Intenta calmarte.", answers:["estás respirando"]},
+     {stem:"Ella (hacer) ______ el ejercicio de anclaje de los sentidos ahora mismo.", answers:["está haciendo"]},
+     {stem:"Nosotros (aprender) ______ técnicas nuevas para manejar la ansiedad en este taller.", answers:["estamos aprendiendo"]},
+     {stem:"Vos (escuchar) ______ música relajante ahora, ¿no?", answers:["estás escuchando"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito imperfecto (hábito en el pasado, contraste con el presente)",
+   quote:"Yo antes <mark>era</mark> capaz de dormir tantas horas al día... y ahora que vivo ansiosa, soy irritable con todo el mundo.",
+   rule:"Raíz + -aba/-ía... Describe hábitos, estados y rutinas pasadas, sin marcar cuándo terminaron; suele usarse en contraste con el presente para mostrar un cambio. <b>Ошибка:</b> использовать indefinido для описания привычки или состояния «раньше» — здесь нужен именно imperfecto.",
+   items:[
+     {stem:"Ahora duermo mal, pero antes (dormir, yo) ______ ocho horas cada noche.", answers:["dormía"]},
+     {stem:"De niña, mi abuela siempre me (decir) ______ que no debía llorar.", answers:["decía"]},
+     {stem:"Antes de ir a terapia, yo (creer) ______ que la ansiedad (ser) ______ normal en mi vida.", answers:["creía", "era"]},
+     {stem:"Cuando (tener, yo) ______ ansiedad, (evitar, yo) ______ salir de casa.", answers:["tenía", "evitaba"]},
+     {stem:"Antes nosotros (pensar) ______ que la ansiedad no se podía controlar.", answers:["pensábamos"]}
+   ]},
+  {id:"g3", title:"3.3 Pretérito perfecto compuesto",
+   quote:"...sentimos que en estos años <mark>hemos aprendido</mark>, especialistas han venido a compartir cosas muy valiosas.",
+   rule:"Presente de haber (he, has, ha, hemos, habéis, han) + participio (-ado/-ido). Acciones pasadas conectadas con el presente o dentro de un periodo no terminado (este año, en estos años, hoy). <b>Ошибка:</b> путать с indefinido, когда период времени ещё не закончился («в эти годы», «сегодня»).",
+   items:[
+     {stem:"Este año (yo/aprender) ______ mucho sobre mis pensamientos automáticos.", answers:["he aprendido"]},
+     {stem:"¿(Tú/escuchar) ______ alguna vez este podcast?", answers:["has escuchado"]},
+     {stem:"Los especialistas (compartir) ______ herramientas muy valiosas en el podcast.", answers:["han compartido"]},
+     {stem:"Todavía no (nosotros/probar) ______ la técnica de las palabras encadenadas.", answers:["hemos probado"]},
+     {stem:"En estos años, Sara y Ash (hacer) ______ muchas entrevistas sobre la ansiedad.", answers:["han hecho"]}
+   ]},
+  {id:"g4", title:"3.4 Presente de subjuntivo (tras conjunciones temporales de futuro: cuando, hasta que, en cuanto)",
+   quote:"No te voy a dejar en paz hasta que se te <mark>quite</mark> el frío.",
+   rule:"Se usa en la cláusula subordinada cuando la acción se refiere a algo futuro o todavía no realizado, después de conjunciones temporales como cuando, hasta que, en cuanto. <b>Ошибка:</b> использовать indicativo по аналогии с русским («пока не пройдёт», где в русском тоже будущее, но испанский требует subjuntivo).",
+   items:[
+     {stem:"No voy a estar tranquila hasta que (pasar) ______ el examen.", answers:["pase"]},
+     {stem:"Cuando (sentir, tú) ______ ansiedad, prueba el agua fría en las muñecas.", answers:["sientas"]},
+     {stem:"En cuanto (llegar, ella) ______ a casa, va a hacer el ejercicio de respiración.", answers:["llegue"]},
+     {stem:"Vamos a seguir practicando hasta que (ser) ______ un hábito.", answers:["sea"]},
+     {stem:"Cuando (tener, nosotros) ______ un pensamiento catastrófico, vamos a cuestionarlo.", answers:["tengamos"]}
+   ]},
+  {id:"g5", title:"3.5 Imperativo (forma vos, Argentina)",
+   quote:"<mark>Cerrá</mark> tus ojos si podés... <mark>Inhalá</mark> por la nariz, contando hasta cuatro... <mark>Sostené</mark> el aire.",
+   rule:"En el voseo argentino, el imperativo afirmativo se forma quitando la -r final del infinitivo y acentuando la última vocal: cerrar→cerrá, inhalar→inhalá, sostener→sostené, sentir→sentí. Es distinto del imperativo de tú (cierra, inhala, sostén, siente). <b>Ошибка:</b> смешивать формы tú и vos в одном тексте.",
+   items:[
+     {stem:"Forma vos de «cierra» (cerrar): ______", answers:["cerrá"]},
+     {stem:"Forma vos de «respira» (respirar): ______", answers:["respirá"]},
+     {stem:"Forma vos de «sostén» (sostener): ______", answers:["sostené"]},
+     {stem:"Forma vos de «escucha» (escuchar): ______", answers:["escuchá"]},
+     {stem:"Completa con la forma vos: «______ (sentir) el peso de tu cuerpo.»", answers:["sentí"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var stemHtml = it.stem;
+    var count = 0;
+    stemHtml = stemHtml.replace(/______/g, function(){
+      var inputHtml = '<input type="text" class="ans-input" data-idx="'+idx+'" data-sub="'+count+'" autocomplete="off">';
+      count++;
+      return inputHtml;
+    });
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+stemHtml+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var inputs = row.querySelectorAll(".ans-input");
+      var ok = true;
+      inputs.forEach(function(inp, subIdx){
+        var expected = it.answers[subIdx] !== undefined ? it.answers[subIdx] : it.answers[0];
+        if(!anyMatch(inp.value, [expected])) ok = false;
+      });
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers.join(" / ")+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+/* ---------------- AUDICIÓN ---------------- */
+var audioList = document.getElementById("audioList");
+
+var playerWrap = document.createElement("div");
+playerWrap.className = "player-wrap";
+playerWrap.innerHTML =
+  '<iframe src="https://embed.podcasts.apple.com/ru/podcast/ansiedad-y-sobrepensamiento-c%C3%B3mo-calmar-tu-mente-recopilaci%C3%B3n/id1416903369?i=1000786828530&theme=auto" ' +
+  'height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" frameborder="0" ' +
+  'sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" ' +
+  'allow="autoplay *; encrypted-media *; clipboard-write"></iframe>' +
+  '<p class="player-caption">Episodio real de Apple Podcasts (Se Regalan Dudas) — escucha el último tramo del episodio, donde se explican los primeros auxilios para un ataque de pánico y Marina Mamoliti guía el ejercicio de respiración final, antes de responder.</p>';
+audioList.appendChild(playerWrap);
+
+var aud1 = {
+  id:"aud1", title:"Audición 1 · Escucha y responde",
+  items:[
+    {q:"Según los consejos para salir de un ataque de pánico, ¿cómo debe ser la respiración?", opts:["la inhalación más larga que la exhalación","la exhalación más larga que la inhalación","solo hay que inhalar por la boca","hay que aguantar la respiración todo el tiempo posible"], answer:1},
+    {q:"¿Qué efecto tiene el agua fría en la cara y las muñecas?", opts:["sube la frecuencia cardíaca","no tiene ningún efecto físico","activa el reflejo de buceo y baja la frecuencia cardíaca","provoca sudoración"], answer:2},
+    {q:"En el ejercicio de anclaje de los sentidos (grounding), ¿cuántas cosas hay que nombrar que puedas ver?", opts:["una","tres","cuatro","cinco"], answer:3},
+    {q:"¿Qué recomienda no hacer para vencer la ansiedad a largo plazo?", opts:["nombrar los sentidos","huir o evitar la situación que da miedo","respirar lento","tocar algo frío"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud1.title+'</span></div>';
+  var list = document.createElement("div");
+  aud1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="aud1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="aud1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud1.items.length+"</b>";
+    blockScores["aud1"] = {correct:correct, total:aud1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud1"] = {correct:0, total:aud1.items.length};
+  audioList.appendChild(wrap);
+})();
+
+var aud2 = {
+  id:"aud2", title:"Audición 2 · Dictado — completa la meditación final de Marina Mamoliti",
+  bank:"calor · manos · a salvo · lento · soltando",
+  items:[
+    {stem:"Sentí el ______ de tus propias manos.", answers:["calor"]},
+    {stem:"Eso te muestra que estás acá, estás a ______.", answers:["salvo"]},
+    {stem:"Y exhalá por la boca, despacio, largo, ______, soltando todo.", answers:["lento"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud2.title+'</span></div>'+
+    '<p class="hint" style="margin-top:0;">Es la meditación de respiración con la que se cierra el episodio.</p>';
+  var bankDiv = document.createElement("div");
+  bankDiv.className = "wordbank";
+  bankDiv.innerHTML = "<b>Banco de palabras:</b> "+aud2.bank;
+  wrap.appendChild(bankDiv);
+  var list = document.createElement("div");
+  aud2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud2.items.length+"</b>";
+    blockScores["aud2"] = {correct:correct, total:aud2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud2"] = {correct:0, total:aud2.items.length};
+  audioList.appendChild(wrap);
+})();
+
+/* ---------------- TEST ---------------- */
+var testList = document.getElementById("testList");
+
+/* Bloque 1: comprensión (radio) */
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"Según Ash, ¿qué es la ansiedad?", opts:["un peligro real que siempre está presente","el resultado de creerle a las mentiras que dice la mente","una enfermedad genética incurable","lo mismo que el estrés"], answer:1},
+    {q:"¿Cuál es la diferencia principal entre ansiedad y estrés según el episodio?", opts:["no hay ninguna diferencia","el estrés es miedo real en el presente; la ansiedad es miedo psicológico sobre algo futuro","el estrés es siempre positivo y la ansiedad siempre negativa","la ansiedad solo la sienten los niños"], answer:1},
+    {q:"¿Qué es la neurocepción, según Nicole Lecár?", opts:["una enfermedad del sistema nervioso","una técnica de respiración","detección sin conciencia de señales de seguridad o peligro","un tipo de terapia"], answer:2},
+    {q:"¿Cuál de estas NO es una fuente de la neurocepción mencionada en el episodio?", opts:["la interocepción (lo que pasa dentro del cuerpo)","la exterocepción (los cinco sentidos)","la propiocepción (la posición del cuerpo en el espacio)","la predicción del futuro"], answer:3},
+    {q:"Según Adali López, ¿qué representa la autocompasión en el ciclo de un pensamiento intrusivo?", opts:["una tijera que rompe el ciclo","un libro más en la biblioteca de pensamientos","una forma de ignorar el problema","un tipo de ataque de pánico"], answer:0},
+    {q:"¿Qué NO se recomienda hacer durante un ataque de pánico, según el episodio?", opts:["respirar exhalando más largo que inhalando","usar agua fría en la cara y las muñecas","huir o evitar la situación","nombrar cosas que puedes ver, oír y tocar"], answer:2}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 2: huecos */
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"mentiras · real · incertidumbre · encadenadas · buceo · quedarme · catastrófico · presente",
+  items:[
+    {stem:"La ansiedad es la respuesta de creerle a las ______ que nuestra mente nos dice.", answers:["mentiras"]},
+    {stem:"El estrés es cuando estoy ante una situación de miedo ______, no de miedo psicológico.", answers:["real"]},
+    {stem:"Nuestro cerebro no está cableado para la ______.", answers:["incertidumbre"]},
+    {stem:"La técnica de las palabras ______ nos ayuda a estar presentes.", answers:["encadenadas"]},
+    {stem:"El agua fría activa un reflejo que se llama reflejo de ______.", answers:["buceo"]},
+    {stem:"No huir, es decir, ______.", answers:["quedarme"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3a: relacionar (select) */
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su significado",
+  words:["sobrepensar","dar lugar a (algo)","desembocar en (algo)","paralizar","bancarse (algo)"],
+  defs:["pensar demasiado en algo, darle muchas vueltas","provocar, causar algo","terminar teniendo un resultado concreto (como un río que llega al mar)","impedir que alguien actúe o se mueva","aguantar, soportar algo difícil (coloquial, Argentina)"],
+  answers:["a","b","c","d","e"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Significado</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3b: orden (select) */
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena los pasos para salir de un ataque de pánico, según se mencionan en el episodio",
+  events:[
+    {text:"Exhalar siempre más largo que inhalar, para activar el freno del sistema nervioso.", answer:1},
+    {text:"Poner agua fría en la cara y en las muñecas para activar el reflejo de buceo.", answer:2},
+    {text:"Hacer el anclaje de los sentidos: nombrar cosas que puedes ver, oír, tocar, oler y degustar.", answer:3},
+    {text:"No huir: quedarse y enfrentar la situación en vez de evitarla.", answer:4}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 4: transformación (respuesta modelo, no autocorregible) */
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Cambia de presente a pretérito imperfecto: «Duermo mal y soy irritable.»", model:"Dormía mal y era irritable."},
+    {stem:"Convierte a estilo indirecto: Ash dijo: «La ansiedad es el resultado de creerle a las mentiras de la mente.»", model:"Ash dijo que la ansiedad era el resultado de creerle a las mentiras de la mente."},
+    {stem:"Une estas dos ideas con «cuando» + presente de subjuntivo: «Voy a calmarme. Va a pasar el ataque de pánico.»", model:"Voy a calmarme cuando pase el ataque de pánico."},
+    {stem:"Cambia el imperativo de tú a vos: «Cierra los ojos y respira profundo.»", model:"Cerrá los ojos y respirá profundo."},
+    {stem:"Reescribe usando «estar + gerundio» (presente continuo): «Mi mente no para de pensar en el futuro.»", model:"Mi mente está pensando sin parar en el futuro."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 5: léxico (radio) */
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «agotar(se)»:", opts:["descansar","cansar mucho","emocionar","calmar"], answer:1},
+    {q:"Antónimo de «paralizar»:", opts:["actuar / moverse","detener","congelar","callar"], answer:0},
+    {q:"Encuentra la palabra intrusa (todas menos una son sensaciones físicas de la ansiedad):", opts:["taquicardia","sudoración","curiosidad","opresión en el pecho"], answer:2},
+    {q:"¿Qué palabra completa la colocación «______ cuenta de algo»?", opts:["darse","hacer","tener","poner"], answer:0},
+    {q:"Sinónimo coloquial de «bancarse algo»:", opts:["evitar","aguantar","olvidar","celebrar"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
