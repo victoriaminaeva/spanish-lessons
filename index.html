@@ -65,6 +65,19 @@ h1{font-size:clamp(28px,5vw,38px); margin:0 0 10px;}
 }
 .card-desc{color:var(--muted); font-size:14.5px; margin-top:8px;}
 .card-meta{font-size:12.5px; color:var(--muted); margin-top:10px; font-style:italic;}
+
+.card-toolbar{display:flex; justify-content:flex-end; margin-bottom:4px;}
+.archive-btn{
+  font-family:"Space Mono", monospace; font-size:10.5px; font-weight:700;
+  letter-spacing:.03em; text-transform:uppercase;
+  background:var(--surface-2); color:var(--muted); border:1px solid var(--border);
+  border-radius:999px; padding:3px 10px; cursor:pointer;
+}
+.archive-btn:hover{color:var(--accent); border-color:var(--accent);}
+.archive-btn.is-archived{background:var(--accent); color:var(--accent-ink); border-color:var(--accent);}
+.card-wrap.is-archived .card{opacity:.6;}
+.archive-empty{color:var(--muted); font-size:14px; margin-top:16px; font-style:italic;}
+
 footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); font-size:13px; color:var(--muted); text-align:center;}
 </style>
 </head>
@@ -514,8 +527,86 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); fo
 
 </div>
 
+<h2 style="margin-top:44px;">Archivo</h2>
+<p class="lead">Los temas y lecciones que ya completaste. Pulsa «Archivar» en cualquier tarjeta para moverla aquí, o «Restaurar» para devolverla a su sitio. Esto se guarda solo en este navegador.</p>
+<div class="grid" id="archivoGrid"></div>
+<p class="archive-empty" id="archivoEmpty">Todavía no has archivado ningún tema.</p>
+
 <footer>Talleres de español · Nivel A2–B1</footer>
 
 </div>
+
+<script>
+(function(){
+"use strict";
+var STORE_KEY = "spanish_lessons_archive_v1";
+var archived = [];
+try{ archived = JSON.parse(localStorage.getItem(STORE_KEY) || "[]"); }catch(e){ archived = []; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(archived)); }catch(e){}
+}
+function isArchived(href){ return archived.indexOf(href) !== -1; }
+function setArchived(href, val){
+  var i = archived.indexOf(href);
+  if(val && i === -1) archived.push(href);
+  if(!val && i !== -1) archived.splice(i,1);
+  persist();
+}
+
+var archivoGrid = document.getElementById("archivoGrid");
+var archivoEmpty = document.getElementById("archivoEmpty");
+function updateEmptyState(){
+  archivoEmpty.hidden = archivoGrid.children.length > 0;
+}
+
+var links = Array.prototype.slice.call(document.querySelectorAll("a.card"));
+links.forEach(function(link){
+  var href = link.getAttribute("href");
+  var originalParent = link.parentNode;
+  var originalNext = link.nextSibling;
+
+  var wrap = document.createElement("div");
+  wrap.className = "card-wrap";
+  var toolbar = document.createElement("div");
+  toolbar.className = "card-toolbar";
+  var btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "archive-btn";
+  toolbar.appendChild(btn);
+
+  originalParent.insertBefore(wrap, link);
+  wrap.appendChild(toolbar);
+  wrap.appendChild(link);
+
+  function render(){
+    var arch = isArchived(href);
+    wrap.classList.toggle("is-archived", arch);
+    btn.classList.toggle("is-archived", arch);
+    btn.textContent = arch ? "Restaurar" : "Archivar";
+  }
+
+  btn.addEventListener("click", function(){
+    var next = !isArchived(href);
+    setArchived(href, next);
+    render();
+    if(next){
+      archivoGrid.appendChild(wrap);
+    } else if(originalNext && originalNext.parentNode === originalParent){
+      originalParent.insertBefore(wrap, originalNext);
+    } else {
+      originalParent.appendChild(wrap);
+    }
+    updateEmptyState();
+  });
+
+  render();
+  if(isArchived(href)){
+    archivoGrid.appendChild(wrap);
+  }
+});
+
+updateEmptyState();
+})();
+</script>
 </body>
 </html>
