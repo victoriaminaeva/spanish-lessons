@@ -1,0 +1,1006 @@
+<!doctype html>
+<title>Maternidad Realista: las Tres Madres</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+/* ---- vocab cards ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+/* ---- discussion ---- */
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+.player-wrap{margin-bottom:16px;}
+.player-frame{position:relative; width:100%; max-width:640px; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:var(--surface-2);}
+.player-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+.player-caption{font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Maternidad Realista · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Maternidad realista: las tres madres</h1>
+  <p class="subtitle">Vocabulario, debate, gramática, audición y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> vídeo de YouTube «Maternidad realista con @palomasicomprendo» (canal Advanced Spanish Podcast — Español Avanzado, con César, de Spanish Language Coach) (transcripción proporcionada por la estudiante)</p>
+  <div class="summary">
+    <b>De qué trata:</b> César lee un texto que escribió para su madre sobre las "tres madres" que coexisten en una misma mujer — la madre-madre, la madre-amiga y la madre-mujer — y a partir de ahí conversa con Paloma, que cría a su hijo en Francia lejos de su familia, sobre la maternidad real: el exceso de información y opiniones sobre crianza, el adultocentrismo (un mundo pensado para adultos), las diferencias en los permisos de maternidad/paternidad entre países, la importancia de conservar espacios personales, y qué pueden hacer los padres para repartir mejor la carga de cuidar a los hijos.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="audicion">
+  <div class="section-head"><span class="section-num">04</span><h2>Audición</h2></div>
+  <p class="hint">Escucha el principio del vídeo, donde César lee el texto «Madre no hay más que tres», antes de responder.</p>
+  <div id="audioList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">05</span><h2>Test — Maternidad realista</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "maternidadrealista_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- VOCABULARIO ---------------- */
+var vocab = [
+  {term:"la crianza", pos:"sustantivo, f.",
+   quote:"Lo que añade un poquito una dificultad mayor al proceso de <mark>crianza</mark>.",
+   trans:"воспитание (детей)",
+   mean:"Процесс воспитания и заботы о ребёнке. От глагола «criar» — воспитывать, растить.",
+   ex:"Cada familia vive la crianza de una manera diferente. — Каждая семья переживает воспитание детей по-своему."},
+  {term:"la red de apoyo", pos:"expresión (sustantivo)",
+   quote:"Ojalá, eso sería lo ideal, tener una <mark>red de apoyo</mark> que de verdad te sostenga.",
+   trans:"сеть поддержки (семья, друзья, помогающие в трудной ситуации)",
+   mean:"Круг людей (семья, друзья, соседи), на которых можно рассчитывать в сложный период — очень частое выражение в контексте материнства, болезни, переезда.",
+   ex:"Mudarse a otra ciudad sin una red de apoyo puede ser muy duro. — Переезд в другой город без сети поддержки может быть очень тяжёлым."},
+  {term:"estar agotado/a", pos:"construcción verbal (estar + participio)",
+   quote:"Las familias están <mark>agotadas</mark> porque se tienen que incorporar demasiado rápido al mercado laboral.",
+   trans:"быть измотанным, крайне уставшим",
+   mean:"Находиться в состоянии сильной усталости — физической или эмоциональной. От глагола «agotar(se)».",
+   ex:"Después de dos noches sin dormir, estaba completamente agotada. — После двух бессонных ночей она была полностью измотана."},
+  {term:"la baja (de maternidad/paternidad)", pos:"sustantivo, f.",
+   quote:"Las <mark>bajas</mark> casi en cualquier país hoy en día son ridículas.",
+   trans:"декретный отпуск, отпуск по уходу за ребёнком",
+   mean:"Официальный оплачиваемый отпуск с работы — в этом контексте, после рождения ребёнка. Также «estar de baja» = быть на больничном/в отпуске по болезни.",
+   ex:"En su empresa, la baja de paternidad es solo de dos semanas. — В его компании отпуск по уходу за ребёнком для отцов составляет всего две недели."},
+  {term:"sostener", pos:"verbo transitivo",
+   quote:"Las madres siguen siendo las que <mark>sostienen</mark> más en la familia a nivel emocional.",
+   trans:"поддерживать (эмоционально, физически)",
+   mean:"Буквально «держать» (чтобы не упало), в переносном смысле — оказывать эмоциональную или финансовую поддержку кому-то или чему-то.",
+   ex:"Fue su mejor amiga quien la sostuvo durante esos meses tan difíciles. — Именно её лучшая подруга поддерживала её в те трудные месяцы."},
+  {term:"el desajuste (hormonal)", pos:"sustantivo, m.",
+   quote:"El <mark>desajuste</mark> hormonal después del embarazo, la falta de sueño...",
+   trans:"дисбаланс, разлад (гормональный)",
+   mean:"Нарушение нормального равновесия чего-либо — в этом контексте, гормонального фона организма.",
+   ex:"El médico le explicó que ese cansancio se debía a un desajuste hormonal. — Врач объяснил ей, что эта усталость связана с гормональным дисбалансом."},
+  {term:"poner límites", pos:"locución verbal",
+   quote:"Es aprender a <mark>poner límites</mark> en el trabajo.",
+   trans:"устанавливать границы",
+   mean:"Определять чёткие рамки того, что человек готов принять — по времени, поведению и т.д. Часто используется в контексте работы, отношений, воспитания.",
+   ex:"Aprender a poner límites con tu jefe es fundamental para no quemarte en el trabajo. — Научиться устанавливать границы с начальником необходимо, чтобы не выгореть на работе."},
+  {term:"incorporarse (al trabajo)", pos:"verbo pronominal",
+   quote:"Se tienen que <mark>incorporar</mark> demasiado rápido al mercado laboral después de tener a tu bebé.",
+   trans:"возвращаться, приступать (к работе)",
+   mean:"Начать или возобновить деятельность в каком-то месте — часто используется для возвращения на работу после отпуска или больничного.",
+   ex:"Se incorporó al trabajo apenas tres meses después de dar a luz. — Она вернулась на работу всего через три месяца после родов."},
+  {term:"la culpabilidad / sentirse culpable", pos:"sustantivo, f. / construcción verbal",
+   quote:"Hay que gestionar la <mark>culpabilidad</mark>, hay que tener apoyo.",
+   trans:"чувство вины / чувствовать себя виноватым",
+   mean:"Эмоциональное состояние, когда человек думает, что сделал что-то неправильно, часто без объективной причины — очень частая тема в разговорах о материнстве.",
+   ex:"Muchas madres sienten culpabilidad por tomarse tiempo para ellas mismas. — Многие матери чувствуют себя виноватыми за то, что уделяют время себе."},
+  {term:"el desafío", pos:"sustantivo, m.",
+   quote:"Es para mí todo un <mark>desafío</mark> ir adaptándote a lo que te va exigiendo cada etapa.",
+   trans:"вызов, испытание, трудная задача",
+   mean:"Ситуация или задача, требующая усилий и способностей для её преодоления. Синоним «reto».",
+   ex:"Aprender un idioma nuevo a los 40 años es todo un desafío. — Изучение нового языка в 40 лет — настоящий вызов."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+/* ---------------- DEBATE ---------------- */
+var debate = [
+  {q:"En tu familia o cultura, ¿es normal vivir cerca de los abuelos y verlos cada semana, o las familias suelen vivir más lejos unas de otras?", hint:"Útil: «En mi familia...», «Es normal/no es normal que...»"},
+  {q:"¿Qué opinas de los espacios \"sin niños\" (restaurantes, hoteles, vagones de tren)? ¿Te parece bien que existan?", hint:"Útil: «Me parece bien/mal porque...», «Entiendo que..., pero...»"},
+  {q:"Paloma dice que \"la crianza no es difícil, la hacen difícil\" por el exceso de información y de opiniones. ¿Estás de acuerdo? ¿Te ha pasado algo parecido en otra área de tu vida?", hint:"Útil: «Estoy de acuerdo/en desacuerdo porque...», «A mí me pasó algo parecido cuando...»"},
+  {q:"¿Qué diferencias notas entre los permisos de maternidad/paternidad de tu país y los que describe Paloma en Francia? ¿Te parecen justos?", hint:"Útil: «En mi país...», «A diferencia de Francia...»"},
+  {q:"Si tuvieras que mudarte a criar a tus hijos en otro país, lejos de tu familia, ¿qué crees que sería lo más difícil? ¿Y lo más positivo?", hint:"Útil: «Lo más difícil sería...», «Por otro lado, lo positivo sería...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+/* ---------------- GRAMÁTICA ---------------- */
+var gram = [
+  {id:"g1", title:"3.1 Pretérito perfecto compuesto",
+   quote:"Nuestras vidas <mark>han cambiado</mark> desde la última vez que hablamos, ¿verdad?",
+   rule:"Presente de haber (he, has, ha, hemos, habéis, han) + participio (-ado/-ido). Acciones pasadas conectadas con el presente o dentro de un periodo no terminado. <b>Ошибка:</b> путать с indefinido, когда период времени ещё продолжается (как «с последнего раза, когда мы разговаривали», что всё ещё актуально).",
+   items:[
+     {stem:"Nuestras vidas (cambiar) ______ mucho desde la última vez que hablamos.", answers:["han cambiado"]},
+     {stem:"Tú te (convertir) ______ en madre este año.", answers:["has convertido"]},
+     {stem:"Nosotros (aprender) ______ mucho sobre la crianza en el extranjero.", answers:["hemos aprendido"]},
+     {stem:"¿(Tú/notar) ______ algún choque cultural con tu pareja?", answers:["has notado"]},
+     {stem:"Ella (vivir) ______ el posparto como algo muy intenso.", answers:["ha vivido"]}
+   ]},
+  {id:"g2", title:"3.2 Verbos de deseo + presente de subjuntivo",
+   quote:"Lo que sí me gustaría... es eso de que mi hijo <mark>sepa</mark> que puede contar conmigo.",
+   rule:"Verbos de deseo (querer que, gustar que, esperar que, ojalá) van seguidos de subjuntivo cuando el sujeto de las dos partes de la oración es distinto. <b>Ошибка:</b> использовать indicativo — по-русски «хочу, чтобы он знал» звучит нейтрально, а в испанском после verbo de deseo + que всегда нужен subjuntivo.",
+   items:[
+     {stem:"Me gustaría que mi hijo (saber) ______ que puede contar conmigo.", answers:["sepa"]},
+     {stem:"Queremos que nuestros hijos (crecer) ______ en un ambiente de confianza.", answers:["crezcan"]},
+     {stem:"Ojalá los papás también (aprender) ______ a poner límites en el trabajo.", answers:["aprendan"]},
+     {stem:"Espero que las familias (tener) ______ más apoyo del Estado.", answers:["tengan"]},
+     {stem:"Prefiero que mi hijo me (decir) ______ la verdad, aunque duela.", answers:["diga"]}
+   ]},
+  {id:"g3", title:"3.3 Pretérito imperfecto (descripción de hábitos y rutinas pasadas)",
+   quote:"No <mark>estaban</mark> ahí tiradas en el suelo jugando con nosotros horas. <mark>Estaban</mark> cocinando, <mark>estaban</mark> limpiando la casa.",
+   rule:"Raíz + -aba/-ía... (o estar + gerundio en imperfecto). Describe hábitos, rutinas y estados repetidos en el pasado, sin foco en cuándo terminaron. <b>Ошибка:</b> использовать indefinido для описания повторяющейся привычки — здесь нужен именно imperfecto.",
+   items:[
+     {stem:"Antes, nuestras madres no (jugar) ______ con nosotros todo el día.", answers:["jugaban"]},
+     {stem:"Ellas (cocinar) ______ y (limpiar) ______ la casa mientras nosotros (ver) ______ la tele.", answers:["cocinaban", "limpiaban", "veíamos"]},
+     {stem:"De niña, yo (comer) ______ en casa de mis abuelos todos los domingos.", answers:["comía"]},
+     {stem:"Antes (haber) ______ solo cuatro libros sobre crianza; ahora hay demasiada información.", answers:["había"]},
+     {stem:"Mis padres no (tener) ______ tanta información sobre crianza como tenemos ahora.", answers:["tenían"]}
+   ]},
+  {id:"g4", title:"3.4 Condicional compuesto + si + pluscuamperfecto de subjuntivo (condicional irreal en el pasado)",
+   quote:"Creo que <mark>habría habido</mark> más choques si, por ejemplo, mi pareja <mark>hubiese sido</mark> de otro país que no fuera de habla hispana.",
+   rule:"Si + pluscuamperfecto de subjuntivo (hubiera/hubiese + participio), + condicional compuesto (habría + participio). Se usa para hablar de situaciones hipotéticas en el pasado que no ocurrieron. <b>Ошибка:</b> смешивать времена — если после «si» стоит pluscuamperfecto de subjuntivo, в главной части нужен именно condicional compuesto, а не presente или futuro.",
+   items:[
+     {stem:"(Nosotros/tener) ______ más choques si mi pareja (ser) ______ de otro país.", answers:["habríamos tenido", "hubiera sido"]},
+     {stem:"Si yo (vivir) ______ cerca de mi familia, (tener) ______ más ayuda con el bebé.", answers:["hubiera vivido", "habría tenido"]},
+     {stem:"Si el Estado (ofrecer) ______ mejores bajas, más padres se las (tomar) ______.", answers:["hubiera ofrecido", "habrían tomado"]},
+     {stem:"Ella no (sentirse) ______ tan sola si (haber) ______ más apoyo en Francia.", answers:["se habría sentido", "hubiera habido"]},
+     {stem:"Si tú (saber) ______ todo esto antes, ¿(hacer) ______ las cosas de forma diferente?", answers:["hubieras sabido", "habrías hecho"]}
+   ]},
+  {id:"g5", title:"3.5 Perífrasis de obligación: tener que / hay que + infinitivo",
+   quote:"<mark>Hay que</mark> gestionar la culpabilidad, <mark>hay que</mark> tener apoyo.",
+   rule:"Tener que + infinitivo expresa una obligación personal (yo tengo que...). Hay que + infinitivo expresa una obligación impersonal, general, sin sujeto concreto (siempre en 3ª persona singular: hay que). <b>Ошибка:</b> спрягать «hay que» по лицам (*yo hay que* неверно) — эта форма всегда безличная.",
+   items:[
+     {stem:"Hay que (gestionar) ______ la culpabilidad cuando eres madre o padre.", answers:["gestionar"]},
+     {stem:"Los papás tienen que (aprender) ______ a poner límites en el trabajo.", answers:["aprender"]},
+     {stem:"Hay que (construir) ______ una cultura de cuidados colectiva.", answers:["construir"]},
+     {stem:"Ella tiene que (adaptarse) ______ a cada nueva etapa de su hijo.", answers:["adaptarse"]},
+     {stem:"Hay que (ser) ______ un poco más comprensivos con los bebés que lloran.", answers:["ser"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var stemHtml = it.stem;
+    var count = 0;
+    stemHtml = stemHtml.replace(/______/g, function(){
+      var inputHtml = '<input type="text" class="ans-input" data-idx="'+idx+'" data-sub="'+count+'" autocomplete="off">';
+      count++;
+      return inputHtml;
+    });
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+stemHtml+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var inputs = row.querySelectorAll(".ans-input");
+      var ok = true;
+      inputs.forEach(function(inp, subIdx){
+        var expected = it.answers[subIdx] !== undefined ? it.answers[subIdx] : it.answers[0];
+        if(!anyMatch(inp.value, [expected])) ok = false;
+      });
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers.join(" / ")+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+/* ---------------- AUDICIÓN ---------------- */
+var audioList = document.getElementById("audioList");
+
+var playerWrap = document.createElement("div");
+playerWrap.className = "player-wrap";
+playerWrap.innerHTML =
+  '<div class="player-frame"><iframe src="https://www.youtube.com/embed/YCaHUAF0xF0" ' +
+  'title="Maternidad realista con @palomasicomprendo - Advanced Spanish Podcast" ' +
+  'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+  'allowfullscreen></iframe></div>' +
+  '<p class="player-caption">Vídeo real de YouTube — escucha el principio, donde César lee el texto «Madre no hay más que tres», antes de responder.</p>';
+audioList.appendChild(playerWrap);
+
+var aud1 = {
+  id:"aud1", title:"Audición 1 · Escucha y responde",
+  items:[
+    {q:"¿Cómo se titula el texto que César escribió para su madre?", opts:["\"Mamá, te quiero\"", "\"Madre no hay más que tres\"", "\"Mi madre, mi amiga\"", "\"Las tres mujeres\""], answer:1},
+    {q:"Según el texto, ¿qué le enseñó la \"madre educadora\"?", opts:["A conducir un coche","Cosas de la vida, como hacer unas buenas lentejas, y se preocupaba por su educación","A hablar inglés","A cocinar solo postres"], answer:1},
+    {q:"¿Cuándo apareció la \"madre amiga\", según el texto?", opts:["Cuando César era un bebé","Cuando César se convirtió en adulto","El día de la boda de César","Nunca apareció"], answer:1},
+    {q:"¿Qué le enseñó la \"madre mujer\" a César, junto a su compañero de vida?", opts:["A cocinar","En qué consiste el amor, y que tener valores en común es esencial","A viajar solo","A no confiar en nadie"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud1.title+'</span></div>';
+  var list = document.createElement("div");
+  aud1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="aud1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="aud1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud1.items.length+"</b>";
+    blockScores["aud1"] = {correct:correct, total:aud1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud1"] = {correct:0, total:aud1.items.length};
+  audioList.appendChild(wrap);
+})();
+
+var aud2 = {
+  id:"aud2", title:"Audición 2 · Dictado — completa el inicio del texto",
+  bank:"madre · calor · seguridad · protección · tristeza",
+  items:[
+    {stem:"La primera es la ______ madre.", answers:["madre"]},
+    {stem:"Esa persona que me da ______ cuando lo necesito.", answers:["calor"]},
+    {stem:"La que me daba ______ y protección cuando era pequeño.", answers:["seguridad"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud2.title+'</span></div>'+
+    '<p class="hint" style="margin-top:0;">Es el comienzo del texto «Madre no hay más que tres».</p>';
+  var bankDiv = document.createElement("div");
+  bankDiv.className = "wordbank";
+  bankDiv.innerHTML = "<b>Banco de palabras:</b> "+aud2.bank;
+  wrap.appendChild(bankDiv);
+  var list = document.createElement("div");
+  aud2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud2.items.length+"</b>";
+    blockScores["aud2"] = {correct:correct, total:aud2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud2"] = {correct:0, total:aud2.items.length};
+  audioList.appendChild(wrap);
+})();
+
+/* ---------------- TEST ---------------- */
+var testList = document.getElementById("testList");
+
+/* Bloque 1: comprensión (radio) */
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"En el texto que César escribió para su madre, ¿cuántas \"madres\" describe?", opts:["Dos","Tres","Cuatro","Una"], answer:1},
+    {q:"Según Paloma, ¿cuál es una de las ventajas de criar en el extranjero, lejos de la familia?", opts:["Tener más dinero","Vivir una maternidad un poco más libre, sin tantas opiniones externas","No tener que trabajar nunca","Tener siempre más tiempo libre"], answer:1},
+    {q:"¿Qué es el \"adultocentrismo\" que mencionan en la conversación?", opts:["Un tipo de terapia para adultos","La idea de que el mundo está pensado para adultos y no se tiene en cuenta a los niños","Una ley sobre la crianza","Un curso de español"], answer:1},
+    {q:"Según Paloma, ¿cuánto dura la baja de maternidad en Francia, aproximadamente?", opts:["Un año completo","Unos 4 meses en total, aunque la mayoría de madres dejan a sus bebés a los 3 meses","Solo dos semanas","6 meses obligatorios"], answer:1},
+    {q:"Según Paloma, ¿qué es lo más importante que los hijos necesitan de sus padres, más que actividades constantes?", opts:["Juguetes y regalos","Presencia, atención y escucha activa","Clases extraescolares","Redes sociales"], answer:1},
+    {q:"¿Qué consejo da Paloma para las personas que quieren regalar algo a una familia con un bebé recién nacido?", opts:["Comprar peluches y flores","Llevarles comida hecha, como una porción de lasaña o de lentejas","No visitarlos nunca","Regalar ropa de bebé cara"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 2: huecos */
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"crianza · red de apoyo · agotadas · sostienen · culpabilidad · desafío · baja · límites",
+  items:[
+    {stem:"Lo que añade un poquito una dificultad mayor al proceso de ______.", answers:["crianza"]},
+    {stem:"Ojalá, eso sería lo ideal, tener una ______ que de verdad te sostenga.", answers:["red de apoyo"]},
+    {stem:"Las familias están ______ porque se tienen que incorporar demasiado rápido al mercado laboral.", answers:["agotadas"]},
+    {stem:"Las madres siguen siendo las que ______ más en la familia a nivel emocional.", answers:["sostienen"]},
+    {stem:"Hay que gestionar la ______, hay que tener apoyo.", answers:["culpabilidad"]},
+    {stem:"Es para mí todo un ______ ir adaptándote a lo que te va exigiendo cada etapa.", answers:["desafío"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3a: relacionar (select) */
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su significado",
+  words:["la crianza","la red de apoyo","sostener","incorporarse (al trabajo)","el desajuste (hormonal)"],
+  defs:["volver a trabajar después de una pausa","un desequilibrio en el cuerpo, por ejemplo después del embarazo","el proceso de educar y cuidar a un hijo o hija","las personas (familia, amigos) que te ayudan en un momento difícil","dar soporte emocional o económico a alguien"],
+  answers:["c","d","e","a","b"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Significado</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3b: orden (select) */
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena los temas según se van tratando en el vídeo",
+  events:[
+    {text:"César lee el texto «Madre no hay más que tres» sobre las tres madres.", answer:1},
+    {text:"Hablan de cómo es criar en el extranjero, lejos de la familia.", answer:2},
+    {text:"Hablan del adultocentrismo y los espacios sin niños.", answer:3},
+    {text:"Hablan del exceso de información sobre crianza y de las bajas de maternidad/paternidad en Francia.", answer:4},
+    {text:"Paloma da consejos para conservar el tiempo personal y habla del papel de los padres.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 4: transformación (respuesta modelo, no autocorregible) */
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Cambia a pretérito perfecto compuesto: «Nuestras vidas cambian mucho desde la última vez que hablamos.»", model:"Nuestras vidas han cambiado mucho desde la última vez que hablamos."},
+    {stem:"Completa con presente de subjuntivo: «Me gustaría que mi hijo (saber) que puede contar conmigo.»", model:"Me gustaría que mi hijo sepa que puede contar conmigo."},
+    {stem:"Convierte a estilo indirecto: Paloma dijo: «La crianza no es difícil, la hacen difícil.»", model:"Paloma dijo que la crianza no era difícil, que la hacían difícil."},
+    {stem:"Completa la condicional irreal en el pasado: «Habría tenido más choques si mi pareja (ser) de otro país.»", model:"Habría tenido más choques si mi pareja hubiera sido de otro país."},
+    {stem:"Reescribe usando «hay que + infinitivo»: «Es necesario construir una cultura de cuidados colectiva.»", model:"Hay que construir una cultura de cuidados colectiva."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 5: léxico (radio) */
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «estar agotado/a»:", opts:["estar descansado","estar muy cansado","estar contento","estar ocupado"], answer:1},
+    {q:"Antónimo de «sostener» (a nivel emocional):", opts:["apoyar","abandonar","cuidar","escuchar"], answer:1},
+    {q:"Encuentra la palabra intrusa (todas menos una describen a personas o cosas que ayudan en la crianza):", opts:["la red de apoyo","los abuelos","el adultocentrismo","la pareja"], answer:2},
+    {q:"¿Qué palabra completa «sentirse ______» (sentir que has hecho algo mal)?", opts:["culpable","agotado","sostenido","desafiado"], answer:0},
+    {q:"Sinónimo de «el desafío»:", opts:["el reto","el descanso","el error","el permiso"], answer:0}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
