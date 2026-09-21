@@ -1,0 +1,1004 @@
+<!doctype html>
+<title>Cómo el Estrés Afecta al Cuerpo</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+/* ---- vocab cards ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+/* ---- discussion ---- */
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+.player-wrap{margin-bottom:16px;}
+.player-caption{font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Cómo el Estrés Afecta al Cuerpo · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Cómo el estrés afecta al cuerpo</h1>
+  <p class="subtitle">Vocabulario, debate, gramática, audición y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> podcast <i>Entiende Tu Mente</i> — episodio 117 «Cómo nos afecta el estrés físicamente», con Molo Cebrián, Luis Muiño y Mónica González (transcripción proporcionada por la estudiante)</p>
+  <div class="summary">
+    <b>De qué trata:</b> a partir de la pregunta de una oyente de Argentina, Rocío, que desarrolló problemas físicos por el estrés, el equipo explica el origen científico del concepto de estrés (con el médico Hans Selye), cómo el cuerpo libera adrenalina y noradrenalina ante un sobreesfuerzo, y por qué eso desgasta sistemas como el digestivo, el muscular o el inmunitario. Hablan de síntomas físicos frecuentes (sueño, alimentación, músculos, piel, dientes, tensión), de la idea de encontrar tu propio "termómetro personal", y de tener un "protocolo de actuación" para cuando el cuerpo empieza a avisar.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="audicion">
+  <div class="section-head"><span class="section-num">04</span><h2>Audición</h2></div>
+  <p class="hint">Escucha el principio del episodio, donde Rocío deja su mensaje desde Argentina, antes de responder.</p>
+  <div id="audioList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">05</span><h2>Test — Cómo el estrés afecta al cuerpo</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "estresyelcuerpo_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- VOCABULARIO ---------------- */
+var vocab = [
+  {term:"sobrepasar", pos:"verbo transitivo",
+   quote:"Cuando tenemos que afrontar un tema que nos <mark>sobrepasa</mark>, sobrepasa lo que normalmente hacemos en la vida cotidiana.",
+   trans:"превышать, выходить за пределы возможностей",
+   mean:"Превышать способность человека справиться с чем-то — ситуация становится больше, чем он может выдержать.",
+   ex:"La cantidad de trabajo esta semana me sobrepasa por completo. — Объём работы на этой неделе полностью превышает мои возможности."},
+  {term:"liberar (una sustancia)", pos:"verbo transitivo",
+   quote:"El sistema físico empieza a <mark>liberar</mark>, sobre todo, adrenalina y noradrenalina.",
+   trans:"выделять, высвобождать (вещество)",
+   mean:"Выпускать вещество из организма — в биологическом контексте, о гормонах или нейромедиаторах.",
+   ex:"El cuerpo libera cortisol cuando estamos bajo mucha presión. — Организм выделяет кортизол, когда мы находимся под сильным давлением."},
+  {term:"el sobreesfuerzo", pos:"sustantivo, m.",
+   quote:"Tenemos que hacer un <mark>sobreesfuerzo</mark>.",
+   trans:"чрезмерное усилие, перенапряжение",
+   mean:"Усилие, превышающее нормальный уровень — физическое или психологическое, которое требует больше ресурсов, чем обычно.",
+   ex:"Terminar el proyecto en dos días fue un sobreesfuerzo tremendo para todo el equipo. — Завершить проект за два дня было огромным перенапряжением для всей команды."},
+  {term:"las manifestaciones físicas", pos:"expresión (sustantivo)",
+   quote:"Estas <mark>manifestaciones físicas</mark> que preguntaba nuestra amiga desde Argentina son mucho más fáciles de interpretar.",
+   trans:"физические проявления (симптомы)",
+   mean:"Внешние, телесные признаки внутреннего состояния — например, боль, напряжение, изменения кожи как проявления стресса.",
+   ex:"El insomnio es una de las manifestaciones físicas más comunes de la ansiedad. — Бессонница — одно из самых распространённых физических проявлений тревоги."},
+  {term:"confluir", pos:"verbo intransitivo",
+   quote:"Cuando tienes varias que coinciden, que <mark>confluyen</mark>, el mapa ya te está dando la ruta.",
+   trans:"сходиться, совпадать (о нескольких вещах одновременно)",
+   mean:"Буквально «сливаться вместе» (как реки) — в переносном смысле, когда несколько признаков или факторов появляются одновременно.",
+   ex:"Cuando el estrés, el cansancio y la tristeza confluyen, hay que pedir ayuda. — Когда стресс, усталость и грусть сходятся вместе, нужно просить о помощи."},
+  {term:"descartar", pos:"verbo transitivo",
+   quote:"Tendrás que preguntar a un médico, <mark>descartar</mark>, y por supuesto siempre están allí los amigos psicólogos.",
+   trans:"исключать (как причину, вариант)",
+   mean:"Убрать что-то из списка возможных причин или вариантов после проверки — часто используется в медицинском контексте.",
+   ex:"El médico le hizo varias pruebas para descartar una enfermedad grave. — Врач сделал ему несколько анализов, чтобы исключить серьёзное заболевание."},
+  {term:"estar contracturado/a", pos:"construcción verbal",
+   quote:"Estás en una situación de estrés, que estás contracturado. O sea, literalmente <mark>estás contracturado</mark>.",
+   trans:"иметь мышечный спазм/зажим",
+   mean:"Медицинский термин для описания мышечного напряжения или спазма — часто в спине или шее, типичная физическая реакция на стресс.",
+   ex:"Después de una semana de exámenes, tenía el cuello completamente contracturado. — После недели экзаменов у неё была полностью зажата шея."},
+  {term:"rechinar (los dientes)", pos:"verbo transitivo/intransitivo",
+   quote:"El <mark>rechinar</mark> de dientes o el apretar de las mandíbulas.",
+   trans:"скрежетать (зубами)",
+   mean:"Тереть зубы друг о друга, обычно неосознанно, часто во сне — распространённая физическая реакция на стресс и напряжение.",
+   ex:"El dentista le dijo que rechinaba los dientes por las noches debido al estrés. — Стоматолог сказал ей, что она скрежещет зубами по ночам из-за стресса."},
+  {term:"el termómetro (personal)", pos:"expresión (sustantivo, uso metafórico)",
+   quote:"Porque ese va a ser tu <mark>termómetro</mark> personal.",
+   trans:"личный «термометр», индивидуальный индикатор",
+   mean:"Метафора — конкретный признак или симптом, который каждый человек использует, чтобы понять уровень своего стресса или тревоги.",
+   ex:"Para mí, el termómetro personal es cuando empiezo a olvidar cosas fácilmente. — Для меня личный «термометр» — это когда я начинаю легко всё забывать."},
+  {term:"estar desbordado/a", pos:"construcción verbal (estar + participio)",
+   quote:"Cuando ya estás <mark>desbordado</mark>, de verdad, es que ya no estás en el 7.",
+   trans:"быть переполненным, не справляться (эмоционально)",
+   mean:"Находиться в состоянии, когда эмоции или обязанности превышают способность с ними справляться — сильнее, чем просто «estar estresado».",
+   ex:"Estaba tan desbordada con el trabajo y los niños que se puso a llorar sin motivo aparente. — Она была настолько переполнена работой и детьми, что расплакалась без видимой причины."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+/* ---------------- DEBATE ---------------- */
+var debate = [
+  {q:"¿Tienes algún síntoma físico que suele aparecer cuando estás estresado/a (dolor de estómago, problemas para dormir, tensión muscular, piel, etc.)? Cuéntanos cuál es tu \"termómetro personal\".", hint:"Útil: «Mi termómetro personal es...», «Cuando estoy estresado/a, suelo...»"},
+  {q:"¿Alguna vez fuiste al médico por un síntoma físico y resultó estar relacionado con el estrés? ¿Qué pasó?", hint:"Útil: «Una vez fui al médico por...», «Al final resultó que...»"},
+  {q:"En el episodio dicen que mucha gente piensa que \"el estrés son tonterías\" y prefiere creer que su problema es solo médico o genético. ¿Por qué crees que pasa esto? ¿Lo has visto en alguien cercano?", hint:"Útil: «Creo que pasa esto porque...», «Conozco a alguien que...»"},
+  {q:"Rocío, la oyente de Argentina, cuenta que dejó su tratamiento psicológico porque sentía que \"lo tenía todo controlado\". ¿Te ha pasado algo parecido con algún tratamiento o hábito de autocuidado?", hint:"Útil: «A mí me pasó algo parecido cuando...», «Dejé de... porque pensaba que...»"},
+  {q:"Si notaras varios síntomas físicos coincidiendo al mismo tiempo (por ejemplo, problemas para dormir, dolor de espalda y cambios en el apetito), ¿qué harías, según lo que aprendiste en este episodio?", hint:"Útil: «Lo primero que haría sería...», «Iría a...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+/* ---------------- GRAMÁTICA ---------------- */
+var gram = [
+  {id:"g1", title:"3.1 Presente de indicativo (definiciones y mecanismos biológicos)",
+   quote:"El sistema físico empieza a <mark>liberar</mark>, sobre todo, adrenalina y noradrenalina.",
+   rule:"El presente de indicativo se usa para explicar mecanismos generales, definiciones científicas o procesos biológicos que ocurren siempre de la misma manera, no solo en este momento concreto. <b>Ошибка:</b> использовать futuro или условное наклонение там, где по-испански для объяснения общего механизма естественнее звучит presente.",
+   items:[
+     {stem:"El cuerpo (liberar) ______ adrenalina y noradrenalina cuando estamos estresados.", answers:["libera"]},
+     {stem:"El estrés (afectar) ______ tanto a la mente como al cuerpo.", answers:["afecta"]},
+     {stem:"Los síntomas físicos (aparecer) ______ cuando el cuerpo ya no puede más.", answers:["aparecen"]},
+     {stem:"Nosotros (necesitar) ______ escucharnos para detectar el estrés a tiempo.", answers:["necesitamos"]},
+     {stem:"Cada persona (tener) ______ su propio \"termómetro\" de estrés.", answers:["tiene"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito imperfecto + pretérito indefinido (narración personal)",
+   quote:"Estuve haciéndome pruebas durante varios momentos de mi vida... Y nunca <mark>daban</mark> con el problema, todo <mark>era</mark> negativo. Hasta que un día <mark>di</mark> con un médico.",
+   rule:"El imperfecto describe el estado o la situación de fondo (todo era negativo, nunca daban con el problema); el indefinido marca el hecho puntual que cambia la historia (di con un médico). <b>Ошибка:</b> использовать одно и то же время для обоих типов информации — тогда теряется контраст между «фоном» и «ключевым событием» в рассказе.",
+   items:[
+     {stem:"Molo (estar) ______ haciéndose pruebas médicas, pero los resultados siempre (ser) ______ negativos.", answers:["estaba", "eran"]},
+     {stem:"Hasta que un día (dar, él) ______ con un médico que le (decir) ______ que era estrés.", answers:["dio", "dijo"]},
+     {stem:"Antes yo no (saber) ______ que mi dolor de espalda (deberse) ______ al estrés.", answers:["sabía", "se debía"]},
+     {stem:"Cuando por fin (entender, ella) ______ el origen de sus síntomas, todo (cambiar) ______.", answers:["entendió", "cambió"]},
+     {stem:"Nosotros (creer) ______ que todo (estar) ______ bajo control.", answers:["creíamos", "estaba"]}
+   ]},
+  {id:"g3", title:"3.3 «Tal vez» + presente de subjuntivo",
+   quote:"No nos cerremos a pensar que tal vez ese estrés que tan bien se esconde <mark>sea</mark> también causante de un problema físico.",
+   rule:"«Tal vez» y «quizá(s)» pueden ir seguidos de subjuntivo cuando expresan una duda o posibilidad no confirmada (con indicativo suena más como una afirmación casi segura). <b>Ошибка:</b> всегда использовать indicativo после tal vez — оба варианта возможны, но subjuntivo подчёркивает именно неуверенность.",
+   items:[
+     {stem:"Tal vez ese dolor de cabeza (ser) ______ también causa del estrés.", answers:["sea"]},
+     {stem:"Tal vez (necesitar, tú) ______ hablar con un profesional.", answers:["necesites"]},
+     {stem:"Tal vez tus problemas de sueño no (tener) ______ que ver solo con el trabajo.", answers:["tengan"]},
+     {stem:"Tal vez (ser, nosotros) ______ más sensibles al estrés de lo que creemos.", answers:["seamos"]},
+     {stem:"Tal vez el cuerpo te (estar) ______ avisando desde hace tiempo.", answers:["esté"]}
+   ]},
+  {id:"g4", title:"3.4 Imperativo afirmativo (tú) con pronombre reflexivo",
+   quote:"Si no te has querido escuchar el alma, <mark>escúchate</mark> el cuerpo, porque ahí te lo está diciendo a gritos.",
+   rule:"El imperativo afirmativo de tú con verbos pronominales lleva el pronombre pegado al final del verbo (escucha + te → escúchate), y suele necesitar tilde. <b>Ошибка:</b> ставить местоимение отдельно перед глаголом — в утвердительном императиве оно всегда слитно после глагола.",
+   items:[
+     {stem:"Si no te has querido escuchar el alma, (escucharse) ______ el cuerpo.", answers:["escúchate"]},
+     {stem:"(Cuidarse) ______ antes de que sea demasiado tarde.", answers:["cuídate"]},
+     {stem:"(Fijarse) ______ en los cambios de tu patrón de sueño.", answers:["fíjate"]},
+     {stem:"(Ponerse) ______ como prioridad tu salud mental.", answers:["ponte"]},
+     {stem:"(Tomarse) ______ en serio esos síntomas físicos.", answers:["tómate"]}
+   ]},
+  {id:"g5", title:"3.5 Condicional simple (sugerencias y consejos con «deber»)",
+   quote:"Yo creo que <mark>deberíamos</mark> de dar algunas pautas.",
+   rule:"Deber (en condicional) + infinitivo se usa para dar consejos o sugerencias de forma suave, menos directa que con «tener que» o el imperativo. <b>Ошибка:</b> использовать presente («debemos») там, где по-испански для мягкого совета естественнее звучит condicional («deberíamos»).",
+   items:[
+     {stem:"Yo creo que (deber, nosotros) ______ dar algunas pautas sobre esto.", answers:["deberíamos"]},
+     {stem:"Tú (deber) ______ ir al médico si tienes varios síntomas a la vez.", answers:["deberías"]},
+     {stem:"Ella (deber) ______ buscar ayuda profesional en vez de ignorar el problema.", answers:["debería"]},
+     {stem:"Vosotros (deber) ______ escuchar más a vuestro cuerpo.", answers:["deberíais"]},
+     {stem:"Yo (deber) ______ medir mi tensión más seguido.", answers:["debería"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var stemHtml = it.stem;
+    var count = 0;
+    stemHtml = stemHtml.replace(/______/g, function(){
+      var inputHtml = '<input type="text" class="ans-input" data-idx="'+idx+'" data-sub="'+count+'" autocomplete="off">';
+      count++;
+      return inputHtml;
+    });
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+stemHtml+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var inputs = row.querySelectorAll(".ans-input");
+      var ok = true;
+      inputs.forEach(function(inp, subIdx){
+        var expected = it.answers[subIdx] !== undefined ? it.answers[subIdx] : it.answers[0];
+        if(!anyMatch(inp.value, [expected])) ok = false;
+      });
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers.join(" / ")+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+/* ---------------- AUDICIÓN ---------------- */
+var audioList = document.getElementById("audioList");
+
+var playerWrap = document.createElement("div");
+playerWrap.className = "player-wrap";
+playerWrap.innerHTML =
+  '<iframe src="https://embed.podcasts.apple.com/ru/podcast/c%C3%B3mo-nos-afecta-el-estr%C3%A9s-f%C3%ADsicamente-podcast-117/id1229124446?i=1000459943163&theme=auto" ' +
+  'height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" frameborder="0" ' +
+  'sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" ' +
+  'allow="autoplay *; encrypted-media *; clipboard-write"></iframe>' +
+  '<p class="player-caption">Episodio real de Apple Podcasts (Entiende Tu Mente) — escucha el principio, donde Rocío deja su mensaje desde Argentina, antes de responder. (El episodio incluye un anuncio en alemán al principio y al final; puedes saltarlo.)</p>';
+audioList.appendChild(playerWrap);
+
+var aud1 = {
+  id:"aud1", title:"Audición 1 · Escucha y responde",
+  items:[
+    {q:"¿Desde qué ciudad de Argentina escribe Rocío?", opts:["Córdoba","Ezeiza, Buenos Aires","Mendoza","Rosario"], answer:1},
+    {q:"¿Qué le diagnosticaron a Rocío hace dos semanas?", opts:["Una migraña crónica","El síndrome vertiginoso, relacionado con una cervicalgia","Una alergia","Un problema de tiroides"], answer:1},
+    {q:"¿A qué se dedica Rocío profesionalmente?", opts:["Es médica","Es docente de nivel secundario","Es psicóloga","Es enfermera"], answer:1},
+    {q:"¿Por qué dejó Rocío el tratamiento con su psicóloga, según cuenta?", opts:["Porque se mudó de ciudad","Porque sentía que ya lo tenía todo controlado","Porque no tenía dinero","Porque no le gustaba la psicóloga"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud1.title+'</span></div>';
+  var list = document.createElement("div");
+  aud1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="aud1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="aud1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud1.items.length+"</b>";
+    blockScores["aud1"] = {correct:correct, total:aud1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud1"] = {correct:0, total:aud1.items.length};
+  audioList.appendChild(wrap);
+})();
+
+var aud2 = {
+  id:"aud2", title:"Audición 2 · Dictado — completa la explicación de Luis",
+  bank:"sistema · liberar · noradrenalina · retener · sobrepasar",
+  items:[
+    {stem:"El ______ físico empieza a liberar, sobre todo, adrenalina y noradrenalina.", answers:["sistema"]},
+    {stem:"El sistema físico empieza a ______, sobre todo, adrenalina y noradrenalina.", answers:["liberar"]},
+    {stem:"El sistema físico empieza a liberar, sobre todo, adrenalina y ______.", answers:["noradrenalina"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud2.title+'</span></div>'+
+    '<p class="hint" style="margin-top:0;">Es la explicación de Luis sobre lo que descubrió Hans Selye.</p>';
+  var bankDiv = document.createElement("div");
+  bankDiv.className = "wordbank";
+  bankDiv.innerHTML = "<b>Banco de palabras:</b> "+aud2.bank;
+  wrap.appendChild(bankDiv);
+  var list = document.createElement("div");
+  aud2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud2.items.length+"</b>";
+    blockScores["aud2"] = {correct:correct, total:aud2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud2"] = {correct:0, total:aud2.items.length};
+  audioList.appendChild(wrap);
+})();
+
+/* ---------------- TEST ---------------- */
+var testList = document.getElementById("testList");
+
+/* Bloque 1: comprensión (radio) */
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"¿Quién definió por primera vez el concepto científico del estrés, según cuenta Luis?", opts:["Sigmund Freud","Hans Selye, un médico","Un psicólogo argentino","La Organización Mundial de la Salud"], answer:1},
+    {q:"Según Selye, ¿qué le pasa al cuerpo cuando tenemos que afrontar algo que nos exige un sobreesfuerzo?", opts:["No pasa nada a nivel físico","El cuerpo libera adrenalina y noradrenalina, lo que desgasta otros sistemas como el digestivo","El cuerpo se relaja automáticamente","Solo afecta a la memoria"], answer:1},
+    {q:"Según Mónica, ¿por qué son útiles los síntomas físicos para detectar el estrés?", opts:["Porque son imposibles de ignorar","Porque, a diferencia de las manifestaciones psicológicas, suelen ser más fáciles de interpretar, sobre todo cuando aparecen varios a la vez","Porque siempre indican una enfermedad grave","Porque solo les pasan a los deportistas"], answer:1},
+    {q:"Según el episodio, ¿qué significa tener un cambio en el \"patrón\" de sueño relacionado con el estrés?", opts:["Dormir siempre exactamente ocho horas","Que cambie tu forma habitual de dormir: mucho más, mucho menos, o con más interrupciones que de costumbre","No poder dormir nunca","Soñar todas las noches"], answer:1},
+    {q:"¿Cuál es, según Luis, el \"termómetro personal\" del estrés?", opts:["Un aparato para medir la temperatura corporal","El síntoma físico particular que cada persona tiende a mostrar cuando está estresada","Una aplicación de móvil","El número de horas de trabajo"], answer:1},
+    {q:"¿Qué recomienda Luis como \"protocolo de actuación\" ante el estrés?", opts:["Ignorarlo hasta que se pase solo","Tener un plan claro de qué hacer (por ejemplo, hacer ejercicio) en cuanto se detectan las señales, como si fuera una prescripción médica","Solo hablar con amigos, nunca con un profesional","Cambiar de trabajo inmediatamente"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 2: huecos */
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"sobrepasa · sobreesfuerzo · manifestaciones · confluyen · descartar · contracturada · termómetro · desbordado",
+  items:[
+    {stem:"Cuando tenemos que afrontar un tema que nos ______, el cuerpo empieza a liberar adrenalina.", answers:["sobrepasa"]},
+    {stem:"Eso supone hacer un ______ que desgasta al resto del cuerpo.", answers:["sobreesfuerzo"]},
+    {stem:"Estas ______ físicas son mucho más fáciles de interpretar que las psicológicas.", answers:["manifestaciones"]},
+    {stem:"Cuando tienes varios síntomas que coinciden, que ______, el mapa ya te está dando la ruta.", answers:["confluyen"]},
+    {stem:"Tendrás que ir al médico para ______ otras causas.", answers:["descartar"]},
+    {stem:"Mucha gente que está con estrés tiene la espalda ______.", answers:["contracturada"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3a: relacionar (select) */
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su significado",
+  words:["sobrepasar","liberar (una sustancia)","confluir","descartar","estar contracturado/a"],
+  defs:["tener los músculos tensos, en un estado de contracción dolorosa","eliminar una posibilidad como causa de algo","exceder la capacidad de algo o alguien","coincidir varias cosas en un mismo momento o lugar","soltar o dejar salir una sustancia del cuerpo"],
+  answers:["c","e","d","b","a"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Significado</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3b: orden (select) */
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena los temas según se van tratando en el episodio",
+  events:[
+    {text:"Rocío, desde Argentina, cuenta que el estrés le provocó un problema físico (síndrome vertiginoso).", answer:1},
+    {text:"Luis explica el origen histórico del concepto de estrés, con Hans Selye.", answer:2},
+    {text:"Hablan de por qué los síntomas físicos son más fáciles de detectar que los psicológicos.", answer:3},
+    {text:"Dan ejemplos de síntomas físicos comunes: sueño, alimentación, músculos, piel, dientes.", answer:4},
+    {text:"Luis da la idea del \"termómetro personal\" y el \"protocolo de actuación\".", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 4: transformación (respuesta modelo, no autocorregible) */
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Cambia a presente: «El cuerpo liberó adrenalina y noradrenalina.»", model:"El cuerpo libera adrenalina y noradrenalina."},
+    {stem:"Completa con imperfecto + indefinido: «Molo (hacerse) pruebas médicas, pero los resultados siempre (ser) negativos.»", model:"Molo se hacía pruebas médicas, pero los resultados siempre eran negativos."},
+    {stem:"Completa con «tal vez» + subjuntivo: «Tal vez ese dolor (ser) también causa del estrés.»", model:"Tal vez ese dolor sea también causa del estrés."},
+    {stem:"Transforma en imperativo (tú): «Tienes que escuchar a tu cuerpo.»", model:"Escúchate el cuerpo."},
+    {stem:"Reescribe usando el condicional de consejo: «Es necesario que deis algunas pautas.»", model:"Deberíais dar algunas pautas."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 5: léxico (radio) */
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «sobrepasar»:", opts:["exceder, superar","evitar","descansar","curar"], answer:0},
+    {q:"Antónimo de «liberar (una sustancia)»:", opts:["soltar","retener","producir","sentir"], answer:1},
+    {q:"Encuentra la palabra intrusa (todas menos una son síntomas físicos del estrés mencionados en el episodio):", opts:["problemas digestivos","rechinar los dientes","el termómetro","contracturas musculares"], answer:2},
+    {q:"¿Qué palabra completa «estar ______» (sentirse completamente superado por la situación)?", opts:["desbordado","confluido","liberado","descartado"], answer:0},
+    {q:"Sinónimo de «las manifestaciones físicas»:", opts:["los síntomas del cuerpo","los pensamientos","los sueños","las emociones"], answer:0}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
