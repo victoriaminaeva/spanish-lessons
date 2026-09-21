@@ -1,0 +1,1006 @@
+<!doctype html>
+<title>Ser Adulto no es Cuestión de Edad</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+/* ---- vocab cards ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+/* ---- discussion ---- */
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+.player-wrap{margin-bottom:16px;}
+.player-frame{position:relative; width:100%; max-width:640px; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:var(--surface-2);}
+.player-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+.player-caption{font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Ser Adulto no es Cuestión de Edad · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1 · Español rioplatense (Argentina)</p>
+  <h1>Ser adulto no es una cuestión de edad</h1>
+  <p class="subtitle">Vocabulario, debate, gramática, audición y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> vídeo de YouTube «Ser adulto NO es una cuestión de edad» (podcast <i>Psicología al Desnudo</i>, Psi Mammoliti, T5 E27) (transcripción proporcionada por la estudiante)</p>
+  <div class="summary">
+    <b>De qué trata:</b> la psicóloga explica que existen tres tipos de adultez (biológica, social y psicológica), y que esta última —la madurez emocional— no se ve a simple vista ni depende de la edad. Presenta el concepto de "diferenciación del self" del psiquiatra Murray Bowen, y las dos formas de falta de diferenciación: el "camaleón" (que se adapta para no decepcionar) y el "rebelde" (que se opone a todo, pero sigue atado al mismo sistema). Usa el ejemplo de la película Mulan y propone dos ejercicios prácticos: construir un "cuarto propio" interno (inspirado en Virginia Woolf) y hacerse la "pregunta brújula" antes de decidir.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="audicion">
+  <div class="section-head"><span class="section-num">04</span><h2>Audición</h2></div>
+  <p class="hint">Mira el principio del vídeo, donde se explican los tres tipos de adultez, antes de responder.</p>
+  <div id="audioList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">05</span><h2>Test — Ser adulto no es una cuestión de edad</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "seradultonoescuestiondeedad_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- VOCABULARIO ---------------- */
+var vocab = [
+  {term:"la adultez", pos:"sustantivo, f.",
+   quote:"Hay tres tipos de <mark>adultez</mark>. La biológica, la social y la psicológica.",
+   trans:"взрослость",
+   mean:"Состояние взрослого человека. В отличие от «la edad adulta» (взрослый возраст как факт), «adultez» чаще используется для описания психологического или социального состояния.",
+   ex:"La adultez no llega de golpe, es un proceso. — Взрослость не наступает внезапно, это процесс."},
+  {term:"resignar (algo)", pos:"verbo transitivo",
+   quote:"<mark>Resignás</mark> partes tuyas con tal de no incomodar a los otros.",
+   trans:"отказываться (от чего-то), поступаться (чем-то)",
+   mean:"Добровольно (хотя и болезненно) отказываться от части себя или своих желаний ради кого-то или чего-то другого.",
+   ex:"Resignó su sueño de viajar para quedarse cerca de su familia. — Она отказалась от мечты путешествовать, чтобы остаться рядом с семьёй."},
+  {term:"la diferenciación del self", pos:"expresión (término de Murray Bowen)",
+   quote:"Propuso un concepto clave, que es la <mark>diferenciación del self</mark>, del yo.",
+   trans:"дифференциация Я (термин Мюррея Боуэна)",
+   mean:"Способность мыслить, чувствовать и принимать решения исходя из себя, оставаясь в близких отношениях с другими, но не теряя себя в них.",
+   ex:"Trabajar en terapia la diferenciación del self le permitió poner límites sin culpa. — Работа над дифференциацией Я в терапии позволила ей устанавливать границы без чувства вины."},
+  {term:"fusionarse (con alguien)", pos:"verbo pronominal",
+   quote:"¿Y qué es esto de <mark>fusionarse</mark>? Bueno, es cuando lo que piensan o sienten o esperan los demás empieza a definir lo que vos hacés.",
+   trans:"сливаться, растворяться (в ком-то)",
+   mean:"Терять собственные границы настолько, что чужие мысли, чувства или ожидания начинают определять твои собственные решения.",
+   ex:"Se fusionó tanto con su pareja que dejó de tener opiniones propias. — Она настолько растворилась в партнёре, что перестала иметь собственное мнение."},
+  {term:"el camaleón", pos:"sustantivo, m. (metáfora)",
+   quote:"Vamos a llamarlo el <mark>camaleón</mark>. Es la persona que aprende a acomodar lo que piensa, lo que dice, lo que decide, según lo que cree que los demás necesitan escuchar.",
+   trans:"хамелеон (метафора)",
+   mean:"Метафора для человека, который постоянно подстраивается под ожидания других, чтобы не быть отвергнутым.",
+   ex:"En el trabajo es un camaleón: siempre dice lo que su jefe quiere escuchar. — На работе он настоящий хамелеон: всегда говорит то, что хочет услышать начальник."},
+  {term:"la lealtad invisible", pos:"expresión (término, Boszormenyi-Nagy)",
+   quote:"Las famosas <mark>lealtades invisibles</mark>. ¿Escuchaste este concepto alguna vez? Son esas deudas que nadie firmó, pero todos cumplen.",
+   trans:"невидимая лояльность / долг (термин семейной терапии)",
+   mean:"Невысказанные семейные обязательства, которым человек следует, даже если о них никто прямо не просил — например, выбор профессии, которую хотели родители.",
+   ex:"Sin darse cuenta, cumplía una lealtad invisible hacia su padre al elegir esa carrera. — Сам того не осознавая, он следовал невидимому долгу перед отцом, выбирая эту профессию."},
+  {term:"el libro de cuentas (no escrito)", pos:"expresión (metáfora)",
+   quote:"Dentro de cada familia existe algo así como un <mark>libro de cuentas no escrito</mark>.",
+   trans:"«неписаная бухгалтерская книга» (метафора семейных долгов)",
+   mean:"Метафора для системы невысказанных семейных долгов и обязательств, которые каждый член семьи «выплачивает», даже не осознавая этого.",
+   ex:"En esa familia el libro de cuentas no escrito decía que el mayor debía cuidar de los demás. — В той семье неписаная книга долгов гласила, что старший должен заботиться об остальных."},
+  {term:"camuflarse", pos:"verbo pronominal",
+   quote:"El camaleón no elige. Se <mark>camufla</mark> con su sistema.",
+   trans:"маскироваться, camuflarse",
+   mean:"Сливаться с окружением, становясь незаметным — буквально о животных (маскировочная окраска), в переносном смысле о людях, скрывающих свою истинную суть.",
+   ex:"Se camufló tanto en ese grupo de amigos que nadie sabía quién era en realidad. — Он так сильно «замаскировался» в той компании друзей, что никто не знал, кто он на самом деле."},
+  {term:"incomodar", pos:"verbo transitivo",
+   quote:"Poder de a poco empezar a elegir quién sos, incluso cuando eso <mark>incomoda</mark> a los demás.",
+   trans:"доставлять неудобство, смущать",
+   mean:"Вызывать у кого-то дискомфорт или неловкость — физическую или эмоциональную.",
+   ex:"Decir lo que pensás de verdad a veces incomoda a la gente, y está bien. — Говорить то, что действительно думаешь, иногда смущает людей, и это нормально."},
+  {term:"la brújula (interna)", pos:"sustantivo, f. (metáfora)",
+   quote:"Te voy a regalar lo que yo llamo la pregunta <mark>brújula</mark>.",
+   trans:"(внутренний) компас",
+   mean:"Метафора для внутренней системы ориентиров, основанной на собственных ценностях, а не на внешних ожиданиях.",
+   ex:"Con el tiempo, esa pregunta te ayuda a construir tu propia brújula interna. — Со временем этот вопрос помогает построить собственный внутренний компас."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+/* ---------------- DEBATE ---------------- */
+var debate = [
+  {q:"Según el episodio, hay adultez biológica, social y psicológica. ¿Cuál crees que tienes más desarrollada tú mismo/a? ¿Por qué?", hint:"Útil: «Creo que mi adultez... está más desarrollada porque...»"},
+  {q:"¿Te reconoces más en el \"camaleón\" (que se adapta para no decepcionar) o en el \"rebelde\" (que se opone a todo lo familiar)? Explica con un ejemplo.", hint:"Útil: «Me reconozco más en...», «Por ejemplo, una vez...»"},
+  {q:"El episodio dice que las \"lealtades invisibles\" nos hacen tomar decisiones sin que nadie nos lo pida explícitamente. ¿Reconoces alguna lealtad invisible en tu propia vida?", hint:"Útil: «Creo que tengo una lealtad invisible hacia...», «Por ejemplo...»"},
+  {q:"¿Qué opinas del ejercicio del \"cuarto propio\" (inspirado en Virginia Woolf) para tomar decisiones? ¿Lo probarías?", hint:"Útil: «Me parece una buena idea porque...», «Lo probaría con...»"},
+  {q:"La \"pregunta brújula\" es: \"¿Esto lo elijo porque lo quiero o porque tengo miedo de lo que va a pasar si no lo elijo?\" Piensa en una decisión reciente tuya y responde esa pregunta.", hint:"Útil: «Pensando en..., creo que lo elegí porque...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+/* ---------------- GRAMÁTICA ---------------- */
+var gram = [
+  {id:"g1", title:"3.1 Presente de indicativo, forma vos (Argentina)",
+   quote:"<mark>Podés</mark> tener 35, 40, 60 años y seguir tomando decisiones desde un lugar infantil.",
+   rule:"En el voseo argentino, el presente se acentúa en la última sílaba y no tiene diptongo: vos podés (tú puedes), vos decidís (tú decides), vos tomás (tú tomas). <b>Ошибка:</b> смешивать формы tú и vos в одном тексте — в Аргентине используется voseo, а не tú.",
+   items:[
+     {stem:"(Vos/poder) ______ tener 35 años y seguir tomando decisiones infantiles.", answers:["podés"]},
+     {stem:"¿Qué (vos/pensar) ______ realmente de esta decisión?", answers:["pensás"]},
+     {stem:"Si (vos/decidir) ______ desde el miedo, no estás siendo libre.", answers:["decidís"]},
+     {stem:"(Vos/tomar) ______ tus decisiones en base a la aprobación ajena.", answers:["tomás"]},
+     {stem:"¿Por qué (vos/callarte) ______ cuando no estás de acuerdo?", answers:["te callás"]}
+   ]},
+  {id:"g2", title:"3.2 «Aunque» + indicativo (concesión de un hecho real y conocido)",
+   quote:"Tu familia espera que sigas cierta carrera y <mark>aunque no te gusta</mark> la elegís igual para no decepcionar.",
+   rule:"Cuando «aunque» introduce un hecho real y confirmado (no una suposición), se usa indicativo. Con indicativo se afirma que el hecho es cierto; con subjuntivo (como en otro episodio ya vimos) se marca que el hecho es hipotético o no confirmado. <b>Ошибка:</b> всегда использовать subjuntivo после aunque — если факт достоверный, нужен indicativo.",
+   items:[
+     {stem:"Tu familia espera que sigas esa carrera y aunque no te (gustar) ______, la elegís igual.", answers:["gusta"]},
+     {stem:"Aunque (él/tener) ______ 40 años, sigue viviendo desde un lugar infantil.", answers:["tiene"]},
+     {stem:"Aunque ella (saber) ______ que no está de acuerdo, se calla para no incomodar.", answers:["sabe"]},
+     {stem:"Aunque (nosotros/querer) ______ irnos, nos quedamos por culpa.", answers:["queremos"]},
+     {stem:"Aunque el camaleón (parecer) ______ tranquilo, por dentro está en conflicto.", answers:["parece"]}
+   ]},
+  {id:"g3", title:"3.3 Como si + imperfecto de subjuntivo (comparación irreal en el presente)",
+   quote:"Es como si tu brújula interna <mark>quedara</mark> tapada por el ruido externo.",
+   rule:"«Como si» siempre va seguido de subjuntivo, porque introduce una comparación hipotética o irreal. Con imperfecto de subjuntivo se compara con algo irreal en el presente. <b>Ошибка:</b> использовать indicativo после «como si» — в испанском там всегда нужен subjuntivo.",
+   items:[
+     {stem:"Es como si tu brújula interna (quedar) ______ tapada por el ruido externo.", answers:["quedara"]},
+     {stem:"Vive como si alguien la (estar) ______ mirando todo el tiempo.", answers:["estuviera"]},
+     {stem:"Actuás como si (tener) ______ que aprobarle a esa persona que ya no está.", answers:["tuvieras"]},
+     {stem:"Se comporta como si (ser) ______ otra persona completamente distinta.", answers:["fuera"]},
+     {stem:"Hablás como si (seguir) ______ un guión que escribió otro.", answers:["siguieras"]}
+   ]},
+  {id:"g4", title:"3.4 Perífrasis: terminar de + infinitivo",
+   quote:"La corteza prefrontal... <mark>termina de madurar</mark> recién alrededor de los 25 años.",
+   rule:"Terminar de + infinitivo expresa la finalización completa de un proceso o acción. En negativo (no terminar de + infinitivo) expresa que algo no se completa del todo. <b>Ошибка:</b> путать с «dejar de + infinitivo» (прекратить действие) — terminar de означает завершение процесса, а не его прекращение.",
+   items:[
+     {stem:"La corteza prefrontal (terminar / madurar) ______ recién alrededor de los 25 años.", answers:["termina de madurar"]},
+     {stem:"Yo todavía no (terminar / entender) ______ por qué actué así.", answers:["termino de entender"]},
+     {stem:"Ella no (terminar / sentir) ______ esa decisión como propia.", answers:["termina de sentir"]},
+     {stem:"Nosotros (terminar / construir) ______ nuestra identidad en la adolescencia.", answers:["terminamos de construir"]},
+     {stem:"¿Cuándo (vos/terminar / decidir) ______ qué vas a hacer?", answers:["terminás de decidir"]}
+   ]},
+  {id:"g5", title:"3.5 Si + imperfecto de subjuntivo + condicional (hipótesis irreal en el presente)",
+   quote:"¿Qué <mark>harías</mark> si nadie <mark>supiera</mark> lo que elegís?",
+   rule:"Si + pretérito imperfecto de subjuntivo (-ra/-se), + condicional simple. Se usa para hipótesis poco probables o contrarias a la realidad presente. <b>Ошибка:</b> использовать presente de indicativo после «si» в этом типе условных предложений — здесь обязателен imperfecto de subjuntivo.",
+   items:[
+     {stem:"¿Qué (hacer, vos) ______ si nadie (saber) ______ lo que elegís?", answers:["harías", "supiera"]},
+     {stem:"Si (yo/tener) ______ esa confianza, no (necesitar) ______ la aprobación de nadie.", answers:["tuviera", "necesitaría"]},
+     {stem:"Si ella (escuchar) ______ su propia voz, (tomar) ______ otra decisión.", answers:["escuchara", "tomaría"]},
+     {stem:"Si nosotros no (temer) ______ el rechazo, (vivir) ______ de otra manera.", answers:["temiéramos", "viviríamos"]},
+     {stem:"Si vos (poder) ______ elegir sin miedo, ¿qué (elegir) ______?", answers:["pudieras", "elegirías"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var stemHtml = it.stem;
+    var count = 0;
+    stemHtml = stemHtml.replace(/______/g, function(){
+      var inputHtml = '<input type="text" class="ans-input" data-idx="'+idx+'" data-sub="'+count+'" autocomplete="off">';
+      count++;
+      return inputHtml;
+    });
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+stemHtml+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var inputs = row.querySelectorAll(".ans-input");
+      var ok = true;
+      inputs.forEach(function(inp, subIdx){
+        var expected = it.answers[subIdx] !== undefined ? it.answers[subIdx] : it.answers[0];
+        if(!anyMatch(inp.value, [expected])) ok = false;
+      });
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers.join(" / ")+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+/* ---------------- AUDICIÓN ---------------- */
+var audioList = document.getElementById("audioList");
+
+var playerWrap = document.createElement("div");
+playerWrap.className = "player-wrap";
+playerWrap.innerHTML =
+  '<div class="player-frame"><iframe src="https://www.youtube.com/embed/_MIHUvFJWK8" ' +
+  'title="Ser adulto NO es una cuestión de edad | Psicología al Desnudo" ' +
+  'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+  'allowfullscreen></iframe></div>' +
+  '<p class="player-caption">Vídeo real de YouTube (Psi Mammoliti) — mira el principio, donde se explican los tres tipos de adultez, antes de responder.</p>';
+audioList.appendChild(playerWrap);
+
+var aud1 = {
+  id:"aud1", title:"Audición 1 · Mira y responde",
+  items:[
+    {q:"Según el episodio, ¿qué diferencia hay entre ser adulto de edad cronológica y ser adulto psicológicamente?", opts:["No hay ninguna diferencia","Se puede tener 35, 40 o 60 años y seguir tomando decisiones desde un lugar infantil","La edad cronológica siempre garantiza la madurez psicológica","Solo existe la adultez cronológica"], answer:1},
+    {q:"¿Qué NO significa estar en una \"posición infantil\", según el episodio?", opts:["Que alguien te obligue literalmente, con amenazas","Que busques la aprobación ajena todo el tiempo","Que a veces digas que sí cuando querés decir que no","Que armes tu vida para no perder el amor de otros"], answer:0},
+    {q:"¿Cuántos tipos de adultez se explican al principio?", opts:["Uno","Dos","Tres: biológica, social y psicológica","Cuatro"], answer:2},
+    {q:"¿A qué edad aproximada termina de madurar la corteza prefrontal, según el episodio?", opts:["A los 18 años","Alrededor de los 25 años","A los 30 años","A los 40 años"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud1.title+'</span></div>';
+  var list = document.createElement("div");
+  aud1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="aud1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="aud1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud1.items.length+"</b>";
+    blockScores["aud1"] = {correct:correct, total:aud1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud1"] = {correct:0, total:aud1.items.length};
+  audioList.appendChild(wrap);
+})();
+
+var aud2 = {
+  id:"aud2", title:"Audición 2 · Dictado — completa la frase de apertura",
+  bank:"adulto · cronológica · psicológicamente · social · edad",
+  items:[
+    {stem:"Ser ______ de edad cronológica y ser adulto psicológicamente hablando es muy diferente.", answers:["adulto"]},
+    {stem:"Ser adulto de edad ______ y ser adulto psicológicamente hablando es muy diferente.", answers:["cronológica"]},
+    {stem:"Ser adulto de edad cronológica y ser adulto ______ hablando es muy diferente.", answers:["psicológicamente"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud2.title+'</span></div>'+
+    '<p class="hint" style="margin-top:0;">Es la idea central con la que arranca el episodio.</p>';
+  var bankDiv = document.createElement("div");
+  bankDiv.className = "wordbank";
+  bankDiv.innerHTML = "<b>Banco de palabras:</b> "+aud2.bank;
+  wrap.appendChild(bankDiv);
+  var list = document.createElement("div");
+  aud2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud2.items.length+"</b>";
+    blockScores["aud2"] = {correct:correct, total:aud2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud2"] = {correct:0, total:aud2.items.length};
+  audioList.appendChild(wrap);
+})();
+
+/* ---------------- TEST ---------------- */
+var testList = document.getElementById("testList");
+
+/* Bloque 1: comprensión (radio) */
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"Según el episodio, ¿cuántos tipos de adultez existen?", opts:["Uno","Dos","Tres: biológica, social y psicológica","Cuatro"], answer:2},
+    {q:"¿Qué caracteriza a la adultez psicológica, a diferencia de la biológica y la social?", opts:["Se nota a simple vista, como las arrugas","Es la capacidad de tomar decisiones que nacen desde adentro, y no se ve a simple vista","Depende solo de tener hijos","Se alcanza automáticamente a los 18 años"], answer:1},
+    {q:"Según Murray Bowen, ¿qué es la \"diferenciación del self\"?", opts:["La capacidad de vivir completamente aislado de los demás","La capacidad de pensar, sentir y decidir desde uno mismo, estando en vínculo con otros sin perderse en ellos","Un trastorno psicológico","La edad en la que se termina de madurar el cerebro"], answer:1},
+    {q:"Según el episodio, ¿qué tienen en común el \"camaleón\" y el \"rebelde\"?", opts:["Nada, son completamente opuestos","Los dos organizan sus decisiones en función del sistema familiar, aunque de forma opuesta","Los dos son igual de felices","Los dos evitan cualquier tipo de vínculo"], answer:1},
+    {q:"En el ejemplo de la película Mulan, ¿cuál es el verdadero momento de giro, según el episodio?", opts:["Cuando se disfraza de soldado","Cuando se mira al espejo y se pregunta quién es ella de verdad, más allá de lo que se espera de ella","Cuando gana la guerra","Cuando se casa"], answer:1},
+    {q:"¿Cuál es la \"pregunta brújula\" que propone el episodio?", opts:["¿Qué van a pensar los demás de mí?","¿Esto lo elijo porque lo quiero o porque tengo miedo de lo que va a pasar si no lo elijo?","¿Cuánto dinero voy a ganar con esto?","¿Es esto lo que siempre hice?"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 2: huecos */
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"adultez · resignás · diferenciación · camaleón · invisibles · camufla · brújula · incomodar",
+  items:[
+    {stem:"Hay tres tipos de ______: la biológica, la social y la psicológica.", answers:["adultez"]},
+    {stem:"______ partes tuyas con tal de no incomodar a los otros.", answers:["resignás"]},
+    {stem:"Propuso un concepto clave, que es la ______ del self.", answers:["diferenciación"]},
+    {stem:"Vamos a llamarlo el ______.", answers:["camaleón"]},
+    {stem:"Las famosas lealtades ______.", answers:["invisibles"]},
+    {stem:"El camaleón no elige. Se ______ con su sistema.", answers:["camufla"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3a: relacionar (select) */
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su significado",
+  words:["resignar (algo)","fusionarse (con alguien)","camuflarse","incomodar","la brújula (interna)"],
+  defs:["causar molestia o malestar a otra persona","perder los propios límites, dejando que lo que otros sienten o esperan defina lo que uno hace","renunciar a una parte de uno mismo, a menudo por otra persona","un sistema interno de orientación basado en los propios valores","adaptarse o mezclarse con el entorno para no destacar ni ser rechazado"],
+  answers:["c","b","e","a","d"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Significado</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3b: orden (select) */
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena los temas según se van tratando en el episodio",
+  events:[
+    {text:"Se explican los tres tipos de adultez: biológica, social y psicológica.", answer:1},
+    {text:"Se presenta el concepto de diferenciación del self, de Murray Bowen.", answer:2},
+    {text:"Se explican las dos formas de falta de diferenciación: el camaleón y el rebelde.", answer:3},
+    {text:"Se usa el ejemplo de la película Mulan para ilustrar la adultez psicológica.", answer:4},
+    {text:"Se propone el ejercicio del \"cuarto propio\" y la \"pregunta brújula\".", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 4: transformación (respuesta modelo, no autocorregible) */
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Cambia a voseo: «Puedes tener 40 años y seguir tomando decisiones infantiles.»", model:"Podés tener 40 años y seguir tomando decisiones infantiles."},
+    {stem:"Completa con «aunque» + indicativo: «Tu familia espera que sigas esa carrera y aunque no te (gustar), la elegís igual.»", model:"Tu familia espera que sigas esa carrera y aunque no te gusta, la elegís igual."},
+    {stem:"Completa con «como si» + imperfecto de subjuntivo: «Vive como si alguien la (estar) mirando todo el tiempo.»", model:"Vive como si alguien la estuviera mirando todo el tiempo."},
+    {stem:"Reescribe usando «terminar de + infinitivo»: «La corteza prefrontal madura completamente recién a los 25 años.»", model:"La corteza prefrontal termina de madurar recién a los 25 años."},
+    {stem:"Completa la condicional: «¿Qué (hacer, vos) si nadie (saber) lo que elegís?»", model:"¿Qué harías si nadie supiera lo que elegís?"}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 5: léxico (radio) */
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «resignar (algo)»:", opts:["renunciar a algo","conseguir algo","celebrar algo","proteger algo"], answer:0},
+    {q:"Antónimo de «fusionarse (con alguien)»:", opts:["diferenciarse, separarse","mezclarse","unirse","confundirse"], answer:0},
+    {q:"Encuentra la intrusa (todas menos una son personas reales mencionadas en el episodio):", opts:["Murray Bowen","Virginia Woolf","Mulan","Iván Boszormenyi-Nagy"], answer:2},
+    {q:"¿Qué palabra completa «un libro de ______ no escrito» (deudas y obligaciones familiares implícitas)?", opts:["cuentas","reglas","cuentos","valores"], answer:0},
+    {q:"Sinónimo de «incomodar»:", opts:["molestar, generar malestar","alegrar","calmar","ayudar"], answer:0}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>

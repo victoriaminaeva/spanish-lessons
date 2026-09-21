@@ -1,0 +1,1006 @@
+<!doctype html>
+<title>Gestionar el Fracaso</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+/* ---- vocab cards ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+/* ---- discussion ---- */
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+.player-wrap{margin-bottom:16px;}
+.player-frame{position:relative; width:100%; max-width:640px; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:var(--surface-2);}
+.player-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+.player-caption{font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Gestionar el Fracaso · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Gestionar el fracaso</h1>
+  <p class="subtitle">Vocabulario, debate, gramática, audición y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> vídeo de YouTube «Gestionar el fracaso» (podcast <i>Entiende Tu Mente</i>, episodio 414), con Molo Cebrián, Luis Muiño y Esther Pérez (transcripción proporcionada por la estudiante)</p>
+  <div class="summary">
+    <b>De qué trata:</b> a partir de la pregunta de María, que no consiguió una promoción interna y desde entonces siente muy fuerte el síndrome del impostor, el psicólogo Luis Muiño explica el fracaso como un "recálculo", como el GPS que recalcula la ruta en vez de decirte que eres un desastre. Da ideas concretas: darse permiso para sentir antes de buscar un aprendizaje, cuestionar la estrategia y no la valía propia, sacar la rabia hacia afuera en vez de interiorizarla, simular un nuevo intento sin comprometerse todavía, y guiarse por los valores propios y no solo por las metas.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="audicion">
+  <div class="section-head"><span class="section-num">04</span><h2>Audición</h2></div>
+  <p class="hint">Escucha el mensaje original de María al principio del episodio, antes de responder.</p>
+  <div id="audioList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">05</span><h2>Test — Gestionar el fracaso</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "gestionarelfracaso_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- VOCABULARIO ---------------- */
+var vocab = [
+  {term:"el síndrome del impostor", pos:"expresión (sustantivo)",
+   quote:"Desde ese momento ella siente ahí muy fuerte el <mark>síndrome del impostor</mark>.",
+   trans:"синдром самозванца",
+   mean:"Ощущение, что не заслуживаешь своих собственных успехов или должности, несмотря на реальные достижения, и страх быть «разоблачённым».",
+   ex:"A pesar de sus diez años de experiencia, sigue sintiendo el síndrome del impostor en cada proyecto nuevo. — Несмотря на десять лет опыта, он всё ещё чувствует синдром самозванца в каждом новом проекте."},
+  {term:"remover (algo, uso figurado)", pos:"verbo transitivo",
+   quote:"Empezamos hablando de lo que ha <mark>removido</mark> este fracaso, entre comillas.",
+   trans:"«разворошить», всколыхнуть (эмоции, старые раны)",
+   mean:"Пробудить или взбудоражить эмоции, воспоминания или чувства, которые были спрятаны — как перемешать что-то, что осело на дне.",
+   ex:"Esa conversación le removió recuerdos que no tocaba desde hacía años. — Тот разговор всколыхнул в ней воспоминания, которых она не касалась годами."},
+  {term:"el suspenso", pos:"sustantivo, m.",
+   quote:"Después del <mark>suspenso</mark> en su examen de promoción, pues se ha activado el síndrome del impostor.",
+   trans:"незачёт, провал (на экзамене)",
+   mean:"Результат, при котором не сдан экзамен или тест — слово, характерное для испанского испанского (в Латинской Америке чаще говорят «reprobar»).",
+   ex:"Un suspenso en un examen no define tu inteligencia. — Незачёт на экзамене не определяет твой интеллект."},
+  {term:"derrumbarse", pos:"verbo pronominal",
+   quote:"Necesitaría tener esa confianza en mí misma que haga que nada pueda <mark>derrumbarme</mark>.",
+   trans:"рушиться, ломаться (эмоционально)",
+   mean:"Полностью терять эмоциональное равновесие или уверенность — как здание, которое обрушивается.",
+   ex:"Cuando recibió la noticia, sintió que se derrumbaba por dentro. — Когда она получила новость, то почувствовала, что рушится изнутри."},
+  {term:"avalar", pos:"verbo transitivo",
+   quote:"Mi currículum, mi experiencia, mi día a día <mark>avalan</mark> más que de sobra mis conocimientos.",
+   trans:"подтверждать, служить порукой (за что-то)",
+   mean:"Служить доказательством или гарантией чего-то — часто используется в контексте опыта, репутации или документов, подтверждающих компетентность.",
+   ex:"Sus años de trabajo avalan su capacidad para el puesto. — Годы его работы подтверждают его компетентность для этой должности."},
+  {term:"interiorizar", pos:"verbo transitivo",
+   quote:"No la <mark>interiorices</mark> toda, porque si no, te vas a hacer mucho daño a ti mismo.",
+   trans:"усваивать внутренне, «проглатывать» (эмоцию)",
+   mean:"Держать эмоцию (особенно гнев или боль) внутри себя, не выражая её вовне — что, по мнению психологов, может привести к депрессии.",
+   ex:"Interiorizar tanto enojo terminó afectando su salud física. — Из-за того, что она так долго держала злость внутри, это в итоге сказалось на её физическом здоровье."},
+  {term:"arrojar (algo contra alguien/algo)", pos:"verbo transitivo",
+   quote:"La ira es un objeto que cuando se <mark>arroja</mark> contra uno mismo, siempre acierta.",
+   trans:"бросать, кидать (с силой)",
+   mean:"Кидать что-то с усилием — в этой метафоре, гнев сравнивается с предметом, который бьёт точно в цель, когда направлен на самого себя.",
+   ex:"Arrojó todos sus miedos en esa carta que nunca envió. — Она «выплеснула» все свои страхи в то письмо, которое так и не отправила."},
+  {term:"estrepitoso/a", pos:"adjetivo",
+   quote:"Luego cuando caen, caen de forma <mark>estrepitosa</mark>.",
+   trans:"громкий, оглушительный (о падении, провале)",
+   mean:"Описывает падение или провал, который происходит внезапно, с большим шумом или последствиями — часто в переносном смысле, об эмоциональном срыве.",
+   ex:"Después de meses fingiendo que todo iba bien, tuvo una caída estrepitosa. — После нескольких месяцев притворства, что всё хорошо, у него случился громкий срыв."},
+  {term:"pasar de puntillas (por algo)", pos:"locución verbal",
+   quote:"Las personas que intentan rápidamente <mark>pasar de puntillas</mark> y hacer como que no ha sucedido nada.",
+   trans:"«проходить на цыпочках» (мимо темы) — избегать, не углубляться",
+   mean:"Буквально «проходить на цыпочках» — избегать полноценного контакта с трудной темой или эмоцией, делая вид, что её не существует.",
+   ex:"Prefiere pasar de puntillas por el tema en vez de hablarlo abiertamente. — Он предпочитает не углубляться в тему, вместо того чтобы обсудить её открыто."},
+  {term:"el currazo", pos:"sustantivo, m. (coloquial, España)",
+   quote:"Es que Esther, haces un <mark>currazo</mark>, ¿eh?",
+   trans:"большая, трудоёмкая, хорошо сделанная работа (разговорное, Испания)",
+   mean:"Разговорное усилительное слово от «curro» (работа) — обозначает большой объём качественно выполненной работы, часто как похвала.",
+   ex:"Preparar esa presentación en dos días fue un currazo. — Подготовить ту презентацию за два дня было огромным трудом."}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+/* ---------------- DEBATE ---------------- */
+var debate = [
+  {q:"¿Alguna vez sentiste el \"síndrome del impostor\" — la sensación de no merecer un puesto o un éxito? Cuéntanos cuándo.", hint:"Útil: «Sentí el síndrome del impostor cuando...», «Pensaba que no merecía...»"},
+  {q:"Luis dice que un fracaso suele remover inseguridades antiguas, no solo el fracaso en sí. ¿Te ha pasado algo así?", hint:"Útil: «Ese fracaso me removió...», «Conecté con una inseguridad antigua cuando...»"},
+  {q:"¿Qué opinas de la metáfora del GPS que \"recalcula\" en vez de decirte que eres un desastre? ¿Te ayuda a pensar en tus propios fracasos de otra manera?", hint:"Útil: «Me ayuda porque...», «Antes pensaba en mis fracasos como..., ahora...»"},
+  {q:"Luis recomienda \"darse permiso para no aprender nada todavía\" tras un fracaso, en vez de buscar inmediatamente una lección positiva. ¿Estás de acuerdo? ¿Por qué?", hint:"Útil: «Estoy de acuerdo/en desacuerdo porque...», «A mí me pasa que...»"},
+  {q:"Si tuvieras que decidir si intentar de nuevo algo en lo que fracasaste (como hace María con su examen), ¿qué te ayudaría a decidir?", hint:"Útil: «Me ayudaría saber...», «Antes de intentarlo de nuevo, necesitaría...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+/* ---------------- GRAMÁTICA ---------------- */
+var gram = [
+  {id:"g1", title:"3.1 Pretérito perfecto compuesto + «hacer que» + subjuntivo",
+   quote:"Este fracaso <mark>ha hecho que vuelva</mark> a dudar de mí misma.",
+   rule:"Hacer que + subjuntivo expresa que algo provoca o causa una reacción en otra persona. Con el verbo «hacer» en pretérito perfecto compuesto, se conecta esa causa con el presente. <b>Ошибка:</b> использовать indicativo после «hacer que» — эта конструкция всегда требует subjuntivo, так как речь о вызванном, а не о свершившемся напрямую факте.",
+   items:[
+     {stem:"Este fracaso (hacer) ______ que ella (volver) ______ a dudar de sí misma.", answers:["ha hecho", "vuelva"]},
+     {stem:"Sus palabras (hacer) ______ que yo me (sentir) ______ mejor.", answers:["han hecho", "sienta"]},
+     {stem:"El examen (hacer) ______ que María (cuestionar) ______ su valía.", answers:["ha hecho", "cuestione"]},
+     {stem:"Esta conversación (hacer) ______ que nosotros (entender) ______ mejor el miedo al fracaso.", answers:["ha hecho", "entendamos"]},
+     {stem:"Tu apoyo (hacer) ______ que yo (poder) ______ seguir adelante.", answers:["ha hecho", "pueda"]}
+   ]},
+  {id:"g2", title:"3.2 Preguntas indirectas (interrogativas indirectas)",
+   quote:"María... <mark>no tiene nada claro qué hacer</mark>.",
+   rule:"Cuando incorporamos una pregunta dentro de otra oración (sin signos de interrogación ni inversión), usamos la palabra interrogativa (qué, cómo, cuándo, por qué, si) seguida del verbo en el orden normal. <b>Ошибка:</b> добавлять вопросительные знаки или менять порядок слов, как в прямом вопросе — в косвенном вопросе структура остаётся как в обычном утверждении.",
+   items:[
+     {stem:"María no tiene nada claro ______ hacer con el examen.", answers:["qué"]},
+     {stem:"No sé ______ me siento tan insegura.", answers:["por qué"]},
+     {stem:"Nadie sabe ______ va a tomar la decisión.", answers:["cuándo"]},
+     {stem:"Me pregunto ______ debería volver a intentarlo.", answers:["si"]},
+     {stem:"No tengo claro ______ voy a afrontar esto.", answers:["cómo"]}
+   ]},
+  {id:"g3", title:"3.3 Perífrasis: volver a + infinitivo (repetición de una acción)",
+   quote:"Ha <mark>vuelto a hacerme</mark> sentir insegura, a hacerme sentir inferior.",
+   rule:"Volver (conjugado) + a + infinitivo expresa que una acción se repite, que vuelve a ocurrir después de un tiempo. <b>Ошибка:</b> забывать предлог «a» между volver и инфинитивом.",
+   items:[
+     {stem:"Este fracaso ha (volver / hacerme) ______ sentir insegura.", answers:["vuelto a hacerme"]},
+     {stem:"Después de tanto tiempo, (yo/volver / intentar) ______ el examen.", answers:["volví a intentar"]},
+     {stem:"Ella (volver / sentir) ______ ese miedo antiguo.", answers:["volvió a sentir"]},
+     {stem:"Nosotros no queremos (volver / cometer) ______ el mismo error.", answers:["volver a cometer"]},
+     {stem:"¿(Tú/volver / pensar) ______ en presentarte de nuevo?", answers:["has vuelto a pensar"]}
+   ]},
+  {id:"g4", title:"3.4 Subjuntivo en oraciones relativas (antecedente deseado, no específico)",
+   quote:"Necesitaría tener esa confianza en mí misma que <mark>haga</mark> que nada pueda derrumbarme.",
+   rule:"Cuando una oración relativa (con «que») describe algo que todavía no existe, se desea o no es concreto, el verbo va en subjuntivo. Con un antecedente conocido y real, se usa indicativo. <b>Ошибка:</b> использовать indicativo, когда речь о желаемой, ещё не существующей вещи (as opposed to «tengo una confianza que hace…», описывающей нечто реальное).",
+   items:[
+     {stem:"Necesitaría tener una confianza que (hacer) ______ que nada pueda derrumbarme.", answers:["haga"]},
+     {stem:"Busco una estrategia que me (ayudar) ______ a afrontar el fracaso.", answers:["ayude"]},
+     {stem:"Quiero encontrar una forma de hablarme que (ser) ______ más sana.", answers:["sea"]},
+     {stem:"Necesito un amigo que me (escuchar) ______ sin juzgarme.", answers:["escuche"]},
+     {stem:"Ella busca una manera de estudiar que le (funcionar) ______ mejor.", answers:["funcione"]}
+   ]},
+  {id:"g5", title:"3.5 Aconsejar + infinitivo (consejo directo)",
+   quote:"Yo os <mark>aconsejaría no decírselo</mark> a nadie.",
+   rule:"Aconsejar + infinitivo se usa cuando el sujeto de los dos verbos coincide o cuando se da un consejo general, sin especificar a quién exactamente. Es más directo que «aconsejar que + subjuntivo». <b>Ошибка:</b> всегда добавлять «que + subjuntivo» после aconsejar — если совет обращён напрямую (через «te/os»), можно использовать простой инфинитив.",
+   items:[
+     {stem:"Yo os (aconsejar) ______ no decírselo a nadie.", answers:["aconsejaría"]},
+     {stem:"Te (aconsejar, yo) ______ simular el intento antes de comprometerte.", answers:["aconsejaría"]},
+     {stem:"Ella nos (aconsejar) ______ conectar primero con nuestras emociones.", answers:["aconsejó"]},
+     {stem:"¿Qué le (aconsejar, tú) ______ a alguien que tiene miedo de volver a intentarlo?", answers:["aconsejarías"]},
+     {stem:"Los psicólogos (aconsejar) ______ no interiorizar toda la rabia.", answers:["aconsejan"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var stemHtml = it.stem;
+    var count = 0;
+    stemHtml = stemHtml.replace(/______/g, function(){
+      var inputHtml = '<input type="text" class="ans-input" data-idx="'+idx+'" data-sub="'+count+'" autocomplete="off">';
+      count++;
+      return inputHtml;
+    });
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+stemHtml+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var inputs = row.querySelectorAll(".ans-input");
+      var ok = true;
+      inputs.forEach(function(inp, subIdx){
+        var expected = it.answers[subIdx] !== undefined ? it.answers[subIdx] : it.answers[0];
+        if(!anyMatch(inp.value, [expected])) ok = false;
+      });
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers.join(" / ")+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+/* ---------------- AUDICIÓN ---------------- */
+var audioList = document.getElementById("audioList");
+
+var playerWrap = document.createElement("div");
+playerWrap.className = "player-wrap";
+playerWrap.innerHTML =
+  '<div class="player-frame"><iframe src="https://www.youtube.com/embed/_5AHP12bBB8" ' +
+  'title="GESTIONAR EL FRACASO | Entiende Tu Mente | 414" ' +
+  'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+  'allowfullscreen></iframe></div>' +
+  '<p class="player-caption">Vídeo real de YouTube (Entiende Tu Mente) — escucha el mensaje original de María al principio del episodio, antes de responder.</p>';
+audioList.appendChild(playerWrap);
+
+var aud1 = {
+  id:"aud1", title:"Audición 1 · Escucha y responde",
+  items:[
+    {q:"¿Desde qué país escribe María?", opts:["México","España","Argentina","Chile"], answer:1},
+    {q:"¿Qué dos temas anteriores menciona María antes de proponer este?", opts:["El sueño y la alimentación","No ser suficiente y me exijo demasiado","El dinero y el trabajo","La familia y la pareja"], answer:1},
+    {q:"¿Qué dos temas quiere que traten en el episodio?", opts:["La gestión del fracaso y la gestión de la frustración","Cómo ganar más dinero","Cómo dormir mejor","Cómo hacer amigos"], answer:0},
+    {q:"Según Molo, ¿qué forman estos tres episodios juntos?", opts:["Una serie sin relación","Una trilogía sobre autoexigencia y fracaso","Un curso de meditación","Una encuesta"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud1.title+'</span></div>';
+  var list = document.createElement("div");
+  aud1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="aud1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="aud1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud1.items.length+"</b>";
+    blockScores["aud1"] = {correct:correct, total:aud1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud1"] = {correct:0, total:aud1.items.length};
+  audioList.appendChild(wrap);
+})();
+
+var aud2 = {
+  id:"aud2", title:"Audición 2 · Dictado — completa las palabras de María",
+  bank:"gestión · fracaso · frustración · éxito · alegría",
+  items:[
+    {stem:"Me gustaría tratar el tema de la ______ del fracaso.", answers:["gestión"]},
+    {stem:"Me gustaría tratar el tema de la gestión del ______.", answers:["fracaso"]},
+    {stem:"Y la gestión de la ______.", answers:["frustración"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud2.title+'</span></div>'+
+    '<p class="hint" style="margin-top:0;">Es la frase con la que María presenta el tema del episodio.</p>';
+  var bankDiv = document.createElement("div");
+  bankDiv.className = "wordbank";
+  bankDiv.innerHTML = "<b>Banco de palabras:</b> "+aud2.bank;
+  wrap.appendChild(bankDiv);
+  var list = document.createElement("div");
+  aud2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud2.items.length+"</b>";
+    blockScores["aud2"] = {correct:correct, total:aud2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud2"] = {correct:0, total:aud2.items.length};
+  audioList.appendChild(wrap);
+})();
+
+/* ---------------- TEST ---------------- */
+var testList = document.getElementById("testList");
+
+/* Bloque 1: comprensión (radio) */
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"Según María, ¿qué le pasó tras la promoción interna?", opts:["La consiguió sin problemas","No la consiguió y desde entonces siente muy fuerte el síndrome del impostor","Decidió no presentarse","La consiguió, pero renunció después"], answer:1},
+    {q:"Según Luis, ¿qué es lo primero que hay que hacer tras un fracaso, en vez de buscar inmediatamente un aprendizaje?", opts:["Analizar fríamente los datos","Darse permiso para simplemente sentir, sin exigirse aprender nada todavía","Contárselo a todo el mundo","Empezar de nuevo inmediatamente"], answer:1},
+    {q:"Según Luis, ¿qué deberíamos cuestionar en vez de nuestra valía cuando algo nos sale mal?", opts:["Nuestra suerte","Nuestra estrategia: qué hicimos y cómo podríamos hacerlo de otra manera","A las personas que nos rodean","Nada, hay que aceptar el fracaso sin más"], answer:1},
+    {q:"¿Qué recomienda Luis hacer con la rabia y la frustración tras un fracaso?", opts:["Ignorarla por completo","Sacarla hacia afuera en vez de interiorizarla, porque interiorizada se vuelve depresión","Guardarla para usarla como motivación en secreto","Solo hablarlo con un desconocido"], answer:1},
+    {q:"¿Qué es \"simular un nuevo intento\", la última idea de Luis?", opts:["Comprometerse inmediatamente a repetir el examen","Planificar cómo sería el intento sin comprometerse todavía, y sin contárselo a nadie","Pedirle a otra persona que lo haga por ti","Olvidarse del tema por completo"], answer:1},
+    {q:"Según Esther, ¿qué alternativa propone a guiarse solo por metas?", opts:["No tener ningún objetivo","Guiarse por los valores y las motivaciones propias, que pueden llevar por caminos distintos a la meta original","Copiar las metas de otras personas","Cambiar de meta cada semana"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 2: huecos */
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"impostor · removido · suspenso · derrumbarme · avalan · arroja · interiorices · estrepitosa",
+  items:[
+    {stem:"Ella siente ahí muy fuerte el síndrome del ______.", answers:["impostor"]},
+    {stem:"Este fracaso ha ______ heridas muy dolorosas y muy profundas en mí.", answers:["removido"]},
+    {stem:"Después del ______ en su examen de promoción, se ha activado el síndrome del impostor.", answers:["suspenso"]},
+    {stem:"Necesitaría tener esa confianza en mí misma que haga que nada pueda ______.", answers:["derrumbarme"]},
+    {stem:"Mi currículum, mi experiencia, mi día a día ______ más que de sobra mis conocimientos.", answers:["avalan"]},
+    {stem:"La ira es un objeto que cuando se ______ contra uno mismo, siempre acierta.", answers:["arroja"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3a: relacionar (select) */
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su significado",
+  words:["el síndrome del impostor","derrumbarse","avalar","interiorizar","pasar de puntillas (por algo)"],
+  defs:["confirmar o dar apoyo a algo, como un mérito o una capacidad","tratar un tema superficialmente, sin profundizar, para evitarlo","sentir que no se merece el éxito propio, a pesar de las pruebas de lo contrario","guardar algo dentro de uno mismo en vez de expresarlo","venirse abajo emocionalmente"],
+  answers:["c","e","a","d","b"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Significado</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3b: orden (select) */
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena los temas según se van tratando en el episodio",
+  events:[
+    {text:"María cuenta que no consiguió la promoción y siente el síndrome del impostor.", answer:1},
+    {text:"Luis explica que primero hay que darse permiso para sentir, no para aprender.", answer:2},
+    {text:"Luis explica la metáfora del GPS: cambiar el foco de la valía a la estrategia.", answer:3},
+    {text:"Luis da la idea de simular un nuevo intento sin comprometerse todavía.", answer:4},
+    {text:"Esther propone guiarse por los valores en vez de solo por las metas.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 4: transformación (respuesta modelo, no autocorregible) */
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Completa con «hacer que» + subjuntivo: «Este fracaso (hacer) que ella (volver) a dudar de sí misma.»", model:"Este fracaso ha hecho que ella vuelva a dudar de sí misma."},
+    {stem:"Convierte en pregunta indirecta: «¿Qué tengo que hacer?» → «No tiene nada claro...»", model:"No tiene nada claro qué tiene que hacer."},
+    {stem:"Reescribe usando «volver a + infinitivo»: «Otra vez siento ese miedo antiguo.»", model:"Vuelvo a sentir ese miedo antiguo."},
+    {stem:"Completa con subjuntivo relativo: «Busco una estrategia que me (ayudar) a afrontar el fracaso.»", model:"Busco una estrategia que me ayude a afrontar el fracaso."},
+    {stem:"Reescribe usando «aconsejar + infinitivo»: «Mi consejo es que no se lo digas a nadie.»", model:"Te aconsejo no decírselo a nadie."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 5: léxico (radio) */
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «derrumbarse»:", opts:["venirse abajo","fortalecerse","avanzar","celebrar"], answer:0},
+    {q:"Antónimo de «avalar»:", opts:["confirmar","desmentir, poner en duda","apoyar","certificar"], answer:1},
+    {q:"Encuentra la palabra intrusa (todas menos una describen reacciones al fracaso mencionadas en el episodio):", opts:["el síndrome del impostor","derrumbarse","el currazo","interiorizar la rabia"], answer:2},
+    {q:"¿Qué palabra completa «caer de forma ______» (con mucho ruido y de golpe)?", opts:["estrepitosa","silenciosa","lenta","suave"], answer:0},
+    {q:"Sinónimo de «pasar de puntillas (por un tema)»:", opts:["evitarlo superficialmente","profundizar en él","resolverlo","ignorarlo para siempre"], answer:0}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
