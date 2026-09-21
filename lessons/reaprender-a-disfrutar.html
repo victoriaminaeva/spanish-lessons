@@ -1,0 +1,1006 @@
+<!doctype html>
+<title>Reaprender a Disfrutar</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff8ca;
+  --surface:#ffffff;
+  --surface-2:#cde3e8;
+  --ink:#2d120d;
+  --muted:#7a5048;
+  --accent:#6b0b0c;
+  --accent-ink:#fff8ca;
+  --gold:#d9761f;
+  --good:#4f7d3a;
+  --good-bg:#e6f0d9;
+  --bad:#b3452e;
+  --bad-bg:#f7ded2;
+  --border:#ecd98a;
+  --mark:#cde3e8;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d120d;
+    --surface:#3a1a14;
+    --surface-2:#452019;
+    --ink:#fff8ca;
+    --muted:#d9c58f;
+    --accent:#ef6b52;
+    --accent-ink:#2d120d;
+    --gold:#f2a544;
+    --good:#8fc17a;
+    --good-bg:#24361f;
+    --bad:#e08a6a;
+    --bad-bg:#40241a;
+    --border:#4a2a1e;
+    --mark:#452019;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d120d;
+  --surface:#3a1a14;
+  --surface-2:#452019;
+  --ink:#fff8ca;
+  --muted:#d9c58f;
+  --accent:#ef6b52;
+  --accent-ink:#2d120d;
+  --gold:#f2a544;
+  --good:#8fc17a;
+  --good-bg:#24361f;
+  --bad:#e08a6a;
+  --bad-bg:#40241a;
+  --border:#4a2a1e;
+  --mark:#452019;
+}
+*{box-sizing:border-box;}
+img{max-width:100%;}
+[hidden]{display:none!important;}
+html,body{margin:0;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Public Sans", system-ui, -apple-system, sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  padding-inline:20px;
+  padding-block:0 48px;
+}
+.wrap{max-width:720px;margin:0 auto;}
+h1,h2,h3{font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em;}
+a{color:var(--accent);}
+
+/* ---- sticky score bar ---- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap:wrap;
+}
+.topbar .brand{
+  font-family:"Fraunces", serif; font-weight:600; font-size:15px; color:var(--accent);
+  display:flex; align-items:center; gap:8px;
+}
+.topbar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.score-pill{
+  font-family:"Space Mono", monospace; font-size:13px; font-weight:600;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+  padding:6px 14px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.score-pill b{color:var(--accent); font-size:14px;}
+.reset-btn{
+  font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:transparent; border:1px solid var(--border); color:var(--muted);
+  border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.reset-btn:hover{color:var(--bad); border-color:var(--bad);}
+
+/* ---- header ---- */
+header.hero{padding-block:36px 8px;}
+.eyebrow{
+  font-family:"Space Mono", monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--gold); margin:0 0 10px;
+}
+h1{font-size:clamp(28px,5vw,40px); margin:0 0 8px; color:var(--ink);}
+.subtitle{color:var(--muted); font-size:15px; margin:0 0 18px;}
+.meta{font-size:13px; color:var(--muted); margin-bottom:16px;}
+.summary{
+  background:var(--surface-2); border-left:3px solid var(--accent);
+  border-radius:8px; padding:14px 16px; font-size:14.5px;
+}
+
+/* ---- section shell ---- */
+section{margin-top:52px;}
+.section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:18px;}
+.section-num{
+  font-family:"Space Mono", monospace; font-size:13px; color:var(--gold);
+  font-weight:600;
+}
+h2{font-size:23px; margin:0; color:var(--ink);}
+.hint{color:var(--muted); font-size:13.5px; margin-top:-8px; margin-bottom:16px;}
+
+/* ---- vocab cards ---- */
+.vocab-grid{display:grid; gap:10px;}
+.vocab-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; page-break-inside:avoid;
+}
+.vocab-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+.vocab-term{font-family:"Fraunces", serif; font-weight:600; font-size:17px; color:var(--accent);}
+.vocab-pos{font-size:12px; color:var(--muted); font-style:italic;}
+.vocab-quote{font-size:14px; font-style:italic; color:var(--ink); margin:8px 0;}
+.vocab-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.vocab-row{font-size:13.5px; margin:4px 0;}
+.vocab-row b{color:var(--muted); font-weight:600;}
+.reveal-btn{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:11.5px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold);
+  border-radius:6px; padding:4px 10px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--surface-2);}
+.vocab-example{margin-top:8px; font-size:13.5px; border-top:1px dashed var(--border); padding-top:8px;}
+
+/* ---- discussion ---- */
+.q-card{
+  border-left:3px solid var(--gold); padding-left:14px; margin-bottom:20px;
+}
+.q-num{font-family:"Space Mono", monospace; color:var(--gold); font-size:12px; margin-right:4px;}
+.q-text{font-weight:600; font-size:15.5px;}
+.q-hint{color:var(--muted); font-size:12.5px; margin-top:4px;}
+.q-answer{
+  width:100%; margin-top:8px; min-height:54px; resize:vertical;
+  font-family:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px 12px;
+}
+.q-answer:focus{outline:2px solid var(--accent); outline-offset:1px;}
+
+/* ---- exercise blocks ---- */
+.ex-block{
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px 16px; margin-bottom:22px; page-break-inside:avoid;
+}
+.ex-head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+.ex-title{font-family:"Fraunces", serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+.ex-quote{font-size:13.5px; font-style:italic; color:var(--muted); margin:4px 0 10px;}
+.ex-quote mark{background:var(--mark); color:var(--ink); border-radius:3px; padding:0 3px;}
+.rule-box{
+  background:var(--surface-2); border-radius:8px; padding:10px 12px; font-size:13px;
+  margin-bottom:12px;
+}
+.rule-box b{color:var(--accent);}
+
+.item-row{
+  display:flex; align-items:flex-start; gap:8px; margin:9px 0; font-size:14.5px; flex-wrap:wrap;
+}
+.item-idx{
+  font-family:"Space Mono", monospace; font-size:12px; color:var(--muted);
+  min-width:18px; padding-top:6px;
+}
+.item-row .stem{flex:1 1 auto; min-width:180px;}
+.ans-input{
+  font-family:inherit; font-size:14px; padding:5px 8px; border-radius:6px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  min-width:150px;
+}
+.ans-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+select.ans-input{min-width:70px;}
+.fb-icon{font-size:14px; font-weight:700; margin-left:4px;}
+.fb-icon.ok{color:var(--good);}
+.fb-icon.bad{color:var(--bad);}
+.correct-note{font-size:12.5px; color:var(--good); margin-left:6px;}
+.item-row.marked-ok{background:var(--good-bg); border-radius:8px;}
+.item-row.marked-bad{background:var(--bad-bg); border-radius:8px;}
+
+.choice-group{display:flex; flex-direction:column; gap:6px; margin:6px 0 2px 26px;}
+.choice-label{display:flex; gap:8px; align-items:baseline; font-size:14px; cursor:pointer;}
+.choice-label input{margin-top:3px;}
+
+.check-btn{
+  font-family:"Space Mono", monospace; font-weight:600; font-size:13px;
+  background:var(--accent); color:var(--accent-ink); border:none; border-radius:8px;
+  padding:9px 18px; cursor:pointer; margin-top:10px;
+}
+.check-btn:hover{filter:brightness(1.08);}
+.block-score{
+  font-family:"Space Mono", monospace; font-size:12.5px; color:var(--muted); margin-top:10px;
+  display:inline-block; margin-left:10px;
+}
+.block-score b{color:var(--accent);}
+
+.wordbank{
+  background:var(--surface-2); border:1px dashed var(--gold); border-radius:8px;
+  padding:8px 12px; font-size:13px; margin-bottom:10px;
+}
+
+table.match-table{width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.match-table th, table.match-table td{border:1px solid var(--border); padding:7px 9px; text-align:left;}
+table.match-table th{background:var(--accent); color:var(--accent-ink); font-weight:600;}
+table.match-table tr:nth-child(even) td{background:var(--surface-2);}
+.def-list{font-size:12.5px; color:var(--muted); margin:6px 0 12px;}
+
+.reveal-model{
+  margin-top:8px; font-family:"Space Mono", monospace; font-size:12px; font-weight:600;
+  background:none; border:1px dashed var(--gold); color:var(--gold); border-radius:6px;
+  padding:5px 11px; cursor:pointer;
+}
+.model-answer{
+  margin-top:8px; font-size:13.5px; background:var(--surface-2); border-radius:8px; padding:10px 12px;
+}
+
+.player-wrap{margin-bottom:16px;}
+.player-frame{position:relative; width:100%; max-width:640px; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:var(--surface-2);}
+.player-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+.player-caption{font-size:12.5px; color:var(--muted); margin-top:6px; font-style:italic;}
+
+footer{
+  margin-top:60px; padding-top:20px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--muted); text-align:center;
+}
+
+@media (max-width:480px){
+  h1{font-size:26px;}
+  .item-row{flex-direction:column;}
+  .ans-input{width:100%;}
+}
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Reaprender a Disfrutar · Taller A2–B1</div>
+  <div style="display:flex; align-items:center; gap:8px;">
+    <div class="score-pill">Puntuación&nbsp;<b id="scoreDisplay">0 / 0</b></div>
+    <button class="reset-btn" id="resetBtn" type="button">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Taller interactivo · Nivel A2–B1</p>
+  <h1>Reaprender a disfrutar</h1>
+  <p class="subtitle">Vocabulario, debate, gramática, audición y test con corrección automática — pulsa «Comprobar» en cada bloque.</p>
+  <p class="meta"><b>Fuente:</b> vídeo de YouTube «Reaprender a disfrutar» (podcast <i>Entiende Tu Mente</i>, episodio 421), con Molo Cebrián, Luis Muiño y Esther Pérez (transcripción proporcionada por la estudiante)</p>
+  <div class="summary">
+    <b>De qué trata:</b> a partir de la pregunta de Virginia, que siente que ha perdido la capacidad de disfrutar tanto de las cosas grandes como de las pequeñas, el psicólogo Luis Muiño explica por qué es tan difícil combinar responsabilidad y placer (el "modo guerrero"), por qué compararnos con la vida de otras personas no ayuda a disfrutar más, y cómo encontrar una "versión 2.0" de lo que nos hacía felices de más jóvenes. También explica una técnica curiosa: detenerse justo antes de que algo termine (como dejar un último bocado en el plato) para no perder el anhelo y disfrutar más.
+  </div>
+</header>
+
+<section id="vocab">
+  <div class="section-head"><span class="section-num">01</span><h2>Vocabulario</h2></div>
+  <p class="hint">10 palabras y construcciones útiles para A2–B1. Pulsa «Mostrar ejemplo» para ver un uso nuevo de cada una.</p>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<section id="debate">
+  <div class="section-head"><span class="section-num">02</span><h2>Preguntas para debatir</h2></div>
+  <p class="hint">Sin respuesta única — escribe tus ideas si quieres guardarlas en este dispositivo.</p>
+  <div id="debateList"></div>
+</section>
+
+<section id="gramatica">
+  <div class="section-head"><span class="section-num">03</span><h2>Gramática en contexto</h2></div>
+  <p class="hint">Cinco tiempos/modos distintos, cada uno con su regla y su ejercicio corregible.</p>
+  <div id="gramList"></div>
+</section>
+
+<section id="audicion">
+  <div class="section-head"><span class="section-num">04</span><h2>Audición</h2></div>
+  <p class="hint">Escucha el mensaje original de Virginia al principio del episodio, antes de responder.</p>
+  <div id="audioList"></div>
+</section>
+
+<section id="test">
+  <div class="section-head"><span class="section-num">05</span><h2>Test — Reaprender a disfrutar</h2></div>
+  <div id="testList"></div>
+</section>
+
+<footer>Documento generado para uso de clase · Nivel A2–B1 · Corrección automática integrada en la página</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ").replace(/[.,;:!¡¿?"'']/g,"");
+}
+function anyMatch(value, accepted){
+  var v = norm(value);
+  if(!v) return false;
+  return accepted.some(function(a){ return norm(a) === v; });
+}
+
+var STORE_KEY = "reaprenderadisfrutar_taller_v1";
+var store = {};
+try{ store = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); }catch(e){ store = {}; }
+function persist(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){}
+}
+
+var blockScores = {}; // blockId -> {correct, total}
+function updateGlobalScore(){
+  var correct = 0, total = 0;
+  Object.keys(blockScores).forEach(function(k){
+    correct += blockScores[k].correct;
+    total += blockScores[k].total;
+  });
+  document.getElementById("scoreDisplay").textContent = correct + " / " + total;
+}
+
+/* ---------------- VOCABULARIO ---------------- */
+var vocab = [
+  {term:"el ritmo frenético", pos:"expresión (sustantivo)",
+   quote:"Lo que no le gusta nada es el <mark>ritmo frenético</mark> que le abruma.",
+   trans:"бешеный, лихорадочный темп (жизни)",
+   mean:"Очень быстрый, интенсивный темп жизни или деятельности, часто вызывающий стресс.",
+   ex:"El ritmo frenético de la ciudad la dejaba agotada cada día. — Бешеный ритм города оставлял её без сил каждый день."},
+  {term:"abrumar", pos:"verbo transitivo",
+   quote:"Lo que no le gusta nada es el ritmo frenético que le <mark>abruma</mark>.",
+   trans:"подавлять, переполнять, ошеломлять",
+   mean:"Вызывать у кого-то ощущение, что чего-то слишком много, что человек не справляется — эмоций, задач, информации.",
+   ex:"La cantidad de mensajes sin leer la abrumaba cada mañana. — Количество непрочитанных сообщений подавляло её каждое утро."},
+  {term:"anhelar", pos:"verbo transitivo",
+   quote:"Tenemos audiencia de esa edad que <mark>anhela</mark> nuestra amiga.",
+   trans:"страстно желать, тосковать по чему-то",
+   mean:"Желать что-то очень сильно, часто с оттенком ностальгии или недостижимости. Более поэтичное слово, чем «querer» или «desear».",
+   ex:"De niña anhelaba tener un perro, y por fin lo consiguió de adulta. — В детстве она страстно мечтала о собаке и наконец завела её, будучи взрослой."},
+  {term:"el agobio", pos:"sustantivo, m.",
+   quote:"Me creo, pues, una presión interna y un <mark>agobio</mark> que evidentemente es muy difícil, es incompatible con el disfrute.",
+   trans:"гнёт, стресс, ощущение перегруженности",
+   mean:"Сильное чувство давления или тревоги из-за слишком большого количества обязанностей или требований.",
+   ex:"El agobio de las fechas límite no la dejaba disfrutar del proyecto. — Стресс от дедлайнов не давал ей наслаждаться проектом."},
+  {term:"estar diferido/a", pos:"construcción verbal (estar + participio)",
+   quote:"En teoría ya todas tus responsabilidades <mark>están diferidas</mark>.",
+   trans:"быть отложенным, перенесённым (на потом)",
+   mean:"Находиться в состоянии отсрочки — задача или обязательство, которое не нужно решать прямо сейчас.",
+   ex:"El pago de la factura está diferido hasta el próximo mes. — Оплата счёта отложена до следующего месяца."},
+  {term:"sensorializarse", pos:"verbo pronominal",
+   quote:"Yo creo que <mark>sensorializarnos</mark> está muy bien.",
+   trans:"настраиваться на свои ощущения, «включать» органы чувств",
+   mean:"Обращать внимание на телесные ощущения (тепло, холод, звуки, напряжение) как способ вернуться в настоящий момент — техника из психологии присутствия.",
+   ex:"Antes de la reunión importante, intento sensorializarme para calmar los nervios. — Перед важной встречей я стараюсь настроиться на свои ощущения, чтобы успокоить нервы."},
+  {term:"truncar", pos:"verbo transitivo",
+   quote:"Es algo como <mark>trúncalo</mark> para disfrutarlo.",
+   trans:"обрывать, прерывать (что-то) до завершения",
+   mean:"Прервать что-то раньше его естественного окончания, оставить незаконченным намеренно.",
+   ex:"Decidió truncar la película justo antes del final para verla otro día con más ganas. — Он решил прервать просмотр фильма прямо перед концом, чтобы досмотреть его в другой день с бо́льшим удовольствием."},
+  {term:"el bocado", pos:"sustantivo, m.",
+   quote:"Párate justo cuando te queda... un último <mark>bocado</mark>.",
+   trans:"кусок, кусочек (еды)",
+   mean:"Порция еды, которую откусывают или съедают за один раз.",
+   ex:"Se guardó el último bocado del pastel para el día siguiente. — Она оставила последний кусочек торта на следующий день."},
+  {term:"la tarea inacabada", pos:"expresión (sustantivo)",
+   quote:"Es como esa sensación... de <mark>tarea inacabada</mark>.",
+   trans:"незавершённое дело, незаконченная задача",
+   mean:"Algo que quedó sin terminar y que, por eso, sigue presente en la mente — concepto ligado al efecto Zeigarnik en psicología.",
+   ex:"Una tarea inacabada tiende a quedarse dando vueltas en la cabeza más que una terminada. — Незавершённое дело обычно крутится в голове дольше, чем законченное."},
+  {term:"el cachito", pos:"sustantivo, m. (diminutivo, coloquial)",
+   quote:"Hay que dejarse un <mark>cachito</mark> en el plato.",
+   trans:"кусочек, малая часть (уменьшительно-ласкательное, разговорное)",
+   mean:"Форма уменьшительного от «cacho» — маленький кусочек чего-то, часто еды, используется в непринуждённой, тёплой речи.",
+   ex:"¿Me das un cachito de tu chocolate? — Дашь мне кусочек своего шоколада?"}
+];
+
+var vocabGrid = document.getElementById("vocabGrid");
+vocab.forEach(function(v, i){
+  var card = document.createElement("div");
+  card.className = "vocab-card";
+  card.innerHTML =
+    '<div class="vocab-top"><span class="vocab-term">'+v.term+'</span><span class="vocab-pos">'+v.pos+'</span></div>'+
+    '<div class="vocab-quote">«'+v.quote+'»</div>'+
+    '<div class="vocab-row"><b>Перевод:</b> '+v.trans+'</div>'+
+    '<div class="vocab-row"><b>Значение:</b> '+v.mean+'</div>'+
+    '<button class="reveal-btn" type="button" data-i="'+i+'">Mostrar ejemplo</button>'+
+    '<div class="vocab-example" id="vocab-ex-'+i+'" hidden><b>Пример:</b> '+v.ex+'</div>';
+  vocabGrid.appendChild(card);
+});
+vocabGrid.addEventListener("click", function(e){
+  var btn = e.target.closest(".reveal-btn");
+  if(!btn) return;
+  var i = btn.getAttribute("data-i");
+  var ex = document.getElementById("vocab-ex-"+i);
+  var showing = !ex.hidden;
+  ex.hidden = showing;
+  btn.textContent = showing ? "Mostrar ejemplo" : "Ocultar ejemplo";
+});
+
+/* ---------------- DEBATE ---------------- */
+var debate = [
+  {q:"¿Cuál fue la última vez que disfrutaste de verdad de algo pequeño y sencillo? Cuéntanoslo.", hint:"Útil: «La última vez que disfruté de verdad fue...», «Me acuerdo de que...»"},
+  {q:"Según el episodio, ¿en qué época de tu vida crees que disfrutabas más? ¿Por qué?", hint:"Útil: «Creo que disfrutaba más cuando...», «En esa época...»"},
+  {q:"Luis distingue entre estar en \"modo guerrero\" (responsable, exigente) y estar en modo disfrute. ¿Te reconoces en algún \"modo guerrero\" que te impide disfrutar? ¿Cuándo aparece?", hint:"Útil: «Mi modo guerrero aparece cuando...», «Me pasa sobre todo en...»"},
+  {q:"¿Qué opinas de la técnica de \"detener algo antes de que termine\" (dejar un último bocado, no terminar de ver una serie) para disfrutar más? ¿La probarías?", hint:"Útil: «Me parece una buena/mala idea porque...», «La probaría con...»"},
+  {q:"Si tuvieras que crear una \"versión 2.0\" de algo que te encantaba hacer de más joven (pero que ya no puedes hacer igual), ¿qué sería y cómo la adaptarías a tu vida actual?", hint:"Útil: «De joven me encantaba...», «Ahora podría adaptarlo haciendo...»"}
+];
+var debateList = document.getElementById("debateList");
+debate.forEach(function(d, i){
+  var card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML =
+    '<div class="q-text"><span class="q-num">'+(i+1)+'.</span>'+d.q+'</div>'+
+    '<div class="q-hint">'+d.hint+'</div>'+
+    '<textarea class="q-answer" id="debate-'+i+'" placeholder="Escribe tu respuesta aquí (opcional)..."></textarea>';
+  debateList.appendChild(card);
+});
+debateList.addEventListener("input", function(e){
+  if(!e.target.classList.contains("q-answer")) return;
+  store[e.target.id] = e.target.value;
+  persist();
+});
+debate.forEach(function(d, i){
+  var id = "debate-"+i;
+  if(store[id] !== undefined){
+    var el = document.getElementById(id);
+    if(el) el.value = store[id];
+  }
+});
+
+/* ---------------- GRAMÁTICA ---------------- */
+var gram = [
+  {id:"g1", title:"3.1 Estar (imperfecto) + gerundio — pasado continuo",
+   quote:"<mark>Estaba yo pensando</mark> ahora en mi peque.",
+   rule:"Estar en imperfecto + gerundio describe una acción en pleno desarrollo en el pasado, sin foco en cuándo empezó o terminó exactamente. <b>Ошибка:</b> использовать pretérito indefinido вместо этой конструкции там, где нужно подчеркнуть, что действие было в процессе.",
+   items:[
+     {stem:"(Yo/estar) ______ pensando en mi hijo cuando me llamó.", answers:["estaba"]},
+     {stem:"Nosotros (estar) ______ jugando en el mar cuando empezó a llover.", answers:["estábamos"]},
+     {stem:"¿Qué (tú/estar) ______ haciendo cuando te diste cuenta de que no disfrutabas?", answers:["estabas"]},
+     {stem:"Ella (estar) ______ hablando con sus amigas cuando sintió esa alegría.", answers:["estaba"]},
+     {stem:"Ellos (estar) ______ riéndose tanto que no vieron pasar el tiempo.", answers:["estaban"]}
+   ]},
+  {id:"g2", title:"3.2 Pretérito imperfecto (recuerdos y narración de la infancia)",
+   quote:"Cuando yo <mark>era</mark> pequeño, el pulpo a feira <mark>era</mark> una fiesta.",
+   rule:"Raíz + -aba/-ía... Se usa para describir estados, hábitos y situaciones repetidas en el pasado, muy típico al contar recuerdos de infancia. <b>Ошибка:</b> использовать indefinido там, где описывается общее, повторяющееся воспоминание, а не единичное событие.",
+   items:[
+     {stem:"Cuando yo (ser) ______ pequeño, el pulpo a feira (ser) ______ una fiesta.", answers:["era", "era"]},
+     {stem:"(Nosotros/ir) ______ a comer pulpo muy de vez en cuando.", answers:["íbamos"]},
+     {stem:"Esa comida no (depender) ______ de mí, sino de mis padres.", answers:["dependía"]},
+     {stem:"Cuando (yo/tener) ______ 20 años, (salir) ______ mucho más con mis amigos.", answers:["tenía", "salía"]},
+     {stem:"De adolescente, Virginia no (tener) ______ tantas responsabilidades.", answers:["tenía"]}
+   ]},
+  {id:"g3", title:"3.3 Imperativo afirmativo (tú, pronominal)",
+   quote:"<mark>Párate</mark> justo cuando te queda un último bocado.",
+   rule:"El imperativo afirmativo de tú con verbos pronominales lleva el pronombre pegado al final del verbo (para + te → párate), con tilde si el verbo original no la llevaba. <b>Ошибка:</b> ставить местоимение отдельно перед глаголом — в утвердительном императиве оно всегда слитно после глагола.",
+   items:[
+     {stem:"(Pararse) ______ justo cuando te queda un último bocado.", answers:["párate"]},
+     {stem:"(Truncarlo) ______ para disfrutarlo más.", answers:["trúncalo"]},
+     {stem:"(Preguntarse) ______ qué estás sintiendo ahora mismo.", answers:["pregúntate"]},
+     {stem:"(Fijarse) ______ en las pequeñas cosas que te hacen feliz.", answers:["fíjate"]},
+     {stem:"(Dejarse) ______ un cachito en el plato la próxima vez.", answers:["déjate"]}
+   ]},
+  {id:"g4", title:"3.4 Condicional simple (sugerencia principal)",
+   quote:"Para mí la primera cuestión <mark>sería</mark> hacernos todo el tiempo a nosotros mismos la pregunta, ¿qué estamos sintiendo ahora?",
+   rule:"El condicional simple se usa para presentar una sugerencia o propuesta de forma suave, como una idea abierta, no como una orden. <b>Ошибка:</b> использовать presente indicativo там, где по-испански мягкое, необязывающее предложение естественнее звучит в condicional.",
+   items:[
+     {stem:"Para mí, la primera cuestión (ser) ______ preguntarte qué estás sintiendo ahora.", answers:["sería"]},
+     {stem:"Yo (decir) ______ que hay que buscar una versión 2.0 de lo que te gustaba antes.", answers:["diría"]},
+     {stem:"Nosotros (recomendar) ______ empezar por los micro placeres.", answers:["recomendaríamos"]},
+     {stem:"¿Qué (hacer, tú) ______ para volver a disfrutar de las cosas pequeñas?", answers:["harías"]},
+     {stem:"A mí me (gustar) ______ recuperar esa capacidad de disfrute.", answers:["gustaría"]}
+   ]},
+  {id:"g5", title:"3.5 Pretérito pluscuamperfecto",
+   quote:"Cuando algo no lo <mark>habías terminado</mark>, estaba en tu cabeza una y otra vez.",
+   rule:"Había/habías/había... + participio. Se usa para una acción pasada anterior a otro momento del pasado (aquí, el momento en el que «estaba en tu cabeza»). <b>Ошибка:</b> использовать простой imperfecto или indefinido там, где нужно показать, что одно действие произошло ДО другого момента в прошлом.",
+   items:[
+     {stem:"Cuando algo no lo (tú/terminar) ______, se quedaba en tu cabeza una y otra vez.", answers:["habías terminado"]},
+     {stem:"Virginia nunca (perder) ______ esa sensación de disfrute hasta hacía un par de años.", answers:["había perdido"]},
+     {stem:"Antes de esa charla, Luis nunca (pensar) ______ tanto en la autenticidad.", answers:["había pensado"]},
+     {stem:"Cuando llegó a terapia, ya (dejar) ______ de hacer las cosas que le gustaban.", answers:["había dejado"]},
+     {stem:"Nosotros nunca (hablar) ______ de esto en el podcast antes de este episodio.", answers:["habíamos hablado"]}
+   ]}
+];
+
+function buildExerciseBlock(block, isGrammar){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  var head = '<div class="ex-head"><span class="ex-title">'+block.title+'</span></div>';
+  var quoteHtml = block.quote ? '<div class="ex-quote">«'+block.quote+'»</div>' : "";
+  var ruleHtml = block.rule ? '<div class="rule-box">'+block.rule+'</div>' : "";
+  wrap.innerHTML = head + quoteHtml + ruleHtml;
+
+  var list = document.createElement("div");
+  block.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var stemHtml = it.stem;
+    var count = 0;
+    stemHtml = stemHtml.replace(/______/g, function(){
+      var inputHtml = '<input type="text" class="ans-input" data-idx="'+idx+'" data-sub="'+count+'" autocomplete="off">';
+      count++;
+      return inputHtml;
+    });
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+stemHtml+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  var checkBtn = document.createElement("button");
+  checkBtn.type = "button";
+  checkBtn.className = "check-btn";
+  checkBtn.textContent = "Comprobar";
+  var scoreSpan = document.createElement("span");
+  scoreSpan.className = "block-score";
+  wrap.appendChild(checkBtn);
+  wrap.appendChild(scoreSpan);
+
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    block.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var inputs = row.querySelectorAll(".ans-input");
+      var ok = true;
+      inputs.forEach(function(inp, subIdx){
+        var expected = it.answers[subIdx] !== undefined ? it.answers[subIdx] : it.answers[0];
+        if(!anyMatch(inp.value, [expected])) ok = false;
+      });
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      if(ok){
+        correct++;
+        slot.innerHTML = '<span class="fb-icon ok">&#10003;</span>';
+      } else {
+        slot.innerHTML = '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers.join(" / ")+'</span>';
+      }
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+block.items.length+"</b>";
+    blockScores[block.id] = {correct:correct, total:block.items.length};
+    updateGlobalScore();
+  });
+
+  blockScores[block.id] = {correct:0, total:block.items.length};
+  return wrap;
+}
+
+var gramList = document.getElementById("gramList");
+gram.forEach(function(b){ gramList.appendChild(buildExerciseBlock(b, true)); });
+
+/* ---------------- AUDICIÓN ---------------- */
+var audioList = document.getElementById("audioList");
+
+var playerWrap = document.createElement("div");
+playerWrap.className = "player-wrap";
+playerWrap.innerHTML =
+  '<div class="player-frame"><iframe src="https://www.youtube.com/embed/XfjKELT4IUI" ' +
+  'title="REAPRENDER A DISFRUTAR | Entiende Tu Mente | 421" ' +
+  'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+  'allowfullscreen></iframe></div>' +
+  '<p class="player-caption">Vídeo real de YouTube (Entiende Tu Mente) — escucha el mensaje original de Virginia al principio del episodio, antes de responder.</p>';
+audioList.appendChild(playerWrap);
+
+var aud1 = {
+  id:"aud1", title:"Audición 1 · Escucha y responde",
+  items:[
+    {q:"¿De qué país es Virginia?", opts:["México","España","Argentina","Chile"], answer:1},
+    {q:"¿Desde hace cuánto tiempo se ha dado cuenta Virginia de que no sabe disfrutar?", opts:["Desde hace un par de años","Desde hace un mes","Desde siempre","Desde hace diez años"], answer:0},
+    {q:"¿Qué le gustaría aprender o volver a aprender a Virginia?", opts:["A cocinar","A disfrutar de la vida","A hablar en público","A organizarse mejor"], answer:1},
+    {q:"Según Virginia, ¿de qué tipo de cosas no sabe disfrutar?", opts:["Solo de las cosas grandes","Solo de las cosas pequeñas","Ni de las pequeñas ni de las grandes","Solo de las vacaciones"], answer:2}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud1.title+'</span></div>';
+  var list = document.createElement("div");
+  aud1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="aud1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="aud1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud1.items.length+"</b>";
+    blockScores["aud1"] = {correct:correct, total:aud1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud1"] = {correct:0, total:aud1.items.length};
+  audioList.appendChild(wrap);
+})();
+
+var aud2 = {
+  id:"aud2", title:"Audición 2 · Dictado — completa las palabras de Virginia",
+  bank:"perdido · capacidad · disfrute · ganado · fuerza",
+  items:[
+    {stem:"Es como que he ______ la capacidad de disfrute.", answers:["perdido"]},
+    {stem:"Es como que he perdido la ______ de disfrute.", answers:["capacidad"]},
+    {stem:"Es como que he perdido la capacidad de ______.", answers:["disfrute"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+aud2.title+'</span></div>'+
+    '<p class="hint" style="margin-top:0;">Es la frase con la que Virginia resume el problema que quiere tratar.</p>';
+  var bankDiv = document.createElement("div");
+  bankDiv.className = "wordbank";
+  bankDiv.innerHTML = "<b>Banco de palabras:</b> "+aud2.bank;
+  wrap.appendChild(bankDiv);
+  var list = document.createElement("div");
+  aud2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    aud2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+aud2.items.length+"</b>";
+    blockScores["aud2"] = {correct:correct, total:aud2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["aud2"] = {correct:0, total:aud2.items.length};
+  audioList.appendChild(wrap);
+})();
+
+/* ---------------- TEST ---------------- */
+var testList = document.getElementById("testList");
+
+/* Bloque 1: comprensión (radio) */
+var b1 = {
+  id:"t1", title:"Bloque 1 · Comprensión — elige la opción correcta",
+  items:[
+    {q:"¿Qué le pasa a Virginia, la oyente de este episodio?", opts:["No tiene tiempo libre","Siente que ha perdido la capacidad de disfrutar de las cosas, grandes y pequeñas","Tiene problemas para dormir","No le gusta su trabajo"], answer:1},
+    {q:"Según Luis, ¿qué es el \"modo guerrero\" que impide disfrutar?", opts:["Un tipo de ejercicio físico","Un estado de hiperresponsabilidad y autoexigencia en el que no hay espacio para el placer","Una técnica de meditación","Un trastorno de ansiedad"], answer:1},
+    {q:"Según Virginia, ¿cuál fue uno de los últimos momentos en los que sí disfrutó de verdad?", opts:["Un viaje al extranjero","Jugar en el mar con sus hijos entre las olas","Una cena con amigos","Ver una película"], answer:1},
+    {q:"Según Luis, ¿por qué compararse con la vida de otras personas (por ejemplo, en redes sociales) no ayuda a disfrutar más?", opts:["Porque siempre es mentira","Porque el disfrute no depende de tener una vida \"mejor\", sino de saber estar presente en los micro placeres propios","Porque las redes sociales están prohibidas","Porque solo les pasa a los famosos"], answer:1},
+    {q:"¿Qué es la \"versión 2.0\" que propone Luis para recuperar el disfrute?", opts:["Volver a hacer exactamente lo mismo que se hacía a los 20 años","Buscar, de otra forma y en otro formato, lo mismo que antes te hacía disfrutar (como las risas con amigos)","Dejar de hacer cualquier actividad social","Comprar cosas nuevas constantemente"], answer:1},
+    {q:"¿Qué relación tiene la técnica de \"detenerte antes de que algo termine\" con el efecto que menciona Luis (Zeigarnik)?", opts:["Ninguna relación","Una tarea inacabada se queda en la cabeza, lo que ayuda a mantener el anhelo y el disfrute por lo que se hizo","El efecto Zeigarnik dice que hay que terminar siempre todo","Solo se aplica a la comida"], answer:1}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b1.title+'</span></div>';
+  var list = document.createElement("div");
+  b1.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b1-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b1.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b1-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b1.items.length+"</b>";
+    blockScores["t1"] = {correct:correct, total:b1.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t1"] = {correct:0, total:b1.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 2: huecos */
+var b2 = {
+  id:"t2", title:"Bloque 2 · Rellena los huecos",
+  bank:"frenético · agobio · diferidas · sensorializarnos · trúncalo · cachito · bocado · anhela",
+  items:[
+    {stem:"Lo que no le gusta nada a Virginia es el ritmo ______ que le abruma.", answers:["frenético"]},
+    {stem:"Al final me creo una presión interna y un ______.", answers:["agobio"]},
+    {stem:"En teoría ya todas tus responsabilidades están ______.", answers:["diferidas"]},
+    {stem:"Yo creo que ______ está muy bien.", answers:["sensorializarnos"]},
+    {stem:"Es algo como ______ para disfrutarlo.", answers:["trúncalo"]},
+    {stem:"Hay que dejarse un ______ en el plato.", answers:["cachito"]}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b2.title+'</span></div>'+
+    '<div class="wordbank"><b>Banco de palabras:</b> '+b2.bank+'</div>';
+  var list = document.createElement("div");
+  b2.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.stem.replace("______",'<input type="text" class="ans-input" data-idx="'+idx+'" autocomplete="off">')+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b2.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var input = row.querySelector(".ans-input");
+      var ok = anyMatch(input.value, it.answers);
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.answers[0]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b2.items.length+"</b>";
+    blockScores["t2"] = {correct:correct, total:b2.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t2"] = {correct:0, total:b2.items.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3a: relacionar (select) */
+var b3a = {
+  id:"t3a", title:"Bloque 3a · Relaciona cada palabra con su significado",
+  words:["abrumar","anhelar","el agobio","truncar","la tarea inacabada"],
+  defs:["desear algo intensamente, con nostalgia o ilusión","hacer que alguien se sienta superado, con demasiadas cosas encima","algo que quedó sin terminar y por eso sigue presente en la mente","cortar algo antes de que termine de forma natural","la sensación de estrés y presión acumulada"],
+  answers:["b","a","e","d","c"]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3a.title+'</span></div>';
+  var table = document.createElement("table");
+  table.className = "match-table";
+  var rows = "<tr><th>Palabra</th><th>Significado</th></tr>";
+  b3a.words.forEach(function(w, idx){
+    var opts = ["a","b","c","d","e"].map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join("");
+    rows += '<tr data-idx="'+idx+'"><td>'+(idx+1)+'. '+w+'</td><td><select class="ans-input" data-idx="'+idx+'"><option value="">—</option>'+opts+'</select> <span class="fb-slot"></span></td></tr>';
+  });
+  table.innerHTML = rows;
+  wrap.appendChild(table);
+  var defList = document.createElement("div");
+  defList.className = "def-list";
+  defList.innerHTML = b3a.defs.map(function(d,i){ return String.fromCharCode(97+i)+") "+d; }).join(" &nbsp;&nbsp; ");
+  wrap.appendChild(defList);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3a.words.forEach(function(w, idx){
+      var tr = table.querySelector('tr[data-idx="'+idx+'"]');
+      var sel = tr.querySelector("select");
+      var ok = sel.value === b3a.answers[idx];
+      tr.classList.remove("marked-ok","marked-bad");
+      tr.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = tr.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+b3a.answers[idx]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3a.words.length+"</b>";
+    blockScores["t3a"] = {correct:correct, total:b3a.words.length};
+    updateGlobalScore();
+  });
+  blockScores["t3a"] = {correct:0, total:b3a.words.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 3b: orden (select) */
+var b3b = {
+  id:"t3b", title:"Bloque 3b · Ordena los temas según se van tratando en el episodio",
+  events:[
+    {text:"Virginia cuenta que ha perdido la capacidad de disfrutar, tanto de lo pequeño como de lo grande.", answer:1},
+    {text:"Luis explica la diferencia entre el \"modo guerrero\" y el disfrute.", answer:2},
+    {text:"Virginia recuerda un momento reciente de disfrute real: jugar con sus hijos en el mar.", answer:3},
+    {text:"Luis explica por qué compararse con la vida de otras personas no ayuda a disfrutar más.", answer:4},
+    {text:"Luis da la idea de detenerse antes de que algo termine, para no perder el anhelo.", answer:5}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b3b.title+'</span></div>';
+  var list = document.createElement("div");
+  b3b.events.forEach(function(ev, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var opts = [1,2,3,4,5].map(function(n){ return '<option value="'+n+'">'+n+'</option>'; }).join("");
+    row.innerHTML =
+      '<select class="ans-input" data-idx="'+idx+'" style="min-width:52px;"><option value="">—</option>'+opts+'</select>'+
+      '<span class="stem">'+ev.text+'</span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b3b.events.forEach(function(ev, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var sel = row.querySelector("select");
+      var ok = parseInt(sel.value,10) === ev.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+ev.answer+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b3b.events.length+"</b>";
+    blockScores["t3b"] = {correct:correct, total:b3b.events.length};
+    updateGlobalScore();
+  });
+  blockScores["t3b"] = {correct:0, total:b3b.events.length};
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 4: transformación (respuesta modelo, no autocorregible) */
+var b4 = {
+  title:"Bloque 4 · Transformación",
+  items:[
+    {stem:"Cambia a pasado continuo: «Pienso en mi hijo cuando me llama.»", model:"Estaba pensando en mi hijo cuando me llamó."},
+    {stem:"Completa con imperfecto: «Cuando yo (ser) pequeño, esa comida (ser) una fiesta.»", model:"Cuando yo era pequeño, esa comida era una fiesta."},
+    {stem:"Transforma en imperativo (tú): «Tienes que pararte antes del último bocado.»", model:"Párate antes del último bocado."},
+    {stem:"Reescribe usando el condicional de sugerencia: «Recomiendo empezar por los micro placeres.»", model:"Recomendaría empezar por los micro placeres."},
+    {stem:"Cambia a pluscuamperfecto: «Antes de esta charla, Luis nunca piensa tanto en esto.»", model:"Antes de esta charla, Luis nunca había pensado tanto en esto."}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b4.title+'</span></div><p class="hint" style="margin-top:0;">Respuestas abiertas — escribe la tuya y compárala con el modelo.</p>';
+  b4.items.forEach(function(it, idx){
+    var box = document.createElement("div");
+    box.style.marginBottom = "14px";
+    box.innerHTML =
+      '<div style="font-size:14.5px; margin-bottom:6px;"><span class="item-idx">'+(idx+1)+'.</span> '+it.stem+'</div>'+
+      '<textarea class="q-answer" id="b4-'+idx+'" style="min-height:44px;" placeholder="Tu transformación..."></textarea>'+
+      '<button class="reveal-model" type="button" data-idx="'+idx+'">Ver respuesta modelo</button>'+
+      '<div class="model-answer" id="b4-model-'+idx+'" hidden>'+it.model+'</div>';
+    wrap.appendChild(box);
+  });
+  wrap.addEventListener("click", function(e){
+    var btn = e.target.closest(".reveal-model");
+    if(!btn) return;
+    var idx = btn.getAttribute("data-idx");
+    var m = document.getElementById("b4-model-"+idx);
+    var showing = !m.hidden;
+    m.hidden = showing;
+    btn.textContent = showing ? "Ver respuesta modelo" : "Ocultar respuesta modelo";
+  });
+  testList.appendChild(wrap);
+})();
+
+/* Bloque 5: léxico (radio) */
+var b5 = {
+  id:"t5", title:"Bloque 5 · Léxico",
+  items:[
+    {q:"Sinónimo de «abrumar»:", opts:["agobiar","relajar","divertir","aburrir"], answer:0},
+    {q:"Antónimo de «anhelar»:", opts:["desear","ser indiferente a algo","recordar","disfrutar"], answer:1},
+    {q:"Encuentra la palabra intrusa (todas menos una son ideas o sensaciones del episodio sobre el disfrute):", opts:["el agobio","el ritmo frenético","la versión 2.0","el bocado"], answer:3},
+    {q:"¿Qué palabra significa «un pedacito pequeño» de forma coloquial?", opts:["cachito","agobio","anhelo","trasfondo"], answer:0},
+    {q:"Sinónimo de «estar diferido/a» (una tarea):", opts:["pospuesto, aplazado","terminado","urgente","olvidado"], answer:0}
+  ]
+};
+(function(){
+  var wrap = document.createElement("div");
+  wrap.className = "ex-block";
+  wrap.innerHTML = '<div class="ex-head"><span class="ex-title">'+b5.title+'</span></div>';
+  var list = document.createElement("div");
+  b5.items.forEach(function(it, idx){
+    var row = document.createElement("div");
+    row.className = "item-row";
+    row.setAttribute("data-idx", idx);
+    var choices = it.opts.map(function(o, oi){
+      return '<label class="choice-label"><input type="radio" name="b5-'+idx+'" value="'+oi+'"> '+o+'</label>';
+    }).join("");
+    row.innerHTML =
+      '<span class="item-idx">'+(idx+1)+'.</span>'+
+      '<span class="stem">'+it.q+'<div class="choice-group">'+choices+'</div></span>'+
+      '<span class="fb-slot"></span>';
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+  var checkBtn = document.createElement("button");
+  checkBtn.type="button"; checkBtn.className="check-btn"; checkBtn.textContent="Comprobar";
+  var scoreSpan = document.createElement("span"); scoreSpan.className="block-score";
+  wrap.appendChild(checkBtn); wrap.appendChild(scoreSpan);
+  checkBtn.addEventListener("click", function(){
+    var correct = 0;
+    b5.items.forEach(function(it, idx){
+      var row = list.querySelector('.item-row[data-idx="'+idx+'"]');
+      var checked = row.querySelector('input[name="b5-'+idx+'"]:checked');
+      var ok = checked && parseInt(checked.value,10) === it.answer;
+      row.classList.remove("marked-ok","marked-bad");
+      row.classList.add(ok ? "marked-ok" : "marked-bad");
+      var slot = row.querySelector(".fb-slot");
+      slot.innerHTML = ok ? '<span class="fb-icon ok">&#10003;</span>' : '<span class="fb-icon bad">&#10007;</span><span class="correct-note">→ '+it.opts[it.answer]+'</span>';
+      if(ok) correct++;
+    });
+    scoreSpan.innerHTML = "Aciertos: <b>"+correct+" / "+b5.items.length+"</b>";
+    blockScores["t5"] = {correct:correct, total:b5.items.length};
+    updateGlobalScore();
+  });
+  blockScores["t5"] = {correct:0, total:b5.items.length};
+  testList.appendChild(wrap);
+})();
+
+updateGlobalScore();
+
+document.getElementById("resetBtn").addEventListener("click", function(){
+  document.querySelectorAll(".ans-input").forEach(function(el){ el.value = ""; });
+  document.querySelectorAll('input[type="radio"]').forEach(function(el){ el.checked = false; });
+  document.querySelectorAll(".item-row, tr[data-idx]").forEach(function(el){ el.classList.remove("marked-ok","marked-bad"); });
+  document.querySelectorAll(".fb-slot").forEach(function(el){ el.innerHTML = ""; });
+  document.querySelectorAll(".block-score").forEach(function(el){ el.innerHTML = ""; });
+  Object.keys(blockScores).forEach(function(k){ blockScores[k].correct = 0; });
+  updateGlobalScore();
+});
+
+})();
+</script>
