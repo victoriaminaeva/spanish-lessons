@@ -264,7 +264,9 @@ function nextQuestion(){
     renderComplete();
     return;
   }
-  const id = remaining[Math.floor(Math.random() * remaining.length)];
+  const prevId = current ? current.id : null;
+  const pickFrom = remaining.length > 1 ? remaining.filter(id => id !== prevId) : remaining;
+  const id = pickFrom[Math.floor(Math.random() * pickFrom.length)];
   current = pool.find(c => c.id === id);
   if(studyMode === "choice") currentMode = "choice";
   else if(studyMode === "write") currentMode = "write";
