@@ -5573,5 +5573,841 @@
       "Tiré el papel al cubo de basura."
     ],
     "added": "2026-09-19"
+  },
+  {
+    "id": "descuento",
+    "front": "descuento",
+    "translation": "скидка",
+    "explanation_es": "Rebaja en el precio de algo que se compra.",
+    "examples": [
+      "Con esta tarjeta tienes un 10% de descuento en toda la tienda.",
+      "Compré el abrigo con descuento porque era la última talla."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "truco",
+    "front": "truco",
+    "translation": "трюк, хитрость, приём",
+    "explanation_es": "Método ingenioso para conseguir algo o resolver un problema, a veces también un engaño con fines de entretenimiento (magia).",
+    "examples": [
+      "Te voy a enseñar un truco para que el arroz no se te pegue nunca.",
+      "El mago hizo un truco con cartas que dejó a todos boquiabiertos."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "contorno-de",
+    "front": "contorno de",
+    "translation": "контур, очертание (чего-л.); окрестности",
+    "explanation_es": "Línea que delimita la forma exterior de algo; también la zona que rodea un lugar.",
+    "examples": [
+      "Dibujó el contorno de la isla en el mapa antes de colorearlo.",
+      "Viven en el contorno de la ciudad, a quince minutos del centro."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "encontrar-pegas",
+    "front": "encontrar pegas (a algo)",
+    "translation": "находить недостатки, придираться (к чему-л.)",
+    "explanation_es": "Poner objeciones o encontrar problemas en algo, normalmente de forma exagerada o poco constructiva.",
+    "examples": [
+      "Siempre le encuentra pegas a cualquier plan, por bueno que sea.",
+      "El jefe encontró pegas al informe, aunque estaba bien hecho."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "estancarse",
+    "front": "estancarse",
+    "translation": "застаиваться, останавливаться в развитии",
+    "explanation_es": "Dejar de avanzar o progresar; quedarse parado en una situación sin cambios.",
+    "examples": [
+      "Siento que mi español se ha estancado, llevo meses sin mejorar.",
+      "La economía del país se estancó durante la crisis."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "dar-vueltas-a-una-idea",
+    "front": "dar vueltas a una idea",
+    "translation": "обдумывать идею, крутить в голове мысль",
+    "explanation_es": "Pensar en algo repetidamente, sin llegar a una conclusión clara, dándole muchas vueltas mentalmente.",
+    "examples": [
+      "Llevo días dando vueltas a la idea de cambiar de trabajo.",
+      "No le des más vueltas a esa idea, simplemente decide y ya está."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "hastio",
+    "front": "el hastío",
+    "translation": "тоска, скука, пресыщение",
+    "explanation_es": "Sensación de cansancio y aburrimiento profundo, muchas veces por la repetición o la monotonía.",
+    "examples": [
+      "El hastío de la rutina la llevó a pedir una excedencia en el trabajo.",
+      "Se notaba el hastío en su voz cuando hablaba del trabajo."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "motor-vital",
+    "front": "el motor vital",
+    "translation": "жизненная движущая сила, то, что даёт смысл жизни",
+    "explanation_es": "Aquello que da sentido y energía a la vida de una persona, lo que la motiva a seguir adelante.",
+    "examples": [
+      "Sus hijos son el motor vital que la levanta cada mañana.",
+      "Para él, la música ha sido siempre su motor vital."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "cacarear",
+    "front": "cacarear",
+    "translation": "кудахтать; перен. раструбить, хвастливо разглашать",
+    "explanation_es": "Sonido que hace la gallina; en sentido figurado, contar algo con mucho ruido y exageración, presumiendo de ello.",
+    "examples": [
+      "Las gallinas cacareaban en el corral desde muy temprano.",
+      "No hace falta que cacarees tanto tu ascenso, ya lo sabe todo el mundo."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "delatarse",
+    "front": "delatarse",
+    "translation": "выдать себя, проговориться",
+    "explanation_es": "Uso reflexivo de «delatar»: revelar sin querer algo que uno intentaba ocultar, a través de un gesto, una reacción o un comentario.",
+    "examples": [
+      "Se delató al ponerse rojo en cuanto le preguntaron por el regalo.",
+      "Con ese comentario se delató sin darse cuenta."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "soltar",
+    "front": "soltar",
+    "translation": "отпускать, выпускать; выпалить (сказать)",
+    "explanation_es": "Dejar de sujetar algo, dejarlo libre; también decir algo de repente, sin pensarlo mucho.",
+    "examples": [
+      "Suelta la cuerda poco a poco para que la barca no se aleje demasiado.",
+      "Soltó una risa nerviosa antes de contarnos la verdad."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "enloquecer",
+    "front": "enloquecer",
+    "translation": "сходить с ума; сводить с ума",
+    "explanation_es": "Volverse loco, o hacer que alguien pierda el control por emoción, entusiasmo o desesperación.",
+    "examples": [
+      "El ruido constante de las obras la estaba enloqueciendo.",
+      "A los niños les enloquece ese parque de atracciones."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "olfatear",
+    "front": "olfatear",
+    "translation": "нюхать, вынюхивать; чуять",
+    "explanation_es": "Oler algo de forma intencionada, normalmente para detectar o investigar algo.",
+    "examples": [
+      "El perro olfateó la maleta y encontró la comida escondida.",
+      "El periodista olfateó que algo raro pasaba con esas cuentas."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "coger-por-sorpresa",
+    "front": "coger por sorpresa",
+    "translation": "застать врасплох",
+    "explanation_es": "Suceder algo de forma inesperada, sin que la persona estuviera preparada.",
+    "examples": [
+      "La pregunta me cogió por sorpresa y no supe qué contestar.",
+      "La tormenta nos cogió por sorpresa en mitad de la excursión."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "inconfundible",
+    "front": "inconfundible",
+    "translation": "безошибочно узнаваемый, неповторимый",
+    "explanation_es": "Que es tan característico que no se puede confundir con nada ni nadie más.",
+    "examples": [
+      "Su voz es inconfundible, la reconocería entre mil.",
+      "El olor a café recién hecho es inconfundible en esa cafetería."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "desabrochar",
+    "front": "desabrochar",
+    "translation": "расстёгивать",
+    "explanation_es": "Abrir botones, cremalleras o cierres de algo, como la ropa o un cinturón.",
+    "examples": [
+      "Se desabrochó el abrigo en cuanto entró en la casa, tenía calor.",
+      "Desabrocha el cinturón de seguridad solo cuando el coche esté parado."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "desplomarse",
+    "front": "desplomarse",
+    "translation": "рушиться, обрушиваться; падать без сил",
+    "explanation_es": "Caerse de repente, de forma brusca y sin control, ya sea una persona, un edificio o algo abstracto como los precios.",
+    "examples": [
+      "El techo se desplomó por el peso de la nieve acumulada.",
+      "Se desplomó en el sofá en cuanto llegó a casa, agotado."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "atropellarse",
+    "front": "atropellarse",
+    "translation": "сбиваться, тараторить (при разговоре)",
+    "explanation_es": "Hablar o actuar muy deprisa y de forma desordenada, sin dejar espacio entre las palabras o los pasos.",
+    "examples": [
+      "Se atropellaba al hablar porque estaba muy nervioso en la entrevista.",
+      "No te atropelles, explícame la receta paso a paso."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "pretender",
+    "front": "pretender",
+    "translation": "намереваться, стремиться (не «притворяться»!)",
+    "explanation_es": "Tener la intención de conseguir algo. ¡Cuidado!, no significa \"fingir\" como el inglés \"pretend\".",
+    "examples": [
+      "¿Qué pretendes conseguir con esa actitud tan agresiva?",
+      "Pretendo terminar el proyecto antes de que acabe el mes."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "aliento",
+    "front": "aliento",
+    "translation": "дыхание; вдохновение, поддержка",
+    "explanation_es": "Aire que se expulsa al respirar; también significa ánimo o apoyo que se da a alguien.",
+    "examples": [
+      "Tenía mal aliento después de comer ajo.",
+      "Sus palabras de aliento me dieron fuerzas para seguir."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "dar-aliento-a",
+    "front": "dar aliento a",
+    "translation": "подбадривать, вдохновлять",
+    "explanation_es": "Animar a alguien, darle fuerza y motivación para seguir adelante.",
+    "examples": [
+      "El entrenador dio aliento al equipo antes de la final.",
+      "Sus amigos le dieron aliento cuando pensaba abandonar los estudios."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "quedarse-sin-aliento",
+    "front": "quedarse sin aliento",
+    "translation": "запыхаться, остаться без сил",
+    "explanation_es": "Perder la capacidad de respirar con normalidad, normalmente después de un esfuerzo físico o por una emoción fuerte.",
+    "examples": [
+      "Subió las escaleras corriendo y se quedó sin aliento.",
+      "Me quedé sin aliento al ver el paisaje desde la cima."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "batido",
+    "front": "batido",
+    "translation": "молочный коктейль; взбитый",
+    "explanation_es": "Bebida hecha con leche y fruta u otros ingredientes mezclados; también participio de \"batir\".",
+    "examples": [
+      "Me pedí un batido de fresa con el almuerzo.",
+      "El huevo batido se añade a la masa al final."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "batir",
+    "front": "batir",
+    "translation": "взбивать; побивать (рекорд)",
+    "explanation_es": "Mezclar algo enérgicamente con un utensilio, como los huevos; también superar una marca o récord anterior.",
+    "examples": [
+      "Bate los huevos con azúcar hasta que la mezcla quede espumosa.",
+      "El atleta batió el récord mundial de los 100 metros."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "palomitas-de-maiz",
+    "front": "palomitas de maíz",
+    "translation": "попкорн",
+    "explanation_es": "Snack hecho de granos de maíz que explotan al calentarse, típico para comer viendo películas.",
+    "examples": [
+      "Siempre compramos palomitas de maíz antes de entrar al cine.",
+      "Hizo palomitas de maíz caseras con un poco de aceite y sal."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "autofoto",
+    "front": "autofoto",
+    "translation": "селфи, автопортрет (на телефон)",
+    "explanation_es": "Fotografía que uno se hace a sí mismo, normalmente con el móvil.",
+    "examples": [
+      "Se hizo una autofoto delante de la Torre Eiffel.",
+      "Subió una autofoto con sus amigas a las redes sociales."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "estar-en-obras",
+    "front": "estar en obras",
+    "translation": "быть на ремонте, вестись строительные работы",
+    "explanation_es": "Estar un edificio, calle o lugar en proceso de construcción o reforma.",
+    "examples": [
+      "La estación está en obras y hay que usar la salida provisional.",
+      "El museo lleva meses en obras y todavía no ha reabierto."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "baja-maternal",
+    "front": "baja maternal / baja por maternidad",
+    "translation": "декретный отпуск, отпуск по беременности и родам",
+    "explanation_es": "Periodo de ausencia laboral remunerada al que tiene derecho una madre tras el nacimiento de un hijo.",
+    "examples": [
+      "Está de baja maternal desde que nació su hija hace dos meses.",
+      "En España la baja por maternidad dura dieciséis semanas."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "patriarcado",
+    "front": "patriarcado",
+    "translation": "патриархат",
+    "explanation_es": "Sistema social en el que el poder y la autoridad están principalmente en manos de los hombres.",
+    "examples": [
+      "El libro analiza cómo el patriarcado ha influido en la educación de las mujeres.",
+      "Muchos movimientos feministas luchan por desmontar el patriarcado."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "sociedad-patriarcal",
+    "front": "sociedad patriarcal",
+    "translation": "патриархальное общество",
+    "explanation_es": "Sociedad organizada según el patriarcado, donde los hombres tienen más poder y privilegios que las mujeres.",
+    "examples": [
+      "Creció en una sociedad patriarcal donde las mujeres apenas podían estudiar.",
+      "El documental muestra las consecuencias de vivir en una sociedad patriarcal."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "elecciones",
+    "front": "las elecciones",
+    "translation": "выборы",
+    "explanation_es": "Proceso en el que los ciudadanos votan para elegir a sus representantes políticos.",
+    "examples": [
+      "Las elecciones generales se celebrarán en noviembre.",
+      "Mucha gente hizo cola para votar el día de las elecciones."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "votacion",
+    "front": "la votación",
+    "translation": "голосование",
+    "explanation_es": "Acto de votar sobre una cuestión concreta, o el proceso completo de recuento de votos.",
+    "examples": [
+      "La votación en el parlamento terminó con un resultado muy ajustado.",
+      "Organizaron una votación entre los vecinos para elegir el nuevo nombre de la plaza."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "votar",
+    "front": "votar",
+    "translation": "голосовать",
+    "explanation_es": "Expresar oficialmente una preferencia u opinión en unas elecciones o una decisión colectiva.",
+    "examples": [
+      "Es la primera vez que voy a votar en unas elecciones.",
+      "Votaron a favor de la nueva ley por mayoría."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "votante",
+    "front": "el/la votante",
+    "translation": "избиратель",
+    "explanation_es": "Persona que tiene derecho a votar y participa en unas elecciones.",
+    "examples": [
+      "Los votantes más jóvenes suelen decidirse en el último momento.",
+      "El partido busca convencer a los votantes indecisos."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "celebrarse",
+    "front": "celebrarse",
+    "translation": "проводиться, состояться (о мероприятии)",
+    "explanation_es": "Tener lugar un evento o acto en una fecha determinada.",
+    "examples": [
+      "El festival se celebrará este año en el parque central.",
+      "La boda se celebró en un pueblo pequeño de la costa."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "pegar-con",
+    "front": "pegar con",
+    "translation": "сочетаться с, подходить к (о цвете, стиле)",
+    "explanation_es": "Combinar bien una cosa con otra, especialmente en cuanto a estilo, color o ambiente.",
+    "examples": [
+      "Ese cojín verde no pega nada con el resto del salón.",
+      "Esos zapatos pegan perfectamente con el vestido."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "viejito",
+    "front": "viejito",
+    "translation": "старичок, старушка (ласково)",
+    "explanation_es": "Diminutivo cariñoso de \"viejo\", usado para referirse a una persona mayor con afecto.",
+    "examples": [
+      "En el parque siempre hay un viejito que da de comer a las palomas.",
+      "Mi abuela ya es una viejita, pero sigue muy activa."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "convenirse",
+    "front": "convenirse",
+    "translation": "быть согласованным, договориться (в официальном контексте)",
+    "explanation_es": "Uso reflexivo/impersonal del verbo \"convenir\": llegar a un acuerdo sobre algo, especialmente en contextos formales o legales.",
+    "examples": [
+      "Se convino que la reunión sería el próximo lunes.",
+      "En el contrato se convino un plazo de entrega de treinta días."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "paso-de-peatones",
+    "front": "el paso de peatones",
+    "translation": "пешеходный переход",
+    "explanation_es": "Zona señalizada en la calle por donde los peatones pueden cruzar de forma segura.",
+    "examples": [
+      "Cruza siempre por el paso de peatones, aunque no venga ningún coche.",
+      "Pintaron de nuevo las líneas del paso de peatones."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "asegurarse-de-que",
+    "front": "asegurarse de que",
+    "translation": "убедиться, что",
+    "explanation_es": "Comprobar que algo es cierto o que se ha hecho correctamente antes de continuar.",
+    "examples": [
+      "Asegúrate de que has cerrado bien la puerta antes de salir.",
+      "Quiero asegurarme de que todos han entendido las instrucciones."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "insulto",
+    "front": "insulto",
+    "translation": "оскорбление",
+    "explanation_es": "Palabra o expresión ofensiva dirigida a alguien para herirlo o faltarle al respeto.",
+    "examples": [
+      "El árbitro expulsó al jugador por un insulto grave.",
+      "No permito que me hables con insultos en mi propia casa."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "multa",
+    "front": "multa",
+    "translation": "штраф",
+    "explanation_es": "Sanción económica que se paga por incumplir una norma o ley; es el sustantivo relacionado con el verbo \"multar\".",
+    "examples": [
+      "La multa por exceso de velocidad fue de doscientos euros.",
+      "Todavía no ha pagado la multa que le pusieron el mes pasado."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "pobreza",
+    "front": "pobreza",
+    "translation": "бедность",
+    "explanation_es": "Situación de carecer de los recursos económicos necesarios para vivir con dignidad.",
+    "examples": [
+      "La ONG trabaja para reducir la pobreza infantil en la región.",
+      "Millones de personas viven todavía en situación de pobreza extrema."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "asesinar",
+    "front": "asesinar, asesinato",
+    "translation": "убивать (преднамеренно), убийство",
+    "explanation_es": "Matar a una persona de forma intencionada y, generalmente, con premeditación; el sustantivo es \"asesinato\".",
+    "examples": [
+      "La policía sigue investigando quién asesinó al empresario.",
+      "El asesinato conmocionó a todo el barrio."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "trastorno-mental",
+    "front": "trastorno mental",
+    "translation": "психическое расстройство",
+    "explanation_es": "Alteración del funcionamiento psicológico de una persona que afecta a su pensamiento, sus emociones o su comportamiento.",
+    "examples": [
+      "La depresión es uno de los trastornos mentales más comunes hoy en día.",
+      "Recibió tratamiento especializado para su trastorno mental."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "extincion",
+    "front": "extinción",
+    "translation": "вымирание, исчезновение (вида)",
+    "explanation_es": "Desaparición total de una especie o de algo que existía.",
+    "examples": [
+      "El panda gigante estuvo en peligro de extinción durante décadas.",
+      "La extinción de los dinosaurios sigue siendo objeto de estudio."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "extinguirse",
+    "front": "extinguirse",
+    "translation": "вымирать, исчезать; гаснуть (об огне)",
+    "explanation_es": "Desaparecer por completo una especie, una tradición o algo similar; también apagarse el fuego o una llama.",
+    "examples": [
+      "Esa especie de rana se extinguió hace apenas diez años.",
+      "El fuego se extinguió solo, sin necesidad de los bomberos."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "retirarse",
+    "front": "retirarse",
+    "translation": "удаляться, отступать; уходить на покой",
+    "explanation_es": "Apartarse de un lugar o de una actividad, o dejar de participar en algo, como el trabajo o la vida pública.",
+    "examples": [
+      "El ejército se retiró de la zona tras el acuerdo de paz.",
+      "El tenista anunció que se retira del deporte profesional este año."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "jubilarse",
+    "front": "jubilarse",
+    "translation": "выходить на пенсию",
+    "explanation_es": "Dejar de trabajar de forma definitiva al llegar a una edad determinada, normalmente cobrando una pensión.",
+    "examples": [
+      "Mi padre se jubila el año que viene después de cuarenta años trabajando.",
+      "Piensa jubilarse pronto para viajar más."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "discapacidad",
+    "front": "discapacidad",
+    "translation": "инвалидность, ограниченные возможности",
+    "explanation_es": "Condición física, sensorial o mental que limita a una persona en alguna actividad.",
+    "examples": [
+      "Trabaja en una fundación que apoya a personas con discapacidad.",
+      "El edificio no está adaptado para personas con discapacidad motora."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "conflicto-armado",
+    "front": "conflicto armado",
+    "translation": "вооружённый конфликт",
+    "explanation_es": "Enfrentamiento violento entre grupos o países en el que se usan armas.",
+    "examples": [
+      "El conflicto armado dejó miles de desplazados en la región.",
+      "Varias organizaciones piden el fin del conflicto armado."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "conflicto-belico",
+    "front": "conflicto bélico",
+    "translation": "военный конфликт",
+    "explanation_es": "Sinónimo más formal de \"guerra\", usado sobre todo en contextos periodísticos o históricos.",
+    "examples": [
+      "El conflicto bélico duró más de una década y cambió las fronteras del país.",
+      "Los historiadores analizan las causas del conflicto bélico."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "violencia-de-genero",
+    "front": "la violencia de género",
+    "translation": "гендерное насилие",
+    "explanation_es": "Violencia ejercida contra una persona, generalmente una mujer, por razón de su género.",
+    "examples": [
+      "El gobierno aprobó nuevas medidas contra la violencia de género.",
+      "Muchas mujeres no denuncian los casos de violencia de género por miedo."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "movilidad-reducida",
+    "front": "con movilidad reducida",
+    "translation": "с ограниченной подвижностью",
+    "explanation_es": "Que tiene dificultad para moverse o desplazarse por sí mismo, ya sea de forma temporal o permanente.",
+    "examples": [
+      "El autobús tiene una rampa para personas con movilidad reducida.",
+      "Reservaron un asiento especial porque viajaba con movilidad reducida."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "silla-de-ruedas",
+    "front": "silla de ruedas",
+    "translation": "инвалидное кресло, коляска",
+    "explanation_es": "Silla con ruedas que permite desplazarse a personas que no pueden caminar.",
+    "examples": [
+      "Desde el accidente se desplaza en silla de ruedas.",
+      "El edificio tiene ascensor para facilitar el acceso a las sillas de ruedas."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "rampa-para-sillas-de-ruedas",
+    "front": "rampa para sillas de ruedas",
+    "translation": "пандус для инвалидных колясок",
+    "explanation_es": "Superficie inclinada que sustituye o complementa las escaleras para facilitar el paso de sillas de ruedas.",
+    "examples": [
+      "Instalaron una rampa para sillas de ruedas en la entrada de la biblioteca.",
+      "Sin rampa para sillas de ruedas, no podría entrar sola al edificio."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "camino-peatonal",
+    "front": "el camino peatonal",
+    "translation": "пешеходная дорожка",
+    "explanation_es": "Sendero o ruta destinada exclusivamente al paso de personas a pie, sin vehículos.",
+    "examples": [
+      "Hicimos la excursión por un camino peatonal junto al río.",
+      "El ayuntamiento señalizó un nuevo camino peatonal entre los dos barrios."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "remedios-caseros",
+    "front": "remedios caseros",
+    "translation": "домашние средства (от болезни)",
+    "explanation_es": "Soluciones tradicionales, hechas con ingredientes caseros, para aliviar molestias o enfermedades leves.",
+    "examples": [
+      "Mi abuela siempre tenía un remedio casero para el dolor de garganta.",
+      "Probó varios remedios caseros antes de ir al médico."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "automedicarse",
+    "front": "automedicarse",
+    "translation": "заниматься самолечением",
+    "explanation_es": "Tomar medicamentos por decisión propia, sin consultar antes a un médico.",
+    "examples": [
+      "No deberías automedicarte, es mejor que un médico te revise primero.",
+      "Se automedicó con antibióticos y empeoró su situación."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "estar-al-dia",
+    "front": "estar al día",
+    "translation": "быть в курсе, быть в актуальном состоянии",
+    "explanation_es": "Tener información reciente sobre algo, o tener las obligaciones (pagos, tareas) hechas hasta el momento presente.",
+    "examples": [
+      "Le gusta estar al día de todas las noticias tecnológicas.",
+      "Estamos al día con todos los pagos del alquiler."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "actualizado-desactualizado",
+    "front": "actualizado / desactualizado",
+    "translation": "обновлённый / устаревший (неактуальный)",
+    "explanation_es": "\"Actualizado\" significa que tiene la información o versión más reciente; \"desactualizado\" es justo lo contrario.",
+    "examples": [
+      "El manual está desactualizado, hay una versión más reciente en la web.",
+      "Su currículum está totalmente actualizado, incluye el último trabajo."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "relevante",
+    "front": "relevante",
+    "translation": "значимый, актуальный, важный",
+    "explanation_es": "Que tiene importancia o interés en un contexto determinado.",
+    "examples": [
+      "Solo incluye en el informe los datos más relevantes.",
+      "Su opinión es muy relevante en este debate porque es experta en el tema."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "obsoleto",
+    "front": "obsoleto",
+    "translation": "устаревший, вышедший из употребления",
+    "explanation_es": "Que ya no se usa o no es útil porque ha sido sustituido por algo más moderno. Compárese con «quedarse obsoleto», que describe el proceso de volverse así.",
+    "examples": [
+      "Ese ordenador ya es obsoleto, no soporta los programas actuales.",
+      "Muchas leyes son obsoletas desde la llegada de internet."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "abundante",
+    "front": "abundante",
+    "translation": "обильный, изобильный",
+    "explanation_es": "Que hay en gran cantidad.",
+    "examples": [
+      "Nos sirvieron una comida abundante, no pudimos terminarla.",
+      "Este año la cosecha ha sido especialmente abundante."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "abundancia",
+    "front": "abundancia",
+    "translation": "изобилие",
+    "explanation_es": "Gran cantidad de algo, mucho más de lo necesario.",
+    "examples": [
+      "En la fiesta había comida en abundancia.",
+      "Vivieron años de abundancia gracias al buen negocio familiar."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "exceder",
+    "front": "exceder",
+    "translation": "превышать",
+    "explanation_es": "Sobrepasar un límite, una cantidad o una expectativa.",
+    "examples": [
+      "El conductor excedió el límite de velocidad en la autopista.",
+      "Sus resultados excedieron las expectativas del equipo."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "exceso",
+    "front": "exceso",
+    "translation": "избыток, излишек",
+    "explanation_es": "Cantidad de algo que sobrepasa lo normal o lo necesario.",
+    "examples": [
+      "Le multaron por exceso de velocidad.",
+      "El exceso de trabajo le está pasando factura a su salud."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "ocultar",
+    "front": "ocultar",
+    "translation": "скрывать, утаивать",
+    "explanation_es": "Esconder algo o impedir que se vea o se sepa.",
+    "examples": [
+      "Intentó ocultar su nerviosismo durante la entrevista.",
+      "La empresa ocultó los verdaderos datos de sus pérdidas."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "revelar",
+    "front": "revelar",
+    "translation": "раскрывать, разоблачать",
+    "explanation_es": "Dar a conocer algo que estaba oculto o en secreto.",
+    "examples": [
+      "El estudio reveló datos preocupantes sobre la contaminación.",
+      "Nunca reveló quién le había dado esa información."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "al-fin-y-al-cabo",
+    "front": "al fin y al cabo",
+    "translation": "в конце концов, как бы то ни было",
+    "explanation_es": "Expresión que se usa para introducir una conclusión, recordando la razón principal de algo.",
+    "examples": [
+      "No te preocupes tanto, al fin y al cabo es solo un examen más.",
+      "Al fin y al cabo, lo importante es que todos llegaron sanos y salvos."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "dar-una-pista",
+    "front": "dar una pista",
+    "translation": "дать подсказку",
+    "explanation_es": "Ofrecer una información parcial que ayuda a adivinar o descubrir algo.",
+    "examples": [
+      "¿Me puedes dar una pista? No consigo adivinar la respuesta.",
+      "El profesor dio una pista antes del examen para tranquilizar a la clase."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "giro",
+    "front": "giro",
+    "translation": "поворот; денежный перевод",
+    "explanation_es": "Cambio de dirección o de rumbo, tanto literal (en una calle) como figurado (en una situación); también puede significar transferencia de dinero.",
+    "examples": [
+      "La historia dio un giro inesperado en el último capítulo.",
+      "Le mandó un giro postal para ayudarle con los gastos del viaje."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "salida",
+    "front": "salida",
+    "translation": "выход; отправление (поезда, рейса)",
+    "explanation_es": "Lugar por donde se sale de un sitio, o el momento en que algo (un tren, un avión) parte.",
+    "examples": [
+      "La salida de emergencia está al fondo del pasillo.",
+      "La salida del tren se retrasó media hora."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "cruce",
+    "front": "cruce",
+    "translation": "перекрёсток, пересечение",
+    "explanation_es": "Lugar donde se cruzan dos o más calles, caminos o líneas.",
+    "examples": [
+      "Gira a la izquierda en el próximo cruce.",
+      "Hubo un accidente en el cruce por no respetar el semáforo."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "carril",
+    "front": "carril",
+    "translation": "полоса (движения), ряд",
+    "explanation_es": "Cada una de las franjas en que se divide una carretera para la circulación de los vehículos.",
+    "examples": [
+      "Ponte en el carril derecho si vas a salir en la próxima salida.",
+      "Han añadido un carril bici en toda la avenida."
+    ],
+    "added": "2026-09-22"
+  },
+  {
+    "id": "respaldar",
+    "front": "respaldar",
+    "translation": "поддерживать, отстаивать",
+    "explanation_es": "Apoyar a una persona, una idea o una decisión, dándole respaldo o defendiéndola.",
+    "examples": [
+      "Sus compañeros lo respaldaron en la reunión frente a las críticas.",
+      "El sindicato respaldó la huelga de los trabajadores."
+    ],
+    "added": "2026-09-22"
   }
 ]
