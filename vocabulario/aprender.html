@@ -145,7 +145,7 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); fo
 
 <header>
   <h1>Aprender</h1>
-  <p class="lead">Empieza con opciones y, en cuanto aciertes, pasa a escribir la palabra de memoria. Cada palabra debe acertarse dos veces seguidas para superar la sesión.</p>
+  <p class="lead">Elige cómo quieres practicar: con opciones, escribiendo de memoria, o alternando ambas. Cada palabra debe acertarse dos veces seguidas para superar la sesión.</p>
 </header>
 
 <div id="modulePicker"></div>
@@ -164,8 +164,19 @@ let streaks = {};
 let order = [];
 let current = null;
 let currentMode = "choice";
+let studyMode = "mixed";
 let stats = {correct:0, incorrect:0};
 let answered = false;
+
+function loadStudyMode(){
+  try{
+    const v = localStorage.getItem("vocabLearnMode");
+    return v === "choice" || v === "write" || v === "mixed" ? v : "mixed";
+  }catch(e){ return "mixed"; }
+}
+function saveStudyMode(v){
+  try{ localStorage.setItem("vocabLearnMode", v); }catch(e){}
+}
 
 function renderStats(){
   const cards = scoped();
@@ -207,6 +218,15 @@ function renderSetup(){
         <label for="count">Cuántas palabras en esta sesión</label>
         <input type="number" id="count" min="1" max="${cards.length}" value="${Math.min(20, dueCount>0?dueCount:cards.length)}">
       </div>
+      <div class="field">
+        <label>Modo de la sesión</label>
+        <div class="radiogroup">
+          <label><input type="radio" name="mode" value="mixed" ${studyMode==="mixed"?"checked":""}> Mixto</label>
+          <label><input type="radio" name="mode" value="choice" ${studyMode==="choice"?"checked":""}> Test</label>
+          <label><input type="radio" name="mode" value="write" ${studyMode==="write"?"checked":""}> Escritura libre</label>
+        </div>
+        <p class="hint-small">Mixto: primero opciones y luego escritura. Test: siempre opciones. Escritura libre: siempre a escribir de memoria.</p>
+      </div>
       <button class="btn-primary" id="btnStart">Comenzar</button>
       <p class="hint-small">Cada respuesta correcta o incorrecta también actualiza el calendario de repaso de las tarjetas.</p>
     </div>
@@ -214,6 +234,8 @@ function renderSetup(){
   document.getElementById("btnStart").addEventListener("click", () => {
     const source = document.querySelector('input[name="source"]:checked').value;
     const count = Math.max(1, Math.min(cards.length, parseInt(document.getElementById("count").value, 10) || 20));
+    studyMode = document.querySelector('input[name="mode"]:checked').value;
+    saveStudyMode(studyMode);
     startSession(source, count);
   });
 }
@@ -244,7 +266,9 @@ function nextQuestion(){
   }
   const id = remaining[Math.floor(Math.random() * remaining.length)];
   current = pool.find(c => c.id === id);
-  currentMode = streaks[id] === 0 ? "choice" : "write";
+  if(studyMode === "choice") currentMode = "choice";
+  else if(studyMode === "write") currentMode = "write";
+  else currentMode = streaks[id] === 0 ? "choice" : "write";
   renderQuestion();
 }
 
@@ -352,6 +376,7 @@ function renderComplete(){
 (async function init(){
   [allCards, progress] = await Promise.all([loadCards(), loadProgress()]);
   moduleChoice = loadModuleChoice(allCards);
+  studyMode = loadStudyMode();
   renderStats();
   renderSetup();
 })();

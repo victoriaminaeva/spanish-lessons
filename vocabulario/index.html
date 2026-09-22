@@ -123,7 +123,7 @@ h1{font-size:clamp(24px,5vw,32px); margin:0 0 6px;}
 .btn.yes{color:var(--good); border-color:var(--good);}
 .btn:active{transform:scale(.97);}
 
-.toolbar{display:flex; align-items:center; justify-content:space-between; margin-top:26px; font-size:13px; color:var(--muted);}
+.toolbar{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-top:26px; font-size:13px; color:var(--muted);}
 .toolbar label{display:flex; align-items:center; gap:6px; cursor:pointer;}
 
 .empty{
@@ -181,6 +181,7 @@ footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); fo
 
 <div class="toolbar">
   <label><input type="checkbox" id="toggleAll"> Repasar todas (aunque no toque)</label>
+  <label><input type="checkbox" id="toggleReverse"> Empezar por la traducción</label>
 </div>
 
 <p class="offline-note" id="offlineNote" hidden>Modo local: el progreso solo se guarda en este navegador (falta configurar el sincronizador).</p>
@@ -196,9 +197,17 @@ let moduleChoice = 1;
 let progress = {};
 let queue = [];
 let showAll = false;
+let reverseMode = false;
 
 function renderOfflineNote(){
   document.getElementById("offlineNote").hidden = vocabOnline;
+}
+
+function loadReverseMode(){
+  try{ return localStorage.getItem("vocabCardReverse") === "1"; }catch(e){ return false; }
+}
+function saveReverseMode(v){
+  try{ localStorage.setItem("vocabCardReverse", v ? "1" : "0"); }catch(e){}
 }
 
 function scoped(){ return cardsForChoice(cards, moduleChoice); }
@@ -247,18 +256,23 @@ function renderStage(){
   const c = queue[0];
   const examples = (c.examples||[]).map(e => `<li>${escapeHtml(e)}</li>`).join("");
 
+  const frontText = reverseMode ? (c.translation||"") : c.front;
+  const frontHint = reverseMode ? "Toca para ver la palabra en español" : "Toca para ver la traducción";
+  const backLabel = reverseMode ? "Palabra en español" : "Traducción";
+  const backValue = reverseMode ? c.front : (c.translation||"");
+
   stage.innerHTML = `
     <div class="card" id="activeCard">
       <span class="swipe-tag left">AÚN NO</span>
       <span class="swipe-tag right">LO SÉ</span>
       <div class="card-inner">
         <div class="face face-front">
-          <div class="word">${escapeHtml(c.front)}</div>
-          <div class="hint">Toca para ver la traducción</div>
+          <div class="word">${escapeHtml(frontText)}</div>
+          <div class="hint">${frontHint}</div>
         </div>
         <div class="face face-back">
-          <div class="back-label">Traducción</div>
-          <div class="back-translation">${escapeHtml(c.translation||"")}</div>
+          <div class="back-label">${backLabel}</div>
+          <div class="back-translation">${escapeHtml(backValue)}</div>
           ${c.explanation_es ? `<div class="back-label">Explicación</div><div class="back-explanation">${escapeHtml(c.explanation_es)}</div>` : ""}
           ${examples ? `<div class="back-label">Ejemplos</div><ul class="back-examples">${examples}</ul>` : ""}
         </div>
@@ -333,10 +347,17 @@ document.getElementById("toggleAll").addEventListener("change", (e) => {
   buildQueue();
   renderStage();
 });
+document.getElementById("toggleReverse").addEventListener("change", (e) => {
+  reverseMode = e.target.checked;
+  saveReverseMode(reverseMode);
+  renderStage();
+});
 
 (async function init(){
   [cards, progress] = await Promise.all([loadCards(), loadProgress()]);
   moduleChoice = loadModuleChoice(cards);
+  reverseMode = loadReverseMode();
+  document.getElementById("toggleReverse").checked = reverseMode;
   renderOfflineNote();
   buildQueue();
   renderStage();
